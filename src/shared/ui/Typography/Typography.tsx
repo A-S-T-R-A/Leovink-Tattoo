@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { classNames } from "shared/lib/classNames"
+import { classNames } from "shared/lib/classNames/classNames"
 import styles from "./Typography.module.scss"
 
 export enum TypographySize {
