@@ -5,7 +5,6 @@ export function HomePage() {
     return (
         <div>
             <Typography>Hello World</Typography>
-            <AppLink to={"www.google.com"}>CLIKC</AppLink>
         </div>
     )
 }
