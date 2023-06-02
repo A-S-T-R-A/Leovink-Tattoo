@@ -10,22 +10,40 @@
     &.h2 {
         font-size: var(--font-size-h2);
     }
+
     &.h3 {
         font-size: var(--font-size-h3);
     }
+
     &.h4 {
         font-size: var(--font-size-h4);
     }
+
     &.h5 {
         font-size: var(--font-size-h5);
     }
+
     &.small {
         font-size: var(--font-size-small);
     }
+
     &.extra_small {
         font-size: var(--font-size-extra-small);
     }
+
+    &.color_base {
+        color: var(--color-base);
+    }
+
     &.color_accent {
         color: var(--color-accent);
+    }
+
+    &.color-error {
+        color: var(--color-error);
+    }
+
+    &.bold {
+        font-weight: 700;
     }
 }

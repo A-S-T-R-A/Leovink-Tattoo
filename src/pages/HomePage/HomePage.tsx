@@ -1,9 +1,5 @@
-import { Typography } from "../../shared/ui/Typography/Typography"
+import { Typography, TypographyColor } from "shared/ui/Typography/Typography"
 
 export function HomePage() {
-    return (
-        <Typography color="color_accent" variant="extra_small">
-            Hello World
-        </Typography>
-    )
+    return <Typography>Hello World</Typography>
 }
