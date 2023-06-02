@@ -1,0 +1,10 @@
+.btn {
+    border: none;
+    background-color: transparent;
+    color: var(--color-accent);
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(90%);
+    }
+}

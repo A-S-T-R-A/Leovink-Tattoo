@@ -1,5 +1,9 @@
 import { Typography } from "shared/ui/Typography/Typography"
 
 export function HomePage() {
-    return <Typography>Hello World</Typography>
+    return (
+        <div>
+            <Typography>Hello World</Typography>
+        </div>
+    )
 }
