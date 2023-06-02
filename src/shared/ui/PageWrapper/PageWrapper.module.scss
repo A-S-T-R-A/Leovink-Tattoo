@@ -1,0 +1,24 @@
+.wrapper {
+    position: relative;
+}
+
+.title {
+    font-size: 64px !important;
+    position: absolute;
+    line-height: 48px;
+}
+
+.back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    cursor: pointer;
+}
+
+.header {
+    height: 100px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
