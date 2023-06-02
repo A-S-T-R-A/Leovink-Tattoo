@@ -1,3 +1,5 @@
+import { Typography, TypographyColor } from "shared/ui/Typography/Typography"
+
 export function HomePage() {
-    return <></>
+    return <Typography>Hello World</Typography>
 }
