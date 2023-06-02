@@ -1,0 +1,1 @@
+export { ModalGallery } from "./ModalGallery"
