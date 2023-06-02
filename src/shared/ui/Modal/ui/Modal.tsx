@@ -1,11 +1,20 @@
-import { useEffect, useState } from "react"
+import { ReactNode, useEffect, useState } from "react"
 import cls from "./Modal.module.scss"
 import { Portal } from "./components/Portal"
 import { MODAL_ANIMATION_DELAY } from "../const/const"
-import { classNames } from "../../../lib/classNames"
+import { Mods, classNames } from "shared/lib/classNames/classNames"
 
-export const Modal = props => {
-    const { className, children, isOpen, onClose } = props
+interface ModalProps {
+    className?: string
+    contentClassName?: string
+    children: ReactNode
+    isOpen: boolean
+    onClose: () => void
+    lazy?: boolean
+}
+
+export const Modal = (props: ModalProps) => {
+    const { className, contentClassName, children, isOpen, onClose, lazy } = props
     const [isOpening, setIsOpening] = useState(false)
     const [isClosing, setIsClosing] = useState(false)
     const [isMounted, setIsMounted] = useState(false)
@@ -26,7 +35,7 @@ export const Modal = props => {
         }
     }, [isOpen, isMounted])
 
-    const mods = {
+    const mods: Mods = {
         [cls.isOpen]: isMounted,
         [cls.isClosing]: isClosing,
         [cls.isOpening]: isOpening,
@@ -38,7 +47,10 @@ export const Modal = props => {
         <Portal>
             <div className={classNames(cls.Modal, mods, [className])}>
                 <div className={cls.overlay} onClick={() => onClose?.()}>
-                    <div className={cls.content} onClick={e => e.stopPropagation()}>
+                    <div
+                        className={classNames(cls.content, {}, [contentClassName])}
+                        onClick={e => e.stopPropagation()}
+                    >
                         {children}
                     </div>
                 </div>
