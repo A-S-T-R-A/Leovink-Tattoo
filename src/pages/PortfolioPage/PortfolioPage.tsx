@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { MasonryGrid } from "shared/ui/MasonryGrid/MasonryGrid"
 import { ModalGallery } from "widgets/ModalGallery"
 
 export function PortfolioPage() {
@@ -7,6 +8,9 @@ export function PortfolioPage() {
         <>
             <ModalGallery isOpen={isOpen} onClose={() => setIsOpen(false)} />
             <div>
+                <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+                    <MasonryGrid />
+                </div>
                 page
                 <button onClick={() => setIsOpen(prev => !prev)}>toggle</button>
             </div>
