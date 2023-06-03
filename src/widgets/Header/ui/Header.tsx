@@ -4,10 +4,16 @@ import logo from "shared/assets/images/logo.png"
 import { Navbar } from "./Navbar/Navbar"
 import { Burger } from "./Burger/Burger"
 import { classNames } from "shared/lib/classNames/classNames"
-import { useThrottle } from "shared/lib/useThrottle/useThrottle"
 
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false)
+
+    const scrollHandler = () => {
+        const boolean = window.pageYOffset > 15
+        setIsScrolled(boolean)
+    }
+
+    console.log("render")
 
     useEffect(() => {
         window.addEventListener("scroll", scrollHandler)
@@ -15,10 +21,6 @@ export function Header() {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
-    const scrollHandler = useThrottle(() => {
-        setIsScrolled(window.window.pageYOffset > 15)
-    }, 100)
 
     return (
         <>
