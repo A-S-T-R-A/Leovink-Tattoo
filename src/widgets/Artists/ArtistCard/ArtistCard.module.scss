@@ -1,0 +1,43 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.img {
+    margin-bottom: 10px;
+}
+
+.name {
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.specialization {
+    margin-bottom: 10px;
+}
+
+.description {
+    margin-bottom: 20px;
+}
+
+.view {
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    gap: 10px;
+    color: var(--color-accent) !important;
+    transform-origin: left;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    svg {
+        width: 16px;
+        path {
+            stroke: var(--color-accent);
+        }
+    }
+}
