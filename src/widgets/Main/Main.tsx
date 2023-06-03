@@ -4,13 +4,14 @@ import styles from "./Main.module.scss"
 import layerBaseImg from "./const/layer-base.png"
 import layerMiddleImg from "./const/layer-middle.png"
 import layerFrontImg from "./const/layer-front.png"
-import leovinkLogo from "./const/leovinkLogo.png"
+import leovinkTitle from "./const/leovinkLogo.png"
 import leovinkCaption from "./const/leovCaption.png"
 import leovinkHorns from "./const/leovinkHorns.png"
+import { ScrollIcon } from "shared/ui/ScrollIcon/ScrollIcon"
 
 export function Main() {
-    function scrollHandler(e: Event) {
-        document.documentElement.style.setProperty("--scrollTop", `${this.scrollY}px`) // Update method
+    function scrollHandler() {
+        document.documentElement.style.setProperty("--scrollTop", `${window.scrollY}px`)
     }
 
     useEffect(() => {
@@ -20,11 +21,11 @@ export function Main() {
 
     return (
         <header className={styles.mainHeader}>
-            <div className={styles.layers}>
-                <div className={styles.layerHeader}>
+            <div className={styles.container}>
+                <div className={styles.textContainer}>
                     <img src={leovinkHorns} alt="" className={styles.horns} />
                     <img src={leovinkCaption} alt="" className={styles.caption} />
-                    <img src={leovinkLogo} alt="" className={styles.logo} />
+                    <img src={leovinkTitle} alt="" className={styles.title} />
                 </div>
                 <div
                     className={classNames(styles.layerBase, {}, [styles.layer])}
@@ -38,6 +39,7 @@ export function Main() {
                     className={classNames(styles.layerFront, {}, [styles.layer])}
                     style={{ backgroundImage: `url(${layerFrontImg})` }}
                 ></div>
+                <ScrollIcon className={styles.scroll} />
             </div>
         </header>
     )
