@@ -20,7 +20,7 @@ export function Main() {
     })
 
     return (
-        <header className={styles.mainHeader}>
+        <header className={styles.wrapper}>
             <div className={styles.container}>
                 <div className={styles.textContainer}>
                     <img src={leovinkHorns} alt="" className={styles.horns} />
