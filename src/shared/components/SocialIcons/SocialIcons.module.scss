@@ -1,4 +1,6 @@
 .socials {
+    position: relative;
+    z-index: 100;
     width: 200px;
     display: flex;
     justify-content: space-around;
@@ -9,7 +11,7 @@
     align-items: center;
     font-size: 32px;
     transition: all 0.3s ease;
-    color: var(--color-base);
+    color: var(--color-accent);
     border-radius: 50px;
     padding: 8px;
 }

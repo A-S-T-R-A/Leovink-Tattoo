@@ -9,7 +9,7 @@ export function Burger({ className }: { className?: string }) {
 
     function toggleBurger() {
         setIsBurgerVisible(prev => {
-            document.body.style.overflow = prev ? "auto" : "hidden"
+            document.body.style.overflow = prev ? "overlay" : "hidden"
             return !prev
         })
     }
@@ -17,7 +17,7 @@ export function Burger({ className }: { className?: string }) {
     return (
         <>
             <BurgerIcon className={className} onClick={toggleBurger} isOpen={isBurgerVisible} />
-            <BurgerModalSlider isOpen={isBurgerVisible} onClose={toggleBurger} />
+            <BurgerModal isOpen={isBurgerVisible} onClose={toggleBurger} />
         </>
     )
 }
@@ -40,16 +40,16 @@ function BurgerIcon(props: { className?: string; onClick: () => void; isOpen: bo
     )
 }
 
-function BurgerModalSlider({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+function BurgerModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
     return (
         <>
             <div
-                className={classNames(styles.sliderOverlay, { [styles.navOpen]: isOpen })}
+                className={classNames(styles.overlay, { [styles.navOpen]: isOpen })}
                 onClick={onClose}
             />
 
-            <div className={classNames(styles.sliderWrapper, { [styles.navOpen]: isOpen })}>
-                <div className={styles.sliderContainer}>
+            <div className={classNames(styles.wrapper, { [styles.navOpen]: isOpen })}>
+                <div className={styles.container}>
                     <NavigationList closeClickHandler={onClose} />
                     <SocialIcons />
                 </div>

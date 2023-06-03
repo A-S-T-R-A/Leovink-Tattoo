@@ -1,12 +1,16 @@
 .list {
     list-style: none;
     color: var(--color-base);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
 @media (min-width: 961px) {
     .list {
         display: flex;
+        flex-direction: row;
         justify-content: end;
         gap: 30px;
     }

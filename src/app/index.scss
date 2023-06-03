@@ -4,10 +4,6 @@
     box-sizing: border-box;
 }
 
-body {
-    overflow-y: overlay;
-}
-
 img {
     max-width: 100%;
 }
@@ -36,6 +32,7 @@ a:active {
     --color-gray: rgb(128, 128, 128);
     --color-light-gray: rgb(211, 211, 211);
     --color-bg-modal: rgb(35, 35, 35);
+    --color-base-bg: rgb(13, 25, 13);
     --color-modal-overlay: rgba(12 31 49 / 49%);
     --color-error: #f82929;
 
@@ -55,4 +52,5 @@ a:active {
 body {
     background: var(--color-bg);
     color: var(--color-base);
+    overflow-y: overlay;
 }
