@@ -22,9 +22,14 @@ export function Artists() {
             </div> */}
 
             <Swiper
-                slidesPerView={4}
+                slidesPerView={1}
                 loop
                 modules={[Pagination, Navigation]}
+                breakpoints={{
+                    501: { slidesPerView: 2 },
+                    800: { slidesPerView: 3 },
+                    1000: { slidesPerView: 4 },
+                }}
                 /*  onSwiper={swiper => (swiperRef.current = swiper)}
                 pagination={{
                     clickable: true,

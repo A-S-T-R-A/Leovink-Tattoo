@@ -2,10 +2,13 @@
     display: flex;
     flex-direction: column;
     width: 300px;
+    margin: 0 auto;
 }
 
 .img {
     margin-bottom: 10px;
+    height: 250px;
+    object-fit: cover;
 }
 
 .name {
