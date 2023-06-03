@@ -1,0 +1,17 @@
+@media (min-width: 961px) {
+    .container {
+        display: flex;
+        justify-content: flex-end;
+        gap: 50px;
+        align-items: center;
+        margin-left: 40px;
+    }
+}
+
+.navList {
+    width: 100%;
+    min-width: 500px;
+    max-width: 680px;
+    height: 100%;
+    min-height: 50px;
+}
