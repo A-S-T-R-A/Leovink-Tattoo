@@ -1,15 +1,16 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { classNames } from "shared/lib/classNames/classNames"
 import { NavigationList } from "../NavigationList/NavigationList"
 import styles from "./Burger.module.scss"
 import { SocialIcons } from "shared/components/SocialIcons"
+import { disableScroll } from "shared/lib/disableScroll/disableScroll"
 
 export function Burger({ className }: { className?: string }) {
     const [isBurgerVisible, setIsBurgerVisible] = useState(false)
 
     function toggleBurger() {
         setIsBurgerVisible(prev => {
-            document.body.style.overflow = prev ? "overlay" : "hidden"
+            disableScroll(prev)
             return !prev
         })
     }

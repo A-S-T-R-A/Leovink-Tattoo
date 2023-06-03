@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import styles from "./Header.module.css"
-import Art1us from "shared/assets/images/logo.webp"
+import logo from "shared/assets/images/logo.png"
 import { Navbar } from "./Navbar/Navbar"
 import { Burger } from "./Burger/Burger"
 import { classNames } from "shared/lib/classNames/classNames"
@@ -26,7 +26,7 @@ export function Header() {
             <div className={classNames(styles.wrapper, { [styles.blur]: isScrolled })}>
                 <div className={styles.container}>
                     <div className={styles.logoContainer}>
-                        <img src={Art1us} className={styles.logo} alt="" />
+                        <img src={logo} className={styles.logo} alt="" />
                     </div>
                     <Navbar className={styles.navbar} />
                 </div>

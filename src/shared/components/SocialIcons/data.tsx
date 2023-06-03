@@ -3,13 +3,13 @@ import { FacebookIcon, InstagramIcon, ViberIcon } from "shared/ui/Icons"
 export const socialsData = [
     {
         id: 1,
-        link: "https://www.facebook.com/profile.php?id=100085196048339",
+        link: "https://www.instagram.com",
         icon: <InstagramIcon />,
     },
     {
         id: 2,
-        link: "https://www.linkedin.com/in/artur-pazyniuk-9a2bbb266/",
+        link: "https://www.facebook.com",
         icon: <FacebookIcon />,
     },
-    { id: 3, link: "https://github.com/Art1us", icon: <ViberIcon /> },
+    { id: 3, link: "https://viber.com", icon: <ViberIcon /> },
 ]

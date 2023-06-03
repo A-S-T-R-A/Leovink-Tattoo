@@ -1,10 +1,14 @@
 .list {
     list-style: none;
-    color: var(--color-base);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 500;
+    font-size: var(--font-size-h3);
+    row-gap: 30px;
 }
 
 @media (min-width: 961px) {
@@ -13,6 +17,14 @@
         flex-direction: row;
         justify-content: end;
         gap: 30px;
+        text-transform: capitalize;
+        letter-spacing: 1px;
+        font-weight: 300;
+        font-size: var(--font-size-h5);
+    }
+
+    .undreline::after {
+        bottom: 2px !important;
     }
 }
 
@@ -21,7 +33,6 @@
         width: 100%;
         display: flex;
         padding: 5px;
-        color: var(--color-base);
     }
 }
 
@@ -31,9 +42,7 @@
     display: flex;
     align-items: center;
     min-height: 50px;
-    font-size: var(--font-size-h4);
     line-height: 32px;
-    color: var(--color-base);
     transition: 0.4s ease;
     position: relative;
 }
@@ -41,11 +50,13 @@
 .undreline {
     display: inline-block;
     position: relative;
+    color: var(--color-base) !important;
+    text-shadow: 1px 1px 2px black;
 }
 
 .undreline::after {
     background: none repeat scroll 0 0 transparent;
-    bottom: 3px;
+    bottom: -2px;
     content: "";
     display: block;
     height: 2px;
@@ -63,8 +74,13 @@
 }
 
 .item:hover {
-    color: var(--color-base);
     opacity: 1;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
+}
+
+@media (min-width: 961px) {
+    .undreline::after {
+        bottom: 2px;
+    }
 }

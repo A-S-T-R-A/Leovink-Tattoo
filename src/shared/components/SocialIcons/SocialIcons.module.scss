@@ -1,6 +1,4 @@
 .socials {
-    position: relative;
-    z-index: 100;
     width: 200px;
     display: flex;
     justify-content: space-around;
@@ -11,15 +9,23 @@
     align-items: center;
     font-size: 32px;
     transition: all 0.3s ease;
-    color: var(--color-accent);
     border-radius: 50px;
     padding: 8px;
+
+    svg {
+        fill: var(--color-base);
+        transition: all 0.3s ease;
+    }
 }
 
 .item:hover {
-    background-color: var(--color-base-bg);
+    background-color: transparent;
     transform: scale(1.2);
     cursor: pointer;
+
+    svg {
+        fill: var(--color-accent);
+    }
 }
 
 @media (min-width: 961px) {
@@ -34,7 +40,6 @@
         display: flex;
         align-items: center;
         transition: 0.2s ease;
-        color: var(--color-base);
         border-radius: 50px;
         padding: 8px;
     }
