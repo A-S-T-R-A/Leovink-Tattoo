@@ -6,6 +6,7 @@ import { ArrowLeftIcon } from "./ArrowLeftIcon"
 import { ArrowUpIcon } from "./ArrowUpIcon"
 import { PlusIcon } from "./PlusIcon"
 import { ChevronDownIcon } from "./ChevronDownIcon"
+import { EyeIcon } from "./EyeIcon"
 
 export {
     InstagramIcon,
@@ -16,4 +17,5 @@ export {
     ArrowUpIcon,
     PlusIcon,
     ChevronDownIcon,
+    EyeIcon,
 }

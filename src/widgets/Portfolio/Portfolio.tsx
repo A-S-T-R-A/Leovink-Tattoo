@@ -5,7 +5,7 @@ import { data as d } from "shared/const/data"
 import { ModalGallery } from "widgets/ModalGallery/ModalGallery"
 
 export function Portfolio() {
-    const data = d.slice(0, 10)
+    const data = d.slice(0, 15)
     const [isOpen, setIsOpen] = useState(false)
     const [modalData, setModalData] = useState(data)
 
