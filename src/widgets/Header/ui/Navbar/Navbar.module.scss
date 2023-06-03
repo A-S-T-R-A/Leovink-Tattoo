@@ -1,10 +1,14 @@
 @media (min-width: 961px) {
     .container {
         display: flex;
-        justify-content: flex-end;
-        gap: 50px;
+        justify-content: end;
+        gap: 40px;
         align-items: center;
         margin-left: 40px;
+
+        .socialIcons {
+            gap: 30px;
+        }
     }
 }
 
