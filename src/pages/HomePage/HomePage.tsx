@@ -1,9 +1,10 @@
-import { Typography } from "shared/ui/Typography/Typography"
+import { Main } from "widgets/Main/Main"
 
 export function HomePage() {
     return (
         <div>
-            <Typography>Hello World</Typography>
+            <Main />
+            <div style={{ height: "300vh" }}></div>
         </div>
     )
 }
