@@ -10,9 +10,9 @@ import leovinkHorns from "./const/leovinkHorns.png"
 
 export function Main() {
     function scrollHandler(e: Event) {
-        console.log(this.scrollY)
         document.documentElement.style.setProperty("--scrollTop", `${this.scrollY}px`) // Update method
     }
+
     useEffect(() => {
         window.addEventListener("scroll", scrollHandler)
         return () => window.removeEventListener("scroll", scrollHandler)
