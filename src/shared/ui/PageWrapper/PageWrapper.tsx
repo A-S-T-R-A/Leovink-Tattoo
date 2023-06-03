@@ -10,7 +10,7 @@ export function PageWrapper({ children, title }: { children: ReactNode; title: s
             <div className={styles.header}>
                 <Typography
                     size={TypographySize.H1}
-                    color={TypographyColor.COLOR_GRAY}
+                    color={TypographyColor.COLOR_DARKGRAY}
                     className={styles.title}
                 >
                     {title}
