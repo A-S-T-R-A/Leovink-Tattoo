@@ -9,14 +9,36 @@
     border-radius: 0;
 }
 
+.prev,
+.next,
+.cross {
+    > svg {
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+
+        stroke: var(--color-base);
+        transition: all 0.3s ease;
+
+        &:hover {
+            stroke: var(--color-accent);
+        }
+    }
+}
+
 .cross {
     position: absolute;
     top: 5px;
     right: 10px;
     font-size: 40px;
-    width: 40px;
-    height: 40px;
+
     z-index: 1000;
+
+    > svg {
+        width: 40px;
+        height: 40px;
+        transform: rotate(45deg);
+    }
 }
 
 .prev {
@@ -26,6 +48,10 @@
     transform: translateY(-50%);
     font-size: 40px;
     z-index: 900;
+
+    > svg {
+        transform: rotate(90deg);
+    }
 }
 
 .next {
@@ -35,6 +61,10 @@
     transform: translateY(-50%);
     font-size: 40px;
     z-index: 900;
+
+    > svg {
+        transform: rotate(-90deg);
+    }
 }
 
 .swiper {

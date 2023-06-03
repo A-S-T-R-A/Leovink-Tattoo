@@ -11,6 +11,7 @@ import styles from "./ModalGallery.module.scss"
 import { useRef } from "react"
 import { classNames } from "shared/lib/classNames/classNames"
 import { ITattooImage } from "shared/types/types"
+import { ArrowDownIcon, ChevronDownIcon, PlusIcon } from "shared/ui/Icons"
 
 interface IModalGallery {
     isOpen: boolean
@@ -24,13 +25,13 @@ export function ModalGallery({ data, isOpen, onClose }: IModalGallery) {
     return (
         <Modal isOpen={isOpen} onClose={onClose} contentClassName={styles.container}>
             <div className={styles.cross} onClick={onClose}>
-                x
+                <PlusIcon />
             </div>
             <div className={styles.prev} onClick={() => swiperRef.current?.slidePrev()}>
-                {"<"}
+                <ChevronDownIcon />
             </div>
             <div className={styles.next} onClick={() => swiperRef.current?.slideNext()}>
-                {">"}
+                <ChevronDownIcon />
             </div>
             <Swiper
                 slidesPerView={1}

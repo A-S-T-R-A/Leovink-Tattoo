@@ -1,20 +1,25 @@
 import { useState } from "react"
 import { data } from "shared/const/data"
-import { MasonryGrid } from "shared/ui/MasonryGrid/MasonryGrid"
+import { MasonryGrid } from "shared/components/MasonryGrid/MasonryGrid"
 import { ModalGallery } from "widgets/ModalGallery/ModalGallery"
+import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper"
 
 export function PortfolioPage() {
     const [isOpen, setIsOpen] = useState(false)
+    const [modalData, setModalData] = useState(data)
+
+    function clickHandler(index: number) {
+        const newModalData = [...data.slice(index), ...data.slice(0, index)]
+        setIsOpen(true)
+        setModalData(newModalData)
+    }
+
     return (
         <>
-            <ModalGallery data={data} isOpen={isOpen} onClose={() => setIsOpen(false)} />
-            <div>
-                <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-                    <MasonryGrid data={data} />
-                </div>
-                page
-                <button onClick={() => setIsOpen(prev => !prev)}>toggle</button>
-            </div>
+            <ModalGallery data={modalData} isOpen={isOpen} onClose={() => setIsOpen(false)} />
+            <PageWrapper title="Portfolio">
+                <MasonryGrid data={data} onClick={clickHandler} />
+            </PageWrapper>
         </>
     )
 }
