@@ -1,21 +1,21 @@
-.mainHeader {
+.wrapper {
     position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        z-index: 100;
+        width: 100%;
+        height: calc(var(--index) * 10);
+        background-image: url(./const/ground.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        bottom: calc(var(--index) * -4.5);
+    }
 }
 
-.mainHeader::after {
-    content: "";
-    position: absolute;
-    z-index: 100;
-    width: 100%;
-    height: calc(var(--index) * 10);
-    background-image: url(./const/ground.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    bottom: calc(var(--index) * -4.5);
-}
-
-.layers {
+.container {
     height: 100vh;
     display: flex;
     align-items: center;
@@ -49,27 +49,25 @@
     transform: translate3d(0, calc(var(--scrollTop) / 5.7), 0);
 }
 
-.layerHeader {
+.textContainer {
     z-index: 1;
     transform: translate3d(0, calc(var(--scrollTop) / 2), 0);
     transition: var(--transition);
     will-change: transform;
-    text-transform: uppercase;
-    font-weight: 900;
-    color: var(--text);
-    text-shadow: 0 0 15px #9d822b;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /*  gap: 20px;
-    margin-top: -30px; */
+    gap: 20px;
+    margin-top: -40px;
     position: relative;
-    border: 1px solid red;
+}
+
+.title {
+    width: 550px;
 }
 
 .caption {
     width: 320px;
-    /*  transform: translate3d(0, calc(var(--scrollTop) / 51.5), 0); */
 }
 
 .horns {
@@ -79,16 +77,9 @@
     transform: translate3d(0, calc(var(--scrollTop) / 6), 0);
 }
 
-/* .layerTitle {
-    font-size: calc(var(--index) * 2.65);
-    letter-spacing: calc(var(--index) / 2.25);
+.scroll {
+    z-index: 1000;
+    position: absolute;
+    bottom: 50px;
+    cursor: pointer;
 }
-
-.layerCaption {
-    font-size: calc(var(--index) / 1.175);
-    letter-spacing: calc(var(--index) / 6);
-    margin-top: calc(var(--index) * -0.75);
-    margin-bottom: 10px;
-    border-bottom: 1px solid #000;
-    display: flex;
-} */
