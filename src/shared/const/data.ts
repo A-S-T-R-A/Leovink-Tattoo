@@ -1,19 +1,32 @@
 import { ITattooImage } from "../types/types"
-import ta1 from "./ta1.jpg"
-import ta2 from "./ta2.jpg"
-import ta3 from "./ta3.jpg"
+import { images } from "./images"
 
 export const data: ITattooImage[] = [
-    { id: 1, img: ta1 },
-    { id: 2, img: ta2 },
-    { id: 3, img: ta3 },
-    { id: 4, img: ta3 },
-    { id: 5, img: ta3 },
-    { id: 6, img: ta3 },
-    { id: 7, img: ta3 },
-    { id: 8, img: ta3 },
-    { id: 9, img: ta3 },
-    { id: 10, img: ta3 },
-    { id: 11, img: ta3 },
-    { id: 12, img: ta1 },
+    { id: 26, img: images.ta26 },
+    { id: 20, img: images.ta20 },
+    { id: 1, img: images.ta1 },
+    { id: 16, img: images.ta16 },
+    { id: 2, img: images.ta2 },
+    { id: 3, img: images.ta3 },
+    { id: 27, img: images.ta27 },
+    { id: 4, img: images.ta4 },
+    { id: 5, img: images.ta5 },
+    { id: 6, img: images.ta6 },
+    { id: 7, img: images.ta7 },
+    { id: 8, img: images.ta8 },
+    { id: 9, img: images.ta9 },
+    { id: 10, img: images.ta10 },
+    { id: 11, img: images.ta11 },
+    { id: 12, img: images.ta12 },
+    { id: 13, img: images.ta13 },
+    { id: 14, img: images.ta14 },
+    { id: 15, img: images.ta15 },
+    { id: 17, img: images.ta17 },
+    { id: 18, img: images.ta18 },
+    { id: 19, img: images.ta19 },
+    { id: 21, img: images.ta21 },
+    { id: 22, img: images.ta22 },
+    { id: 23, img: images.ta23 },
+    { id: 24, img: images.ta24 },
+    { id: 25, img: images.ta25 },
 ]

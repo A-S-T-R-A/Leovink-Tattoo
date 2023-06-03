@@ -48,6 +48,11 @@
     align-items: center;
 }
 
+.img {
+    max-height: 100%;
+    object-fit: contain !important;
+}
+
 :global(.pagination) {
     :global(.swiper-pagination) {
         position: absolute !important;

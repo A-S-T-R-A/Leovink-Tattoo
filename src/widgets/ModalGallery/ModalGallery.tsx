@@ -1,5 +1,4 @@
 import { Modal } from "shared/ui/Modal"
-import { ITattooImage } from "./types/types"
 import "swiper/scss"
 import "swiper/scss/navigation"
 import "swiper/scss/pagination"
@@ -8,18 +7,18 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import SwiperCore from "swiper"
 import { Swiper as SwiperClass } from "swiper/types"
 import { Pagination, Navigation } from "swiper"
-import { data } from "./const/data"
 import styles from "./ModalGallery.module.scss"
 import { useRef } from "react"
 import { classNames } from "shared/lib/classNames/classNames"
+import { ITattooImage } from "shared/types/types"
 
 interface IModalGallery {
     isOpen: boolean
     onClose: () => void
-    // data: ITattooImage[]
+    data: ITattooImage[]
 }
 
-export function ModalGallery({ isOpen, onClose }: IModalGallery) {
+export function ModalGallery({ data, isOpen, onClose }: IModalGallery) {
     const swiperRef = useRef<SwiperCore>()
 
     return (
@@ -47,7 +46,7 @@ export function ModalGallery({ isOpen, onClose }: IModalGallery) {
                     const { id, img } = item
                     return (
                         <SwiperSlide key={id} className={styles.slide}>
-                            <img src={img} />
+                            <img src={img} className={styles.img} />
                         </SwiperSlide>
                     )
                 })}
