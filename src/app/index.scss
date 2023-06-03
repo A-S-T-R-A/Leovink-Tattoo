@@ -29,7 +29,7 @@ a:active {
 }
 
 :root {
-    --color-accent: #d9552b;
+    --color-accent: #d8bd8e;
     --color-base: #e5e5e5;
     --color-bg: #020b13;
     --color-dark-gray: rgb(49, 49, 49);
@@ -47,6 +47,9 @@ a:active {
     --font-size-base: 16px;
     --font-size-small: 14px;
     --font-size-extra-small: 12px;
+
+    --index: calc(1vw + 1vh);
+    /*  --transition: transform 0.2 ease-in; */
 }
 
 body {

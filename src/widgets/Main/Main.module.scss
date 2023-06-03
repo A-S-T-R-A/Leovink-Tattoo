@@ -1,0 +1,85 @@
+.wrapper {
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        z-index: 100;
+        width: 100%;
+        height: calc(var(--index) * 10);
+        background-image: url(./const/ground.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        bottom: calc(var(--index) * -4.5);
+    }
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.layer {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+    transition: var(--transition);
+    z-index: 2;
+}
+
+.layerBase {
+    transform: translate3d(0, calc(var(--scrollTop) / 1.6), 0);
+    z-index: 0;
+}
+
+.layerMiddle {
+    transform: translate3d(0, calc(var(--scrollTop) / 2.5), 0);
+}
+
+.layerFront {
+    transform: translate3d(0, calc(var(--scrollTop) / 5.7), 0);
+}
+
+.textContainer {
+    z-index: 1;
+    transform: translate3d(0, calc(var(--scrollTop) / 2), 0);
+    transition: var(--transition);
+    will-change: transform;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: -40px;
+    position: relative;
+}
+
+.title {
+    width: 550px;
+}
+
+.caption {
+    width: 320px;
+}
+
+.horns {
+    position: absolute;
+    top: -170px;
+    z-index: -1;
+    transform: translate3d(0, calc(var(--scrollTop) / 6), 0);
+}
+
+.scroll {
+    z-index: 1000;
+    position: absolute;
+    bottom: 50px;
+    cursor: pointer;
+}
