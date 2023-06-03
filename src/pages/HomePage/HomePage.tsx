@@ -1,4 +1,6 @@
 import { Main } from "widgets/Main/Main"
+import { Section } from "shared/ui/Section/Section"
+import { Typography, TypographyColor } from "shared/ui/Typography/Typography"
 
 export function HomePage() {
     return (
