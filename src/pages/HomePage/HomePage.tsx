@@ -1,11 +1,11 @@
 import { Main } from "widgets/Main/Main"
-import { Section } from "shared/ui/Section/Section"
-import { Typography, TypographyColor } from "shared/ui/Typography/Typography"
+import { Portfolio } from "widgets/Portfolio/Portfolio"
 
 export function HomePage() {
     return (
         <div>
             <Main />
+            <Portfolio />
             <div style={{ height: "300vh" }}></div>
         </div>
     )

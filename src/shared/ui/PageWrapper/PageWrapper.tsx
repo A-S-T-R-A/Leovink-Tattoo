@@ -8,11 +8,7 @@ export function PageWrapper({ children, title }: { children: ReactNode; title: s
     return (
         <div className={styles.wrapper}>
             <div className={styles.header}>
-                <Typography
-                    size={TypographySize.H1}
-                    color={TypographyColor.COLOR_DARKGRAY}
-                    className={styles.title}
-                >
+                <Typography color={TypographyColor.COLOR_DARKGRAY} className={styles.title}>
                     {title}
                 </Typography>
                 <AppLink className={styles.back} to="/">
