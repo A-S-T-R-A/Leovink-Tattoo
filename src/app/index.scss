@@ -47,6 +47,9 @@ a:active {
     --font-size-base: 16px;
     --font-size-small: 14px;
     --font-size-extra-small: 12px;
+
+    --index: calc(1vw + 1vh);
+    --transition: transform 0.2 ease-in;
 }
 
 body {
