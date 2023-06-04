@@ -14,7 +14,6 @@ export function HomePage() {
             <Artists />
             <Testimonials />
             <FormSection />
-            <div style={{ height: "300vh" }}></div>
         </div>
     )
 }
