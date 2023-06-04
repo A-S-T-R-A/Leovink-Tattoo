@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+}
+
+.card {
+    display: flex;
+    gap: 20px;
+
+    .left {
+        width: 350px;
+    }
+
+    .right {
+        max-width: 450px;
+
+        .name {
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .specialization {
+            margin-bottom: 15px;
+        }
+    }
+}

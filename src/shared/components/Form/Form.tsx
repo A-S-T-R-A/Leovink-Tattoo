@@ -3,12 +3,13 @@ import { CtaButton } from "shared/components/CtaButton/CtaButton"
 import { useState } from "react"
 import { Typography, TypographySize } from "shared/ui/Typography/Typography"
 import styles from "./Form.module.scss"
+import { classNames } from "shared/lib/classNames/classNames"
 
-export function Form() {
+export function Form({ isVertical }: { isVertical?: boolean }) {
     const [formData, setFormData] = useState({ name: "", phone: "" })
 
     return (
-        <form className={styles.form} id="formSection">
+        <form id="formSection" className={classNames(styles.form, { [styles.vertical]: isVertical })}>
             <Typography className={styles.title} size={TypographySize.H1}>
                 Book an appointment
             </Typography>

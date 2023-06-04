@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router"
 import { HomePage, FAQPage, ContactPage, PortfolioPage, TestimonialsPage, ArtistPage } from "pages"
 import { Header } from "widgets/Header"
+import { Footer } from "widgets/Footer/Footer"
 
 export function App() {
     return (
@@ -14,6 +15,7 @@ export function App() {
                 <Route path="/testimonials" element={<TestimonialsPage />} />
                 <Route path="/artist" element={<ArtistPage />} />
             </Routes>
+            <Footer />
         </div>
     )
 }

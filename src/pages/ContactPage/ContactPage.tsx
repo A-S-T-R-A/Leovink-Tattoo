@@ -1,3 +1,10 @@
+import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper"
+import { FormSection } from "widgets/FormSection/FormSection"
+
 export function ContactPage() {
-    return <div>ContactPage</div>
+    return (
+        <PageWrapper title="Contact">
+            <FormSection />
+        </PageWrapper>
+    )
 }
