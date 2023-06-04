@@ -9,7 +9,7 @@ import { classNames } from "shared/lib/classNames/classNames"
 interface IMasonryGrid {
     data: ITattooImage[]
     maxHeight?: string
-    onClick: (index: number) => void
+    onClick?: (index: number) => void
 }
 
 export function MasonryGrid({ data, onClick, maxHeight = "auto" }: IMasonryGrid) {
