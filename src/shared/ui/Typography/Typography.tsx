@@ -16,6 +16,7 @@ export enum TypographySize {
 export enum TypographyColor {
     COLOR_BASE = "color_base",
     COLOR_DARKGRAY = "color_darkgray",
+    COLOR_LIGHTGRAY = "color_lightgray",
     COLOR_ACCENT = "color_accent",
     COLOR_ERROR = "color-error",
 }

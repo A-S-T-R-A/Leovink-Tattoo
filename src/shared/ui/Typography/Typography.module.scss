@@ -36,7 +36,11 @@
     }
 
     &.color_darkgray {
-        color: var(--color-dark-gray);
+        color: var(--color-darkgray);
+    }
+
+    &.color_lightgray {
+        color: var(--color-lightgray);
     }
 
     &.color_accent {

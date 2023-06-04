@@ -9,6 +9,9 @@ import { ChevronDownIcon } from "./ChevronDownIcon"
 import { MoldovaRepublic } from "./MoldovaRepublic"
 import { LineIcon } from "./Line"
 import { BigLine } from "./BigLine"
+import { EyeIcon } from "./EyeIcon"
+import { PauseIcon } from "./PauseIcon"
+import { PlayIcon } from "./PlayIcon"
 
 export {
     BigLine,
@@ -22,4 +25,7 @@ export {
     PlusIcon,
     ChevronDownIcon,
     LineIcon,
+    EyeIcon,
+    PauseIcon,
+    PlayIcon,
 }

@@ -1,0 +1,24 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.title {
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.formContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .input {
+        width: 100%;
+    }
+}

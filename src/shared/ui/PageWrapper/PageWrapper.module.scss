@@ -1,9 +1,10 @@
 .wrapper {
     position: relative;
+    padding-top: calc(var(--header-height) + 10px);
 }
 
 .title {
-    font-size: 64px !important;
+    font-size: 84px !important;
     position: absolute;
     line-height: 48px;
 }
