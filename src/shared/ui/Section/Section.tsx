@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
 import { classNames } from "shared/lib/classNames/classNames"
+import { Typography, TypographySize } from "../Typography/Typography"
 import styles from "./Section.module.scss"
 
 interface ISectionProps {
@@ -15,7 +16,11 @@ export function Section(props: ISectionProps) {
     return (
         <section className={classNames(styles.wrapper, {}, [wrapperClassName])}>
             <div className={classNames(styles.container, {}, [containerClassName])}>
-                {!!title && <h1 className={styles.title}>{title}</h1>}
+                {!!title && (
+                    <Typography className={styles.title} size={TypographySize.H1}>
+                        {title}
+                    </Typography>
+                )}
                 {children}
             </div>
         </section>
