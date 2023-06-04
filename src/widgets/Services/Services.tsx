@@ -31,7 +31,7 @@ export function Services() {
                                     size={TypographySize.H3}
                                     color={TypographyColor.COLOR_LIGHTGRAY}
                                 >
-                                    {service}
+                                    0{index + 1}. {service}
                                     <ArrowUpIcon
                                         className={classNames(
                                             styles.arrowIcon,
@@ -42,7 +42,7 @@ export function Services() {
                                 </Typography>
                             </div>
                             {open === index && (
-                                <>
+                                <div className={styles.content}>
                                     <Typography
                                         className={styles.price}
                                         color={TypographyColor.COLOR_BASE}
@@ -56,7 +56,7 @@ export function Services() {
                                         })}
                                     </div>
                                     <CtaButton className={styles.btn} />
-                                </>
+                                </div>
                             )}
                         </li>
                     )

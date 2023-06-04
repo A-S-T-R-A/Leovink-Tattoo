@@ -11,7 +11,7 @@ import styles from "./ModalGallery.module.scss"
 import { useRef } from "react"
 import { classNames } from "shared/lib/classNames/classNames"
 import { ITattooImage } from "shared/types/types"
-import { ArrowDownIcon, ChevronDownIcon, PlusIcon } from "shared/ui/Icons"
+import { ChevronDownIcon, PlusIcon } from "shared/ui/Icons"
 
 interface IModalGallery {
     isOpen: boolean
@@ -36,11 +36,11 @@ export function ModalGallery({ data, isOpen, onClose }: IModalGallery) {
             <Swiper
                 slidesPerView={1}
                 loop
-                modules={[Pagination, Navigation]}
+                modules={[Navigation]}
                 onSwiper={swiper => (swiperRef.current = swiper)}
-                pagination={{
+                /*  pagination={{
                     clickable: true,
-                }}
+                }} */
                 className={classNames(styles.swiper, {}, ["pagination"])}
             >
                 {data.map(item => {

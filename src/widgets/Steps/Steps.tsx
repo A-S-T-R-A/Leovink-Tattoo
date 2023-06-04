@@ -3,6 +3,7 @@ import styles from "./Steps.module.scss"
 import { Typography, TypographySize } from "shared/ui/Typography/Typography"
 import { stepsData } from "./const/data"
 import { DesktopLayout } from "./ui/DesctopLayout/DesktopLayout"
+import { CtaButton } from "shared/components/CtaButton/CtaButton"
 
 export function Steps() {
     return (
@@ -22,6 +23,7 @@ export function Steps() {
                     )
                 })}
             </DesktopLayout>
+            <CtaButton className={styles.btn} />
         </Section>
     )
 }

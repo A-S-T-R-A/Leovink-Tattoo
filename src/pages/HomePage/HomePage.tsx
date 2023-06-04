@@ -11,9 +11,9 @@ export function HomePage() {
     return (
         <div>
             <Main />
+            <Portfolio />
             <Steps />
             <Services />
-            <Portfolio />
             <Artists />
             <Testimonials />
             <Faq />
