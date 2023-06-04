@@ -27,7 +27,7 @@ export function ArtistCard({ data }: { data: IArtistData }) {
             >
                 {description}
             </Typography>
-            <AppLink to="/" className={styles.view}>
+            <AppLink to="/artist" className={styles.view}>
                 view gallery <ArrowDownIcon />
             </AppLink>
         </div>

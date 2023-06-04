@@ -22,3 +22,14 @@
         width: 100%;
     }
 }
+
+.vertical {
+    width: fit-content;
+    .title {
+        font-size: 22px;
+    }
+    .formContent {
+        flex-direction: column;
+        gap: 30px;
+    }
+}
