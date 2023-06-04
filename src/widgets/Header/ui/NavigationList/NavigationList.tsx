@@ -1,6 +1,7 @@
 import { classNames } from "shared/lib/classNames/classNames"
 import { menuData } from "../../const/data"
 import styles from "./NavigationList.module.css"
+import { AppLink } from "shared/ui/AppLink/AppLink"
 
 export function NavigationList(props: { closeClickHandler?: () => void; className?: string }) {
     const { closeClickHandler, className } = props
@@ -10,9 +11,9 @@ export function NavigationList(props: { closeClickHandler?: () => void; classNam
             {menuData.map(item => {
                 return (
                     <li className={styles.item} key={item.id} onClick={closeClickHandler}>
-                        <a href={item.link} className={styles.undreline}>
+                        <AppLink to={item.link} className={styles.undreline}>
                             {item.text}
-                        </a>
+                        </AppLink>
                     </li>
                 )
             })}
