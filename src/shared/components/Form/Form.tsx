@@ -9,7 +9,7 @@ export function Form({ isVertical }: { isVertical?: boolean }) {
     const [formData, setFormData] = useState({ name: "", phone: "" })
 
     return (
-        <form className={classNames(styles.form, { [styles.vertical]: isVertical })}>
+        <form id="formSection" className={classNames(styles.form, { [styles.vertical]: isVertical })}>
             <Typography className={styles.title} size={TypographySize.H1}>
                 Book an appointment
             </Typography>
