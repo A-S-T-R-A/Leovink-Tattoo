@@ -8,6 +8,8 @@ body {
     font-family: "Montserrat", sans-serif;
     background: var(--color-bg);
     color: var(--color-base);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 body::-webkit-scrollbar-track {

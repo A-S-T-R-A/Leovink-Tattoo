@@ -13,8 +13,6 @@ export function Header() {
         setIsScrolled(boolean)
     }
 
-    console.log("render")
-
     useEffect(() => {
         window.addEventListener("scroll", scrollHandler)
         return () => window.removeEventListener("scroll", scrollHandler)
