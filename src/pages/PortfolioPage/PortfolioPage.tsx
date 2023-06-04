@@ -6,6 +6,7 @@ import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper"
 import { Dropdown } from "shared/ui/Dropdown"
 import styles from "./PortfolioPage.module.scss"
 import { ITattooImage } from "shared/types/types"
+import { FormSection } from "widgets/FormSection/FormSection"
 
 interface IFilters {
     artist: string
@@ -83,6 +84,7 @@ export function PortfolioPage() {
                     />
                 </div>
                 <MasonryGrid data={data} onClick={clickHandler} />
+                <FormSection />
             </PageWrapper>
         </>
     )
