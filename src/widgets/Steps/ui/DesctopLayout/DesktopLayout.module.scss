@@ -1,0 +1,87 @@
+.container {
+    display: grid;
+    justify-content: center;
+    row-gap: 80px;
+    grid-template-columns: 1fr 1fr 1fr 20px;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "firstStep secondStep thirdStep line"
+        "sixthStep fifthStep fourthStep line";
+}
+
+.bigLine {
+    transform: rotate(280deg);
+    justify-self: center;
+    width: 250px;
+    margin: 80px 0 0 45px;
+    grid-area: line;
+}
+
+.firstStep {
+    grid-area: firstStep;
+    transform: translateY(20px);
+    transform: translateX(40px);
+}
+
+.secondStep {
+    grid-area: secondStep;
+    transform: translateY(-20px);
+    transform: translateX(40px);
+}
+
+.thirdStep {
+    grid-area: thirdStep;
+    transform: translateX(40px);
+}
+
+.fourthStep {
+    grid-area: fourthStep;
+    transform: translateY(20px);
+    transform: translateX(-40px);
+}
+
+.fifthStep {
+    grid-area: fifthStep;
+    transform: translateY(-20px);
+    transform: translateX(-40px);
+}
+
+.sixthStep {
+    grid-area: sixthStep;
+    transform: translateX(-40px);
+}
+
+.firstStep,
+.secondStep,
+.thirdStep,
+.fourthStep,
+.fifthStep,
+.sixthStep {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+
+    .secondLine,
+    .fifthLine {
+        position: absolute;
+        top: -5px;
+        right: -20%;
+        transform: rotate(185deg);
+        width: 50%;
+        max-width: 200px;
+        z-index: -1;
+    }
+
+    .firstLine,
+    .sixthLine {
+        position: absolute;
+        bottom: -5px;
+        right: -20%;
+        transform: rotate(-5deg);
+        width: 50%;
+        max-width: 200px;
+        z-index: -1;
+    }
+}
