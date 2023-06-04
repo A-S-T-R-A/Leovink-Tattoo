@@ -8,7 +8,7 @@ export function Form() {
     const [formData, setFormData] = useState({ name: "", phone: "" })
 
     return (
-        <form className={styles.form}>
+        <form className={styles.form} id="formSection">
             <Typography className={styles.title} size={TypographySize.H1}>
                 Book an appointment
             </Typography>

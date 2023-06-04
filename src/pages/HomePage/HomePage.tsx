@@ -4,12 +4,14 @@ import { Main } from "widgets/Main/Main"
 import { Steps } from "widgets/Steps/Steps"
 import { Portfolio } from "widgets/Portfolio/Portfolio"
 import { Testimonials } from "widgets/Testimonials/Testimonials"
+import { Services } from "widgets/Services/Services"
 
 export function HomePage() {
     return (
         <div>
             <Main />
             <Steps />
+            <Services />
             <Portfolio />
             <Artists />
             <Testimonials />
