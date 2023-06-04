@@ -2,9 +2,12 @@
     border: none;
     background-color: transparent;
     color: var(--color-accent);
+    width: fit-content;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
 
     &:hover {
-        cursor: pointer;
         filter: brightness(90%);
     }
 }

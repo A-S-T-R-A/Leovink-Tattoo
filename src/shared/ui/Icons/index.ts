@@ -7,6 +7,8 @@ import { ArrowUpIcon } from "./ArrowUpIcon"
 import { PlusIcon } from "./PlusIcon"
 import { ChevronDownIcon } from "./ChevronDownIcon"
 import { EyeIcon } from "./EyeIcon"
+import { PauseIcon } from "./PauseIcon"
+import { PlayIcon } from "./PlayIcon"
 
 export {
     InstagramIcon,
@@ -18,4 +20,6 @@ export {
     PlusIcon,
     ChevronDownIcon,
     EyeIcon,
+    PauseIcon,
+    PlayIcon,
 }
