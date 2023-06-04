@@ -1,4 +1,4 @@
-import { MoldovaRepublic } from "shared/ui/Icons/moldovaRepublic"
+import { MoldovaRepublic } from "shared/ui/Icons/MoldovaRepublic"
 import styles from "./Language.module.scss"
 
 export function Language() {
