@@ -1,0 +1,85 @@
+.list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 500;
+    font-size: var(--font-size-h3);
+    row-gap: 30px;
+}
+
+@media (min-width: 961px) {
+    .list {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        gap: 30px;
+        text-transform: capitalize;
+        letter-spacing: 1px;
+        font-weight: 300;
+        font-size: var(--font-size-h5);
+    }
+
+    .undreline::after {
+        bottom: 2px !important;
+    }
+}
+
+@media (min-width: 1201px) {
+    .list {
+        width: 100%;
+        display: flex;
+    }
+}
+
+.item {
+    width: fit-content;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+    line-height: 32px;
+    transition: 0.4s ease;
+    position: relative;
+}
+
+.undreline {
+    display: inline-block;
+    position: relative;
+    color: var(--color-base) !important;
+    text-shadow: 1px 1px 2px black;
+}
+
+.undreline::after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: -2px;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: var(--color-base);
+    transition: width .2s ease 0s, left .2s ease 0s;
+    width: 0;
+}
+
+.undreline:hover::after {
+    width: 100%;
+    left: 0;
+
+}
+
+.item:hover {
+    opacity: 1;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+@media (min-width: 961px) {
+    .undreline::after {
+        bottom: 2px;
+    }
+}
