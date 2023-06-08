@@ -1,4 +1,4 @@
-import { classNames } from "shared/lib/classNames/classNames"
+import { classNames } from "../../lib/classNames/classNames"
 
 export function ArrowDownIcon({ className }: { className?: string }) {
     return (

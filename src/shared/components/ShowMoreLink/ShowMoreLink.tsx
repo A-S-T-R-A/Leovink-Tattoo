@@ -1,7 +1,7 @@
-import { AppLink } from "shared/ui/AppLink/AppLink"
-import { ChevronDownIcon } from "shared/ui/Icons"
+import { AppLink } from "../../ui/AppLink/AppLink"
+import { ChevronDownIcon } from "../../ui/Icons"
 import styles from "./ShowMoreLink.module.scss"
-import { classNames } from "shared/lib/classNames/classNames"
+import { classNames } from "../../lib/classNames/classNames"
 
 export function ShowMoreLink({
     to,

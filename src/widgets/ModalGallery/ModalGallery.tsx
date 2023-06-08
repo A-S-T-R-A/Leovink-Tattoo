@@ -1,17 +1,17 @@
-import { Modal } from "shared/ui/Modal"
+import { Modal } from "../../shared/ui/Modal"
 import "swiper/scss"
 import "swiper/scss/navigation"
 import "swiper/scss/pagination"
 import "swiper/scss/scrollbar"
 import { Swiper, SwiperSlide } from "swiper/react"
-import SwiperCore from "swiper"
+import type SwiperCore from "swiper"
 import { Swiper as SwiperClass } from "swiper/types"
 import { Pagination, Navigation } from "swiper"
 import styles from "./ModalGallery.module.scss"
 import { useRef } from "react"
-import { classNames } from "shared/lib/classNames/classNames"
-import { ITattooImage } from "shared/types/types"
-import { ChevronDownIcon, PlusIcon } from "shared/ui/Icons"
+import { classNames } from "../../shared/lib/classNames/classNames"
+import type { ITattooImage } from "../../shared/types/types"
+import { ChevronDownIcon, PlusIcon } from "../../shared/ui/Icons"
 
 interface IModalGallery {
     isOpen: boolean
@@ -37,7 +37,7 @@ export function ModalGallery({ data, isOpen, onClose }: IModalGallery) {
                 slidesPerView={1}
                 loop
                 modules={[Navigation]}
-                onSwiper={swiper => (swiperRef.current = swiper)}
+                onSwiper={(swiper: any) => (swiperRef.current = swiper)}
                 /*  pagination={{
                     clickable: true,
                 }} */

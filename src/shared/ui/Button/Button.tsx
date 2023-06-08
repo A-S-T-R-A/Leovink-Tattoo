@@ -1,10 +1,10 @@
-import { ButtonHTMLAttributes, ReactNode } from "react"
-import { classNames } from "shared/lib/classNames/classNames"
+//import { ButtonHTMLAttributes, ReactNode } from "react"
+import { classNames } from "../../lib/classNames/classNames"
 import styles from "./Button.module.scss"
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps {
     className?: string
-    children: ReactNode
+    children: any
 }
 
 export function Button(props: ButtonProps) {

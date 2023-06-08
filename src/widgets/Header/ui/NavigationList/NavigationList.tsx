@@ -1,7 +1,7 @@
-import { classNames } from "shared/lib/classNames/classNames"
+import { classNames } from "../../../../shared/lib/classNames/classNames"
 import { menuData } from "../../const/data"
 import styles from "./NavigationList.module.css"
-import { AppLink } from "shared/ui/AppLink/AppLink"
+import { AppLink } from "../../../../shared/ui/AppLink/AppLink"
 
 export function NavigationList(props: { closeClickHandler?: () => void; className?: string }) {
     const { closeClickHandler, className } = props

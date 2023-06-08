@@ -1,11 +1,11 @@
 import { useState } from "react"
-import { Section } from "shared/ui/Section/Section"
+import { Section } from "../../shared/ui/Section/Section"
 import { servicesData } from "./const/data"
-import { Typography, TypographyColor, TypographySize } from "shared/ui/Typography/Typography"
-import { ArrowLeftIcon, ArrowUpIcon } from "shared/ui/Icons"
+import { Typography } from "../../shared/ui/Typography/Typography"
+import { ArrowUpIcon } from "../../shared/ui/Icons/ArrowUpIcon"
 import styles from "./Services.module.scss"
-import { classNames } from "shared/lib/classNames/classNames"
-import { CtaButton } from "shared/components/CtaButton/CtaButton"
+import { classNames } from "../../shared/lib/classNames/classNames"
+import { CtaButton } from "../../shared/components/CtaButton/CtaButton"
 
 export function Services() {
     const [open, setOpen] = useState(0)
@@ -26,11 +26,7 @@ export function Services() {
                                 className={styles.serviceClick}
                                 onClick={() => clickHandler(index)}
                             >
-                                <Typography
-                                    className={styles.title}
-                                    size={TypographySize.H3}
-                                    color={TypographyColor.COLOR_LIGHTGRAY}
-                                >
+                                <Typography className={styles.title}>
                                     0{index + 1}. {service}
                                     <ArrowUpIcon
                                         className={classNames(
@@ -43,13 +39,7 @@ export function Services() {
                             </div>
                             {open === index && (
                                 <div className={styles.content}>
-                                    <Typography
-                                        className={styles.price}
-                                        color={TypographyColor.COLOR_BASE}
-                                        size={TypographySize.SMALL}
-                                    >
-                                        from {price}
-                                    </Typography>
+                                    <Typography className={styles.price}>from {price}</Typography>
                                     <div className={styles.imgContainer}>
                                         {imgs.map(image => {
                                             return <img src={image} alt="pic" />

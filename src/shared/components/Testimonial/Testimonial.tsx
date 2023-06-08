@@ -1,4 +1,4 @@
-import { Typography, TypographyColor, TypographySize } from "shared/ui/Typography/Typography"
+import { Typography } from "../../ui/Typography/Typography"
 import styles from "./Testimonial.module.scss"
 import video from "./const/testimonial.mp4"
 import poster from "./const/testimonial1.jpg"
@@ -23,10 +23,10 @@ export function Testimonial({
                 <video src={video} poster={poster} controls />
             </div>
             <div className={styles.right}>
-                <Typography size={TypographySize.H2} isBold className={styles.title}>
+                <Typography isBold className={styles.title}>
                     Polynesian tribe tattoo
                 </Typography>
-                <Typography color={TypographyColor.COLOR_LIGHTGRAY} className={styles.description}>
+                <Typography className={styles.description}>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, voluptas
                     inventore voluptatibus fugit tenetur, numquam suscipit provident sequi nobis
                     soluta ab laudantium esse dolor vitae est quae asperiores libero porro aut odit
@@ -34,13 +34,13 @@ export function Testimonial({
                     sint explicabo quam, totam aspernatur cupiditate.
                 </Typography>
                 <div className={styles.info}>
-                    <Typography color={TypographyColor.COLOR_LIGHTGRAY}>
+                    <Typography>
                         <span className={styles.bold}>tattoo artist:</span> Nastia
                     </Typography>
-                    <Typography color={TypographyColor.COLOR_LIGHTGRAY}>
+                    <Typography>
                         <span className={styles.bold}>price:</span> 150 eur
                     </Typography>
-                    <Typography color={TypographyColor.COLOR_LIGHTGRAY}>
+                    <Typography>
                         <span className={styles.bold}>duration:</span> 14 hours
                     </Typography>
                 </div>

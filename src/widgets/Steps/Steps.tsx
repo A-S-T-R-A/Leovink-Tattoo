@@ -1,9 +1,9 @@
-import { Section } from "shared/ui/Section/Section"
+import { Section } from "../../shared/ui/Section/Section"
 import styles from "./Steps.module.scss"
-import { Typography, TypographySize } from "shared/ui/Typography/Typography"
+import { Typography } from "../../shared/ui/Typography/Typography"
 import { stepsData } from "./const/data"
 import { DesktopLayout } from "./ui/DesctopLayout/DesktopLayout"
-import { CtaButton } from "shared/components/CtaButton/CtaButton"
+import { CtaButton } from "../../shared/components/CtaButton/CtaButton"
 
 export function Steps() {
     return (
@@ -16,7 +16,7 @@ export function Steps() {
                             <div key={id} className={styles.imgContainer}>
                                 <img src={img} alt="step" className={styles.img} />
                             </div>
-                            <Typography size={TypographySize.H4}>
+                            <Typography>
                                 {step}. {title}
                             </Typography>
                         </>

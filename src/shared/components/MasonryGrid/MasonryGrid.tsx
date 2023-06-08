@@ -1,10 +1,10 @@
-import { ITattooImage } from "shared/types/types"
+import type { ITattooImage } from "../../types/types"
 import styles from "./MasonryGrid.module.scss"
 
 //@ts-ignore
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 import { EyeIcon } from "../../ui/Icons"
-import { classNames } from "shared/lib/classNames/classNames"
+import { classNames } from "../../lib/classNames/classNames"
 
 interface IMasonryGrid {
     data: ITattooImage[]

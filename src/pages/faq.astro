@@ -1,0 +1,17 @@
+---
+import Layout from "layouts/Layout.astro"
+import { faqData } from "shared/const/faqData"
+import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper"
+import { Section } from "shared/ui/Section/Section"
+import { FAQ } from "./FAQ/FAQ"
+import { FormSection } from "widgets/FormSection/FormSection"
+---
+
+<Layout>
+    <PageWrapper title="FAQ">
+        <Section>
+            <FAQ client:load />
+        </Section>
+        <FormSection client:load />
+    </PageWrapper>
+</Layout>

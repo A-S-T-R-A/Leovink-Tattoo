@@ -1,4 +1,4 @@
-import { classNames } from "shared/lib/classNames/classNames"
+import { classNames } from "../../shared/lib/classNames/classNames"
 import { useEffect } from "react"
 import styles from "./Main.module.scss"
 import layerBaseImg from "./const/layer-base.png"
@@ -7,7 +7,7 @@ import layerFrontImg from "./const/layer-front.png"
 import leovinkTitle from "./const/leovinkLogo.png"
 import leovinkCaption from "./const/leovCaption.png"
 import leovinkHorns from "./const/leovinkHorns.png"
-import { ScrollIcon } from "shared/ui/ScrollIcon/ScrollIcon"
+import { ScrollIcon } from "../../shared/ui/ScrollIcon/ScrollIcon"
 
 export function Main() {
     function scrollHandler() {

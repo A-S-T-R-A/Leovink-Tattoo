@@ -1,9 +1,9 @@
-import { useState, MouseEvent } from "react"
-import { IFaqBlock } from "shared/types/types"
+import { useState } from "preact/hooks"
+import type { IFaqBlock } from "shared/types/types"
 import styles from "./FaqBlock.module.scss"
-import { Typography, TypographyColor, TypographySize } from "shared/ui/Typography/Typography"
-import { PlusIcon } from "shared/ui/Icons"
-import { classNames } from "shared/lib/classNames/classNames"
+import { Typography } from "../../ui/Typography/Typography"
+import { PlusIcon } from "../../ui/Icons"
+import { classNames } from "../../lib/classNames/classNames"
 
 export function FaqBlock({ data, isWithoutTitle }: { data: IFaqBlock; isWithoutTitle?: boolean }) {
     const { title, questions } = data
@@ -27,11 +27,7 @@ export function FaqBlock({ data, isWithoutTitle }: { data: IFaqBlock; isWithoutT
 
     return (
         <div className={styles.container}>
-            {!isWithoutTitle && (
-                <Typography size={TypographySize.H1} className={styles.title}>
-                    {title}
-                </Typography>
-            )}
+            {!isWithoutTitle && <Typography className={styles.title}>{title}</Typography>}
             <div className={styles.list}>
                 {questions.map((item, index) => {
                     const { question, answer } = item
@@ -42,12 +38,7 @@ export function FaqBlock({ data, isWithoutTitle }: { data: IFaqBlock; isWithoutT
                                 className={styles.question}
                                 onClick={() => questionClickHandler(index)}
                             >
-                                <Typography
-                                    size={TypographySize.H3}
-                                    className={styles.questionTitle}
-                                >
-                                    {question}
-                                </Typography>
+                                <Typography className={styles.questionTitle}>{question}</Typography>
 
                                 <div onClick={e => iconClickHandler(e, index)}>
                                     <PlusIcon
@@ -58,12 +49,7 @@ export function FaqBlock({ data, isWithoutTitle }: { data: IFaqBlock; isWithoutT
                                 </div>
                             </div>
                             {isExpanded && (
-                                <Typography
-                                    color={TypographyColor.COLOR_LIGHTGRAY}
-                                    className={styles.answer}
-                                >
-                                    {answer}
-                                </Typography>
+                                <Typography className={styles.answer}>{answer}</Typography>
                             )}
                         </div>
                     )

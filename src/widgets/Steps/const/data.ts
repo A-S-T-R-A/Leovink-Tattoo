@@ -1,4 +1,11 @@
-import { care, consult, drawing, prepare, treatment, update } from "shared/assets/images"
+import {
+    care,
+    consult,
+    drawing,
+    prepare,
+    treatment,
+    update,
+} from "../../../shared/assets/images/index"
 
 export const stepsData = [
     {

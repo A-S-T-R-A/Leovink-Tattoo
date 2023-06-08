@@ -1,7 +1,7 @@
-import { Button } from "shared/ui/Button/Button"
+import { Button } from "../../ui/Button/Button"
 import styles from "./CtaButton.module.scss"
-import { ArrowDownIcon } from "shared/ui/Icons"
-import { classNames } from "shared/lib/classNames/classNames"
+import { ArrowDownIcon } from "../../ui/Icons"
+import { classNames } from "../../lib/classNames/classNames"
 
 export function CtaButton({ className }: { className?: string }) {
     function scrollToTarget() {
@@ -16,7 +16,7 @@ export function CtaButton({ className }: { className?: string }) {
     }
 
     return (
-        <Button onClick={scrollToTarget} className={classNames(styles.btn, {}, [className])}>
+        <Button className={classNames(styles.btn, {}, [className])}>
             Book an appointment
             <ArrowDownIcon className={styles.icon} />
         </Button>

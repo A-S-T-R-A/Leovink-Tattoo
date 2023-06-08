@@ -1,9 +1,9 @@
-import { Children, ReactNode } from "react"
-import { LineIcon } from "shared/ui/Icons"
+import { Children } from "react"
+import { LineIcon } from "../../../../shared/ui/Icons"
 import styles from "./DesktopLayout.module.scss"
-import { BigLine } from "shared/ui/Icons"
+import { BigLine } from "../../../../shared/ui/Icons"
 
-export function DesktopLayout({ children }: { children: ReactNode }) {
+export function DesktopLayout({ children }: { children: any }) {
     const array = Children.toArray(children)
 
     return (

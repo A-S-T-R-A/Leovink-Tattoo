@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "preact/hooks"
 import { data as d } from "shared/const/data"
 import { MasonryGrid } from "shared/components/MasonryGrid/MasonryGrid"
 import { ModalGallery } from "widgets/ModalGallery/ModalGallery"
 import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper"
 import { Dropdown } from "shared/ui/Dropdown"
 import styles from "./PortfolioPage.module.scss"
-import { ITattooImage } from "shared/types/types"
+import type { ITattooImage } from "shared/types/types"
 import { FormSection } from "widgets/FormSection/FormSection"
 
 interface IFilters {

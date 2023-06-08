@@ -1,4 +1,4 @@
-import { classNames } from "shared/lib/classNames/classNames"
+import { classNames } from "../../lib/classNames/classNames"
 import styles from "./ScrollIcon.module.scss"
 
 export function ScrollIcon({ className, query }: { className?: string; query?: string }) {

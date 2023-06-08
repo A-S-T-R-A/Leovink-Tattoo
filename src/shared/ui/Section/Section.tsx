@@ -1,10 +1,9 @@
-import { ReactNode } from "react"
-import { classNames } from "shared/lib/classNames/classNames"
+import { classNames } from "../../lib/classNames/classNames"
 import { Typography, TypographySize } from "../Typography/Typography"
 import styles from "./Section.module.scss"
 
 interface ISectionProps {
-    children: ReactNode
+    children: any
     wrapperClassName?: string
     containerClassName?: string
     title?: string

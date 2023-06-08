@@ -1,5 +1,4 @@
-import { ReactNode } from "react"
-import { classNames } from "shared/lib/classNames/classNames"
+import { classNames } from "../../lib/classNames/classNames"
 import styles from "./Typography.module.scss"
 
 export enum TypographySize {
@@ -23,7 +22,7 @@ export enum TypographyColor {
 
 interface TypographyProps {
     className?: string
-    children: ReactNode
+    children: any
     size?: TypographySize
     color?: TypographyColor
     isBold?: boolean

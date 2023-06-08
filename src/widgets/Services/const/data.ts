@@ -1,4 +1,4 @@
-import { images } from "shared/const/images"
+import { images } from "../../../shared/const/images"
 
 export const servicesData = [
     { service: "Tattoo", price: "€49", imgs: [images.ta1, images.ta2, images.ta3] },

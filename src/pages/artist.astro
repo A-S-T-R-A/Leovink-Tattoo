@@ -1,0 +1,8 @@
+---
+import Layout from "layouts/Layout.astro"
+import { ArtistPage } from "./ArtistPage/ArtistPage"
+---
+
+<Layout client:load title="Leovink Tattoo">
+    <ArtistPage client:only="preact" />
+</Layout>

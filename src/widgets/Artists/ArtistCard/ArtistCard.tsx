@@ -1,5 +1,5 @@
 import { Typography, TypographyColor, TypographySize } from "shared/ui/Typography/Typography"
-import { IArtistData } from "../types/types"
+import type { IArtistData } from "../types/types"
 import styles from "./ArtistCard.module.scss"
 import { AppLink } from "shared/ui/AppLink/AppLink"
 import { ArrowDownIcon } from "shared/ui/Icons"
