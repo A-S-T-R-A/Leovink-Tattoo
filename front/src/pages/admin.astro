@@ -1,0 +1,8 @@
+---
+import Layout from "layouts/Layout.astro";
+import {Redirect} from '../widgets/Redirect/Redirect'
+---
+
+<Layout>
+    <Redirect client:only="preact" />
+</Layout>

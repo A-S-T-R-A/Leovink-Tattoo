@@ -4,9 +4,10 @@ import { IFiltersData, ViewType } from "../types/types"
 import { PortfolioPageHeader } from "./PortfolioPageHeader/PortfolioPageHeader"
 import { PortfolioPageFilters } from "./PortfolioPageFilters/PortfolioPageFilters"
 import { PortfolioPageList } from "./PortfolioPageList/PortfolioPageList"
-import { ITattooImage } from "shared/types/types"
+import { ArtistType, ColorType, ITattooImage } from "shared/types/types"
 import styles from "./PortfolioPage.module.scss"
 import { portfolioPicturesRef } from "shared/const/firebaseVariables"
+import { TattooArtists } from "shared/const/filters"
 
 export function PortfolioPage() {
     const [data, setData] = useState<ITattooImage[]>([])
@@ -37,23 +38,23 @@ export function PortfolioPage() {
             .filter(item =>
                 filters.artist === ""
                     ? true
-                    : filters.artist === "Unassigned"
+                    : filters.artist === ("Unassigned" as any)
                     ? item.artist === ""
-                    : item.artist === filters.artist
+                    : item.artist === (filters.artist as any)
             )
             .filter(item =>
                 filters.style === ""
                     ? true
-                    : filters.style === "Unassigned"
+                    : filters.style === ("Unassigned" as any)
                     ? item.style === ""
-                    : item.style === filters.style
+                    : item.style === (filters.style as any)
             )
             .filter(item =>
                 filters.color === ""
                     ? true
-                    : filters.color === "Unassigned"
+                    : filters.color === ("Unassigned" as any)
                     ? item.color === ""
-                    : item.color === filters.color
+                    : item.color === (filters.color as any)
             )
             .filter(
                 item =>
