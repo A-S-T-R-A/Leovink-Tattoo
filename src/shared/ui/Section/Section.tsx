@@ -1,15 +1,16 @@
+import type { ComponentChildren } from "preact"
 import { classNames } from "../../lib/classNames/classNames"
 import { Typography, TypographySize } from "../Typography/Typography"
 import styles from "./Section.module.scss"
 
 interface ISectionProps {
-    children: any
+    children: ComponentChildren
     wrapperClassName?: string
     containerClassName?: string
     title?: string
 }
 
-export default function Section(props: ISectionProps) {
+export function Section(props: ISectionProps) {
     const { children, wrapperClassName, containerClassName, title } = props
 
     return (

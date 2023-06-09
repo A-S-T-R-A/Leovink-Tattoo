@@ -1,10 +1,11 @@
-//import { ButtonHTMLAttributes, ReactNode } from "react"
-import { classNames } from "../../lib/classNames/classNames"
+import type { ComponentChildren } from "preact"
+import type { HTMLAttributes } from "preact/compat"
+import { classNames } from "shared/lib/classNames/classNames"
 import styles from "./Button.module.scss"
 
-interface ButtonProps {
+interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
     className?: string
-    children: any
+    children: ComponentChildren
 }
 
 export function Button(props: ButtonProps) {

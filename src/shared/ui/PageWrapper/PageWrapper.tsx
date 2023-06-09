@@ -1,10 +1,10 @@
-//import { ReactNode } from "react"
+import type { ComponentChildren } from "preact"
 import { Typography, TypographyColor } from "../Typography/Typography"
 import { ArrowLeftIcon } from "../Icons"
 import styles from "./PageWrapper.module.scss"
 import { AppLink } from "../AppLink/AppLink"
 
-export default function PageWrapper({ children, title }: { children: any; title: string }) {
+export function PageWrapper({ children, title }: { children: ComponentChildren; title: string }) {
     return (
         <div className={styles.wrapper}>
             <div className={styles.header}>

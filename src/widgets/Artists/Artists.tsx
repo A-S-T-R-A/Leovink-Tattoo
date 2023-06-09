@@ -1,4 +1,4 @@
-import Section from "../../shared/ui/Section/Section"
+import { Section } from "shared/ui/Section/Section"
 import styles from "./Artists.module.scss"
 import "swiper/scss"
 import "swiper/scss/navigation"
@@ -10,9 +10,9 @@ import { Swiper as SwiperClass } from "swiper/types"
 import { Pagination, Navigation } from "swiper"
 import { ArtistCard } from "./ArtistCard/ArtistCard"
 import { data } from "./const/data"
-import { classNames } from "../../shared/lib/classNames/classNames"
+import { classNames } from "shared/lib/classNames/classNames"
 
-export default function Artists() {
+export function Artists() {
     return (
         <Section title="Artists">
             {/* <div className={styles.listContainer}>

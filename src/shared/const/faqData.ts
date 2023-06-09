@@ -1,6 +1,6 @@
-//import { IFaqBlock } from "shared/types/types"
+import type { IFaqBlock } from "shared/types/types"
 
-export const faqData: any[] = [
+export const faqData: IFaqBlock[] = [
     {
         id: 1,
         title: "General",

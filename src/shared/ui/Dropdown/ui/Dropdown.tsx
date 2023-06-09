@@ -1,16 +1,16 @@
 import { useState, useMemo } from "preact/hooks"
-
+import type { ChangeEvent, HTMLAttributes } from "preact/compat"
 import styles from "./Dropdown.module.scss"
 import { ChevronDownIcon } from "shared/ui/Icons"
 
-//type HTMLDropdownProps = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange">
+type HTMLDropdownProps = Omit<HTMLAttributes<HTMLInputElement>, "value" | "onChange">
 
 export interface Option {
     value: string
     label: string
 }
 
-export interface DropdownProps {
+export interface DropdownProps extends HTMLDropdownProps {
     label?: string
     className?: string
     error?: string
@@ -34,7 +34,7 @@ export function Dropdown(props: DropdownProps) {
     } = props
     const newOptions = useMemo(() => options.map((i, ind) => ({ ...i, id: ind })), [options])
 
-    const handleChange = (event: any) => {
+    const handleChange = (event: ChangeEvent) => {
         const target = event.target as HTMLSelectElement
         onChange?.(target.value)
     }

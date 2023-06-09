@@ -2,18 +2,18 @@ import { useState, useEffect } from "preact/hooks"
 import { data as d } from "shared/const/data"
 import { MasonryGrid } from "shared/components/MasonryGrid/MasonryGrid"
 import { ModalGallery } from "widgets/ModalGallery/ModalGallery"
-import PageWrapper from "shared/ui/PageWrapper/PageWrapper"
+import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper"
 import { Dropdown } from "shared/ui/Dropdown"
-import styles from "./PortfolioPage.module.scss"
 import type { ITattooImage } from "shared/types/types"
-import FormSection from "widgets/FormSection/FormSection"
+import { FormSection } from "widgets/FormSection/FormSection"
+import styles from "./PortfolioPage.module.scss"
 
 interface IFilters {
     artist: string
     style: string
     color: string
 }
-export default function PortfolioPage() {
+export function PortfolioPage() {
     const [isOpen, setIsOpen] = useState(false)
     const [data, setData] = useState(d)
     const [modalData, setModalData] = useState(d)

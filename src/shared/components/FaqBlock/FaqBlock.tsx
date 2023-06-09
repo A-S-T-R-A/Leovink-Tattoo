@@ -1,9 +1,9 @@
 import { useState } from "preact/hooks"
 import type { IFaqBlock } from "shared/types/types"
 import styles from "./FaqBlock.module.scss"
-import { Typography } from "../../ui/Typography/Typography"
-import { PlusIcon } from "../../ui/Icons"
-import { classNames } from "../../lib/classNames/classNames"
+import { Typography } from "shared/ui/Typography/Typography"
+import { PlusIcon } from "shared/ui/Icons"
+import { classNames } from "shared/lib/classNames/classNames"
 
 export function FaqBlock({ data, isWithoutTitle }: { data: IFaqBlock; isWithoutTitle?: boolean }) {
     const { title, questions } = data

@@ -1,4 +1,4 @@
-import { Typography } from "../../ui/Typography/Typography"
+import { Typography } from "shared/ui/Typography/Typography"
 import styles from "./Testimonial.module.scss"
 import video from "./const/testimonial.mp4"
 import poster from "./const/testimonial1.jpg"

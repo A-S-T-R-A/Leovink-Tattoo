@@ -1,10 +1,10 @@
-import { ShowMoreLink } from "../../shared/components/ShowMoreLink/ShowMoreLink"
-import Section from "../../shared/ui/Section/Section"
-import { faqData } from "../../shared/const/faqData"
-import { FaqBlock } from "../../shared/components/FaqBlock/FaqBlock"
+import { ShowMoreLink } from "shared/components/ShowMoreLink/ShowMoreLink"
+import { Section } from "shared/ui/Section/Section"
+import { faqData } from "shared/const/faqData"
+import { FaqBlock } from "shared/components/FaqBlock/FaqBlock"
 import styles from "./Faq.module.scss"
 
-export default function Faq() {
+export function Faq() {
     const data = faqData[0]
 
     return (

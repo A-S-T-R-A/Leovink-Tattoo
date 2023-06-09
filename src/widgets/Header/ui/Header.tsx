@@ -3,7 +3,7 @@ import styles from "./Header.module.css"
 import logo from "shared/assets/images/logo.png"
 import { Navbar } from "./Navbar/Navbar"
 import { Burger } from "./Burger/Burger"
-import { classNames } from "../../../shared/lib/classNames/classNames"
+import { classNames } from "shared/lib/classNames/classNames"
 
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false)
@@ -16,8 +16,6 @@ export function Header() {
     useEffect(() => {
         window.addEventListener("scroll", scrollHandler)
         return () => window.removeEventListener("scroll", scrollHandler)
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

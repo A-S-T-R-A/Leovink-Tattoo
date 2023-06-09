@@ -1,15 +1,15 @@
 import { classNames } from "shared/lib/classNames/classNames"
-//import { ChangeEvent, InputHTMLAttributes } from "react"
+import type { ChangeEvent, HTMLAttributes } from "preact/compat"
 import styles from "./Input.module.scss"
 
-//type HtmlInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange">
+type HtmlInputProps = Omit<HTMLAttributes<HTMLInputElement>, "value" | "onChange">
 
 export enum InputType {
     TEXT = "text",
     NUMBER = "number",
 }
 
-export interface InputProps {
+export interface InputProps extends HtmlInputProps {
     type?: InputType
     label?: string
     isRequired?: boolean
@@ -37,8 +37,9 @@ export function Input(props: InputProps) {
         className,
     ])
 
-    function changeHandler(e: any) {
-        onChange?.(e.target.value)
+    function changeHandler(e: ChangeEvent) {
+        const target = e.target as HTMLInputElement
+        onChange?.(target.value)
     }
 
     return (

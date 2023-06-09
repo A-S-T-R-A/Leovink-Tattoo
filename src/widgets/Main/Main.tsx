@@ -7,9 +7,9 @@ import layerFrontImg from "./const/layer-front.png"
 import leovinkTitle from "./const/leovinkLogo.png"
 import leovinkCaption from "./const/leovCaption.png"
 import leovinkHorns from "./const/leovinkHorns.png"
-import { ScrollIcon } from "../../shared/ui/ScrollIcon/ScrollIcon"
+import { ScrollIcon } from "shared/ui/ScrollIcon/ScrollIcon"
 
-export default function Main() {
+export function Main() {
     function scrollHandler() {
         document.documentElement.style.setProperty("--scrollTop", `${window.scrollY}px`)
     }

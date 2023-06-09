@@ -1,8 +1,8 @@
-//import { ReactNode } from "react"
+import type { VNode } from "preact"
 import { createPortal } from "preact/compat"
 
 interface PortalProps {
-    children: any
+    children: VNode
     element?: HTMLElement
 }
 

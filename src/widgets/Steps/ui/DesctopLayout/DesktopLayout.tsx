@@ -1,7 +1,7 @@
 import { Children } from "preact/compat"
-import { LineIcon } from "../../../../shared/ui/Icons"
+import { LineIcon } from "shared/ui/Icons"
 import styles from "./DesktopLayout.module.scss"
-import { BigLine } from "../../../../shared/ui/Icons"
+import { BigLine } from "shared/ui/Icons"
 
 export function DesktopLayout({ children }: { children: any }) {
     const array = Children.toArray(children)

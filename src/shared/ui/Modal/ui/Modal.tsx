@@ -1,13 +1,14 @@
+import type { ComponentChildren } from "preact"
 import { useEffect, useState } from "preact/hooks"
 import cls from "./Modal.module.scss"
 import { Portal } from "./components/Portal"
 import { MODAL_ANIMATION_DELAY } from "../const/const"
-import { Mods, classNames } from "../../../../shared/lib/classNames/classNames"
+import { Mods, classNames } from "shared/lib/classNames/classNames"
 
 interface ModalProps {
     className?: string
     contentClassName?: string
-    children: any
+    children: ComponentChildren
     isOpen: boolean
     onClose: () => void
     lazy?: boolean

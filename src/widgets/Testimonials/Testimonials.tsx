@@ -1,9 +1,9 @@
-import Section from "../../shared/ui/Section/Section"
+import { Section } from "shared/ui/Section/Section"
 import styles from "./Testimonials.module.scss"
-import { Testimonial } from "../../shared/components/Testimonial/Testimonial"
-import { ShowMoreLink } from "../../shared/components/ShowMoreLink/ShowMoreLink"
+import { Testimonial } from "shared/components/Testimonial/Testimonial"
+import { ShowMoreLink } from "shared/components/ShowMoreLink/ShowMoreLink"
 
-export default function Testimonials() {
+export function Testimonials() {
     const data = [1, 2, 3]
 
     return (

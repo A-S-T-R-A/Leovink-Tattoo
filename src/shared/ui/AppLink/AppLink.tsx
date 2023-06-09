@@ -1,10 +1,11 @@
-//import { Link, LinkProps } from "react-router-dom"
+import type { ComponentChildren } from "preact"
+import type { HTMLAttributes } from "preact/compat"
 import { classNames } from "../../lib/classNames/classNames"
 import styles from "./AppLink.module.scss"
 
-interface AppLinkProps {
-    children: any
-    to?: any
+interface AppLinkProps extends HTMLAttributes<HTMLAnchorElement> {
+    children: ComponentChildren
+    to: string
     className?: string
 }
 

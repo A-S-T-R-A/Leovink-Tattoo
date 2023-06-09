@@ -1,7 +1,7 @@
 import { FaqBlock } from "shared/components/FaqBlock/FaqBlock"
 import { faqData } from "shared/const/faqData"
 
-export default function FAQ() {
+export function FAQ() {
     return (
         <>
             {faqData.map(item => (

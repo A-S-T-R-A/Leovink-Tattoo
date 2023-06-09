@@ -1,9 +1,9 @@
-import { Input } from "../../ui/Input/Input"
-import { CtaButton } from "../CtaButton/CtaButton"
+import { Input } from "shared/ui/Input/Input"
+import { CtaButton } from "shared/components/CtaButton/CtaButton"
 import { useState } from "preact/hooks"
-import { Typography } from "../../ui/Typography/Typography"
+import { Typography } from "shared/ui/Typography/Typography"
 import styles from "./Form.module.scss"
-import { classNames } from "../../lib/classNames/classNames"
+import { classNames } from "shared/lib/classNames/classNames"
 
 export function Form({ isVertical }: { isVertical?: boolean }) {
     const [formData, setFormData] = useState({ name: "", phone: "" })
@@ -16,13 +16,13 @@ export function Form({ isVertical }: { isVertical?: boolean }) {
             <Typography className={styles.title}>Book an appointment</Typography>
             <div className={styles.formContent}>
                 <Input
-                    /* placeholder="Your name" */
+                    placeholder="Your name"
                     className={styles.input}
                     value={formData.name}
                     onChange={name => setFormData(prev => ({ ...prev, name }))}
                 />
                 <Input
-                    /*    placeholder="Your phone" */
+                    placeholder="Your phone"
                     className={styles.input}
                     value={formData.phone}
                     onChange={phone => setFormData(prev => ({ ...prev, phone }))}

@@ -1,9 +1,9 @@
-import { useEffect, useState } from "preact/hooks"
-import { classNames } from "../../../../shared/lib/classNames/classNames"
+import { useState } from "preact/hooks"
+import { classNames } from "shared/lib/classNames/classNames"
 import { NavigationList } from "../NavigationList/NavigationList"
 import styles from "./Burger.module.scss"
-import { SocialIcons } from "../../../../shared/components/SocialIcons/SocialIcons"
-import { disableScroll } from "../../../../shared/lib/disableScroll/disableScroll"
+import { SocialIcons } from "shared/components/SocialIcons/SocialIcons"
+import { disableScroll } from "shared/lib/disableScroll/disableScroll"
 
 export function Burger({ className }: { className?: string }) {
     const [isBurgerVisible, setIsBurgerVisible] = useState(false)
