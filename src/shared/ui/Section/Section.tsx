@@ -1,6 +1,6 @@
 import type { ComponentChildren } from "preact"
-import { classNames } from "../../lib/classNames/classNames"
-import { Typography, TypographySize } from "../Typography/Typography"
+import { classNames } from "shared/lib/classNames/classNames"
+import { Typography } from "shared/ui/Typography/Typography"
 import styles from "./Section.module.scss"
 
 interface ISectionProps {
@@ -17,7 +17,7 @@ export function Section(props: ISectionProps) {
         <section className={classNames(styles.wrapper, {}, [wrapperClassName])}>
             <div className={classNames(styles.container, {}, [containerClassName])}>
                 {!!title && (
-                    <Typography className={styles.title} size={TypographySize.H1}>
+                    <Typography className={styles.title} variant="h1" component="xxxxl">
                         {title}
                     </Typography>
                 )}

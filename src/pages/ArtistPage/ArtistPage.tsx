@@ -3,7 +3,7 @@ import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper"
 import { Section } from "shared/ui/Section/Section"
 import { data as artistsData } from "widgets/Artists/const/data"
 import { data } from "shared/const/data"
-import { Typography, TypographyColor, TypographySize } from "shared/ui/Typography/Typography"
+import { Typography } from "shared/ui/Typography/Typography"
 import { Form } from "shared/components/Form/Form"
 import { MasonryGrid } from "shared/components/MasonryGrid/MasonryGrid"
 import { ModalGallery } from "widgets/ModalGallery/ModalGallery"
@@ -29,18 +29,11 @@ export function ArtistPage() {
                         <img src={img} alt="" />
                     </div>
                     <div className={styles.right}>
-                        <Typography size={TypographySize.H2} className={styles.name}>
+                        <Typography variant="h2" component="xxxl" className={styles.name}>
                             {name}
                         </Typography>
-                        <Typography
-                            color={TypographyColor.COLOR_LIGHTGRAY}
-                            className={styles.specialization}
-                        >
-                            {specialization}
-                        </Typography>
-                        <Typography color={TypographyColor.COLOR_LIGHTGRAY}>
-                            {description}
-                        </Typography>
+                        <Typography className={styles.specialization}>{specialization}</Typography>
+                        <Typography>{description}</Typography>
                     </div>
                 </div>
                 <Form isVertical />

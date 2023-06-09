@@ -1,33 +1,33 @@
 .typography {
-    &.base {
-        font-size: var(--font-size-base);
-    }
-
-    &.h1 {
+    &.xxxxl {
         font-size: var(--font-size-h1);
     }
 
-    &.h2 {
+    &.xxxl {
         font-size: var(--font-size-h2);
     }
 
-    &.h3 {
+    &.xxl {
         font-size: var(--font-size-h3);
     }
 
-    &.h4 {
+    &.xl {
         font-size: var(--font-size-h4);
     }
 
-    &.h5 {
+    &.l {
         font-size: var(--font-size-h5);
     }
 
-    &.small {
+    &.m {
+        font-size: var(--font-size-base);
+    }
+
+    &.s {
         font-size: var(--font-size-small);
     }
 
-    &.extra_small {
+    &.xs {
         font-size: var(--font-size-extra-small);
     }
 
