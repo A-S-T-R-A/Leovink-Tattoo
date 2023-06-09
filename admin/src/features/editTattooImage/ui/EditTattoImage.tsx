@@ -1,6 +1,6 @@
 import { getDocs, query, updateDoc, where } from "firebase/firestore"
 import { useState } from "react"
-import { ITattooImage } from "shared/types/types"
+import { ArtistType, ColorType, ITattooImage, StyleType } from "shared/types/types"
 import { EditModal } from "./EditModal/EditModal"
 import {
     getFirestoreDocumentByFileId,
@@ -16,7 +16,14 @@ export function EditTattooImage({
     triggerRefetch: () => void
 }) {
     const [isOpen, setIsOpen] = useState(false)
-    const [data, setData] = useState<ITattooImage>({})
+    const defaultData = {
+        id: 0,
+        img: "",
+        artist: "" as ArtistType,
+        style: "" as StyleType,
+        color: "" as ColorType,
+    }
+    const [data, setData] = useState<ITattooImage>(defaultData)
 
     async function openClickHandler() {
         try {
@@ -31,11 +38,13 @@ export function EditTattooImage({
     }
 
     async function saveClickHandler() {
+        if (!data) return
+
         try {
             const file = await getFirestoreDocumentById(id, portfolioPicturesRef)
 
             if (id === data.id) {
-                await updateDoc(getFirestoreDocumentByFileId(file.id), data)
+                await updateDoc(getFirestoreDocumentByFileId(file.id), data as any)
                 alert("Edit Success")
                 setIsOpen(false)
                 triggerRefetch?.()
@@ -50,7 +59,7 @@ export function EditTattooImage({
                     })
                 }
 
-                await updateDoc(getFirestoreDocumentByFileId(file.id), data)
+                await updateDoc(getFirestoreDocumentByFileId(file.id), data as any)
                 alert("Success reorder")
                 setIsOpen(false)
                 triggerRefetch?.()
@@ -62,7 +71,7 @@ export function EditTattooImage({
     }
 
     function discardClickHandler() {
-        setData({})
+        setData(defaultData)
         setIsOpen(false)
     }
 
