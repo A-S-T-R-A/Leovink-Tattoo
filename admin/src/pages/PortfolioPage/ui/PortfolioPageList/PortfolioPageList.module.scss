@@ -1,0 +1,37 @@
+.icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    .item {
+        width: 200px;
+
+        .img {
+            height: 200px;
+            width: 100%;
+            object-fit: contain;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 30px;
+        }
+    }
+}
+
+.table {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .item {
+        display: grid;
+        grid-template-columns: 50px 100px 1fr 1fr 1fr 1fr 100px;
+        align-items: center;
+        border-bottom: 1px solid var(--color-base);
+
+        .img {
+            height: 50px;
+        }
+    }
+}

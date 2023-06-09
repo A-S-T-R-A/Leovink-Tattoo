@@ -1,0 +1,15 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+
+    .viewToggle {
+        display: flex;
+        gap: 5px;
+
+        .selectedView {
+            background: var(--color-accent);
+        }
+    }
+}

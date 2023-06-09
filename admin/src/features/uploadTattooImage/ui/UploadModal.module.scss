@@ -1,0 +1,13 @@
+.modal {
+    width: 300px;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.buttons {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+}
