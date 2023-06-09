@@ -1,4 +1,4 @@
-import { ITattooImage } from "../types/types"
+import type { ITattooImage } from "../types/types"
 import { images } from "./images"
 
 export const data: ITattooImage[] = [

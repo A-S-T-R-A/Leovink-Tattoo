@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { Section } from "../../shared/ui/Section/Section"
+import { useState } from "preact/hooks"
+import Section from "../../shared/ui/Section/Section"
 import { servicesData } from "./const/data"
 import { Typography } from "../../shared/ui/Typography/Typography"
 import { ArrowUpIcon } from "../../shared/ui/Icons/ArrowUpIcon"
@@ -7,7 +7,7 @@ import styles from "./Services.module.scss"
 import { classNames } from "../../shared/lib/classNames/classNames"
 import { CtaButton } from "../../shared/components/CtaButton/CtaButton"
 
-export function Services() {
+export default function Services() {
     const [open, setOpen] = useState(0)
 
     function clickHandler(index: number) {

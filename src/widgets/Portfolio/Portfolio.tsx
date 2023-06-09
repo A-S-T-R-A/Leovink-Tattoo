@@ -1,12 +1,12 @@
-import { useState } from "react"
-import { Section } from "shared/ui/Section/Section"
+import { useState } from "preact/hooks"
+import Section from "shared/ui/Section/Section"
 import { MasonryGrid } from "shared/components/MasonryGrid/MasonryGrid"
 import { data as d } from "shared/const/data"
 import { ModalGallery } from "widgets/ModalGallery/ModalGallery"
 import { ShowMoreLink } from "shared/components/ShowMoreLink/ShowMoreLink"
 import styles from "./Portfolio.module.scss"
 
-export function Portfolio() {
+export default function Portfolio() {
     const data = d.slice(0, 15)
     const [isOpen, setIsOpen] = useState(false)
     const [modalData, setModalData] = useState(d)

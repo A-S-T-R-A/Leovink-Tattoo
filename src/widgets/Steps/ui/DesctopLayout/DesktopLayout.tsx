@@ -1,4 +1,4 @@
-import { Children } from "react"
+import { Children } from "preact/compat"
 import { LineIcon } from "../../../../shared/ui/Icons"
 import styles from "./DesktopLayout.module.scss"
 import { BigLine } from "../../../../shared/ui/Icons"

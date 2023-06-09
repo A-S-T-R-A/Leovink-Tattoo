@@ -1,8 +1,8 @@
-import { Section } from "../../shared/ui/Section/Section"
+import Section from "../../shared/ui/Section/Section"
 
 import { Form } from "../../shared/components/Form/Form"
 
-export function FormSection() {
+export default function FormSection() {
     return (
         <Section>
             <Form />

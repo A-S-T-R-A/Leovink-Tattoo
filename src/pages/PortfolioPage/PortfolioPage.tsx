@@ -2,18 +2,18 @@ import { useState, useEffect } from "preact/hooks"
 import { data as d } from "shared/const/data"
 import { MasonryGrid } from "shared/components/MasonryGrid/MasonryGrid"
 import { ModalGallery } from "widgets/ModalGallery/ModalGallery"
-import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper"
+import PageWrapper from "shared/ui/PageWrapper/PageWrapper"
 import { Dropdown } from "shared/ui/Dropdown"
 import styles from "./PortfolioPage.module.scss"
 import type { ITattooImage } from "shared/types/types"
-import { FormSection } from "widgets/FormSection/FormSection"
+import FormSection from "widgets/FormSection/FormSection"
 
 interface IFilters {
     artist: string
     style: string
     color: string
 }
-export function PortfolioPage() {
+export default function PortfolioPage() {
     const [isOpen, setIsOpen] = useState(false)
     const [data, setData] = useState(d)
     const [modalData, setModalData] = useState(d)
@@ -60,32 +60,30 @@ export function PortfolioPage() {
     ]
 
     return (
-        <>
+        <PageWrapper title="Portfolio">
             <ModalGallery data={modalData} isOpen={isOpen} onClose={() => setIsOpen(false)} />
-            <PageWrapper title="Portfolio">
-                <div className={styles.filters}>
-                    <Dropdown
-                        options={optionsArtist}
-                        firstOptionText="Select tattoo artist"
-                        value={filters.artist}
-                        onChange={value => setFilters(prev => ({ ...prev, artist: value }))}
-                    />
-                    <Dropdown
-                        options={optionsStyle}
-                        firstOptionText="Select tattoo style"
-                        value={filters.style}
-                        onChange={value => setFilters(prev => ({ ...prev, style: value }))}
-                    />
-                    <Dropdown
-                        options={optionsColor}
-                        firstOptionText="Select tattoo color"
-                        value={filters.color}
-                        onChange={value => setFilters(prev => ({ ...prev, color: value }))}
-                    />
-                </div>
-                <MasonryGrid data={data} onClick={clickHandler} />
-                <FormSection />
-            </PageWrapper>
-        </>
+            <div className={styles.filters}>
+                <Dropdown
+                    options={optionsArtist}
+                    firstOptionText="Select tattoo artist"
+                    value={filters.artist}
+                    onChange={value => setFilters(prev => ({ ...prev, artist: value }))}
+                />
+                <Dropdown
+                    options={optionsStyle}
+                    firstOptionText="Select tattoo style"
+                    value={filters.style}
+                    onChange={value => setFilters(prev => ({ ...prev, style: value }))}
+                />
+                <Dropdown
+                    options={optionsColor}
+                    firstOptionText="Select tattoo color"
+                    value={filters.color}
+                    onChange={value => setFilters(prev => ({ ...prev, color: value }))}
+                />
+            </div>
+            <MasonryGrid data={data} onClick={clickHandler} />
+            <FormSection />
+        </PageWrapper>
     )
 }

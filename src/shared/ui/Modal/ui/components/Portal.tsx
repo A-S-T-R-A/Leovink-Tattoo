@@ -1,8 +1,8 @@
-import { ReactNode } from "react"
-import { createPortal } from "react-dom"
+//import { ReactNode } from "react"
+import { createPortal } from "preact/compat"
 
 interface PortalProps {
-    children: ReactNode
+    children: any
     element?: HTMLElement
 }
 

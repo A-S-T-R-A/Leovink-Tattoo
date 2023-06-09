@@ -9,7 +9,7 @@ interface ISectionProps {
     title?: string
 }
 
-export function Section(props: ISectionProps) {
+export default function Section(props: ISectionProps) {
     const { children, wrapperClassName, containerClassName, title } = props
 
     return (

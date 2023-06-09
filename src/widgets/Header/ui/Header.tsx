@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "preact/hooks"
 import styles from "./Header.module.css"
 import logo from "shared/assets/images/logo.png"
 import { Navbar } from "./Navbar/Navbar"

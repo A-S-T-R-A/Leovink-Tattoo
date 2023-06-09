@@ -1,6 +1,6 @@
 import { Testimonial } from "shared/components/Testimonial/Testimonial"
 
-export function Testimonials() {
+export default function TestimonialPage() {
     const data = [1, 2, 3, 4, 5]
 
     return (

@@ -1,5 +1,5 @@
 import { classNames } from "../../shared/lib/classNames/classNames"
-import { useEffect } from "react"
+import { useEffect } from "preact/hooks"
 import styles from "./Main.module.scss"
 import layerBaseImg from "./const/layer-base.png"
 import layerMiddleImg from "./const/layer-middle.png"
@@ -9,7 +9,7 @@ import leovinkCaption from "./const/leovCaption.png"
 import leovinkHorns from "./const/leovinkHorns.png"
 import { ScrollIcon } from "../../shared/ui/ScrollIcon/ScrollIcon"
 
-export function Main() {
+export default function Main() {
     function scrollHandler() {
         document.documentElement.style.setProperty("--scrollTop", `${window.scrollY}px`)
     }

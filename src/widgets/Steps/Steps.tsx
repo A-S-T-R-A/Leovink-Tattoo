@@ -1,11 +1,11 @@
-import { Section } from "../../shared/ui/Section/Section"
+import Section from "../../shared/ui/Section/Section"
 import styles from "./Steps.module.scss"
 import { Typography } from "../../shared/ui/Typography/Typography"
 import { stepsData } from "./const/data"
 import { DesktopLayout } from "./ui/DesctopLayout/DesktopLayout"
 import { CtaButton } from "../../shared/components/CtaButton/CtaButton"
 
-export function Steps() {
+export default function Steps() {
     return (
         <Section title="How It Works">
             <DesktopLayout>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "preact/hooks"
 import cls from "./Modal.module.scss"
 import { Portal } from "./components/Portal"
 import { MODAL_ANIMATION_DELAY } from "../const/const"

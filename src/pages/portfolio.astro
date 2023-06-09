@@ -1,8 +1,8 @@
 ---
 import Layout from "layouts/Layout.astro"
-import { PortfolioPage } from "./PortfolioPage/PortfolioPage"
+import PortfolioPage from "./PortfolioPage/PortfolioPage"
 ---
 
-<Layout title="Portfolio">
+<Layout>
     <PortfolioPage client:only="preact" />
 </Layout>

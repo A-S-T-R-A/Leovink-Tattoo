@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "preact/hooks"
 import { classNames } from "../../../../shared/lib/classNames/classNames"
 import { NavigationList } from "../NavigationList/NavigationList"
 import styles from "./Burger.module.scss"

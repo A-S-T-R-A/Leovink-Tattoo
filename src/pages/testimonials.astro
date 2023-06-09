@@ -1,15 +1,15 @@
 ---
-import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper"
-import { Section } from "shared/ui/Section/Section"
-import { FormSection } from "widgets/FormSection/FormSection"
-import { Testimonials } from "./Testimonials/Testimonials"
+import PageWrapper from "shared/ui/PageWrapper/PageWrapper"
+import Section from "shared/ui/Section/Section"
+import FormSection from "widgets/FormSection/FormSection"
+import TestimonialPage from "./Testimonials/Testimonials"
 import Layout from "layouts/Layout.astro"
 ---
 
 <Layout>
     <PageWrapper title="Testimonials">
         <Section>
-            <Testimonials />
+            <TestimonialPage client:load />
         </Section>
         <FormSection client:load />
     </PageWrapper>
