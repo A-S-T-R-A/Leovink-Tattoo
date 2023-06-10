@@ -22,12 +22,13 @@ export function Artists() {
             </div> */}
 
             <Swiper
+                spaceBetween={20}
                 slidesPerView={1}
                 modules={[Pagination, Navigation]}
                 breakpoints={{
-                    501: { slidesPerView: 2 },
-                    800: { slidesPerView: 3 },
-                    1000: { slidesPerView: 4 },
+                    489: { slidesPerView: 2 },
+                    769: { slidesPerView: 3 },
+                    1200: { slidesPerView: 4 },
                 }}
                 /*  onSwiper={swiper => (swiperRef.current = swiper)}
                 pagination={{

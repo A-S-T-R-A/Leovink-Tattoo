@@ -9,20 +9,30 @@ export function Footer() {
             <div className={styles.logoContainer}>
                 <img src={logo} alt="logo" />
             </div>
-            <div className={styles.location}>
-                <Typography className={styles.header}>location</Typography>
-                <Typography className={styles.text}>Strada Ismail 40/2, Chișinău</Typography>
+            <div className={styles.locationContainer}>
+                <Typography className={styles.header} variant="h3" component="xxl">
+                    location
+                </Typography>
+                <Typography className={styles.text} variant="h5" component="m">
+                    Strada Ismail 40/2, Chișinău
+                </Typography>
             </div>
-            <div className={styles.contacts}>
+            <div className={styles.contactsContainer}>
                 <Typography className={styles.header} variant="h3" component="xxl">
                     contacts
                 </Typography>
 
-                <Typography className={styles.text}>069 222 222</Typography>
-                <Typography className={styles.text}>069 222 222</Typography>
-                <Typography className={styles.text}>email@gg.ss</Typography>
+                <Typography className={styles.text} variant="h5" component="m">
+                    069 222 222
+                </Typography>
+                <Typography className={styles.text} variant="h5" component="m">
+                    069 222 222
+                </Typography>
+                <Typography className={styles.text} variant="h5" component="m">
+                    email@gg.ss
+                </Typography>
             </div>
-            <div className={styles.follow}>
+            <div className={styles.followContainer}>
                 <Typography className={styles.header} variant="h3" component="xxl">
                     follow
                 </Typography>

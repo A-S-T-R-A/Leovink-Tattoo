@@ -1,6 +1,7 @@
 ---
 import { Header } from "widgets/Header"
 import "./Layout.scss"
+import { Footer } from "widgets/Footer/Footer";
 ---
 
 <!DOCTYPE html>
@@ -22,5 +23,6 @@ import "./Layout.scss"
     <body>
         <Header client:load />
         <slot />
+        <Footer />
     </body>
 </html>
