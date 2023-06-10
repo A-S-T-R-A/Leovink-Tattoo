@@ -8,7 +8,7 @@ export function BigLine({ className }: { className: string }) {
         >
             <g
                 strokeWidth="12"
-                stroke="rgb(49, 49, 49)"
+                stroke="gray"
                 fill="none"
                 strokeLinecap="square"
                 strokeLinejoin="round"

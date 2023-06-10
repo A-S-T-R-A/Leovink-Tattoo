@@ -9,7 +9,10 @@ export function Testimonials() {
     return (
         <Section title="Testimonials">
             {data.map((item, index, array) => (
-                <Testimonial key={index} isReversed isWithBorder={index !== array.length - 1} />
+                <Testimonial
+                    key={index}
+                    /* isReversed */ isWithBorder={index !== array.length - 1}
+                />
             ))}
             <ShowMoreLink to="/testimonials" text="Show More" className={styles.showMore} />
         </Section>

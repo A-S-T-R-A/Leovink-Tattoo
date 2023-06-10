@@ -27,7 +27,7 @@ export function Form({ isVertical }: { isVertical?: boolean }) {
                     value={formData.phone}
                     onChange={phone => setFormData(prev => ({ ...prev, phone }))}
                 />
-                <CtaButton />
+                <CtaButton className={styles.btn} />
             </div>
         </form>
     )

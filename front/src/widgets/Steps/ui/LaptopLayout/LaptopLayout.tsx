@@ -1,10 +1,10 @@
 import { Children } from "preact/compat"
 import { LineIcon } from "shared/ui/Icons"
-import styles from "./DesktopLayout.module.scss"
+import styles from "./LaptopLayout.module.scss"
 import { BigLine } from "shared/ui/Icons"
 import { classNames } from "shared/lib/classNames/classNames"
 
-export function DesktopLayout({ children, className }: { className?: string; children: any }) {
+export function LaptopLayout({ children, className }: { className?: string; children: any }) {
     const array = Children.toArray(children)
 
     return (

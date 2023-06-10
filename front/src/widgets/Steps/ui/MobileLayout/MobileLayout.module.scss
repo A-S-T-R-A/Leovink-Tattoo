@@ -1,0 +1,78 @@
+.container {
+    max-width: 350px;
+    margin: 0 auto;
+    display: grid;
+    justify-content: center;
+    row-gap: 80px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "firstStep"
+        "secondStep"
+        "thirdStep"
+        "fourthStep"
+        "fifthStep"
+        "sixthStep";
+}
+
+.firstStep {
+    grid-area: firstStep;
+}
+
+.secondStep {
+    justify-self: end;
+    grid-area: secondStep;
+}
+
+.thirdStep {
+    grid-area: thirdStep;
+}
+
+.fourthStep {
+    grid-area: fourthStep;
+    justify-self: end;
+}
+
+.fifthStep {
+    grid-area: fifthStep;
+}
+
+.sixthStep {
+    grid-area: sixthStep;
+    justify-self: end;
+}
+
+.firstStep,
+.secondStep,
+.thirdStep,
+.fourthStep,
+.fifthStep,
+.sixthStep {
+    width: fit-content;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+
+    .rightLine {
+        position: absolute;
+        bottom: -180px;
+        max-width: 80%;
+        transform: rotate(-65deg);
+        z-index: -1;
+    }
+
+    .leftLine {
+        position: absolute;
+        bottom: -180px;
+        max-width: 80%;
+        transform: rotate(65deg);
+        z-index: -1;
+    }
+}
+
+@media (min-width: 961px) {
+    .container {
+        display: none;
+    }
+}
