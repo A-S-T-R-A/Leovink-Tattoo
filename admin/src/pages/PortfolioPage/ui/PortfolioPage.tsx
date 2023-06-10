@@ -4,10 +4,9 @@ import { IFiltersData, ViewType } from "../types/types"
 import { PortfolioPageHeader } from "./PortfolioPageHeader/PortfolioPageHeader"
 import { PortfolioPageFilters } from "./PortfolioPageFilters/PortfolioPageFilters"
 import { PortfolioPageList } from "./PortfolioPageList/PortfolioPageList"
-import { ArtistType, ColorType, ITattooImage } from "shared/types/types"
+import { ITattooImage } from "shared/types/types"
 import styles from "./PortfolioPage.module.scss"
 import { portfolioPicturesRef } from "shared/const/firebaseVariables"
-import { TattooArtists } from "shared/const/filters"
 
 export function PortfolioPage() {
     const [data, setData] = useState<ITattooImage[]>([])

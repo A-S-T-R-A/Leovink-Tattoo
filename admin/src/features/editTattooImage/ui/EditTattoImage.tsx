@@ -7,6 +7,7 @@ import {
     getFirestoreDocumentById,
     portfolioPicturesRef,
 } from "shared/const/firebaseVariables"
+import styles from "./EditTattooImage.module.scss"
 
 export function EditTattooImage({
     id,
@@ -89,7 +90,9 @@ export function EditTattooImage({
                 saveClickHandler={saveClickHandler}
                 discardClickHandler={discardClickHandler}
             />
-            <button onClick={openClickHandler}>Edit</button>
+            <button onClick={openClickHandler} className={styles.btn}>
+                Edit
+            </button>
         </>
     )
 }

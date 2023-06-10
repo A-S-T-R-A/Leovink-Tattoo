@@ -128,22 +128,23 @@ export function UploadModal({ triggerRefetch }: { triggerRefetch: () => void }) 
     return (
         <>
             <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} contentClassName={styles.modal}>
-                <p>Filepond</p>
-                {isLoading ? (
-                    <p>
-                        {progress?.map(item => (
-                            <p>{item}</p>
-                        ))}
-                    </p>
-                ) : (
-                    <>
-                        <Filepond setFiles={setFiles} files={files} />
-                        <div className={styles.buttons}>
-                            <Button onClick={saveClickHandler}>Save</Button>
-                            <Button onClick={discardClickHandler}>Discard</Button>
-                        </div>
-                    </>
-                )}
+                <div className={styles.container}>
+                    {isLoading ? (
+                        <p>
+                            {progress?.map(item => (
+                                <p>{item}</p>
+                            ))}
+                        </p>
+                    ) : (
+                        <>
+                            <Filepond setFiles={setFiles} files={files} />
+                            <div className={styles.buttons}>
+                                <Button onClick={saveClickHandler}>Save</Button>
+                                <Button onClick={discardClickHandler}>Discard</Button>
+                            </div>
+                        </>
+                    )}
+                </div>
             </Modal>
             <button onClick={() => setIsOpen(true)}>Upload Image</button>
         </>
