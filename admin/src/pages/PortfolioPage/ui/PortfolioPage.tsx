@@ -7,10 +7,11 @@ import { PortfolioPageList } from "./PortfolioPageList/PortfolioPageList"
 import { ITattooImage } from "shared/types/types"
 import styles from "./PortfolioPage.module.scss"
 import { portfolioPicturesRef } from "shared/const/firebaseVariables"
+import { localStorageView } from "../lib/localStorageLib"
 
 export function PortfolioPage() {
     const [data, setData] = useState<ITattooImage[]>([])
-    const [view, setView] = useState<ViewType>("icons")
+    const [view, setView] = useState<ViewType>(localStorageView.get() || "icons")
     const [filters, setFilters] = useState<IFiltersData>({
         artist: "",
         style: "",
