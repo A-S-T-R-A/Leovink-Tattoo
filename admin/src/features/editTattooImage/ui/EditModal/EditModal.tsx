@@ -81,7 +81,7 @@ export function EditModal(props: IEditModalProps) {
                 />
             </div>
             <div>
-                live:
+                published:
                 <input
                     type="checkbox"
                     checked={data.isLive}

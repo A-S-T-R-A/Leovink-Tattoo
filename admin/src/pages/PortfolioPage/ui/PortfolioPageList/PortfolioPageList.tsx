@@ -1,9 +1,11 @@
+import { useState } from "react"
 import { ITattooImage } from "shared/types/types"
 import { EditTattooImage } from "features/editTattooImage"
 import { DeleteTattooImage } from "features/deleteTattooImage"
 import styles from "./PortfolioPageList.module.scss"
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { ViewType } from "../../types/types"
+import { EditBulkTattooImages } from "features/editBulkTattooImages"
 
 export function PortfolioPageList({
     data,
@@ -14,6 +16,24 @@ export function PortfolioPageList({
     view: ViewType
     triggerRefetch: () => void
 }) {
+    const [selected, setSelected] = useState<number[]>([])
+
+    function checkboxChangeHandler(id: number) {
+        if (selected.includes(id)) {
+            setSelected(prev => prev.filter(item => item !== id))
+        } else {
+            setSelected(prev => [...prev, id])
+        }
+    }
+
+    function selectAllHandler() {
+        if (data.length === selected.length) {
+            setSelected([])
+        } else {
+            setSelected(data.map(item => item.id))
+        }
+    }
+
     return view === "icons" ? (
         <div className={styles.icons}>
             {data.map((item, index) => (
@@ -33,8 +53,24 @@ export function PortfolioPageList({
         </div>
     ) : (
         <div className={styles.table}>
+            <div className={styles.tableButtons}>
+                <button onClick={selectAllHandler}>
+                    {data.length === selected.length ? "Unselect All" : "Select All"}
+                </button>
+                {selected.length === 1 && (
+                    <EditTattooImage id={selected[0]} triggerRefetch={triggerRefetch} />
+                )}
+                {selected.length > 1 && (
+                    <EditBulkTattooImages imagesId={selected} triggerRefetch={triggerRefetch} />
+                )}
+            </div>
             {data.map((item, index) => (
                 <div className={styles.item} key={index}>
+                    <input
+                        type="checkbox"
+                        checked={selected.includes(item.id)}
+                        onChange={() => checkboxChangeHandler(item.id)}
+                    />
                     <div>id: {item.id}</div>
                     <ModalImage className={styles.img} url={item.img} />
                     <div>artist: {item.artist}</div>
