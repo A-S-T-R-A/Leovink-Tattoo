@@ -1,5 +1,4 @@
 import { Modal } from "shared/ui/Modal"
-import styles from "./EditBulkTattooImages.module.scss"
 import { useState } from "react"
 import { Dropdown } from "shared/ui/Dropdown"
 import {
@@ -15,6 +14,7 @@ import {
 } from "shared/const/firebaseVariables"
 import { updateDoc } from "firebase/firestore"
 import { tattooLiveDropdownOptions } from "../const/filterOptions"
+import styles from "./EditBulkTattooImages.module.scss"
 
 export function EditBulkTattooImages({
     imagesId,
@@ -25,9 +25,9 @@ export function EditBulkTattooImages({
 }) {
     const [isOpen, setIsOpen] = useState(false)
     const defaultData = {
-        artist: "" as ArtistType,
-        style: "" as StyleType,
-        color: "" as ColorType,
+        artist: "" as ArtistType | "" | "Unassigned",
+        style: "" as StyleType | "" | "Unassigned",
+        color: "" as ColorType | "" | "Unassigned",
         isLive: "",
     }
     const [data, setData] = useState<typeof defaultData>(defaultData)
@@ -38,7 +38,7 @@ export function EditBulkTattooImages({
 
     async function saveClickHandler() {
         const { artist, style, color, isLive } = data
-        const newData = {}
+        const newData: any = {}
         if (artist !== "") {
             newData.artist = artist === "Unassigned" ? "" : artist
         }
