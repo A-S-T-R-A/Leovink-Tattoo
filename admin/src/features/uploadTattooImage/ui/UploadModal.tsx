@@ -21,7 +21,7 @@ export function UploadModal({ triggerRefetch }: { triggerRefetch: () => void }) 
         const q = query(portfolioPicturesRef, orderBy("id", "asc"))
         const d = await getDocs(q)
 
-        return d.docs.pop()?.data().id
+        return d.docs.pop()?.data().id || 0
     }
 
     async function uploadImagesToBucket(files: FilePondFile[]): Promise<string[]> {

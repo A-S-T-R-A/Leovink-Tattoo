@@ -7,6 +7,7 @@ import {
 } from "shared/const/firebaseVariables"
 import { deleteObject, getStorage, ref } from "firebase/storage"
 import { deleteDoc, getDocs, query, updateDoc, where } from "firebase/firestore"
+import { useIsAdmin } from "features/authByGoogle"
 
 export function DeleteBulkTattooImages({
     imagesId,
@@ -18,9 +19,13 @@ export function DeleteBulkTattooImages({
     unselectAllHandler: () => void
 }) {
     const storage = getStorage()
+    const isAdmin = useIsAdmin()
 
     async function clickHandler() {
-        //if(noAdmin) alert return
+        if (!isAdmin) {
+            alert("You have to be logged as admin to perform this action")
+            return
+        }
 
         const deletePromises = imagesId.map(async item => {
             try {

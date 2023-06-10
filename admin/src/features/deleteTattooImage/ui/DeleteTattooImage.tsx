@@ -11,9 +11,11 @@ import {
 export function DeleteTattooImage({
     id,
     triggerRefetch,
+    unselectAllHandler,
 }: {
     id: number
     triggerRefetch: () => void
+    unselectAllHandler: () => void
 }) {
     const storage = getStorage()
 
@@ -42,9 +44,11 @@ export function DeleteTattooImage({
 
             await Promise.all(updateIdPromises)
             alert("Delete Success")
+            unselectAllHandler()
             triggerRefetch?.()
         } catch (error) {
             alert("Delete Error")
+            unselectAllHandler()
             triggerRefetch?.()
         }
     }
