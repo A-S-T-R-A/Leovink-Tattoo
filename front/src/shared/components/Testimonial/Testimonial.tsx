@@ -38,9 +38,6 @@ export function Testimonial({
                         <span className={styles.bold}>tattoo artist:</span> Nastia
                     </Typography>
                     <Typography>
-                        <span className={styles.bold}>price:</span> 150 eur
-                    </Typography>
-                    <Typography>
                         <span className={styles.bold}>duration:</span> 14 hours
                     </Typography>
                 </div>

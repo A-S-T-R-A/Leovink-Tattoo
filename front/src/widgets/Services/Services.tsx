@@ -18,7 +18,7 @@ export function Services() {
         <Section title="Services">
             <ul className={styles.servicesContainer}>
                 {servicesData.map((services, index) => {
-                    const { service, imgs, price } = services
+                    const { service, imgs } = services
 
                     return (
                         <li className={styles.serviceContainer}>
@@ -39,7 +39,6 @@ export function Services() {
                             </div>
                             {open === index && (
                                 <div className={styles.content}>
-                                    <Typography className={styles.price}>from {price}</Typography>
                                     <div className={styles.imgContainer}>
                                         {imgs.map(image => {
                                             return <img src={image} alt="pic" />
