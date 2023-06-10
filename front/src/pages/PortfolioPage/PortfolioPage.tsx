@@ -9,6 +9,8 @@ import styles from "./PortfolioPage.module.scss"
 import { getDocs, orderBy, query, where } from "firebase/firestore"
 import { portfolioPicturesRef } from "shared/const/firebaseVariables"
 import { tattooArtistsDropdownOptions, tattooColorsDropdownOptions } from "shared/const/filters"
+import { Section } from "shared/ui/Section/Section"
+
 
 interface IFilters {
     artist: string
@@ -63,6 +65,7 @@ export function PortfolioPage() {
     return (
         <PageWrapper title="Portfolio">
             <ModalGallery data={modalData} isOpen={isOpen} onClose={() => setIsOpen(false)} />
+        <Section>
             <div className={styles.filters}>
                 <Dropdown
                     options={tattooArtistsDropdownOptions}
@@ -84,7 +87,7 @@ export function PortfolioPage() {
                 />
             </div>
             <MasonryGrid data={filteredData} onClick={clickHandler} />
-            <FormSection />
+            <FormSection /> </Section>
         </PageWrapper>
     )
 }

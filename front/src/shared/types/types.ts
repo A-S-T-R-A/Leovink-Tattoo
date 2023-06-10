@@ -17,3 +17,5 @@ export interface IFaqBlock {
     title: string
     questions: IFaqQuestion[]
 }
+
+export type DeviceType = "mobile" | "tablet" | "laptop" | "desktop" | "desktop4K"

@@ -20,7 +20,7 @@ export function MasonryGrid({ data, onClick, maxHeight = "auto" }: IMasonryGrid)
             })}
             style={{ maxHeight }}
         >
-            <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 750: 3, 900: 5 }}>
+            <ResponsiveMasonry columnsCountBreakPoints={{ 320: 2, 480: 3, 768: 4, 961: 5 }}>
                 <Masonry gutter="6px">
                     {data.map((item, index) => {
                         const { id, img } = item

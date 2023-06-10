@@ -15,14 +15,14 @@ export function Testimonial({
         <div
             className={styles.container}
             style={{
-                flexDirection: isReversed ? "row-reverse" : "row",
+                //flexDirection: isReversed ? "row-reverse" : "row",
                 borderBottom: isWithBorder ? "1px solid var(--color-darkgray)" : "",
             }}
         >
-            <div className={styles.left}>
+            <div className={styles.videoContainer}>
                 <video src={video} poster={poster} controls />
             </div>
-            <div className={styles.right}>
+            <div className={styles.infoContainer}>
                 <Typography isBold className={styles.title}>
                     Polynesian tribe tattoo
                 </Typography>

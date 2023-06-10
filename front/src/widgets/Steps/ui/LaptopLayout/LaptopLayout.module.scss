@@ -2,17 +2,19 @@
     display: none;
 }
 
-@media (min-width: 961px) {
+@media (min-width: 650px) {
     .container {
+        max-width: 700px;
+        margin: 0 auto;
         position: relative;
         display: grid;
         justify-content: center;
         row-gap: 80px;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
         grid-template-areas:
-            "firstStep secondStep thirdStep"
-            "sixthStep fifthStep fourthStep";
+            "firstStep secondStep"
+            "fourthStep thirdStep"
+            "fifthStep sixthStep";
     }
 
     .bigLine {
@@ -23,41 +25,30 @@
         justify-self: center;
         width: 200px;
         margin: 80px 0 0 45px;
-        grid-area: line;
     }
 
     .firstStep {
         grid-area: firstStep;
-        transform: translateY(20px);
-        transform: translateX(40px);
     }
 
     .secondStep {
         grid-area: secondStep;
-        transform: translateY(-20px);
-        transform: translateX(40px);
     }
 
     .thirdStep {
         grid-area: thirdStep;
-        transform: translateX(40px);
     }
 
     .fourthStep {
         grid-area: fourthStep;
-        transform: translateY(20px);
-        transform: translateX(-40px);
     }
 
     .fifthStep {
         grid-area: fifthStep;
-        transform: translateY(-20px);
-        transform: translateX(-40px);
     }
 
     .sixthStep {
         grid-area: sixthStep;
-        transform: translateX(-40px);
     }
 
     .firstStep,
@@ -72,26 +63,48 @@
         align-items: center;
         row-gap: 10px;
 
-        .secondLine,
-        .fifthLine {
+        .firstLine {
             position: absolute;
-            bottom: 50px;
-            right: -20%;
+            width: 150px;
+            top: -60px;
+            right: -22%;
             transform: rotate(180deg);
-            width: 50%;
-            max-width: 200px;
-            z-index: -1;
         }
 
-        .firstLine,
-        .sixthLine {
+        .secondLine {
             position: absolute;
-            top: 50px;
-            right: -20%;
-            transform: rotate(0deg);
-            width: 50%;
-            max-width: 200px;
-            z-index: -1;
+            width: 150px;
+            bottom: -40%;
+            right: 0;
+            transform: rotate(-90deg);
         }
+
+        .thirdLine {
+            position: absolute;
+            width: 150px;
+            bottom: -30px;
+            left: -22%;
+        }
+
+        .fourthLine {
+            position: absolute;
+            width: 150px;
+            left: 0;
+            bottom: -40%;
+            transform: rotate(90deg);
+        }
+
+        .fifthLine {
+            position: absolute;
+            width: 150px;
+            bottom: -30px;
+            right: -22%;
+        }
+    }
+}
+
+@media (min-width: 961px) {
+    .container {
+        display: none;
     }
 }
