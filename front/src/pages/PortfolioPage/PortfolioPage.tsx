@@ -1,5 +1,4 @@
 import { useState, useEffect } from "preact/hooks"
-import { data as d } from "shared/const/data"
 import { MasonryGrid } from "shared/components/MasonryGrid/MasonryGrid"
 import { ModalGallery } from "widgets/ModalGallery/ModalGallery"
 import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper"
@@ -7,6 +6,9 @@ import { Dropdown } from "shared/ui/Dropdown"
 import type { ITattooImage } from "shared/types/types"
 import { FormSection } from "widgets/FormSection/FormSection"
 import styles from "./PortfolioPage.module.scss"
+import { getDocs, orderBy, query, where } from "firebase/firestore"
+import { portfolioPicturesRef } from "shared/const/firebaseVariables"
+import { tattooArtistsDropdownOptions, tattooColorsDropdownOptions } from "shared/const/filters"
 
 interface IFilters {
     artist: string
@@ -15,18 +17,13 @@ interface IFilters {
 }
 export function PortfolioPage() {
     const [isOpen, setIsOpen] = useState(false)
-    const [data, setData] = useState(d)
-    const [modalData, setModalData] = useState(d)
+    const [data, setData] = useState<ITattooImage[]>([])
+    const [filteredData, setFilteredData] = useState<ITattooImage[]>([])
+    const [modalData, setModalData] = useState<ITattooImage[]>([])
     const [filters, setFilters] = useState<IFilters>({ artist: "", style: "", color: "" })
 
-    function clickHandler(index: number) {
-        const newModalData = [...data.slice(index), ...data.slice(0, index)]
-        setIsOpen(true)
-        setModalData(newModalData)
-    }
-
     function filterImages(filters: IFilters): ITattooImage[] {
-        const newData = d
+        const newData = data
             .filter(item => (!filters.artist ? true : item.artist === filters.artist))
             .filter(item => (!filters.style ? true : item.style === filters.style))
             .filter(item => (!filters.color ? true : item.color === filters.color))
@@ -37,52 +34,56 @@ export function PortfolioPage() {
     useEffect(() => {
         const newData = filterImages(filters)
 
-        setData(newData)
+        setFilteredData(newData)
     }, [filters])
 
-    console.log(data)
+    function clickHandler(index: number) {
+        const newModalData = [...filteredData.slice(index), ...filteredData.slice(0, index)]
+        setIsOpen(true)
+        setModalData(newModalData)
+    }
 
-    const optionsArtist = [
-        { label: "John", value: "John" },
-        { label: "Sam", value: "Sam" },
-        { label: "Alex", value: "Alex" },
-    ]
+    async function fetch() {
+        const fetchedData: ITattooImage[] = []
+        const q = query(portfolioPicturesRef, (orderBy("id", "asc"), where("isLive", "==", true)))
+        const d = await getDocs(q)
+        d.forEach(doc => {
+            fetchedData.push(doc.data() as ITattooImage)
+        })
 
-    const optionsStyle = [
-        { label: "Realism", value: "Realism" },
-        { label: "Classic", value: "Classic" },
-        { label: "NewSchool", value: "NewSchool" },
-    ]
+        setData(fetchedData)
+        setModalData(fetchedData)
+        setFilteredData(fetchedData)
+    }
 
-    const optionsColor = [
-        { label: "Black", value: "Black" },
-        { label: "Color", value: "Color" },
-    ]
+    useEffect(() => {
+        fetch()
+    }, [])
 
     return (
         <PageWrapper title="Portfolio">
             <ModalGallery data={modalData} isOpen={isOpen} onClose={() => setIsOpen(false)} />
             <div className={styles.filters}>
                 <Dropdown
-                    options={optionsArtist}
+                    options={tattooArtistsDropdownOptions}
                     firstOptionText="Select tattoo artist"
                     value={filters.artist}
                     onChange={value => setFilters(prev => ({ ...prev, artist: value }))}
                 />
                 <Dropdown
-                    options={optionsStyle}
+                    options={tattooColorsDropdownOptions}
                     firstOptionText="Select tattoo style"
                     value={filters.style}
                     onChange={value => setFilters(prev => ({ ...prev, style: value }))}
                 />
                 <Dropdown
-                    options={optionsColor}
+                    options={tattooColorsDropdownOptions}
                     firstOptionText="Select tattoo color"
                     value={filters.color}
                     onChange={value => setFilters(prev => ({ ...prev, color: value }))}
                 />
             </div>
-            <MasonryGrid data={data} onClick={clickHandler} />
+            <MasonryGrid data={filteredData} onClick={clickHandler} />
             <FormSection />
         </PageWrapper>
     )
