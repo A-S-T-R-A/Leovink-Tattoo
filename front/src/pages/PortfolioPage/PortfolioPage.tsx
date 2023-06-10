@@ -72,25 +72,25 @@ export function PortfolioPage() {
                 <div className={styles.filters}>
                     <Dropdown
                         options={tattooArtistsDropdownOptions}
-                        firstOptionText="Select tattoo artist"
+                        firstOptionText="All tattoo artists"
                         value={filters.artist}
                         onChange={value => setFilters(prev => ({ ...prev, artist: value }))}
                     />
                     <Dropdown
                         options={tattooStylesDropdownOptions}
-                        firstOptionText="Select tattoo style"
+                        firstOptionText="All tattoo styles"
                         value={filters.style}
                         onChange={value => setFilters(prev => ({ ...prev, style: value }))}
                     />
                     <Dropdown
                         options={tattooColorsDropdownOptions}
-                        firstOptionText="Select tattoo color"
+                        firstOptionText="All tattoo colors"
                         value={filters.color}
                         onChange={value => setFilters(prev => ({ ...prev, color: value }))}
                     />
                 </div>
                 <MasonryGrid data={filteredData} onClick={clickHandler} />
-                <FormSection />{" "}
+                <FormSection />
             </Section>
         </PageWrapper>
     )
