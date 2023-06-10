@@ -6,6 +6,7 @@ import styles from "./PortfolioPageList.module.scss"
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { ViewType } from "../../types/types"
 import { EditBulkTattooImages } from "features/editBulkTattooImages"
+import { DeleteBulkTattooImages } from "features/deleteBulkTattooImages"
 
 export function PortfolioPageList({
     data,
@@ -34,6 +35,10 @@ export function PortfolioPageList({
         }
     }
 
+    function unselectAllHandler() {
+        setSelected([])
+    }
+
     return view === "icons" ? (
         <div className={styles.icons}>
             {data.map((item, index) => (
@@ -58,10 +63,20 @@ export function PortfolioPageList({
                     {data.length === selected.length ? "Unselect All" : "Select All"}
                 </button>
                 {selected.length === 1 && (
-                    <EditTattooImage id={selected[0]} triggerRefetch={triggerRefetch} />
+                    <>
+                        <EditTattooImage id={selected[0]} triggerRefetch={triggerRefetch} />
+                        <DeleteTattooImage id={selected[0]} triggerRefetch={triggerRefetch} />
+                    </>
                 )}
                 {selected.length > 1 && (
-                    <EditBulkTattooImages imagesId={selected} triggerRefetch={triggerRefetch} />
+                    <>
+                        <EditBulkTattooImages imagesId={selected} triggerRefetch={triggerRefetch} />
+                        <DeleteBulkTattooImages
+                            imagesId={selected}
+                            triggerRefetch={triggerRefetch}
+                            unselectAllHandler={unselectAllHandler}
+                        />
+                    </>
                 )}
             </div>
             {data.map((item, index) => (

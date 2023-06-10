@@ -28,13 +28,19 @@ export function DeleteTattooImage({
             await deleteDoc(getFirestoreDocumentByFileId(file.id))
             const nq = query(portfolioPicturesRef, where("id", ">", id))
             const nd = await getDocs(nq)
-            if (!nd.empty) {
-                nd.docs.forEach(async (item, index) => {
-                    await updateDoc(getFirestoreDocumentByFileId(item.id), {
-                        id: id + index,
-                    })
-                })
+            if (nd.empty) {
+                alert("Delete Success")
+                triggerRefetch?.()
             }
+
+            const updateIdPromises = nd.docs.map(async (item, index) => {
+                await updateDoc(getFirestoreDocumentByFileId(item.id), {
+                    id: id + index,
+                })
+                return new Promise(res => res(true))
+            })
+
+            await Promise.all(updateIdPromises)
             alert("Delete Success")
             triggerRefetch?.()
         } catch (error) {
