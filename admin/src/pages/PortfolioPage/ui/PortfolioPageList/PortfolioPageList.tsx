@@ -2,10 +2,11 @@ import { useState } from "react"
 import { ITattooImage } from "shared/types/types"
 import { EditTattooImage } from "features/editTattooImage"
 import { DeleteTattooImage } from "features/deleteTattooImage"
-import styles from "./PortfolioPageList.module.scss"
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { ViewType } from "../../types/types"
 import { EditBulkTattooImages } from "features/editBulkTattooImages"
+import { DeleteBulkTattooImages } from "features/deleteBulkTattooImages"
+import styles from "./PortfolioPageList.module.scss"
 
 export function PortfolioPageList({
     data,
@@ -34,6 +35,10 @@ export function PortfolioPageList({
         }
     }
 
+    function unselectAllHandler() {
+        setSelected([])
+    }
+
     return view === "icons" ? (
         <div className={styles.icons}>
             {data.map((item, index) => (
@@ -46,7 +51,11 @@ export function PortfolioPageList({
                     <div>{item.isLive ? "Published" : "Unpublished"}</div>
                     <div className={styles.buttons}>
                         <EditTattooImage id={item.id} triggerRefetch={triggerRefetch} />
-                        <DeleteTattooImage id={item.id} triggerRefetch={triggerRefetch} />
+                        <DeleteTattooImage
+                            id={item.id}
+                            triggerRefetch={triggerRefetch}
+                            unselectAllHandler={unselectAllHandler}
+                        />
                     </div>
                 </div>
             ))}
@@ -58,10 +67,24 @@ export function PortfolioPageList({
                     {data.length === selected.length ? "Unselect All" : "Select All"}
                 </button>
                 {selected.length === 1 && (
-                    <EditTattooImage id={selected[0]} triggerRefetch={triggerRefetch} />
+                    <>
+                        <EditTattooImage id={selected[0]} triggerRefetch={triggerRefetch} />
+                        <DeleteTattooImage
+                            id={selected[0]}
+                            triggerRefetch={triggerRefetch}
+                            unselectAllHandler={unselectAllHandler}
+                        />
+                    </>
                 )}
                 {selected.length > 1 && (
-                    <EditBulkTattooImages imagesId={selected} triggerRefetch={triggerRefetch} />
+                    <>
+                        <EditBulkTattooImages imagesId={selected} triggerRefetch={triggerRefetch} />
+                        <DeleteBulkTattooImages
+                            imagesId={selected}
+                            triggerRefetch={triggerRefetch}
+                            unselectAllHandler={unselectAllHandler}
+                        />
+                    </>
                 )}
             </div>
             {data.map((item, index) => (
@@ -79,7 +102,11 @@ export function PortfolioPageList({
                     <div>{item.isLive ? "Published" : "Unpublished"}</div>
                     <div>
                         <EditTattooImage id={item.id} triggerRefetch={triggerRefetch} />
-                        <DeleteTattooImage id={item.id} triggerRefetch={triggerRefetch} />
+                        <DeleteTattooImage
+                            id={item.id}
+                            triggerRefetch={triggerRefetch}
+                            unselectAllHandler={unselectAllHandler}
+                        />
                     </div>
                 </div>
             ))}

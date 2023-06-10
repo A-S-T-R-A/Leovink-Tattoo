@@ -141,7 +141,7 @@ export function EditBulkTattooImages({
                 <button onClick={discardClickHandler}>Discard</button>
             </Modal>
             <button className={styles.btn} onClick={() => setIsOpen(true)}>
-                Edit {imagesId.length} images
+                Edit Selected
             </button>
         </>
     )
