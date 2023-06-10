@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react"
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import {
-    TattooArtists,
-    TattooColors,
-    TattooStyles,
     tattooArtistsDropdownOptions,
     tattooColorsDropdownOptions,
     tattooStylesDropdownOptions,
@@ -19,13 +16,14 @@ interface IEditModalProps {
     data: ITattooImage
     isOpen: boolean
     onClose: () => void
-    setData: (data: React.Dispatch<React.SetStateAction<ITattooImage>>) => void
+    setData: (data: any) => void
     saveClickHandler: () => void
     discardClickHandler: () => void
 }
 
 export function EditModal(props: IEditModalProps) {
     const { data, isOpen, onClose, setData, saveClickHandler, discardClickHandler } = props
+
     const [length, setLength] = useState(0)
 
     async function getLength() {
@@ -51,7 +49,7 @@ export function EditModal(props: IEditModalProps) {
                 <Dropdown
                     options={dropdownNumbers}
                     value={data.id?.toString()}
-                    onChange={id => setData(prev => ({ ...prev, id: +id }))}
+                    onChange={id => setData((prev: ITattooImage) => ({ ...prev, id: +id }))}
                 />
             </div>
             <div>
@@ -63,7 +61,7 @@ export function EditModal(props: IEditModalProps) {
                 <Dropdown
                     options={tattooArtistsDropdownOptions}
                     value={data.artist}
-                    onChange={artist => setData(prev => ({ ...prev, artist }))}
+                    onChange={artist => setData((prev: ITattooImage) => ({ ...prev, artist }))}
                 />
             </div>
             <div>
@@ -71,7 +69,7 @@ export function EditModal(props: IEditModalProps) {
                 <Dropdown
                     options={tattooStylesDropdownOptions}
                     value={data.style}
-                    onChange={style => setData(prev => ({ ...prev, style }))}
+                    onChange={style => setData((prev: ITattooImage) => ({ ...prev, style }))}
                 />
             </div>
             <div>
@@ -79,7 +77,7 @@ export function EditModal(props: IEditModalProps) {
                 <Dropdown
                     options={tattooColorsDropdownOptions}
                     value={data.color}
-                    onChange={color => setData(prev => ({ ...prev, color }))}
+                    onChange={color => setData((prev: ITattooImage) => ({ ...prev, color }))}
                 />
             </div>
             <div>
@@ -87,7 +85,9 @@ export function EditModal(props: IEditModalProps) {
                 <input
                     type="checkbox"
                     checked={data.isLive}
-                    onChange={e => setData(prev => ({ ...prev, isLive: e.target.checked }))}
+                    onChange={e =>
+                        setData((prev: ITattooImage) => ({ ...prev, isLive: e.target.checked }))
+                    }
                 />
             </div>
             <button onClick={saveClickHandler}>Save</button>

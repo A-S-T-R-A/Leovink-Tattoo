@@ -79,7 +79,8 @@ a:active {
 
 .page-wrapper {
     margin-left: var(--sidebar-width);
-    padding: 0 30px;
+    margin-top: var(--header-height);
+    padding: 10px 30px;
     overflow-y: auto;
     height: 100vh;
 }

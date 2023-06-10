@@ -1,0 +1,12 @@
+.wrapper {
+    background: rgb(213, 151, 35);
+    height: var(--header-height);
+    left: var(--sidebar-width);
+    top: 0;
+    right: 0;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
