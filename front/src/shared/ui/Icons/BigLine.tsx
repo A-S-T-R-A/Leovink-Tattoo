@@ -7,8 +7,8 @@ export function BigLine({ className }: { className: string }) {
             className={className}
         >
             <g
+                style={{ stroke: "var(--color-darkgray)" }}
                 strokeWidth="12"
-                stroke="gray"
                 fill="none"
                 strokeLinecap="square"
                 strokeLinejoin="round"
