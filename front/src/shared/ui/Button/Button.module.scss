@@ -6,8 +6,9 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     cursor: pointer;
+    transition: all 0.3s ease;
 
     &:hover {
-        filter: brightness(90%);
+        transform: scale(1.1);
     }
 }
