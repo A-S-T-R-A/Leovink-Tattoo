@@ -2,10 +2,12 @@
 import Layout from "layouts/Layout.astro"
 import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper"
 import { FormSection } from "widgets/FormSection/FormSection"
+import { FindUs } from "widgets/FundUs/FindUs";
 ---
 
 <Layout>
     <PageWrapper title="Contact">
+        <FindUs />
         <FormSection client:load />
     </PageWrapper>
 </Layout>

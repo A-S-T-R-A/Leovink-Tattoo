@@ -5,5 +5,6 @@ import logo from "./logo.png"
 import prepare from "./prepare.webp"
 import treatment from "./treatment.webp"
 import update from "./update.webp"
+import map from "./map.png"
 
-export { care, consult, drawing, logo, prepare, treatment, update }
+export { care, consult, drawing, logo, prepare, treatment, update, map }
