@@ -61,7 +61,7 @@ export function PortfolioPageList({
             ))}
         </div>
     ) : (
-        <div className={styles.table}>
+        <>
             <div className={styles.tableButtons}>
                 <button onClick={selectAllHandler}>
                     {data.length === selected.length ? "Unselect All" : "Select All"}
@@ -87,29 +87,31 @@ export function PortfolioPageList({
                     </>
                 )}
             </div>
-            {data.map((item, index) => (
-                <div className={styles.item} key={index}>
-                    <input
-                        type="checkbox"
-                        checked={selected.includes(item.id)}
-                        onChange={() => checkboxChangeHandler(item.id)}
-                    />
-                    <div>id: {item.id}</div>
-                    <ModalImage className={styles.img} url={item.img} />
-                    <div>artist: {item.artist}</div>
-                    <div>style: {item.style}</div>
-                    <div>color: {item.color}</div>
-                    <div>{item.isLive ? "Published" : "Unpublished"}</div>
-                    <div>
-                        <EditTattooImage id={item.id} triggerRefetch={triggerRefetch} />
-                        <DeleteTattooImage
-                            id={item.id}
-                            triggerRefetch={triggerRefetch}
-                            unselectAllHandler={unselectAllHandler}
+            <div className={styles.table}>
+                {data.map((item, index) => (
+                    <div className={styles.item} key={index}>
+                        <input
+                            type="checkbox"
+                            checked={selected.includes(item.id)}
+                            onChange={() => checkboxChangeHandler(item.id)}
                         />
+                        <div>id: {item.id}</div>
+                        <ModalImage className={styles.img} url={item.img} />
+                        <div>artist: {item.artist}</div>
+                        <div>style: {item.style}</div>
+                        <div>color: {item.color}</div>
+                        <div>{item.isLive ? "Published" : "Unpublished"}</div>
+                        <div className={styles.buttons}>
+                            <EditTattooImage id={item.id} triggerRefetch={triggerRefetch} />
+                            <DeleteTattooImage
+                                id={item.id}
+                                triggerRefetch={triggerRefetch}
+                                unselectAllHandler={unselectAllHandler}
+                            />
+                        </div>
                     </div>
-                </div>
-            ))}
-        </div>
+                ))}
+            </div>
+        </>
     )
 }
