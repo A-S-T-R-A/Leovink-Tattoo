@@ -25,7 +25,7 @@ export function Filepond({ files, setFiles }: IFilepond) {
             allowMultiple={true}
             onupdatefiles={setFiles}
             labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
-            maxFileSize="1MB"
+            maxFileSize="500KB"
             acceptedFileTypes={["image/png", "image/jpeg", "image/webp"]}
         />
     )
