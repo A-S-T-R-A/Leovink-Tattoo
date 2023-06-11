@@ -13,7 +13,8 @@ select {
     background-repeat: no-repeat;
     background-position: right 8px center;
     cursor: pointer;
-    width: 244px;
+    width: fit-content;
+    padding-right: 25px;
     outline: none;
 }
 

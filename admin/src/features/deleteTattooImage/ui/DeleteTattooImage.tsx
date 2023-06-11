@@ -29,6 +29,8 @@ export function DeleteTattooImage({
     const storage = getStorage()
 
     async function clickHandler() {
+        if (!confirm(`Delete image id:${id}?`)) return
+
         setIsLoading(true)
         try {
             const file = await getFirestoreDocumentById(id, portfolioPicturesRef)
@@ -40,6 +42,7 @@ export function DeleteTattooImage({
             await deleteDoc(getFirestoreDocumentByFileId(file.id))
             const nq = query(portfolioPicturesRef, where("id", ">", id))
             const nd = await getDocs(nq)
+            setIsLoading(false)
             if (nd.empty) {
                 alert("Delete Success")
                 triggerRefetch?.()

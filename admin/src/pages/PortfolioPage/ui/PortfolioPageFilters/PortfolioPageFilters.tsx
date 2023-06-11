@@ -29,6 +29,8 @@ export function PortfolioPageFilters({ filters, setFilters }: IPortfolioPageFilt
         ...tattooColorsDropdownOptions,
     ]
 
+    console.log(filters)
+
     return (
         <div className={styles.container}>
             <Dropdown
@@ -55,6 +57,18 @@ export function PortfolioPageFilters({ filters, setFilters }: IPortfolioPageFilt
                 value={filters.color as string}
                 onChange={color => setFilters((prev: IFiltersData) => ({ ...prev, color }))}
             />
+            <button
+                onClick={() => {
+                    setFilters({
+                        artist: "",
+                        style: "",
+                        color: "",
+                        isLive: "",
+                    })
+                }}
+            >
+                Reset Filters
+            </button>
         </div>
     )
 }

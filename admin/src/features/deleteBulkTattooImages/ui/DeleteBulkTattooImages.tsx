@@ -36,6 +36,8 @@ export function DeleteBulkTattooImages({
             return
         }
 
+        if (!confirm(`Delete ${imagesId.length} images?`)) return
+
         setIsLoading(true)
 
         const deletePromises = imagesId.map(async item => {
