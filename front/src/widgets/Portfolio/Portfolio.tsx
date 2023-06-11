@@ -22,17 +22,17 @@ export function Portfolio() {
 
     async function fetch() {
         const fetchedData: ITattooImage[] = []
-        const q = query(
-            portfolioPicturesRef,
-            (limit(15), orderBy("id", "asc"), where("isLive", "==", true))
-        )
+        const q = query(portfolioPicturesRef, (where("isLive", "==", true), orderBy("id", "asc")))
         const d = await getDocs(q)
+
         d.forEach(doc => {
             fetchedData.push(doc.data() as ITattooImage)
         })
 
-        setData(fetchedData)
-        setModalData(fetchedData)
+        const limitedData = fetchedData.slice(0, 16)
+
+        setData(limitedData)
+        setModalData(limitedData)
     }
 
     useEffect(() => {

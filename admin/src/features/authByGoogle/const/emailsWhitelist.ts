@@ -1,5 +1,6 @@
 //first email is admin
 export const emailsWhitelist: string[] = [
+    "gerasymenkoden@gmail.com",
     "masterleovinktattoo@gmail.com",
     "jesuitdelray@gmail.com",
     "vadim.galian@gmail.com",

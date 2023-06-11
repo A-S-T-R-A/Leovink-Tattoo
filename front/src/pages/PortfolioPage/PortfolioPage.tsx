@@ -50,7 +50,7 @@ export function PortfolioPage() {
 
     async function fetch() {
         const fetchedData: ITattooImage[] = []
-        const q = query(portfolioPicturesRef, (orderBy("id", "asc"), where("isLive", "==", true)))
+        const q = query(portfolioPicturesRef, (where("isLive", "==", true), orderBy("id", "asc")))
         const d = await getDocs(q)
         d.forEach(doc => {
             fetchedData.push(doc.data() as ITattooImage)
@@ -60,6 +60,8 @@ export function PortfolioPage() {
         setModalData(fetchedData)
         setFilteredData(fetchedData)
     }
+
+    console.log(data.map(item => item.id).join(","))
 
     useEffect(() => {
         fetch()
