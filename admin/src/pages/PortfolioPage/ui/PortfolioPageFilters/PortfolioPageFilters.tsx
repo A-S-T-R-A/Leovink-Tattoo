@@ -29,8 +29,6 @@ export function PortfolioPageFilters({ filters, setFilters }: IPortfolioPageFilt
         ...tattooColorsDropdownOptions,
     ]
 
-    console.log(filters)
-
     return (
         <div className={styles.container}>
             <Dropdown

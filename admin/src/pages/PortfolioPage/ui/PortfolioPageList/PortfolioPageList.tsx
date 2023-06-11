@@ -50,7 +50,11 @@ export function PortfolioPageList({
                     <div>color: {item.color}</div>
                     <div>{item.isLive ? "Published" : "Unpublished"}</div>
                     <div className={styles.buttons}>
-                        <EditTattooImage id={item.id} triggerRefetch={triggerRefetch} />
+                        <EditTattooImage
+                            id={item.id}
+                            triggerRefetch={triggerRefetch}
+                            unselectAllHandler={unselectAllHandler}
+                        />
                         <DeleteTattooImage
                             id={item.id}
                             triggerRefetch={triggerRefetch}
@@ -68,7 +72,11 @@ export function PortfolioPageList({
                 </button>
                 {selected.length === 1 && (
                     <>
-                        <EditTattooImage id={selected[0]} triggerRefetch={triggerRefetch} />
+                        <EditTattooImage
+                            id={selected[0]}
+                            triggerRefetch={triggerRefetch}
+                            unselectAllHandler={unselectAllHandler}
+                        />
                         <DeleteTattooImage
                             id={selected[0]}
                             triggerRefetch={triggerRefetch}
@@ -102,7 +110,11 @@ export function PortfolioPageList({
                         <div>color: {item.color}</div>
                         <div>{item.isLive ? "Published" : "Unpublished"}</div>
                         <div className={styles.buttons}>
-                            <EditTattooImage id={item.id} triggerRefetch={triggerRefetch} />
+                            <EditTattooImage
+                                id={item.id}
+                                triggerRefetch={triggerRefetch}
+                                unselectAllHandler={unselectAllHandler}
+                            />
                             <DeleteTattooImage
                                 id={item.id}
                                 triggerRefetch={triggerRefetch}
