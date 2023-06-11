@@ -7,6 +7,9 @@ import {
     getFirestoreDocumentById,
     portfolioPicturesRef,
 } from "shared/const/firebaseVariables"
+import { useEffect, useState } from "react"
+import { disableUi } from "shared/lib/disableUi/disableUi"
+import { Modal } from "shared/ui/Modal"
 
 export function DeleteTattooImage({
     id,
@@ -17,9 +20,16 @@ export function DeleteTattooImage({
     triggerRefetch: () => void
     unselectAllHandler: () => void
 }) {
+    const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        isLoading ? disableUi.disable() : disableUi.enable()
+    }, [isLoading])
+
     const storage = getStorage()
 
     async function clickHandler() {
+        setIsLoading(true)
         try {
             const file = await getFirestoreDocumentById(id, portfolioPicturesRef)
             const imgLink = file.data().img
@@ -51,7 +61,15 @@ export function DeleteTattooImage({
             unselectAllHandler()
             triggerRefetch?.()
         }
+        setIsLoading(false)
     }
 
-    return <button onClick={clickHandler}>Delete</button>
+    return (
+        <>
+            <Modal isOpen={isLoading} onClose={() => null}>
+                Loading...
+            </Modal>
+            <button onClick={clickHandler}>Delete</button>
+        </>
+    )
 }

@@ -34,3 +34,18 @@
     display: flex;
     justify-content: space-between;
 }
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    height: 220px;
+
+    .progress {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+}
