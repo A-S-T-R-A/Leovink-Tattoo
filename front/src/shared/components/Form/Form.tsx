@@ -5,13 +5,13 @@ import { Typography } from "shared/ui/Typography/Typography"
 import styles from "./Form.module.scss"
 import { classNames } from "shared/lib/classNames/classNames"
 
-export function Form({ isVertical }: { isVertical?: boolean }) {
+export function Form({ isVertical, className }: { className?: string; isVertical?: boolean }) {
     const [formData, setFormData] = useState({ name: "", phone: "" })
 
     return (
         <form
             id="formSection"
-            className={classNames(styles.form, { [styles.vertical]: isVertical })}
+            className={classNames(styles.form, { [styles.vertical]: isVertical }, [className])}
         >
             <Typography className={styles.title}>Book an appointment</Typography>
             <div className={styles.formContent}>
