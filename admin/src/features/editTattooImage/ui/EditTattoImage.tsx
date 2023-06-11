@@ -1,4 +1,4 @@
-import { getDocs, query, updateDoc, where } from "firebase/firestore"
+import { getDocs, orderBy, query, updateDoc, where } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { ArtistType, ColorType, ITattooImage, StyleType } from "shared/types/types"
 import { EditModal } from "./EditModal/EditModal"
@@ -13,9 +13,11 @@ import { disableUi } from "shared/lib/disableUi/disableUi"
 export function EditTattooImage({
     id,
     triggerRefetch,
+    unselectAllHandler,
 }: {
     id: number
     triggerRefetch: () => void
+    unselectAllHandler: () => void
 }) {
     const [isOpen, setIsOpen] = useState(false)
     const defaultData = {
@@ -57,19 +59,43 @@ export function EditTattooImage({
                 setIsOpen(false)
                 triggerRefetch?.()
             } else {
-                const nq = query(portfolioPicturesRef, where("id", ">=", data.id))
+                const from = id
+                const to = data.id
+                const minId = Math.min(from, to)
+
+                const nq = query(
+                    portfolioPicturesRef,
+                    (orderBy("id", "asc"), where("id", ">=", minId))
+                )
                 const nd = await getDocs(nq)
                 if (!nd.empty) {
-                    nd.docs.forEach(async (item, index) => {
-                        await updateDoc(getFirestoreDocumentByFileId(item.id), {
-                            id: data.id + index + 1,
-                        })
-                    })
+                    const q = query(portfolioPicturesRef, orderBy("id", "asc"))
+                    const d = await getDocs(q)
+                    const stack = Array(d.size)
+                        .fill("")
+                        .map((_, index) => index + 1)
+                        .slice(minId - 1)
+                        .filter(item => item !== to)
+
+                    const func = async (item: (typeof nd.docs)[0], index: number) => {
+                        const id = minId + index
+                        if (id === from) {
+                            await updateDoc(getFirestoreDocumentByFileId(file.id), data as any)
+                        } else {
+                            await updateDoc(getFirestoreDocumentByFileId(item.id), { id: stack[0] })
+                            stack.shift()
+                        }
+                        return new Promise(res => res(true))
+                    }
+
+                    for (let i = 0; i < nd.docs.length; i++) {
+                        await func(nd.docs[i], i)
+                    }
                 }
 
-                await updateDoc(getFirestoreDocumentByFileId(file.id), data as any)
                 alert("Success reorder")
                 setIsOpen(false)
+                unselectAllHandler()
                 triggerRefetch?.()
             }
         } catch (error) {
