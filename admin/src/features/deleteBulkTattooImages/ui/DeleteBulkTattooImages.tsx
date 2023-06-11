@@ -55,6 +55,7 @@ export function DeleteBulkTattooImages({
 
         try {
             await Promise.all(deletePromises)
+            setIsLoading(false)
             const id = Math.min(...imagesId)
             const nq = query(portfolioPicturesRef, where("id", ">", id))
             const nd = await getDocs(nq)
@@ -75,15 +76,13 @@ export function DeleteBulkTattooImages({
 
             await Promise.all(updateIdPromises)
             alert("Delete Success")
-            unselectAllHandler?.()
-            triggerRefetch?.()
         } catch (error) {
             alert("Delete Error")
-            unselectAllHandler?.()
-            triggerRefetch?.()
+            setIsLoading(false)
         }
 
-        setIsLoading(false)
+        unselectAllHandler?.()
+        triggerRefetch?.()
     }
 
     return (
