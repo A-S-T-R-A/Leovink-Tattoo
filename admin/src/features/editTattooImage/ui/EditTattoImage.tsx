@@ -1,5 +1,5 @@
 import { getDocs, query, updateDoc, where } from "firebase/firestore"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ArtistType, ColorType, ITattooImage, StyleType } from "shared/types/types"
 import { EditModal } from "./EditModal/EditModal"
 import {
@@ -8,6 +8,7 @@ import {
     portfolioPicturesRef,
 } from "shared/const/firebaseVariables"
 import styles from "./EditTattooImage.module.scss"
+import { disableUi } from "shared/lib/disableUi/disableUi"
 
 export function EditTattooImage({
     id,
@@ -25,6 +26,7 @@ export function EditTattooImage({
         color: "" as ColorType,
     }
     const [data, setData] = useState<ITattooImage>(defaultData)
+    const [isLoading, setIsLoading] = useState(false)
 
     async function openClickHandler() {
         try {
@@ -38,8 +40,13 @@ export function EditTattooImage({
         }
     }
 
+    useEffect(() => {
+        isLoading ? disableUi.disable() : disableUi.enable()
+    }, [isLoading])
+
     async function saveClickHandler() {
         if (!data) return
+        setIsLoading(true)
 
         try {
             const file = await getFirestoreDocumentById(id, portfolioPicturesRef)
@@ -69,6 +76,7 @@ export function EditTattooImage({
             alert("Unexpected Error")
             triggerRefetch?.()
         }
+        setIsLoading(false)
     }
 
     function discardClickHandler() {
@@ -85,6 +93,7 @@ export function EditTattooImage({
             <EditModal
                 data={data}
                 isOpen={isOpen}
+                isLoading={isLoading}
                 onClose={onClose}
                 setData={setData}
                 saveClickHandler={saveClickHandler}

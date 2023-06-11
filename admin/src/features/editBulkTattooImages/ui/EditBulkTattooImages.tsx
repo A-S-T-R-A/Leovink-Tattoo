@@ -1,5 +1,5 @@
 import { Modal } from "shared/ui/Modal"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Dropdown } from "shared/ui/Dropdown"
 import {
     tattooArtistsDropdownOptions,
@@ -15,6 +15,7 @@ import {
 import { updateDoc } from "firebase/firestore"
 import { tattooLiveDropdownOptions } from "../const/filterOptions"
 import styles from "./EditBulkTattooImages.module.scss"
+import { disableUi } from "shared/lib/disableUi/disableUi"
 
 export function EditBulkTattooImages({
     imagesId,
@@ -31,6 +32,11 @@ export function EditBulkTattooImages({
         isLive: "",
     }
     const [data, setData] = useState<typeof defaultData>(defaultData)
+    const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        isLoading ? disableUi.disable() : disableUi.enable()
+    }, [isLoading])
 
     function onClose() {
         setIsOpen(false)
@@ -57,6 +63,8 @@ export function EditBulkTattooImages({
             return
         }
 
+        setIsLoading(true)
+
         const editPromises = imagesId.map(async item => {
             const file = await getFirestoreDocumentById(item, portfolioPicturesRef)
             await updateDoc(getFirestoreDocumentByFileId(file.id), newData as any)
@@ -75,6 +83,7 @@ export function EditBulkTattooImages({
             setData(defaultData)
             triggerRefetch?.()
         }
+        setIsLoading(false)
     }
 
     function discardClickHandler() {
@@ -99,46 +108,52 @@ export function EditBulkTattooImages({
 
     return (
         <>
-            <Modal isOpen={isOpen} onClose={onClose}>
-                <h4>Edit {imagesId.length} images</h4>
-                <div>
-                    artist:
-                    <Dropdown
-                        firstOptionText="Select an artist"
-                        options={artistsOption}
-                        value={data.artist}
-                        onChange={artist => setData((prev: any) => ({ ...prev, artist }))}
-                    />
-                </div>
-                <div>
-                    style:
-                    <Dropdown
-                        firstOptionText="Select a style"
-                        options={stylesOption}
-                        value={data.style}
-                        onChange={style => setData((prev: any) => ({ ...prev, style }))}
-                    />
-                </div>
-                <div>
-                    color:
-                    <Dropdown
-                        firstOptionText="Select a color"
-                        options={colorsOption}
-                        value={data.color}
-                        onChange={color => setData((prev: any) => ({ ...prev, color }))}
-                    />
-                </div>
-                <div>
-                    published:
-                    <Dropdown
-                        firstOptionText="Publish / Unpublish"
-                        options={tattooLiveDropdownOptions}
-                        value={data.isLive}
-                        onChange={isLive => setData((prev: any) => ({ ...prev, isLive }))}
-                    />
-                </div>
-                <button onClick={saveClickHandler}>Save</button>
-                <button onClick={discardClickHandler}>Discard</button>
+            <Modal isOpen={isOpen || isLoading} onClose={onClose}>
+                {isLoading ? (
+                    "Loading..."
+                ) : (
+                    <>
+                        <h4>Edit {imagesId.length} images</h4>
+                        <div>
+                            artist:
+                            <Dropdown
+                                firstOptionText="Select an artist"
+                                options={artistsOption}
+                                value={data.artist}
+                                onChange={artist => setData((prev: any) => ({ ...prev, artist }))}
+                            />
+                        </div>
+                        <div>
+                            style:
+                            <Dropdown
+                                firstOptionText="Select a style"
+                                options={stylesOption}
+                                value={data.style}
+                                onChange={style => setData((prev: any) => ({ ...prev, style }))}
+                            />
+                        </div>
+                        <div>
+                            color:
+                            <Dropdown
+                                firstOptionText="Select a color"
+                                options={colorsOption}
+                                value={data.color}
+                                onChange={color => setData((prev: any) => ({ ...prev, color }))}
+                            />
+                        </div>
+                        <div>
+                            published:
+                            <Dropdown
+                                firstOptionText="Publish / Unpublish"
+                                options={tattooLiveDropdownOptions}
+                                value={data.isLive}
+                                onChange={isLive => setData((prev: any) => ({ ...prev, isLive }))}
+                            />
+                        </div>
+                        <button onClick={saveClickHandler}>Save</button>
+                        <button onClick={discardClickHandler}>Discard</button>
+                    </>
+                )}
             </Modal>
             <button className={styles.btn} onClick={() => setIsOpen(true)}>
                 Edit Selected

@@ -8,6 +8,9 @@ import {
 import { deleteObject, getStorage, ref } from "firebase/storage"
 import { deleteDoc, getDocs, query, updateDoc, where } from "firebase/firestore"
 import { useIsAdmin } from "features/authByGoogle"
+import { Modal } from "shared/ui/Modal"
+import { useEffect, useState } from "react"
+import { disableUi } from "shared/lib/disableUi/disableUi"
 
 export function DeleteBulkTattooImages({
     imagesId,
@@ -18,6 +21,12 @@ export function DeleteBulkTattooImages({
     triggerRefetch: () => void
     unselectAllHandler: () => void
 }) {
+    const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        isLoading ? disableUi.disable() : disableUi.enable()
+    }, [isLoading])
+
     const storage = getStorage()
     const isAdmin = useIsAdmin()
 
@@ -26,6 +35,8 @@ export function DeleteBulkTattooImages({
             alert("You have to be logged as admin to perform this action")
             return
         }
+
+        setIsLoading(true)
 
         const deletePromises = imagesId.map(async item => {
             try {
@@ -71,7 +82,16 @@ export function DeleteBulkTattooImages({
             unselectAllHandler?.()
             triggerRefetch?.()
         }
+
+        setIsLoading(false)
     }
 
-    return <button onClick={clickHandler}>Delete Selected</button>
+    return (
+        <>
+            <Modal isOpen={isLoading} onClose={() => null}>
+                Loading...
+            </Modal>
+            <button onClick={clickHandler}>Delete Selected</button>
+        </>
+    )
 }

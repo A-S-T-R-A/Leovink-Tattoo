@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Modal } from "shared/ui/Modal"
 import styles from "./UploadModal.module.scss"
 import { Filepond } from "./Filepond/Filepond"
@@ -9,13 +9,17 @@ import { storage } from "../../../../firebase"
 import { addDoc, getDocs, orderBy, query } from "firebase/firestore"
 import { TATTOO_IMAGES_BUCKET, portfolioPicturesRef } from "shared/const/firebaseVariables"
 import { ITattooImage } from "shared/types/types"
+import { disableUi } from "shared/lib/disableUi/disableUi"
 
 export function UploadModal({ triggerRefetch }: { triggerRefetch: () => void }) {
     const [isOpen, setIsOpen] = useState(false)
     const [files, setFiles] = useState<FilePondFile[]>([])
     const [progress, setProgress] = useState<string[]>([])
+    const [isLoading, setIsLoading] = useState(false)
 
-    const isLoading = !progress.every(item => item === "100")
+    useEffect(() => {
+        isLoading ? disableUi.disable() : disableUi.enable()
+    }, [isLoading])
 
     async function getLastId() {
         const q = query(portfolioPicturesRef, orderBy("id", "asc"))
@@ -103,9 +107,13 @@ export function UploadModal({ triggerRefetch }: { triggerRefetch: () => void }) 
     }
 
     async function saveClickHandler() {
+        setIsLoading(true)
         try {
             const urls = await uploadImagesToBucket(files)
-            if (!urls.length) return
+            if (!urls.length) {
+                setIsLoading(false)
+                return
+            }
             setFiles([])
             setProgress([])
             await uploadImagesToDatabase(urls)
@@ -115,8 +123,8 @@ export function UploadModal({ triggerRefetch }: { triggerRefetch: () => void }) 
         } catch (error) {
             alert("Unexpected Error")
             triggerRefetch?.()
-            return
         }
+        setIsLoading(false)
     }
 
     function discardClickHandler() {
@@ -127,14 +135,21 @@ export function UploadModal({ triggerRefetch }: { triggerRefetch: () => void }) 
 
     return (
         <>
-            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} contentClassName={styles.modal}>
+            <Modal
+                isOpen={isOpen || isLoading}
+                onClose={() => setIsOpen(false)}
+                contentClassName={styles.modal}
+            >
                 <div className={styles.container}>
                     {isLoading ? (
-                        <p>
-                            {progress?.map(item => (
-                                <p>{item}</p>
-                            ))}
-                        </p>
+                        <div className={styles.loading}>
+                            <div>Loading...</div>
+                            <div className={styles.progress}>
+                                {progress?.map((item, index) => (
+                                    <p key={index}>{item}%</p>
+                                ))}
+                            </div>
+                        </div>
                     ) : (
                         <>
                             <Filepond setFiles={setFiles} files={files} />
