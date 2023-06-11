@@ -32,7 +32,6 @@ export function Typography(props: TypographyProps) {
             Typography = (
                 <h1 className={classNames(styles.typography, mods, [className])}>{children}</h1>
             )
-
             break
         case "h2" === variant:
             Typography = (
