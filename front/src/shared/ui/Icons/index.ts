@@ -6,7 +6,9 @@ import { ArrowLeftIcon } from "./ArrowLeftIcon"
 import { ArrowUpIcon } from "./ArrowUpIcon"
 import { PlusIcon } from "./PlusIcon"
 import { ChevronDownIcon } from "./ChevronDownIcon"
-import { MoldovaRepublic } from "./MoldovaRepublic"
+import { MoldovaRepublicFlag } from "./MoldovaRepublicFlag"
+import { GreatBritianFlag } from "./GreatBritianFlag"
+import { RussiaFlag } from "./RussiaFlag"
 import { LineIcon } from "./Line"
 import { BigLine } from "./BigLine"
 import { EyeIcon } from "./EyeIcon"
@@ -15,7 +17,9 @@ import { PlayIcon } from "./PlayIcon"
 
 export {
     BigLine,
-    MoldovaRepublic,
+    GreatBritianFlag,
+    RussiaFlag,
+    MoldovaRepublicFlag,
     InstagramIcon,
     FacebookIcon,
     ViberIcon,

@@ -1,8 +1,8 @@
-export function MoldovaRepublic() {
+export function MoldovaRepublicFlag() {
     return (
         <svg
-            width="24"
-            height="24"
+            width="26px"
+            height="26px"
             viewBox="0 0 64 64"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

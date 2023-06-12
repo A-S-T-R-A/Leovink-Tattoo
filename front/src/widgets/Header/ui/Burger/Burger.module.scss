@@ -129,8 +129,19 @@
     max-width: 200px;
 }
 
+.languages {
+    position: absolute;
+    top: 18px;
+    right: 80px;
+    z-index: 15;
+}
+
 @media (min-width: 961px) {
     .icon {
+        display: none;
+    }
+
+    .languages {
         display: none;
     }
 }
