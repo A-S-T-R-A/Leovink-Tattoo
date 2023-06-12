@@ -14,6 +14,8 @@ import {
     tattooStylesDropdownOptions,
 } from "shared/const/filters"
 import { Section } from "shared/ui/Section/Section"
+import { Button } from "shared/ui/Button/Button"
+import { AntiClockwiseIcon } from "shared/ui/Icons"
 
 interface IFilters {
     artist: string
@@ -46,6 +48,10 @@ export function PortfolioPage() {
         const newModalData = [...filteredData.slice(index), ...filteredData.slice(0, index)]
         setIsOpen(true)
         setModalData(newModalData)
+    }
+
+    function resetFiltersHandler() {
+        setFilters({ artist: "", style: "", color: "" })
     }
 
     async function fetch() {
@@ -90,6 +96,9 @@ export function PortfolioPage() {
                         value={filters.color}
                         onChange={value => setFilters(prev => ({ ...prev, color: value }))}
                     />
+                    <Button className={styles.btn} onClick={() => resetFiltersHandler()}>
+                        reset filters <AntiClockwiseIcon />
+                    </Button>
                 </div>
                 <MasonryGrid data={filteredData} onClick={clickHandler} />
                 <FormSection />
