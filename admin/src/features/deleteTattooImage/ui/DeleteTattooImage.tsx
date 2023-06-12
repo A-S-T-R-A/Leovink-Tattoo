@@ -22,9 +22,9 @@ export function DeleteTattooImage({
 }) {
     const [isLoading, setIsLoading] = useState(false)
 
-    useEffect(() => {
+    /*   useEffect(() => {
         isLoading ? disableUi.disable() : disableUi.enable()
-    }, [isLoading])
+    }, [isLoading]) */
 
     const storage = getStorage()
 
@@ -42,10 +42,12 @@ export function DeleteTattooImage({
             await deleteDoc(getFirestoreDocumentByFileId(file.id))
             const nq = query(portfolioPicturesRef, where("id", ">", id))
             const nd = await getDocs(nq)
-            setIsLoading(false)
             if (nd.empty) {
                 alert("Delete Success")
+                unselectAllHandler()
                 triggerRefetch?.()
+                setIsLoading(false)
+                return
             }
 
             const updateIdPromises = nd.docs.map(async (item, index) => {
