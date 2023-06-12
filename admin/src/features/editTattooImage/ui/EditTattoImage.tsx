@@ -42,9 +42,9 @@ export function EditTattooImage({
         }
     }
 
-    useEffect(() => {
+    /*  useEffect(() => {
         isLoading ? disableUi.disable() : disableUi.enable()
-    }, [isLoading])
+    }, [isLoading]) */
 
     async function saveClickHandler() {
         if (!data) return
@@ -92,7 +92,7 @@ export function EditTattooImage({
                         await func(nd.docs[i], i)
                     }
                 }
-
+                setIsLoading(false)
                 alert("Success reorder")
                 setIsOpen(false)
                 unselectAllHandler()
