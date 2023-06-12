@@ -8,7 +8,12 @@ export function PageWrapper({ children, title }: { children: ComponentChildren; 
     return (
         <div className={styles.wrapper}>
             <div className={styles.header}>
-                <Typography variant="h1" component="xxxxl" className={styles.title}>
+                <Typography
+                    variant="h1"
+                    component="xxxxl"
+                    color="darkgray"
+                    className={styles.title}
+                >
                     {title}
                 </Typography>
                 <AppLink className={styles.back} to="/">
