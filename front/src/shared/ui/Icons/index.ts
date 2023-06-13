@@ -12,8 +12,10 @@ import { BigLine } from "./BigLine"
 import { EyeIcon } from "./EyeIcon"
 import { PauseIcon } from "./PauseIcon"
 import { PlayIcon } from "./PlayIcon"
+import { AntiClockwiseIcon } from "./AntiClockwiseIcon"
 
 export {
+    AntiClockwiseIcon,
     BigLine,
     MoldovaRepublic,
     InstagramIcon,
