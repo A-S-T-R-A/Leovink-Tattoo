@@ -38,7 +38,13 @@ export function FaqBlock({ data, isWithoutTitle }: { data: IFaqBlock; isWithoutT
                                 className={styles.question}
                                 onClick={() => questionClickHandler(index)}
                             >
-                                <Typography className={styles.questionTitle}>{question}</Typography>
+                                <Typography
+                                    variant="h3"
+                                    component="xl"
+                                    className={styles.questionTitle}
+                                >
+                                    {question}
+                                </Typography>
 
                                 <div onClick={e => iconClickHandler(e, index)}>
                                     <PlusIcon
@@ -48,9 +54,20 @@ export function FaqBlock({ data, isWithoutTitle }: { data: IFaqBlock; isWithoutT
                                     />
                                 </div>
                             </div>
-                            {isExpanded && (
-                                <Typography className={styles.answer}>{answer}</Typography>
-                            )}
+
+                            <div
+                                className={classNames(
+                                    styles.answerContainer,
+                                    { [styles.isOpen]: isExpanded },
+                                    []
+                                )}
+                            >
+                                <div>
+                                    <Typography color="lightgray" className={styles.answer}>
+                                        {answer}
+                                    </Typography>
+                                </div>
+                            </div>
                         </div>
                     )
                 })}

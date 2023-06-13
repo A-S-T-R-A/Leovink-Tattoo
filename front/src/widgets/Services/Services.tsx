@@ -9,7 +9,7 @@ import { CtaButton } from "shared/components/CtaButton/CtaButton"
 import { ArrowDownIcon } from "shared/ui/Icons"
 
 export function Services() {
-    const [open, setOpen] = useState(-1)
+    const [open, setOpen] = useState<number>(-1)
 
     function clickHandler(index: number) {
         if (open !== index) {
