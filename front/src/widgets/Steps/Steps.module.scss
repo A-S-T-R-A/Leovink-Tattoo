@@ -1,15 +1,36 @@
-.imgContainer {
-    width: 200px;
-    height: 200px;
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 60px;
+    align-items: center;
 
-    img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
+    .stepContainer {
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+
+        .description {
+            max-width: 250px;
+        }
+
+        .imgContainer {
+            width: 200px;
+            height: 200px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+            }
+        }
     }
 }
 
 .btn {
     margin: 0 auto;
-    margin-top: 30px;
+    margin-top: 50px;
 }

@@ -2,14 +2,10 @@ import { Section } from "shared/ui/Section/Section"
 import styles from "./Steps.module.scss"
 import { Typography } from "shared/ui/Typography/Typography"
 import { stepsData } from "./const/data"
-import { DesktopLayout } from "./ui/DesctopLayout/DesktopLayout"
 import { CtaButton } from "shared/components/CtaButton/CtaButton"
-import { MobileLayout } from "./ui/MobileLayout/MobileLayout"
-import { LaptopLayout } from "./ui/LaptopLayout/LaptopLayout"
-import { Children } from "preact/compat"
 
 export function Steps() {
-    const stepsInfo = stepsData.map(item => {
+    /* const stepsInfo = stepsData.map(item => {
         const { id, step, title, img } = item
         return (
             <>
@@ -21,13 +17,37 @@ export function Steps() {
                 </Typography>
             </>
         )
-    })
+    })  */
 
     return (
         <Section title="How It Works">
-            <DesktopLayout className={styles.desktop}>{stepsInfo}</DesktopLayout>
-            <LaptopLayout className={styles.desktop}>{stepsInfo}</LaptopLayout>
-            <MobileLayout className={styles.mobile}>{stepsInfo}</MobileLayout>
+            <div className={styles.container}>
+                {stepsData.map(item => {
+                    const { id, step, title, img, description } = item
+                    return (
+                        <div className={styles.stepContainer}>
+                            <div key={id} className={styles.imgContainer}>
+                                <img src={img} alt="step" className={styles.img} />
+                            </div>
+                            <Typography
+                                className={styles.title}
+                                variant="h4"
+                                component="xl"
+                                color="base"
+                            >
+                                {step}. {title}
+                            </Typography>
+                            <Typography
+                                className={styles.description}
+                                color="lightgray"
+                                component="m"
+                            >
+                                {description}
+                            </Typography>
+                        </div>
+                    )
+                })}
+            </div>
             <CtaButton className={styles.btn} />
         </Section>
     )
