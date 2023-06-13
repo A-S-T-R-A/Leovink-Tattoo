@@ -1,8 +1,6 @@
 .servicesContainer {
     width: 100%;
     margin: 0 auto;
-    /*  list-style-position: inside; */
-    /* list-style: decimal-leading-zero; */
     list-style: none;
 
     .serviceContainer {
@@ -10,7 +8,6 @@
         color: var(--color-lightgray);
         font-size: var(--font-size-h3);
         border-bottom: 1px solid var(--color-darkgray);
-        padding-bottom: 10px;
 
         &:last-child {
             margin: 0;
@@ -23,40 +20,65 @@
                 margin-bottom: 10px;
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
                 font-weight: 500;
             }
 
             .arrowIcon {
+                transition: transform 0.5s ease;
                 path {
                     stroke: var(--color-lightgray);
                 }
             }
 
             .open {
-                transform: rotate(90deg);
+                transform: rotate(-90deg);
             }
         }
 
-        .imgContainer {
-            display: flex;
-            width: fit-content;
-            column-gap: 20px;
-            margin-bottom: 40px;
-            cursor: pointer;
+        .content {
+            position: relative;
+            display: grid;
+            transition: all 0.5s ease;
 
-            img {
-                width: 100px;
-                height: 100px;
-                object-fit: cover;
+            & > div {
+                overflow: hidden;
             }
+
+            .description {
+                margin-bottom: 20px;
+            }
+
+            .imgContainer {
+                display: flex;
+                width: fit-content;
+                column-gap: 20px;
+                margin-bottom: 40px;
+                cursor: pointer;
+
+                img {
+                    width: 100px;
+                    height: 100px;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        .isOpen {
+            opacity: 1;
+            margin-bottom: 20px;
+            grid-template-rows: 1fr;
+        }
+
+        .isClose {
+            opacity: 0;
+            grid-template-rows: 0fr;
+            margin-bottom: 0;
         }
 
         .btn {
             font-size: var(--font-size-base);
+            margin-left: 10px;
         }
     }
-}
-
-.content {
-    margin-bottom: 20px;
 }
