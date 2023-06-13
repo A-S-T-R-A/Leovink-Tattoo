@@ -6,53 +6,70 @@ import { ArrowUpIcon } from "shared/ui/Icons/ArrowUpIcon"
 import styles from "./Services.module.scss"
 import { classNames } from "shared/lib/classNames/classNames"
 import { CtaButton } from "shared/components/CtaButton/CtaButton"
+import { ArrowDownIcon } from "shared/ui/Icons"
 
 export function Services() {
     const [open, setOpen] = useState(-1)
 
     function clickHandler(index: number) {
-        setOpen(index)
+        if (open !== index) {
+            setOpen(index)
+        } else {
+            setOpen(-1)
+        }
     }
 
     return (
         <Section title="Services">
             <ul className={styles.servicesContainer}>
                 {servicesData.map((services, index) => {
-                    const { service, imgs } = services
+                    const { service, imgs, text } = services
 
                     return (
-                        <li className={styles.serviceContainer}>
-                            <div
-                                className={styles.serviceClick}
-                                onClick={() => clickHandler(index)}
-                            >
-                                <Typography className={styles.title}>
-                                    0{index + 1}. {service}
-                                    <ArrowUpIcon
-                                        className={classNames(
-                                            styles.arrowIcon,
-                                            { [styles.open]: open === index },
-                                            []
-                                        )}
-                                    />
-                                </Typography>
-                            </div>
-                            {open === index && (
-                                <div className={styles.content}>
-                                    <Typography>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Consequuntur sed quidem molestias voluptates reprehenderit
-                                        totam incidunt doloribus eius nemo maiores.
+                        <>
+                            <li className={styles.serviceContainer}>
+                                <div
+                                    className={styles.serviceClick}
+                                    onClick={() => clickHandler(index)}
+                                >
+                                    <Typography className={styles.title}>
+                                        0{index + 1}. {service}
+                                        <ArrowDownIcon
+                                            className={classNames(
+                                                styles.arrowIcon,
+                                                { [styles.open]: open === index },
+                                                []
+                                            )}
+                                        />
                                     </Typography>
-                                    <div className={styles.imgContainer}>
-                                        {imgs.map(image => {
-                                            return <img src={image} alt="pic" />
-                                        })}
-                                    </div>
-                                    <CtaButton className={styles.btn} />
                                 </div>
-                            )}
-                        </li>
+                                <div
+                                    className={classNames(
+                                        styles.content,
+                                        {
+                                            [styles.isOpen]: open === index,
+                                            [styles.isClose]: open !== index,
+                                        },
+                                        []
+                                    )}
+                                >
+                                    <div>
+                                        <Typography
+                                            className={styles.description}
+                                            color="lightgray"
+                                        >
+                                            {text}
+                                        </Typography>
+                                        <div className={styles.imgContainer}>
+                                            {imgs.map(image => {
+                                                return <img src={image} alt="pic" />
+                                            })}
+                                        </div>
+                                        <CtaButton className={styles.btn} />
+                                    </div>
+                                </div>
+                            </li>
+                        </>
                     )
                 })}
             </ul>
