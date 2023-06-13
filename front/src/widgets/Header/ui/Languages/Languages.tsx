@@ -4,12 +4,15 @@ import { classNames } from "shared/lib/classNames/classNames"
 import { useRef, useState } from "preact/hooks"
 import { Button } from "shared/ui/Button/Button"
 
+type Language = "ro" | "en" | "ru"
+
 export function Languages({ className }: { className?: string }) {
     const [dropdownOpen, setDropdownOpen] = useState(false)
-    const [currentLanguage, setCurrentLanguage] = useState("")
+    const [currentLanguage, setCurrentLanguage] = useState<Language>("ro")
     const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-    function clickHandler(language: string) {
+    function clickHandler(e: MouseEvent, language: Language) {
+        e.stopPropagation()
         setDropdownOpen(false)
         setCurrentLanguage(language)
     }
@@ -29,23 +32,26 @@ export function Languages({ className }: { className?: string }) {
         }, delay)
     }
 
-    let languageFlag
+    const LanguageFlag = (() => {
+        let languageFlag
 
-    switch (currentLanguage) {
-        case "ro":
-            languageFlag = <MoldovaRepublicFlag />
-            break
-        case "ru":
-            languageFlag = <RussiaFlag />
-            break
-        case "en":
-            languageFlag = <GreatBritianFlag />
+        switch (currentLanguage) {
+            case "ro":
+                languageFlag = <MoldovaRepublicFlag />
+                break
+            case "ru":
+                languageFlag = <RussiaFlag />
+                break
+            case "en":
+                languageFlag = <GreatBritianFlag />
+                break
+            default:
+                languageFlag = <MoldovaRepublicFlag />
+                break
+        }
 
-            break
-        default:
-            languageFlag = <MoldovaRepublicFlag />
-            break
-    }
+        return languageFlag
+    })()
 
     return (
         <div
@@ -55,34 +61,16 @@ export function Languages({ className }: { className?: string }) {
             className={classNames(styles.languages, {}, [className])}
         >
             <div className={styles.dropdownContainer}>
-                {languageFlag}
+                {LanguageFlag}
                 {dropdownOpen && (
                     <div className={styles.dropdown}>
-                        <Button
-                            onClick={e => {
-                                e.stopPropagation()
-                                clickHandler("ro")
-                            }}
-                            className={styles.language}
-                        >
+                        <Button onClick={e => clickHandler(e, "ro")} className={styles.language}>
                             <MoldovaRepublicFlag /> ro
                         </Button>
-                        <Button
-                            onClick={e => {
-                                e.stopPropagation()
-                                clickHandler("en")
-                            }}
-                            className={styles.language}
-                        >
+                        <Button onClick={e => clickHandler(e, "en")} className={styles.language}>
                             <GreatBritianFlag /> en
                         </Button>
-                        <Button
-                            onClick={e => {
-                                e.stopPropagation()
-                                clickHandler("ru")
-                            }}
-                            className={styles.language}
-                        >
+                        <Button onClick={e => clickHandler(e, "ru")} className={styles.language}>
                             <RussiaFlag /> ru
                         </Button>
                     </div>
