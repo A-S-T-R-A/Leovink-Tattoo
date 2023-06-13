@@ -34,7 +34,23 @@
 
 .logo {
     width: 100%;
+    height: 100%;
     position: relative;
+
+}
+
+.horns {
+    width: 50%;
+    height: 100%;
+    position: relative;
+    scale: 1.3;
+}
+
+.logoTattoo {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    scale: 2;
 }
 
 @media (max-width: 961px) {
