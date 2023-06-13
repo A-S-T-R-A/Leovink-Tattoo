@@ -7,6 +7,8 @@ export const stepsData = [
         stepContainer: "firstStep",
         title: "Consultation",
         img: consult,
+        description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt totam, obcaecati praesentium veniam.",
     },
     {
         id: 2,
@@ -14,6 +16,8 @@ export const stepsData = [
         stepContainer: "secondStep",
         title: "Preparation",
         img: prepare,
+        description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt totam, obcaecati praesentium veniam.",
     },
     {
         id: 3,
@@ -21,8 +25,10 @@ export const stepsData = [
         stepContainer: "thirdStep",
         title: "Drawing a Picture",
         img: drawing,
+        description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt totam, obcaecati praesentium veniam.",
     },
-    {
+    /*  {
         id: 4,
         step: "04",
         stepContainer: "fourthStep",
@@ -42,5 +48,5 @@ export const stepsData = [
         stepContainer: "sixthStep",
         title: "Tattoo Update",
         img: update,
-    },
+    }, */
 ]
