@@ -8,7 +8,7 @@ import { classNames } from "shared/lib/classNames/classNames"
 import { CtaButton } from "shared/components/CtaButton/CtaButton"
 
 export function Services() {
-    const [open, setOpen] = useState(0)
+    const [open, setOpen] = useState(-1)
 
     function clickHandler(index: number) {
         setOpen(index)
@@ -39,6 +39,11 @@ export function Services() {
                             </div>
                             {open === index && (
                                 <div className={styles.content}>
+                                    <Typography>
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        Consequuntur sed quidem molestias voluptates reprehenderit
+                                        totam incidunt doloribus eius nemo maiores.
+                                    </Typography>
                                     <div className={styles.imgContainer}>
                                         {imgs.map(image => {
                                             return <img src={image} alt="pic" />

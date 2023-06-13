@@ -24,8 +24,8 @@ export function Main() {
             <div className={styles.container}>
                 <div className={styles.textContainer}>
                     <img src={leovinkHorns} alt="" className={styles.horns} />
-                    <img src={leovinkCaption} alt="" className={styles.caption} />
                     <img src={leovinkTitle} alt="" className={styles.title} />
+                    <img src={leovinkCaption} alt="" className={styles.caption} />
                 </div>
                 <div
                     className={classNames(styles.layerBase, {}, [styles.layer])}
