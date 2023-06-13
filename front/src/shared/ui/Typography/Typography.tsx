@@ -9,10 +9,11 @@ interface TypographyProps {
     isBold?: boolean
     variant?: "h1" | "h2" | "h3" | "h4" | "h5"
     component?: "xs" | "s" | "m" | "l" | "xl" | "xxl" | "xxxl" | "xxxxl"
+    color?: "base" | "darkgray" | "lightgray" | "accent" | "error"
 }
 
 export function Typography(props: TypographyProps) {
-    const { variant = "h4", component = "m", children, className, isBold } = props
+    const { color = "base", variant = "h4", component = "m", children, className, isBold } = props
 
     const mods: Mods = {
         [styles.xs]: "xs" === component,
@@ -23,6 +24,11 @@ export function Typography(props: TypographyProps) {
         [styles.xxl]: "xxl" === component,
         [styles.xxxl]: "xxxl" === component,
         [styles.xxxxl]: "xxxxl" === component,
+        [styles.color_base]: "base" === color,
+        [styles.color_darkgray]: "darkgray" === color,
+        [styles.color_lightgray]: "lightgray" === color,
+        [styles.color_accent]: "accent" === color,
+        [styles.color_error]: "error" === color,
         [styles.bold]: isBold,
     }
 
