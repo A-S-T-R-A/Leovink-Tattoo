@@ -1,8 +1,9 @@
 .icon {
     transition: all 250ms cubic-bezier(0.5, 0, 0.5, 1);
-    z-index: 12;
+    z-index: 112;
     position: fixed;
-    width: 100%;
+    right: 0;
+    width: fit-content;
     height: 60px;
 
     .container {
@@ -14,7 +15,7 @@
         right: 18px;
         transform: translateY(-50%);
         border-radius: 50%;
-        z-index: 10;
+        z-index: 1111;
         width: 50px;
         height: 50px;
         display: flex;
@@ -46,7 +47,7 @@
     .hamburger {
         display: block;
         position: relative;
-        z-index: 100;
+        z-index: 111;
     }
 
     .hamburger,
@@ -87,7 +88,7 @@
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     transition: all 250ms cubic-bezier(0.5, 0, 0.5, 1);
-    z-index: 9;
+    z-index: 109;
 
     &.navOpen {
         opacity: 1;
@@ -106,7 +107,7 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 250ms cubic-bezier(0.5, 0, 0.5, 1);
-    z-index: 10;
+    z-index: 110;
 
     &.navOpen {
         opacity: 1;
@@ -129,8 +130,19 @@
     max-width: 200px;
 }
 
+.languages {
+    position: absolute;
+    top: 18px;
+    right: 80px;
+    z-index: 15;
+}
+
 @media (min-width: 961px) {
     .icon {
+        display: none;
+    }
+
+    .languages {
         display: none;
     }
 }

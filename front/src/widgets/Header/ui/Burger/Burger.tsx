@@ -4,6 +4,7 @@ import { NavigationList } from "../NavigationList/NavigationList"
 import styles from "./Burger.module.scss"
 import { SocialIcons } from "shared/components/SocialIcons/SocialIcons"
 import { disableScroll } from "shared/lib/disableScroll/disableScroll"
+import { Languages } from "../Languages/Languages"
 
 export function Burger({ className }: { className?: string }) {
     const [isBurgerVisible, setIsBurgerVisible] = useState(false)
@@ -17,6 +18,7 @@ export function Burger({ className }: { className?: string }) {
 
     return (
         <>
+            <Languages className={styles.languages} />
             <BurgerIcon className={className} onClick={toggleBurger} isOpen={isBurgerVisible} />
             <BurgerModal isOpen={isBurgerVisible} onClose={toggleBurger} />
         </>

@@ -1,0 +1,36 @@
+.languages {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    cursor: pointer;
+
+    .dropdownContainer {
+        position: relative;
+
+        .dropdown {
+            position: absolute;
+            right: 0;
+            top: 110%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: fit-content;
+            min-height: 100px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: rgba(69, 126, 74, 0.425);
+
+            .language {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: var(--font-size-small);
+                color: var(--color-base);
+
+                &:hover {
+                    color: var(--color-lightgray);
+                }
+            }
+        }
+    }
+}

@@ -4,6 +4,7 @@ import logo from "shared/assets/images/logo.png"
 import { Navbar } from "./Navbar/Navbar"
 import { Burger } from "./Burger/Burger"
 import { classNames } from "shared/lib/classNames/classNames"
+import { Languages } from "./Languages/Languages"
 
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false)

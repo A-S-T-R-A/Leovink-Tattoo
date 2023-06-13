@@ -1,6 +1,7 @@
 import { Mods, classNames } from "shared/lib/classNames/classNames"
 import styles from "./Typography.module.scss"
 import type { ComponentChildren } from "preact"
+import type { HTMLAttributes } from "preact/compat"
 
 interface TypographyProps {
     className?: string
