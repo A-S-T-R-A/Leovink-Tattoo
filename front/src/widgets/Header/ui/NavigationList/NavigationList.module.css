@@ -61,7 +61,7 @@
     height: 2px;
     left: 50%;
     position: absolute;
-    background: var(--color-base);
+    background: var(--color-lightgray);
     transition: width .2s ease 0s, left .2s ease 0s;
     width: 0;
 }
