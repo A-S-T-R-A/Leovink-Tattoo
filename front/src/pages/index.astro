@@ -8,11 +8,12 @@ import { Artists } from "../widgets/Artists/Artists"
 import { Testimonials } from "../widgets/Testimonials/Testimonials"
 import { Faq } from "../widgets/Faq/Faq"
 import { FormSection } from "../widgets/FormSection/FormSection"
+//import GridGallery from "../shared/components/GalleryGrid/GridGallery.astro"
 ---
 
 <Layout>
     <Main client:load />
-    <Portfolio client:only="preact" />
+    <Portfolio client:load />
     <Steps />
     <Services client:load />
     <Artists client:load />
