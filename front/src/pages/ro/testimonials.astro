@@ -1,18 +1,18 @@
 ---
 import { changeLanguage } from "i18next";
-import Layout from "layouts/Layout.astro";
 import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
 import { Section } from "shared/ui/Section/Section";
-import { FAQ } from "./FAQ/FAQ";
 import { FormSection } from "widgets/FormSection/FormSection";
+import { TestimonialPage } from "../Testimonials/Testimonials";
+import Layout from "layouts/Layout.astro";
 
-changeLanguage("en");
+changeLanguage("ro");
 ---
 
 <Layout>
-    <PageWrapper title="FAQ">
+    <PageWrapper title="Testimonials">
         <Section>
-            <FAQ client:load />
+            <TestimonialPage client:load />
         </Section>
         <FormSection client:load />
     </PageWrapper>

@@ -1,8 +1,8 @@
 import { defineConfig } from "astro/config"
-
+import astroI18next from "astro-i18next"
 import preact from "@astrojs/preact"
 
 // https://astro.build/config
 export default defineConfig({
-    integrations: [preact({ compat: true })],
+    integrations: [astroI18next(), preact({ compat: true })],
 })

@@ -2,20 +2,11 @@ import { GreatBritianFlag, MoldovaRepublicFlag, RussiaFlag } from "shared/ui/Ico
 import styles from "./Languages.module.scss"
 import { classNames } from "shared/lib/classNames/classNames"
 import { useRef, useState } from "preact/hooks"
-import { Button } from "shared/ui/Button/Button"
+import type { LanguageType } from "../../types/type"
 
-type Language = "ro" | "en" | "ru"
-
-export function Languages({ className }: { className?: string }) {
+export function Languages({ className, language }: { className?: string; language: LanguageType }) {
     const [dropdownOpen, setDropdownOpen] = useState(false)
-    const [currentLanguage, setCurrentLanguage] = useState<Language>("ro")
     const timeoutRef = useRef<NodeJS.Timeout | null>(null)
-
-    function clickHandler(e: MouseEvent, language: Language) {
-        e.stopPropagation()
-        setDropdownOpen(false)
-        setCurrentLanguage(language)
-    }
 
     function onMouseEnterHandler() {
         if (timeoutRef.current) {
@@ -35,7 +26,7 @@ export function Languages({ className }: { className?: string }) {
     const LanguageFlag = (() => {
         let languageFlag
 
-        switch (currentLanguage) {
+        switch (language) {
             case "ro":
                 languageFlag = <MoldovaRepublicFlag />
                 break
@@ -46,7 +37,7 @@ export function Languages({ className }: { className?: string }) {
                 languageFlag = <GreatBritianFlag />
                 break
             default:
-                languageFlag = <MoldovaRepublicFlag />
+                languageFlag = <GreatBritianFlag />
                 break
         }
 
@@ -64,15 +55,15 @@ export function Languages({ className }: { className?: string }) {
                 {LanguageFlag}
                 {dropdownOpen && (
                     <div className={styles.dropdown}>
-                        <Button onClick={e => clickHandler(e, "ro")} className={styles.language}>
-                            <MoldovaRepublicFlag /> ro
-                        </Button>
-                        <Button onClick={e => clickHandler(e, "en")} className={styles.language}>
-                            <GreatBritianFlag /> en
-                        </Button>
-                        <Button onClick={e => clickHandler(e, "ru")} className={styles.language}>
-                            <RussiaFlag /> ru
-                        </Button>
+                        <a href={`/ro/`} className={styles.language}>
+                            <MoldovaRepublicFlag /> RO
+                        </a>
+                        <a href={`/`} className={styles.language}>
+                            <GreatBritianFlag /> EN
+                        </a>
+                        <a href={`/ru/`} className={styles.language}>
+                            <RussiaFlag /> RU
+                        </a>
                     </div>
                 )}
             </div>

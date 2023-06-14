@@ -1,0 +1,15 @@
+---
+import { changeLanguage } from "i18next";
+import Layout from "../../layouts/Layout.astro";
+
+changeLanguage("ro");
+---
+
+<Layout>
+    <PageWrapper title="FAQ">
+        <Section>
+            <FAQ client:load />
+        </Section>
+        <FormSection client:load />
+    </PageWrapper>
+</Layout>

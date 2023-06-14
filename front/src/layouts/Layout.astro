@@ -2,6 +2,24 @@
 import { Header } from "widgets/Header"
 import "./Layout.scss"
 import { Footer } from "widgets/Footer/Footer";
+import i18next from "i18next";
+import type {LanguageType} from 'widgets/Header'
+
+const language =  i18next.language as LanguageType
+
+let data
+
+switch (language) {
+    case "ro":
+        data = {title:"Romanian"}
+        break;  case "en":
+        data = {title:"English"}
+        break;  case "ro":
+        data = {title:"Russian"}
+        break;
+    default:
+        break;
+}
 ---
 
 <!DOCTYPE html>
@@ -21,7 +39,7 @@ import { Footer } from "widgets/Footer/Footer";
         <title>Leovink Tattoo</title>
     </head>
     <body>
-        <Header client:load />
+        <Header client:load language={language}/>
         <slot />
         <Footer />
     </body>
