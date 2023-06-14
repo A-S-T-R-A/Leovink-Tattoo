@@ -7,19 +7,6 @@ import type {LanguageType} from 'widgets/Header'
 
 const language =  i18next.language as LanguageType
 
-let data
-
-switch (language) {
-    case "ro":
-        data = {title:"Romanian"}
-        break;  case "en":
-        data = {title:"English"}
-        break;  case "ro":
-        data = {title:"Russian"}
-        break;
-    default:
-        break;
-}
 ---
 
 <!DOCTYPE html>
@@ -39,6 +26,7 @@ switch (language) {
         <title>Leovink Tattoo</title>
     </head>
     <body>
+       
         <Header client:load language={language}/>
         <slot />
         <Footer />
