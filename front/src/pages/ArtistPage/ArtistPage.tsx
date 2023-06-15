@@ -5,9 +5,9 @@ import { data as artistsData } from "widgets/Artists/const/data"
 import { data } from "shared/const/data"
 import { Typography } from "shared/ui/Typography/Typography"
 import { Form } from "shared/components/Form/Form"
-import { MasonryGrid } from "shared/components/MasonryGrid/MasonryGrid"
 import { ModalGallery } from "widgets/ModalGallery/ModalGallery"
 import styles from "./ArtistPage.module.scss"
+import { GalleryGrid } from "shared/components/GalleryGrid/GalleryGrid"
 
 export function ArtistPage() {
     const { name, img, specialization, description } = artistsData[0]
@@ -39,7 +39,7 @@ export function ArtistPage() {
                 <Form isVertical />
             </Section>
             <Section title="Gallery">
-                <MasonryGrid data={galleryData} onClick={clickHandler} />
+                <GalleryGrid data={galleryData} onClick={clickHandler} />
                 <ModalGallery data={modalData} isOpen={isOpen} onClose={() => setIsOpen(false)} />
             </Section>
         </PageWrapper>
