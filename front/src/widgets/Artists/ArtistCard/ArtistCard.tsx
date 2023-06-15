@@ -1,10 +1,10 @@
 import { Typography } from "shared/ui/Typography/Typography"
-import type { IArtistData } from "../types/types"
 import styles from "./ArtistCard.module.scss"
 import { AppLink } from "shared/ui/AppLink/AppLink"
 import { ArrowDownIcon } from "shared/ui/Icons"
+import type { IArtistsData } from "shared/const/firebaseVariables"
 
-export function ArtistCard({ data }: { data: IArtistData }) {
+export function ArtistCard({ data }: { data: IArtistsData }) {
     const { img, name, description, specialization } = data
 
     return (

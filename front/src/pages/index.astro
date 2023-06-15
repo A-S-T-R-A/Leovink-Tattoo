@@ -10,20 +10,22 @@ import { Faq } from "../widgets/Faq/Faq";
 import { FormSection } from "../widgets/FormSection/FormSection";
 import type { LanguageType } from "widgets/Header";
 import i18next, { changeLanguage } from "i18next";
-import { fetchSectionData, IStepData, addData } from "../shared/const/firebaseVariables";
+import { fetchSectionData, IStepData, addData, IServicesData, IArtistsData } from "../shared/const/firebaseVariables";
 
 changeLanguage("en");
 
 const language = i18next.language as LanguageType;
 const stepsData = await fetchSectionData(language, "steps") as IStepData[];
+const servicesData = await fetchSectionData(language, "services") as IServicesData[];
+const artistsData = await fetchSectionData(language, "artists") as IArtistsData[];
 ---
 
 <Layout>
     <Main client:load />
     <Portfolio client:load />
     <Steps data={stepsData}/>
-    <Services client:load />
-    <Artists client:load />
+    <Services client:idle data={servicesData}/>
+    <Artists client:idle data={artistsData} />
     <Testimonials />
     <Faq client:idle />
     <FormSection />
