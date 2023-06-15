@@ -1,15 +1,13 @@
 import { ShowMoreLink } from "shared/components/ShowMoreLink/ShowMoreLink"
 import { Section } from "shared/ui/Section/Section"
-import { faqData } from "shared/const/faqData"
 import { FaqBlock } from "shared/components/FaqBlock/FaqBlock"
 import styles from "./Faq.module.scss"
+import type { IFaqData } from "shared/const/firebaseVariables"
 
-export function Faq() {
-    const data = faqData[0]
-
+export function Faq({ data }: { data: IFaqData[] }) {
     return (
         <Section title="FAQ">
-            <FaqBlock data={data} isWithoutTitle />
+            <FaqBlock data={data.filter(item => item.title === "index")[0]} isWithoutTitle />
             <ShowMoreLink to="/faq" text="Show more" className={styles.link} />
         </Section>
     )

@@ -17,6 +17,7 @@ export const SECTION_COLLECTION = {
     steps: "steps",
     services: "services",
     artists: "artists",
+    faq: "faq",
 }
 
 function reformatObjectValuesToArray(obj: any): any[] {
@@ -61,37 +62,69 @@ export interface IArtistsData {
     img: string
 }
 
+export interface IFaqData {
+    title: string
+    questions: { question: string; answer: string }[]
+}
+
 export function addData(lang: keyof typeof LANGUAGE_DOCUMENT) {
-    const ref = collection(db, DATA_COLLECTION, LANGUAGE_DOCUMENT[lang], SECTION_COLLECTION.artists)
+    const ref = collection(
+        db,
+        DATA_COLLECTION,
+        LANGUAGE_DOCUMENT[lang],
+        SECTION_COLLECTION.services
+    )
 
     const data = {
         0: {
-            img: "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fportfolio%2Fa1.jpg?alt=media&token=de2a8522-7b60-433d-982b-1efe3b0ee558",
-            name: "Rus Hector",
-            specialization: "Specializes in caligraphy and fine line",
-            description: `Hector's incredible talent, attention to details, and precise line work, combined with an increadibly 
-          positive attitude, make him one of the shop's most sought-after artists.`,
+            title: "Rus Tattoo",
+            description:
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur sed quidem molestias voluptates reprehenderit totam incidunt doloribus eius nemo maiores.",
+            images: [
+                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv1.jpg?alt=media&token=295a6d04-96c5-4fa9-8875-3a98735fe054",
+                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv2.jpg?alt=media&token=d7b245cf-2ba7-4ec6-a306-255ede668b86",
+                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv3.jpg?alt=media&token=a25debd7-161e-4331-9035-1ac9ecfd17d5",
+            ],
         },
         1: {
-            img: "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fportfolio%2Fa2.jpg?alt=media&token=e70d1846-9f11-41d5-aaba-964281381a7c",
-            name: "Rus Vasia",
-            specialization: "Specializes in caligraphy and fine line",
-            description: `Hector's incredible talent, attention to details, and precise line work, combined with an increadibly 
-          positive attitude, make him one of the shop's most sought-after artists.`,
+            title: "Rus Fixing a bad tattoo",
+            description:
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur sed quidem molestias voluptates reprehenderit totam incidunt doloribus eius nemo maiores.",
+            images: [
+                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv1.jpg?alt=media&token=295a6d04-96c5-4fa9-8875-3a98735fe054",
+                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv2.jpg?alt=media&token=d7b245cf-2ba7-4ec6-a306-255ede668b86",
+                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv3.jpg?alt=media&token=a25debd7-161e-4331-9035-1ac9ecfd17d5",
+            ],
         },
         2: {
-            img: "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fportfolio%2Fa3.jpg?alt=media&token=3286aa33-7760-4aad-b09a-1a2db8e11842",
-            name: "Rus Petia",
-            specialization: "Specializes in caligraphy and fine line",
-            description: `Hector's incredible talent, attention to details, and precise line work, combined with an increadibly 
-          positive attitude, make him one of the shop's most sought-after artists.`,
+            title: "Rus Cover up Tattoo",
+            description:
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur sed quidem molestias voluptates reprehenderit totam incidunt doloribus eius nemo maiores.",
+            images: [
+                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv1.jpg?alt=media&token=295a6d04-96c5-4fa9-8875-3a98735fe054",
+                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv2.jpg?alt=media&token=d7b245cf-2ba7-4ec6-a306-255ede668b86",
+                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv3.jpg?alt=media&token=a25debd7-161e-4331-9035-1ac9ecfd17d5",
+            ],
         },
         3: {
-            img: "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fportfolio%2Fa4.jpg?alt=media&token=2c51e0da-6cd3-4e7f-9eb8-a5458b6d9eae",
-            name: "Rus Kolia",
-            specialization: "Specializes in caligraphy and fine line",
-            description: `Hector's incredible talent, attention to details, and precise line work, combined with an increadibly 
-          positive attitude, make him one of the shop's most sought-after artists.`,
+            title: "Rus Covering Scars",
+            description:
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur sed quidem molestias voluptates reprehenderit totam incidunt doloribus eius nemo maiores.",
+            images: [
+                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv1.jpg?alt=media&token=295a6d04-96c5-4fa9-8875-3a98735fe054",
+                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv2.jpg?alt=media&token=d7b245cf-2ba7-4ec6-a306-255ede668b86",
+                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv3.jpg?alt=media&token=a25debd7-161e-4331-9035-1ac9ecfd17d5",
+            ],
+        },
+        4: {
+            title: "Rus Piercing",
+            description:
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur sed quidem molestias voluptates reprehenderit totam incidunt doloribus eius nemo maiores.",
+            images: [
+                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv1.jpg?alt=media&token=295a6d04-96c5-4fa9-8875-3a98735fe054",
+                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv2.jpg?alt=media&token=d7b245cf-2ba7-4ec6-a306-255ede668b86",
+                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv3.jpg?alt=media&token=a25debd7-161e-4331-9035-1ac9ecfd17d5",
+            ],
         },
     }
 
