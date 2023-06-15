@@ -9,7 +9,15 @@ import { CtaButton } from "shared/components/CtaButton/CtaButton"
 import { ArrowDownIcon } from "shared/ui/Icons"
 import type { IServicesData } from "shared/const/firebaseVariables"
 
-export function Services({ data }: { data: IServicesData[] }) {
+export function Services({
+    data,
+    title,
+    button,
+}: {
+    data: IServicesData[]
+    title: string
+    button: string
+}) {
     const [open, setOpen] = useState<number>(-1)
 
     function clickHandler(index: number) {
@@ -21,7 +29,7 @@ export function Services({ data }: { data: IServicesData[] }) {
     }
 
     return (
-        <Section title="Services">
+        <Section title={title}>
             <ul className={styles.servicesContainer}>
                 {data.map((item, index) => {
                     const { title, images, description } = item
@@ -66,7 +74,7 @@ export function Services({ data }: { data: IServicesData[] }) {
                                                 return <img src={image} alt="pic" />
                                             })}
                                         </div>
-                                        <CtaButton className={styles.btn} />
+                                        <CtaButton className={styles.btn} text={button} />
                                     </div>
                                 </div>
                             </li>

@@ -13,9 +13,17 @@ import { data } from "./const/data"
 import { classNames } from "shared/lib/classNames/classNames"
 import type { IArtistsData } from "shared/const/firebaseVariables"
 
-export function Artists({ data }: { data: IArtistsData[] }) {
+export function Artists({
+    data,
+    title,
+    button,
+}: {
+    data: IArtistsData[]
+    title: string
+    button: string
+}) {
     return (
-        <Section title="Artists">
+        <Section title={title}>
             <Swiper
                 spaceBetween={20}
                 slidesPerView={1}
@@ -25,16 +33,12 @@ export function Artists({ data }: { data: IArtistsData[] }) {
                     769: { slidesPerView: 3 },
                     1200: { slidesPerView: 4 },
                 }}
-                /*  onSwiper={swiper => (swiperRef.current = swiper)}
-                pagination={{
-                    clickable: true,
-                }} */
                 className={classNames(styles.swiper, {}, ["pagination"])}
             >
                 {data.map(item => {
                     return (
                         <SwiperSlide className={styles.slide}>
-                            <ArtistCard data={item} />
+                            <ArtistCard data={item} button={button} />
                         </SwiperSlide>
                     )
                 })}

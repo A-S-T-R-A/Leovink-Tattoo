@@ -5,7 +5,7 @@ import { SocialIcons } from "shared/components/SocialIcons"
 import type { FooterType } from "shared/const/firebaseVariables"
 
 export function Footer({ data }: { data: FooterType }) {
-    const { location, contacts } = data
+    const { location, contacts, footerList } = data
     return (
         <footer className={styles.container}>
             <div className={styles.logoContainer}>
@@ -13,7 +13,7 @@ export function Footer({ data }: { data: FooterType }) {
             </div>
             <div className={styles.locationContainer}>
                 <Typography className={styles.header} variant="h3" component="xxl">
-                    location
+                    {footerList[0]}
                 </Typography>
                 <Typography className={styles.text} variant="h5" component="m">
                     {location}
@@ -21,7 +21,7 @@ export function Footer({ data }: { data: FooterType }) {
             </div>
             <div className={styles.contactsContainer}>
                 <Typography className={styles.header} variant="h3" component="xxl">
-                    contacts
+                    {footerList[1]}
                 </Typography>
                 {contacts.map(item => (
                     <Typography className={styles.text} variant="h5" component="m">
@@ -31,7 +31,7 @@ export function Footer({ data }: { data: FooterType }) {
             </div>
             <div className={styles.followContainer}>
                 <Typography className={styles.header} variant="h3" component="xxl">
-                    follow
+                    {footerList[2]}
                 </Typography>
                 <SocialIcons className={styles.socials} />
             </div>

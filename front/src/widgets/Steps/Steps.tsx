@@ -4,9 +4,17 @@ import { Typography } from "shared/ui/Typography/Typography"
 import { CtaButton } from "shared/components/CtaButton/CtaButton"
 import type { IStepData } from "shared/const/firebaseVariables"
 
-export function Steps({ data = [] }: { data: IStepData[] }) {
+export function Steps({
+    data = [],
+    title,
+    button,
+}: {
+    data: IStepData[]
+    title: string
+    button: string
+}) {
     return (
-        <Section title="How It Works">
+        <Section title={title}>
             <div className={styles.container}>
                 {data.map((item, index) => {
                     const { title, img, description } = item
@@ -34,7 +42,7 @@ export function Steps({ data = [] }: { data: IStepData[] }) {
                     )
                 })}
             </div>
-            <CtaButton className={styles.btn} />
+            <CtaButton className={styles.btn} text={button} />
         </Section>
     )
 }

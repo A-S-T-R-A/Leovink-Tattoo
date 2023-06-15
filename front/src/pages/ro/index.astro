@@ -10,7 +10,7 @@ import { Faq } from "../../widgets/Faq/Faq";
 import { FormSection } from "../../widgets/FormSection/FormSection";
 import type { LanguageType } from "widgets/Header";
 import i18next, { changeLanguage } from "i18next";
-import { fetchSectionData, IStepData, addData, IServicesData, IArtistsData, IFaqData, ITestimonialsData } from "../../shared/const/firebaseVariables";
+import { fetchSectionData, IStepData, addData, IServicesData, IArtistsData, IFaqData, ITestimonialsData, IOtherData } from "../../shared/const/firebaseVariables";
 
 changeLanguage("ro");
 
@@ -20,15 +20,19 @@ const servicesData = await fetchSectionData(language, "services") as IServicesDa
 const artistsData = await fetchSectionData(language, "artists") as IArtistsData[];
 const faqData = await fetchSectionData(language, "faq") as IFaqData[];
 const testimonialsData = await fetchSectionData(language, "testimonials") as ITestimonialsData[];
+const otherData = await fetchSectionData(language, "other", true) as IOtherData;
+const { formData, sectionNames, buttons } = otherData;
+const { portfolio, steps, services, artists, testimonials, faq, form } = sectionNames;
+const { cta, showMore, viewGallery } = buttons;
 ---
 
 <Layout>
     <Main client:load />
-    <Portfolio client:load />
-    <Steps data={stepsData}/>
-    <Services client:idle data={servicesData}/>
-    <Artists client:idle data={artistsData} />
-    <Testimonials data={testimonialsData.slice(0,2)}/>
-    <Faq client:idle data={faqData}/>
-    <FormSection />
+    <Portfolio client:load title={portfolio} button={showMore}/>
+    <Steps data={stepsData} title={steps} button={cta}/>
+    <Services client:idle data={servicesData} title={services} button={cta}/>
+    <Artists client:idle data={artistsData} title={artists} button={viewGallery}/>
+    <Testimonials data={testimonialsData.slice(0,2)} title={testimonials} showMore={showMore} cta={cta}/>
+    <Faq client:idle data={faqData} title={faq} button={showMore} />
+    <FormSection data={formData} title={form} button={cta}/>
 </Layout>

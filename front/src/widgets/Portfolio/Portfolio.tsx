@@ -9,7 +9,7 @@ import { getDocs, limit, orderBy, query, where } from "firebase/firestore"
 import type { ITattooImage } from "shared/types/types"
 import { GalleryGrid } from "shared/components/GalleryGrid/GalleryGrid"
 
-export function Portfolio() {
+export function Portfolio({ title, button }: { title: string; button: string }) {
     const [isOpen, setIsOpen] = useState(false)
     const [data, setData] = useState<ITattooImage[]>([])
     const [modalData, setModalData] = useState<ITattooImage[]>([])
@@ -40,10 +40,10 @@ export function Portfolio() {
     }, [])
 
     return (
-        <Section title="Portfolio">
+        <Section title={title}>
             <ModalGallery isOpen={isOpen} onClose={() => setIsOpen(false)} data={modalData} />
             <GalleryGrid data={data} onClick={clickHandler} maxHeight="600px" />
-            <ShowMoreLink to="/portfolio" text="show more" className={styles.link} />
+            <ShowMoreLink to="/portfolio" text={button} className={styles.link} />
         </Section>
     )
 }

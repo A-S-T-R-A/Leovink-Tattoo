@@ -20,6 +20,7 @@ export const SECTION_COLLECTION = {
     faq: "faq",
     testimonials: "testimonials",
     layout: "layout",
+    other: "other",
 }
 
 function reformatObjectValuesToArray(obj: any): any[] {
@@ -42,7 +43,8 @@ export async function fetchSectionData(
     if (docs.empty) return
     const newData = docs.docs[0].data()
     const reformattedNewData = reformatObjectValuesToArray(newData)
-    return !!raw ? newData : reformattedNewData
+    const data = !!raw ? newData : reformattedNewData
+    return data
 }
 
 export const portfolioPicturesRef = collection(db, PORTFOLIO_PICTURES_DB)
@@ -81,27 +83,50 @@ export interface ITestimonialsData {
 }
 
 export type NavlistType = { link: string; text: string }[]
-export type FooterType = { location: string; contacts: string[] }
+export type FooterType = { location: string; footerList: string[]; contacts: string[] }
 
 export interface ILayoutData {
     navlist: NavlistType
     footer: FooterType
 }
 
+export interface IOtherData {
+    sectionNames: {
+        portfolio: string
+        steps: string
+        services: string
+        artists: string
+        testimonials: string
+        faq: string
+        form: string
+    }
+    formData: {
+        name: string
+        phone: string
+    }
+    buttons: {
+        cta: string
+        showMore: string
+        viewGallery: string
+    }
+}
+
 export function addData(lang: keyof typeof LANGUAGE_DOCUMENT) {
-    const ref = collection(db, DATA_COLLECTION, LANGUAGE_DOCUMENT[lang], SECTION_COLLECTION.layout)
+    const ref = collection(db, DATA_COLLECTION, LANGUAGE_DOCUMENT[lang], SECTION_COLLECTION.other)
 
     const data = {
-        navlist: [
-            { link: "/", text: "Главная" },
-            { link: "/portfolio", text: "Портфолио" },
-            { link: "/faq", text: "Вопросы" },
-            { link: "/contact", text: "Контакты" },
-            { link: "/testimonials", text: "Отзывы" },
-        ],
-        footer: {
-            location: "улица Измаил 40/2, Кишинев",
-            contacts: ["069 222 222", "069 222 222", "email@gg.ss"],
+        sectionNames: {
+            portfolio: "Портфолио",
+            steps: "Как это работает",
+            services: "Услуги",
+            artists: "Тату мастера",
+            testimonials: "Отзывы",
+            faq: "Частые Вопросы",
+            form: "Оставить заявку",
+        },
+        formData: {
+            name: "Имя",
+            phone: "Телефон",
         },
     }
 

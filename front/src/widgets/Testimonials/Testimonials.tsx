@@ -4,16 +4,23 @@ import { Testimonial } from "shared/components/Testimonial/Testimonial"
 import { ShowMoreLink } from "shared/components/ShowMoreLink/ShowMoreLink"
 import type { ITestimonialsData } from "shared/const/firebaseVariables"
 
-export function Testimonials({ data }: { data: ITestimonialsData[] }) {
+export function Testimonials({
+    data,
+    title,
+    showMore,
+    cta,
+}: {
+    data: ITestimonialsData[]
+    title: string
+    showMore: string
+    cta: string
+}) {
     return (
-        <Section title="Testimonials">
+        <Section title={title}>
             {data.map((item, index, array) => (
-                <Testimonial
-                    data={item}
-                    /* isReversed */ isWithBorder={index !== array.length - 1}
-                />
+                <Testimonial data={item} cta={cta} isWithBorder={index !== array.length - 1} />
             ))}
-            <ShowMoreLink to="/testimonials" text="Show More" className={styles.showMore} />
+            <ShowMoreLink to="/testimonials" text={showMore} className={styles.showMore} />
         </Section>
     )
 }

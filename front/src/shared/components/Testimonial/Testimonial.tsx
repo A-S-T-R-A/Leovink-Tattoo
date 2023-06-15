@@ -8,10 +8,12 @@ export function Testimonial({
     isReversed,
     isWithBorder,
     data,
+    cta,
 }: {
     data: ITestimonialsData
     isReversed?: boolean
     isWithBorder?: boolean
+    cta: string
 }) {
     const { title, description, duration, artist, preview, video } = data
 
@@ -39,7 +41,7 @@ export function Testimonial({
                         <span className={styles.bold}>duration:</span> {duration}
                     </Typography>
                 </div>
-                <CtaButton />
+                <CtaButton text={cta} />
             </div>
         </div>
     )

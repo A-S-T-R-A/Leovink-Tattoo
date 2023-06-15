@@ -5,7 +5,19 @@ import { Typography } from "shared/ui/Typography/Typography"
 import styles from "./Form.module.scss"
 import { classNames } from "shared/lib/classNames/classNames"
 
-export function Form({ isVertical, className }: { className?: string; isVertical?: boolean }) {
+export function Form({
+    isVertical,
+    className,
+    placeholdersData,
+    title,
+    cta,
+}: {
+    className?: string
+    isVertical?: boolean
+    placeholdersData: { name: string; phone: string }
+    title: string
+    cta: string
+}) {
     const [formData, setFormData] = useState({ name: "", phone: "" })
 
     return (
@@ -13,21 +25,21 @@ export function Form({ isVertical, className }: { className?: string; isVertical
             id="formSection"
             className={classNames(styles.form, { [styles.vertical]: isVertical }, [className])}
         >
-            <Typography className={styles.title}>Book an appointment</Typography>
+            <Typography className={styles.title}>{title}</Typography>
             <div className={styles.formContent}>
                 <Input
-                    placeholder="Your name"
+                    placeholder={placeholdersData.name}
                     className={styles.input}
                     value={formData.name}
                     onChange={name => setFormData(prev => ({ ...prev, name }))}
                 />
                 <Input
-                    placeholder="Your phone"
+                    placeholder={placeholdersData.phone}
                     className={styles.input}
                     value={formData.phone}
                     onChange={phone => setFormData(prev => ({ ...prev, phone }))}
                 />
-                <CtaButton className={styles.btn} />
+                <CtaButton className={styles.btn} text={cta} />
             </div>
         </form>
     )
