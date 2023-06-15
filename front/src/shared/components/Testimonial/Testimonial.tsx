@@ -1,6 +1,5 @@
 import { Typography } from "shared/ui/Typography/Typography"
 import styles from "./Testimonial.module.scss"
-import poster from "./const/testimonial1.jpg"
 import { CtaButton } from "shared/components/CtaButton/CtaButton"
 import type { ITestimonialsData } from "shared/const/firebaseVariables"
 

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "preact/hooks"
 import { Section } from "shared/ui/Section/Section"
-//import { data as dummyData } from "shared/const/data"
 import { ModalGallery } from "widgets/ModalGallery/ModalGallery"
 import { ShowMoreLink } from "shared/components/ShowMoreLink/ShowMoreLink"
 import styles from "./Portfolio.module.scss"
@@ -8,6 +7,7 @@ import { portfolioPicturesRef } from "shared/const/firebaseVariables"
 import { getDocs, limit, orderBy, query, where } from "firebase/firestore"
 import type { ITattooImage } from "shared/types/types"
 import { GalleryGrid } from "shared/components/GalleryGrid/GalleryGrid"
+import { data as dummyData } from "shared/const/data"
 
 export function Portfolio({ title, button }: { title: string; button: string }) {
     const [isOpen, setIsOpen] = useState(false)
@@ -21,15 +21,17 @@ export function Portfolio({ title, button }: { title: string; button: string }) 
     }
 
     async function fetch() {
-        const fetchedData: ITattooImage[] = []
+        /* const fetchedData: ITattooImage[] = []
         const q = query(portfolioPicturesRef, (where("isLive", "==", true), orderBy("id", "asc")))
         const d = await getDocs(q)
 
         d.forEach(doc => {
             fetchedData.push(doc.data() as ITattooImage)
-        })
+        }) */
 
-        const limitedData = fetchedData.slice(0, 16)
+        const fetchedData = dummyData
+
+        const limitedData = fetchedData.slice(16, 36)
 
         setData(limitedData)
         setModalData(limitedData)

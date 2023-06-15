@@ -1,16 +1,23 @@
 ---
-import { changeLanguage } from "i18next";
+import i18next, { changeLanguage } from "i18next";
 import Layout from "layouts/Layout.astro";
 import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
 import { FormSection } from "widgets/FormSection/FormSection";
 import { FindUs } from "widgets/FindUs/FindUs";
+import type { LanguageType } from "widgets/Header";
+import { IOtherData, fetchSectionData } from "shared/const/firebaseVariables";
 
 changeLanguage("en");
+
+const language = i18next.language as LanguageType;
+const otherData = await fetchSectionData(language, "other", true) as IOtherData;
+const { sectionNames, formData, buttons } = otherData;
+const { cta } = buttons;
 ---
 
 <Layout>
     <PageWrapper title="Contact">
         <FindUs />
-        <FormSection client:load />
+        <FormSection client:load title={sectionNames.form} button={cta} data={formData}/>
     </PageWrapper>
 </Layout>

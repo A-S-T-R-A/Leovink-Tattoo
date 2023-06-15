@@ -9,7 +9,15 @@ import { ModalGallery } from "widgets/ModalGallery/ModalGallery"
 import styles from "./ArtistPage.module.scss"
 import { GalleryGrid } from "shared/components/GalleryGrid/GalleryGrid"
 
-export function ArtistPage() {
+export function ArtistPage({
+    formData,
+    formTitle,
+    cta,
+}: {
+    formData: { name: string; phone: string }
+    formTitle: string
+    cta: string
+}) {
     const { name, img, specialization, description } = artistsData[0]
     const galleryData = [...data.slice(2, 6), data[8]]
     const [modalData, setModalData] = useState(galleryData)
@@ -36,7 +44,7 @@ export function ArtistPage() {
                         <Typography>{description}</Typography>
                     </div>
                 </div>
-                <Form isVertical />
+                <Form isVertical placeholdersData={formData} title={formTitle} cta={cta} />
             </Section>
             <Section title="Gallery">
                 <GalleryGrid data={galleryData} onClick={clickHandler} />

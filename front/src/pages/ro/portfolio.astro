@@ -1,11 +1,18 @@
 ---
-import { changeLanguage } from "i18next";
+import i18next, { changeLanguage } from "i18next";
 import Layout from "layouts/Layout.astro";
-import { PortfolioPage } from "../PortfolioPage/PortfolioPage";
+import { PortfolioPage } from "pageComponents/PortfolioPage/PortfolioPage";
+import { fetchSectionData, type IOtherData } from "shared/const/firebaseVariables";
+import type { LanguageType } from "widgets/Header";
 
 changeLanguage("ro");
+
+const language = i18next.language as LanguageType;
+const otherData = await fetchSectionData(language, "other", true) as IOtherData;
+const { sectionNames, formData, buttons } = otherData;
+const { cta } = buttons;
 ---
 
 <Layout>
-    <PortfolioPage client:load />
+    <PortfolioPage client:load title={sectionNames.portfolio} formTitle={sectionNames.form} placeholdersData={formData} button={cta}/>
 </Layout>

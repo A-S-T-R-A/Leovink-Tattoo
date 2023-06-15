@@ -1,11 +1,19 @@
 ---
-import { changeLanguage } from "i18next";
+import i18next, { changeLanguage } from "i18next";
 import Layout from "layouts/Layout.astro";
-import { ArtistPage } from "../ArtistPage/ArtistPage";
+import { ArtistPage } from "pageComponents/ArtistPage/ArtistPage";
+import { IArtistsData, IOtherData, fetchSectionData } from "shared/const/firebaseVariables";
+import type { LanguageType } from "widgets/Header";
 
 changeLanguage("ro");
+
+const language = i18next.language as LanguageType;
+const artistsData = await fetchSectionData(language, "artists") as IArtistsData[];
+const otherData = await fetchSectionData(language, "other", true) as IOtherData;
+const { sectionNames, formData, buttons } = otherData;
+const { cta } = buttons;
 ---
 
 <Layout>
-    <ArtistPage client:only="preact" />
+    <ArtistPage client:only="preact"  formTitle={sectionNames.form} cta={cta} formData={formData}/>
 </Layout>

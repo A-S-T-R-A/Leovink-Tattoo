@@ -7,7 +7,7 @@
         "start": "astro dev",
         "build": "astro build",
         "translate": "npx astro-i18next generate",
-        "deploy": "npm run translate && run build && firebase deploy",
+        "deploy": "npm run translate && npm run build && firebase deploy",
         "preview": "astro preview",
         "astro": "astro"
     },

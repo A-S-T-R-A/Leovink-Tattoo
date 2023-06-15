@@ -1,19 +1,27 @@
 ---
-import { changeLanguage } from "i18next";
+import i18next, { changeLanguage } from "i18next";
 import Layout from "layouts/Layout.astro";
 import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
 import { Section } from "shared/ui/Section/Section";
-import { FAQ } from "./FAQ/FAQ";
+import { FAQPage } from "pageComponents/FAQPage/FAQPage";
 import { FormSection } from "widgets/FormSection/FormSection";
+import { IFaqData, IOtherData, fetchSectionData } from "shared/const/firebaseVariables";
+import type { LanguageType } from "widgets/Header";
 
 changeLanguage("en");
+
+const language = i18next.language as LanguageType;
+const faqData = await fetchSectionData(language, "faq") as IFaqData[];
+const otherData = await fetchSectionData(language, "other", true) as IOtherData;
+const { sectionNames, formData, buttons } = otherData;
+const { cta } = buttons;
 ---
 
 <Layout>
     <PageWrapper title="FAQ">
         <Section>
-            <FAQ client:load />
+            <FAQPage client:load data={faqData.filter(item=>item.title!=='index')}/>
         </Section>
-        <FormSection client:load />
+        <FormSection client:load title={sectionNames.form} button={cta} data={formData}/>
     </PageWrapper>
 </Layout>

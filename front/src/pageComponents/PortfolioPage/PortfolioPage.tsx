@@ -16,13 +16,25 @@ import { Section } from "shared/ui/Section/Section"
 import { Button } from "shared/ui/Button/Button"
 import { AntiClockwiseIcon } from "shared/ui/Icons"
 import { GalleryGrid } from "shared/components/GalleryGrid/GalleryGrid"
+import { data as dummyData } from "shared/const/data"
 
 interface IFilters {
     artist: string
     style: string
     color: string
 }
-export function PortfolioPage() {
+
+export function PortfolioPage({
+    title,
+    formTitle,
+    placeholdersData,
+    button,
+}: {
+    title: string
+    formTitle: string
+    placeholdersData: { name: string; phone: string }
+    button: string
+}) {
     const [isOpen, setIsOpen] = useState(false)
     const [data, setData] = useState<ITattooImage[]>([])
     const [filteredData, setFilteredData] = useState<ITattooImage[]>([])
@@ -55,12 +67,14 @@ export function PortfolioPage() {
     }
 
     async function fetch() {
-        const fetchedData: ITattooImage[] = []
+        /*  const fetchedData: ITattooImage[] = []
         const q = query(portfolioPicturesRef, (where("isLive", "==", true), orderBy("id", "asc")))
         const d = await getDocs(q)
         d.forEach(doc => {
             fetchedData.push(doc.data() as ITattooImage)
-        })
+        }) */
+
+        const fetchedData = dummyData
 
         setData(fetchedData)
         setModalData(fetchedData)
@@ -72,7 +86,7 @@ export function PortfolioPage() {
     }, [])
 
     return (
-        <PageWrapper title="Portfolio">
+        <PageWrapper title={title}>
             <ModalGallery data={modalData} isOpen={isOpen} onClose={() => setIsOpen(false)} />
             <Section>
                 <div className={styles.filters}>
@@ -99,7 +113,7 @@ export function PortfolioPage() {
                     </Button>
                 </div>
                 <GalleryGrid data={filteredData} onClick={clickHandler} />
-                <FormSection />
+                <FormSection title={formTitle} data={placeholdersData} button={button} />
             </Section>
         </PageWrapper>
     )
