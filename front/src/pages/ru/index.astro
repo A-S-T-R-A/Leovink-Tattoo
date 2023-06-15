@@ -10,7 +10,7 @@ import { Faq } from "../../widgets/Faq/Faq";
 import { FormSection } from "../../widgets/FormSection/FormSection";
 import type { LanguageType } from "widgets/Header";
 import i18next, { changeLanguage } from "i18next";
-import { fetchSectionData, IStepData, addData, IServicesData, IArtistsData, IFaqData } from "../../shared/const/firebaseVariables";
+import { fetchSectionData, IStepData, addData, IServicesData, IArtistsData, IFaqData, ITestimonialsData } from "../../shared/const/firebaseVariables";
 
 changeLanguage("ru");
 
@@ -19,6 +19,7 @@ const stepsData = await fetchSectionData(language, "steps") as IStepData[];
 const servicesData = await fetchSectionData(language, "services") as IServicesData[];
 const artistsData = await fetchSectionData(language, "artists") as IArtistsData[];
 const faqData = await fetchSectionData(language, "faq") as IFaqData[];
+const testimonialsData = await fetchSectionData(language, "testimonials") as ITestimonialsData[];
 ---
 
 <Layout>
@@ -27,7 +28,7 @@ const faqData = await fetchSectionData(language, "faq") as IFaqData[];
     <Steps data={stepsData}/>
     <Services client:idle data={servicesData}/>
     <Artists client:idle data={artistsData} />
-    <Testimonials />
+    <Testimonials data={testimonialsData.slice(0,2)}/>
     <Faq client:idle data={faqData}/>
     <FormSection />
 </Layout>

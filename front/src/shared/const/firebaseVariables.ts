@@ -18,6 +18,7 @@ export const SECTION_COLLECTION = {
     services: "services",
     artists: "artists",
     faq: "faq",
+    testimonials: "testimonials",
 }
 
 function reformatObjectValuesToArray(obj: any): any[] {
@@ -67,64 +68,63 @@ export interface IFaqData {
     questions: { question: string; answer: string }[]
 }
 
+export interface ITestimonialsData {
+    title: string
+    description: string
+    artist: string
+    duration: string
+    preview: string
+    video: string
+}
+
 export function addData(lang: keyof typeof LANGUAGE_DOCUMENT) {
     const ref = collection(
         db,
         DATA_COLLECTION,
         LANGUAGE_DOCUMENT[lang],
-        SECTION_COLLECTION.services
+        SECTION_COLLECTION.testimonials
     )
 
     const data = {
         0: {
-            title: "Rus Tattoo",
+            title: "Rus Polynesian tribe tattoo",
             description:
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur sed quidem molestias voluptates reprehenderit totam incidunt doloribus eius nemo maiores.",
-            images: [
-                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv1.jpg?alt=media&token=295a6d04-96c5-4fa9-8875-3a98735fe054",
-                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv2.jpg?alt=media&token=d7b245cf-2ba7-4ec6-a306-255ede668b86",
-                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv3.jpg?alt=media&token=a25debd7-161e-4331-9035-1ac9ecfd17d5",
-            ],
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, voluptas inventore voluptatibus fugit tenetur, numquam suscipit provident sequi nobis soluta ab laudantium esse dolor vitae est quae asperiores libero porro aut odit quia! Laborum, iure sint. Laboriosam error hic, natus quae esse dolor, voluptate sint explicabo quam, totam aspernatur cupiditate.",
+            artist: "Vasia",
+            duration: "14 hours",
+            preview:
+                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Ftestimonials%2Ftestimonial1.jpg?alt=media&token=ec3edc16-be29-451b-8ed5-54d984100e0e",
+            video: "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Ftestimonials%2Ftestimonial.mp4?alt=media&token=d7adff28-69a4-46bd-9115-4d029e2a8f3f",
         },
         1: {
-            title: "Rus Fixing a bad tattoo",
+            title: "Rus Polynesian tribe tattoo",
             description:
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur sed quidem molestias voluptates reprehenderit totam incidunt doloribus eius nemo maiores.",
-            images: [
-                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv1.jpg?alt=media&token=295a6d04-96c5-4fa9-8875-3a98735fe054",
-                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv2.jpg?alt=media&token=d7b245cf-2ba7-4ec6-a306-255ede668b86",
-                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv3.jpg?alt=media&token=a25debd7-161e-4331-9035-1ac9ecfd17d5",
-            ],
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, voluptas inventore voluptatibus fugit tenetur, numquam suscipit provident sequi nobis soluta ab laudantium esse dolor vitae est quae asperiores libero porro aut odit quia! Laborum, iure sint. Laboriosam error hic, natus quae esse dolor, voluptate sint explicabo quam, totam aspernatur cupiditate.",
+            artist: "Vasia",
+            duration: "14 hours",
+            preview:
+                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Ftestimonials%2Ftestimonial1.jpg?alt=media&token=ec3edc16-be29-451b-8ed5-54d984100e0e",
+            video: "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Ftestimonials%2Ftestimonial.mp4?alt=media&token=d7adff28-69a4-46bd-9115-4d029e2a8f3f",
         },
         2: {
-            title: "Rus Cover up Tattoo",
+            title: "Rus Polynesian tribe tattoo",
             description:
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur sed quidem molestias voluptates reprehenderit totam incidunt doloribus eius nemo maiores.",
-            images: [
-                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv1.jpg?alt=media&token=295a6d04-96c5-4fa9-8875-3a98735fe054",
-                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv2.jpg?alt=media&token=d7b245cf-2ba7-4ec6-a306-255ede668b86",
-                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv3.jpg?alt=media&token=a25debd7-161e-4331-9035-1ac9ecfd17d5",
-            ],
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, voluptas inventore voluptatibus fugit tenetur, numquam suscipit provident sequi nobis soluta ab laudantium esse dolor vitae est quae asperiores libero porro aut odit quia! Laborum, iure sint. Laboriosam error hic, natus quae esse dolor, voluptate sint explicabo quam, totam aspernatur cupiditate.",
+            artist: "Vasia",
+            duration: "14 hours",
+            preview:
+                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Ftestimonials%2Ftestimonial1.jpg?alt=media&token=ec3edc16-be29-451b-8ed5-54d984100e0e",
+            video: "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Ftestimonials%2Ftestimonial.mp4?alt=media&token=d7adff28-69a4-46bd-9115-4d029e2a8f3f",
         },
         3: {
-            title: "Rus Covering Scars",
+            title: "Rus Polynesian tribe tattoo",
             description:
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur sed quidem molestias voluptates reprehenderit totam incidunt doloribus eius nemo maiores.",
-            images: [
-                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv1.jpg?alt=media&token=295a6d04-96c5-4fa9-8875-3a98735fe054",
-                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv2.jpg?alt=media&token=d7b245cf-2ba7-4ec6-a306-255ede668b86",
-                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv3.jpg?alt=media&token=a25debd7-161e-4331-9035-1ac9ecfd17d5",
-            ],
-        },
-        4: {
-            title: "Rus Piercing",
-            description:
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur sed quidem molestias voluptates reprehenderit totam incidunt doloribus eius nemo maiores.",
-            images: [
-                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv1.jpg?alt=media&token=295a6d04-96c5-4fa9-8875-3a98735fe054",
-                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv2.jpg?alt=media&token=d7b245cf-2ba7-4ec6-a306-255ede668b86",
-                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Fservices%2Fserv3.jpg?alt=media&token=a25debd7-161e-4331-9035-1ac9ecfd17d5",
-            ],
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, voluptas inventore voluptatibus fugit tenetur, numquam suscipit provident sequi nobis soluta ab laudantium esse dolor vitae est quae asperiores libero porro aut odit quia! Laborum, iure sint. Laboriosam error hic, natus quae esse dolor, voluptate sint explicabo quam, totam aspernatur cupiditate.",
+            artist: "Vasia",
+            duration: "14 hours",
+            preview:
+                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Ftestimonials%2Ftestimonial1.jpg?alt=media&token=ec3edc16-be29-451b-8ed5-54d984100e0e",
+            video: "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Ftestimonials%2Ftestimonial.mp4?alt=media&token=d7adff28-69a4-46bd-9115-4d029e2a8f3f",
         },
     }
 

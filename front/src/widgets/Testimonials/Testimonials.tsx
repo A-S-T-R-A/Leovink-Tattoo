@@ -2,15 +2,14 @@ import { Section } from "shared/ui/Section/Section"
 import styles from "./Testimonials.module.scss"
 import { Testimonial } from "shared/components/Testimonial/Testimonial"
 import { ShowMoreLink } from "shared/components/ShowMoreLink/ShowMoreLink"
+import type { ITestimonialsData } from "shared/const/firebaseVariables"
 
-export function Testimonials() {
-    const data = [1, 2, 3]
-
+export function Testimonials({ data }: { data: ITestimonialsData[] }) {
     return (
         <Section title="Testimonials">
             {data.map((item, index, array) => (
                 <Testimonial
-                    key={index}
+                    data={item}
                     /* isReversed */ isWithBorder={index !== array.length - 1}
                 />
             ))}
