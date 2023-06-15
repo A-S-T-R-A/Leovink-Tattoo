@@ -15,13 +15,12 @@ export function StepsPageList({
         <div className={styles.table}>
             {data.map((item, index) => (
                 <div className={styles.item} key={index}>
-                    <div>step: {item.id}</div>
+                    <div>id: {index + 1}</div>
                     <ModalImage className={styles.img} url={item.img} />
                     <div>title: {item.title}</div>
                     <div>description: {item.description}</div>
-                    <div>{item.isLive ? "Published" : "Unpublished"}</div>
                     <div className={styles.buttons}>
-                        <EditParagraph />
+                        <EditParagraph stepData={data} />
                         <DeleteTattooImage id={item.id} triggerRefetch={triggerRefetch} />
                     </div>
                 </div>

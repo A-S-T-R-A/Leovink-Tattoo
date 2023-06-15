@@ -25,7 +25,7 @@ const data = [
 export function StepsPage() {
     return (
         <>
-            <AddStepModal />
+            <AddStepModal stepData={data} />
             <StepsPageList data={data} />
         </>
     )

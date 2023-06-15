@@ -3,5 +3,4 @@ export interface IStepsData {
     title: string
     img: string
     description: string
-    isLive: boolean
 }

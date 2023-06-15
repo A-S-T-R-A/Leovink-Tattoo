@@ -4,7 +4,7 @@ import { Modal } from "shared/ui/Modal"
 
 import styles from "./ModalImage.module.scss"
 
-export function ModalImage({ url, className }: { url: string; className: string }) {
+export function ModalImage({ url, className }: { url: string; className?: string }) {
     const [isOpen, setIsOpen] = useState(false)
 
     function onClose() {
