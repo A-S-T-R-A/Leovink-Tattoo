@@ -4,9 +4,10 @@ import "./Layout.scss"
 import { Footer } from "widgets/Footer/Footer";
 import i18next from "i18next";
 import type {LanguageType} from 'widgets/Header' //change
+import { ILayoutData, fetchSectionData } from "shared/const/firebaseVariables";
 
 const language =  i18next.language as LanguageType
-
+const layoutData = await fetchSectionData(language, "layout",true) as ILayoutData;
 ---
 
 <!DOCTYPE html>
@@ -26,9 +27,8 @@ const language =  i18next.language as LanguageType
         <title>Leovink Tattoo</title>
     </head>
     <body>
-       
-        <Header client:load language={language}/>
+        <Header client:load language={language} data={layoutData.navlist}/>
         <slot />
-        <Footer />
+        <Footer data={layoutData.footer}/>
     </body>
 </html>

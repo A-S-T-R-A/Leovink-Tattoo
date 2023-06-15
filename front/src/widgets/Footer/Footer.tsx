@@ -2,8 +2,10 @@ import { Typography } from "shared/ui/Typography/Typography"
 import styles from "./Footer.module.scss"
 import logo from "shared/assets/images/logo.png"
 import { SocialIcons } from "shared/components/SocialIcons"
+import type { FooterType } from "shared/const/firebaseVariables"
 
-export function Footer() {
+export function Footer({ data }: { data: FooterType }) {
+    const { location, contacts } = data
     return (
         <footer className={styles.container}>
             <div className={styles.logoContainer}>
@@ -14,23 +16,18 @@ export function Footer() {
                     location
                 </Typography>
                 <Typography className={styles.text} variant="h5" component="m">
-                    Strada Ismail 40/2, Chișinău
+                    {location}
                 </Typography>
             </div>
             <div className={styles.contactsContainer}>
                 <Typography className={styles.header} variant="h3" component="xxl">
                     contacts
                 </Typography>
-
-                <Typography className={styles.text} variant="h5" component="m">
-                    069 222 222
-                </Typography>
-                <Typography className={styles.text} variant="h5" component="m">
-                    069 222 222
-                </Typography>
-                <Typography className={styles.text} variant="h5" component="m">
-                    email@gg.ss
-                </Typography>
+                {contacts.map(item => (
+                    <Typography className={styles.text} variant="h5" component="m">
+                        {item}
+                    </Typography>
+                ))}
             </div>
             <div className={styles.followContainer}>
                 <Typography className={styles.header} variant="h3" component="xxl">

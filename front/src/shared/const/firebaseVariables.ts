@@ -19,6 +19,7 @@ export const SECTION_COLLECTION = {
     artists: "artists",
     faq: "faq",
     testimonials: "testimonials",
+    layout: "layout",
 }
 
 function reformatObjectValuesToArray(obj: any): any[] {
@@ -27,7 +28,8 @@ function reformatObjectValuesToArray(obj: any): any[] {
 
 export async function fetchSectionData(
     language: keyof typeof LANGUAGE_DOCUMENT,
-    section: keyof typeof SECTION_COLLECTION
+    section: keyof typeof SECTION_COLLECTION,
+    raw?: boolean
 ) {
     const ref = collection(
         db,
@@ -38,8 +40,9 @@ export async function fetchSectionData(
     const docs = await getDocs(ref)
 
     if (docs.empty) return
-    const newData = reformatObjectValuesToArray(docs.docs[0].data())
-    return newData
+    const newData = docs.docs[0].data()
+    const reformattedNewData = reformatObjectValuesToArray(newData)
+    return !!raw ? newData : reformattedNewData
 }
 
 export const portfolioPicturesRef = collection(db, PORTFOLIO_PICTURES_DB)
@@ -77,54 +80,28 @@ export interface ITestimonialsData {
     video: string
 }
 
+export type NavlistType = { link: string; text: string }[]
+export type FooterType = { location: string; contacts: string[] }
+
+export interface ILayoutData {
+    navlist: NavlistType
+    footer: FooterType
+}
+
 export function addData(lang: keyof typeof LANGUAGE_DOCUMENT) {
-    const ref = collection(
-        db,
-        DATA_COLLECTION,
-        LANGUAGE_DOCUMENT[lang],
-        SECTION_COLLECTION.testimonials
-    )
+    const ref = collection(db, DATA_COLLECTION, LANGUAGE_DOCUMENT[lang], SECTION_COLLECTION.layout)
 
     const data = {
-        0: {
-            title: "Rus Polynesian tribe tattoo",
-            description:
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, voluptas inventore voluptatibus fugit tenetur, numquam suscipit provident sequi nobis soluta ab laudantium esse dolor vitae est quae asperiores libero porro aut odit quia! Laborum, iure sint. Laboriosam error hic, natus quae esse dolor, voluptate sint explicabo quam, totam aspernatur cupiditate.",
-            artist: "Vasia",
-            duration: "14 hours",
-            preview:
-                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Ftestimonials%2Ftestimonial1.jpg?alt=media&token=ec3edc16-be29-451b-8ed5-54d984100e0e",
-            video: "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Ftestimonials%2Ftestimonial.mp4?alt=media&token=d7adff28-69a4-46bd-9115-4d029e2a8f3f",
-        },
-        1: {
-            title: "Rus Polynesian tribe tattoo",
-            description:
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, voluptas inventore voluptatibus fugit tenetur, numquam suscipit provident sequi nobis soluta ab laudantium esse dolor vitae est quae asperiores libero porro aut odit quia! Laborum, iure sint. Laboriosam error hic, natus quae esse dolor, voluptate sint explicabo quam, totam aspernatur cupiditate.",
-            artist: "Vasia",
-            duration: "14 hours",
-            preview:
-                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Ftestimonials%2Ftestimonial1.jpg?alt=media&token=ec3edc16-be29-451b-8ed5-54d984100e0e",
-            video: "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Ftestimonials%2Ftestimonial.mp4?alt=media&token=d7adff28-69a4-46bd-9115-4d029e2a8f3f",
-        },
-        2: {
-            title: "Rus Polynesian tribe tattoo",
-            description:
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, voluptas inventore voluptatibus fugit tenetur, numquam suscipit provident sequi nobis soluta ab laudantium esse dolor vitae est quae asperiores libero porro aut odit quia! Laborum, iure sint. Laboriosam error hic, natus quae esse dolor, voluptate sint explicabo quam, totam aspernatur cupiditate.",
-            artist: "Vasia",
-            duration: "14 hours",
-            preview:
-                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Ftestimonials%2Ftestimonial1.jpg?alt=media&token=ec3edc16-be29-451b-8ed5-54d984100e0e",
-            video: "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Ftestimonials%2Ftestimonial.mp4?alt=media&token=d7adff28-69a4-46bd-9115-4d029e2a8f3f",
-        },
-        3: {
-            title: "Rus Polynesian tribe tattoo",
-            description:
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, voluptas inventore voluptatibus fugit tenetur, numquam suscipit provident sequi nobis soluta ab laudantium esse dolor vitae est quae asperiores libero porro aut odit quia! Laborum, iure sint. Laboriosam error hic, natus quae esse dolor, voluptate sint explicabo quam, totam aspernatur cupiditate.",
-            artist: "Vasia",
-            duration: "14 hours",
-            preview:
-                "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Ftestimonials%2Ftestimonial1.jpg?alt=media&token=ec3edc16-be29-451b-8ed5-54d984100e0e",
-            video: "https://firebasestorage.googleapis.com/v0/b/leovink-tattoo.appspot.com/o/data%2Ftestimonials%2Ftestimonial.mp4?alt=media&token=d7adff28-69a4-46bd-9115-4d029e2a8f3f",
+        navlist: [
+            { link: "/", text: "Главная" },
+            { link: "/portfolio", text: "Портфолио" },
+            { link: "/faq", text: "Вопросы" },
+            { link: "/contact", text: "Контакты" },
+            { link: "/testimonials", text: "Отзывы" },
+        ],
+        footer: {
+            location: "улица Измаил 40/2, Кишинев",
+            contacts: ["069 222 222", "069 222 222", "email@gg.ss"],
         },
     }
 
