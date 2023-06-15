@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom"
 import { PortfolioPage } from "pages/PortfolioPage"
 import { Header } from "widgets/Header/Header"
 import { RequireAuth } from "features/authByGoogle"
+import { StepsPage } from "pages/StepsPage"
 
 function App() {
     return (
@@ -18,6 +19,14 @@ function App() {
                         element={
                             <RequireAuth>
                                 <PortfolioPage />
+                            </RequireAuth>
+                        }
+                    />
+                    <Route
+                        path="/steps"
+                        element={
+                            <RequireAuth>
+                                <StepsPage />
                             </RequireAuth>
                         }
                     />

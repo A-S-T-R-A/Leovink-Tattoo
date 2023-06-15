@@ -9,6 +9,7 @@ export function Sidebar() {
             <div className={styles.container}>
                 <Link to="/">Home</Link>
                 {!!user && <Link to="/portfolio">Portfolio</Link>}
+                {!!user && <Link to="/steps">Steps</Link>}
             </div>
         </div>
     )
