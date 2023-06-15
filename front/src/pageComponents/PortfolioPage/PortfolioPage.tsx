@@ -1,5 +1,4 @@
 import { useState, useEffect } from "preact/hooks"
-import { MasonryGrid } from "shared/components/MasonryGrid/MasonryGrid"
 import { ModalGallery } from "widgets/ModalGallery/ModalGallery"
 import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper"
 import { Dropdown } from "shared/ui/Dropdown"
@@ -16,6 +15,7 @@ import {
 import { Section } from "shared/ui/Section/Section"
 import { Button } from "shared/ui/Button/Button"
 import { AntiClockwiseIcon } from "shared/ui/Icons"
+import { GalleryGrid } from "shared/components/GalleryGrid/GalleryGrid"
 
 interface IFilters {
     artist: string
@@ -67,8 +67,6 @@ export function PortfolioPage() {
         setFilteredData(fetchedData)
     }
 
-    console.log(data.map(item => item.id).join(","))
-
     useEffect(() => {
         fetch()
     }, [])
@@ -100,7 +98,7 @@ export function PortfolioPage() {
                         reset filters <AntiClockwiseIcon />
                     </Button>
                 </div>
-                <MasonryGrid data={filteredData} onClick={clickHandler} />
+                <GalleryGrid data={filteredData} onClick={clickHandler} />
                 <FormSection />
             </Section>
         </PageWrapper>

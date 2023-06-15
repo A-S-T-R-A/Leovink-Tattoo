@@ -20,8 +20,8 @@ const stepsData = await fetchSectionData(language, "steps") as IStepData[];
 
 <Layout>
     <Main client:load />
-    <Portfolio client:only="preact" />
-    <Steps data={stepsData}/> 
+    <Portfolio client:load />
+    <Steps data={stepsData}/>
     <Services client:load />
     <Artists client:load />
     <Testimonials />

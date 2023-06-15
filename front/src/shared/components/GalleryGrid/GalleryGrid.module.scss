@@ -1,0 +1,78 @@
+.container {
+    overflow: hidden !important;
+
+    &.withGradient {
+        -webkit-mask-image: linear-gradient(to bottom, black 55%, rgba(0, 0, 0, 0.01) 90%);
+    }
+}
+
+.gridContainer {
+    max-width: 100%;
+    column-count: 3;
+    column-gap: 6px;
+
+    .imgContainer {
+        cursor: pointer;
+        position: relative;
+        border-radius: 10px;
+        display: grid;
+        grid-template-rows: 1fr auto;
+        break-inside: avoid;
+        margin-bottom: 6px;
+        border-radius: 5px;
+
+        img {
+            max-width: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .eye {
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            right: 50%;
+            transform: translate(50%, -50%);
+            transition: all 0.15s ease;
+            width: 40px;
+            height: 40px;
+
+            path {
+                fill: var(--color-base);
+            }
+        }
+
+        &:hover {
+            img {
+                filter: brightness(80%) blur(1px);
+            }
+
+            .eye {
+                opacity: 1;
+
+                &:hover {
+                    path {
+                        fill: var(--color-accent);
+                    }
+                }
+            }
+        }
+    }
+
+    .imgContainer > img {
+        grid-row: 1 / -1;
+        grid-column: 1;
+    }
+}
+
+@media (min-width: 769px) {
+    .gridContainer {
+        column-count: 4;
+    }
+}
+
+@media (min-width: 1000px) {
+    .gridContainer {
+        column-count: 5;
+    }
+}
