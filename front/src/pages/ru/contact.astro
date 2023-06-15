@@ -2,18 +2,15 @@
 import { changeLanguage } from "i18next";
 import Layout from "layouts/Layout.astro";
 import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
-import { Section } from "shared/ui/Section/Section";
-import { FAQ } from "../FAQ/FAQ";
 import { FormSection } from "widgets/FormSection/FormSection";
+import { FindUs } from "widgets/FindUs/FindUs";
 
-changeLanguage("ro");
+changeLanguage("ru");
 ---
 
 <Layout>
-    <PageWrapper title="FAQ">
-        <Section>
-            <FAQ client:load />
-        </Section>
+    <PageWrapper title="Contact">
+        <FindUs />
         <FormSection client:load />
     </PageWrapper>
 </Layout>

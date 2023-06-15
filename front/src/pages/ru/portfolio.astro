@@ -1,0 +1,11 @@
+---
+import { changeLanguage } from "i18next";
+import Layout from "layouts/Layout.astro";
+import { PortfolioPage } from "../PortfolioPage/PortfolioPage";
+
+changeLanguage("ru");
+---
+
+<Layout>
+    <PortfolioPage client:only="preact" />
+</Layout>

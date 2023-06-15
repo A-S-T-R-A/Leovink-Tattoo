@@ -13,7 +13,7 @@ import type { LanguageType } from "widgets/Header";
 import i18next, { changeLanguage } from "i18next";
 import { fetchSectionData, IStepData, addData } from "../../shared/const/firebaseVariables";
 
-changeLanguage("ro");
+changeLanguage("ru");
 
 const language = i18next.language as LanguageType;
 const stepsData = await fetchSectionData(language, "steps") as IStepData[];

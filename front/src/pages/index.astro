@@ -1,5 +1,4 @@
 ---
-import { changeLanguage } from "i18next";
 import Layout from "../layouts/Layout.astro";
 import { Main } from "../widgets/Main/Main";
 import { Portfolio } from "../widgets/Portfolio/Portfolio";
@@ -9,15 +8,20 @@ import { Artists } from "../widgets/Artists/Artists";
 import { Testimonials } from "../widgets/Testimonials/Testimonials";
 import { Faq } from "../widgets/Faq/Faq";
 import { FormSection } from "../widgets/FormSection/FormSection";
-import { getLangFromUrl } from "widgets/Header/ui/Languages/getLangFromUrl";
+import type { LanguageType } from "widgets/Header";
+import i18next, { changeLanguage } from "i18next";
+import { fetchSectionData, IStepData, addData } from "../shared/const/firebaseVariables";
 
 changeLanguage("en");
+
+const language = i18next.language as LanguageType;
+const stepsData = await fetchSectionData(language, "steps") as IStepData[];
 ---
 
 <Layout>
     <Main client:load />
     <Portfolio client:only="preact" />
-    <Steps />
+    <Steps data={stepsData}/> 
     <Services client:load />
     <Artists client:load />
     <Testimonials />
