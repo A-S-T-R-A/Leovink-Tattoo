@@ -6,17 +6,18 @@ import { Textarea } from "shared/ui/Textarea/Textarea"
 import styles from "./AddStepModal.module.scss"
 import { IStepsData } from "pages/StepsPage/types/types"
 import { Dropdown } from "shared/ui/Dropdown"
+import { Language } from "shared/types/types"
 
 export function AddStepModal({ stepData }: { stepData: IStepsData[] }) {
     const [data, setData] = useState({ id: 0, title: "", description: "" })
     const [isOpen, setIsOpen] = useState(false)
-    const [currentLanguage, setCurrentLanguage] = useState("en")
+    const [currentLanguage, setCurrentLanguage] = useState<Language>("en")
 
     function onClose() {
         setIsOpen(false)
     }
 
-    function onChangeLanguage(lang: string) {
+    function onChangeLanguage(lang: Language) {
         setCurrentLanguage(lang)
     }
 

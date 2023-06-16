@@ -6,6 +6,7 @@ import { Textarea } from "shared/ui/Textarea/Textarea"
 import styles from "./EditParagraph.module.scss"
 import { IStepsData } from "pages/StepsPage/types/types"
 import { Dropdown } from "shared/ui/Dropdown"
+import { Language } from "shared/types/types"
 
 export function EditParagraph({
     stepData,
@@ -20,13 +21,13 @@ export function EditParagraph({
 }) {
     const [data, setData] = useState({ id: 0, title: "", description: "" })
     const [isOpen, setIsOpen] = useState(false)
-    const [currentLanguage, setCurrentLanguage] = useState("english")
+    const [currentLanguage, setCurrentLanguage] = useState<Language>("en")
 
     function onClose() {
         setIsOpen(false)
     }
 
-    function onChangeLanguage(lang: string) {
+    function onChangeLanguage(lang: Language) {
         setCurrentLanguage(lang)
     }
 

@@ -3,8 +3,7 @@ import { GreatBritianFlag, MoldovaRepublic, RussiaFlag } from "./Icons/index"
 import styles from "./Languages.module.scss"
 import { classNames } from "shared/lib/classNames/classNames"
 import { Button } from "shared/ui/Button/Button"
-
-type Language = "ro" | "en" | "ru"
+import { Language } from "shared/types/types"
 
 export function Languages({
     className,
@@ -12,8 +11,8 @@ export function Languages({
     onChangeLanguage,
 }: {
     className?: string
-    currentLanguage: string
-    onChangeLanguage: (language: string) => void
+    currentLanguage: Language
+    onChangeLanguage: (language: Language) => void
 }) {
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const timeoutRef = useRef<NodeJS.Timeout | null>(null)
