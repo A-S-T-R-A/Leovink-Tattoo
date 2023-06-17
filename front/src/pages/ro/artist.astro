@@ -2,7 +2,7 @@
 import i18next, { changeLanguage } from "i18next";
 import Layout from "layouts/Layout.astro";
 import { ArtistPage } from "pageComponents/ArtistPage/ArtistPage";
-import { IArtistsData, ILayoutData, IOtherData, fetchSectionData } from "shared/const/firebaseVariables";
+import { ILayoutData, IOtherData, fetchSectionData } from "shared/const/firebaseVariables";
 import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
 import type { LanguageType } from "shared/types/types";
 
@@ -17,6 +17,6 @@ const { cta } = buttons;
 
 <Layout>
     <PageWrapper title={sectionNames.artists} main={layoutData.navlist[0].text}>
-        <ArtistPage client:only="preact"  formTitle={sectionNames.form} cta={cta} formData={formData}/>
+        <ArtistPage client:load  formTitle={sectionNames.form} cta={cta} formData={formData}/>
     </PageWrapper>
 </Layout>

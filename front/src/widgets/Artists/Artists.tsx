@@ -5,22 +5,24 @@ import "swiper/scss/navigation"
 import "swiper/scss/pagination"
 import "swiper/scss/scrollbar"
 import { Swiper, SwiperSlide } from "swiper/react"
-import SwiperCore from "swiper"
-import { Swiper as SwiperClass } from "swiper/types"
 import { Pagination, Navigation } from "swiper"
 import { ArtistCard } from "./ArtistCard/ArtistCard"
-import { data } from "./const/data"
 import { classNames } from "shared/lib/classNames/classNames"
 import type { IArtistsData } from "shared/const/firebaseVariables"
+import type { LanguageType } from "shared/types/types"
 
 export function Artists({
     data,
     title,
     button,
+    language,
+    defaultLanguage,
 }: {
     data: IArtistsData[]
     title: string
     button: string
+    language: LanguageType
+    defaultLanguage: LanguageType
 }) {
     return (
         <Section title={title}>
@@ -38,7 +40,12 @@ export function Artists({
                 {data.map(item => {
                     return (
                         <SwiperSlide className={styles.slide}>
-                            <ArtistCard data={item} button={button} />
+                            <ArtistCard
+                                data={item}
+                                button={button}
+                                language={language}
+                                defaultLanguage={defaultLanguage}
+                            />
                         </SwiperSlide>
                     )
                 })}

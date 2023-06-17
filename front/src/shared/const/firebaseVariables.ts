@@ -66,6 +66,7 @@ export interface IArtistsData {
     description: string
     specialization: string
     img: string
+    slug: string
 }
 
 export interface IFaqData {

@@ -2,24 +2,27 @@ import { useState } from "preact/hooks"
 import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper"
 import { Section } from "shared/ui/Section/Section"
 import { data as artistsData } from "widgets/Artists/const/data"
-import { data } from "shared/const/data"
+import { data as dummyGalleryData } from "shared/const/data"
 import { Typography } from "shared/ui/Typography/Typography"
 import { Form } from "shared/components/Form/Form"
 import { ModalGallery } from "widgets/ModalGallery/ModalGallery"
 import styles from "./ArtistPage.module.scss"
 import { GalleryGrid } from "shared/components/GalleryGrid/GalleryGrid"
+import type { IArtistsData } from "shared/const/firebaseVariables"
 
 export function ArtistPage({
     formData,
     formTitle,
     cta,
+    data,
 }: {
+    data: IArtistsData
     formData: { name: string; phone: string }
     formTitle: string
     cta: string
 }) {
-    const { name, img, specialization, description } = artistsData[0]
-    const galleryData = [...data.slice(2, 6), data[8]]
+    const { name, img, specialization, description } = data
+    const galleryData = [...dummyGalleryData.slice(2, 6), dummyGalleryData[8]]
     const [modalData, setModalData] = useState(galleryData)
     const [isOpen, setIsOpen] = useState(false)
 
