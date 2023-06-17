@@ -3,14 +3,13 @@ import styles from "./Footer.module.scss"
 import logo from "shared/assets/images/logo.png"
 import { SocialIcons } from "shared/components/SocialIcons"
 import type { FooterType } from "shared/const/firebaseVariables"
+import type { ComponentChildren } from "preact"
 
-export function Footer({ data }: { data: FooterType }) {
+export function Footer({ data, children }: { data: FooterType; children: ComponentChildren }) {
     const { location, contacts, footerList } = data
     return (
         <footer className={styles.container}>
-            <div className={styles.logoContainer}>
-                <img src={logo} alt="logo" />
-            </div>
+            <div className={styles.logoContainer}>{children}</div>
             <div className={styles.locationContainer}>
                 <Typography className={styles.header} variant="h3" component="xxl">
                     {footerList[0]}

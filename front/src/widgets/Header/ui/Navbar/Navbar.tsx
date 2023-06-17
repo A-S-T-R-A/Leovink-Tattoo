@@ -9,17 +9,23 @@ import type { NavlistType } from "shared/const/firebaseVariables"
 export function Navbar({
     className,
     language,
+    defaultLanguage,
     data,
 }: {
     className?: string
     language: LanguageType
+    defaultLanguage: LanguageType
     data: NavlistType
 }) {
     return (
         <div className={classNames(styles.container, {}, [className])}>
             <NavigationList className={styles.navList} data={data} />
             <SocialIcons className={styles.socialIcons} />
-            <Languages className={styles.languages} language={language} />
+            <Languages
+                className={styles.languages}
+                defaultLanguage={defaultLanguage}
+                language={language}
+            />
         </div>
     )
 }
