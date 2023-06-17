@@ -1,14 +1,24 @@
 import { useState } from "react"
-import { FilePond } from "react-filepond"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { Input } from "shared/ui/Input/Input"
 import { Textarea } from "shared/ui/Textarea/Textarea"
-import styles from "./AddStepModal.module.scss"
-import { IStepsData } from "pages/StepsPage/types/types"
 import { Dropdown } from "shared/ui/Dropdown"
 import { LanguageType } from "shared/types/types"
+import { IServiceData } from "pages/ServicesPage/types/types"
+import styles from "./EditParagraph.module.scss"
 
-export function AddStepModal({ stepData }: { stepData: IStepsData[] }) {
+export function EditParagraph({
+    serviceData,
+    id,
+    triggerRefetch,
+    unselectAllHandler,
+}: {
+    serviceData: IServiceData[]
+    id?: number
+    triggerRefetch?: () => void
+    unselectAllHandler?: () => void
+}) {
     const [data, setData] = useState({ id: 0, title: "", description: "" })
     const [isOpen, setIsOpen] = useState(false)
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
@@ -21,7 +31,7 @@ export function AddStepModal({ stepData }: { stepData: IStepsData[] }) {
         setCurrentLanguage(lang)
     }
 
-    const dropdownNumbers = Array(stepData.length)
+    const dropdownNumbers = Array(serviceData.length)
         .fill("")
         .map((_, index) => {
             const v = (index + 1).toString()
@@ -39,7 +49,14 @@ export function AddStepModal({ stepData }: { stepData: IStepsData[] }) {
                 onDiscardClick={() => null}
             >
                 <div className={styles.container}>
-                    <FilePond />
+                    <div className={styles.imgContainer}>
+                        <ModalImage
+                            url="https://images.pexels.com/photos/1547813/pexels-photo-1547813.jpeg?auto=compress&cs=tinysrgb&w=800"
+                            className={styles.img}
+                        />
+                        <label htmlFor="my-file">Edit</label>
+                        <input type="file" id="my-file" className={styles.file} />
+                    </div>
                     <div>
                         id:
                         <Dropdown
@@ -59,7 +76,7 @@ export function AddStepModal({ stepData }: { stepData: IStepsData[] }) {
                     />
                 </div>
             </ModalEditorWithTranslation>
-            <button onClick={() => setIsOpen(true)}>Add New</button>
+            <button onClick={() => setIsOpen(true)}>Edit</button>
         </>
     )
 }
