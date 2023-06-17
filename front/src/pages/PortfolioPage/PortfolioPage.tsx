@@ -16,6 +16,7 @@ import { Section } from "shared/ui/Section/Section"
 import { Button } from "shared/ui/Button/Button"
 import { AntiClockwiseIcon } from "shared/ui/Icons"
 import { GalleryGrid } from "shared/components/GalleryGrid/GalleryGrid"
+import { data as datazzz } from "shared/const/data"
 
 interface IFilters {
     artist: string
@@ -73,7 +74,11 @@ export function PortfolioPage() {
 
     return (
         <PageWrapper title="Portfolio">
-            <ModalGallery data={modalData} isOpen={isOpen} onClose={() => setIsOpen(false)} />
+            <ModalGallery
+                data={datazzz /* modalData */}
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+            />
             <Section>
                 <div className={styles.filters}>
                     <Dropdown
@@ -98,7 +103,7 @@ export function PortfolioPage() {
                         reset filters <AntiClockwiseIcon />
                     </Button>
                 </div>
-                <GalleryGrid data={filteredData} onClick={clickHandler} />
+                <GalleryGrid data={datazzz} onClick={clickHandler} />
                 <FormSection />
             </Section>
         </PageWrapper>
