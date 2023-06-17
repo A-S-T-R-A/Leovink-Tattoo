@@ -9,15 +9,29 @@ interface IModalEditorWithTranslation {
     currentLanguage: LanguageType
     onClose: () => void
     onChangeLanguage: (language: LanguageType) => void
+    onSaveClick: () => void
+    onDiscardClick: () => void
 }
 
 export function ModalEditorWithTranslation(props: IModalEditorWithTranslation) {
-    const { children, isOpen, onClose, onChangeLanguage, currentLanguage } = props
+    const {
+        children,
+        isOpen,
+        onClose,
+        onChangeLanguage,
+        currentLanguage,
+        onSaveClick,
+        onDiscardClick,
+    } = props
 
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
             <Languages currentLanguage={currentLanguage} onChangeLanguage={onChangeLanguage} />
             {children}
+            <div>
+                <button onClick={onSaveClick}>save</button>
+                <button onClick={onDiscardClick}>discard</button>
+            </div>
         </Modal>
     )
 }

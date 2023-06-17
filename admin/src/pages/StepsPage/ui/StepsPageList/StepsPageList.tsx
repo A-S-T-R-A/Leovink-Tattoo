@@ -1,16 +1,9 @@
-import { DeleteTattooImage } from "features/deleteTattooImage"
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import styles from "./StepsPageList.module.scss"
 import { EditParagraph } from "../EditParagraph/EditParagraph"
 import { IStepsData } from "pages/StepsPage/types/types"
 
-export function StepsPageList({
-    data,
-    triggerRefetch,
-}: {
-    data: IStepsData[]
-    triggerRefetch?: () => void
-}) {
+export function StepsPageList({ data }: { data: IStepsData[] }) {
     return (
         <div className={styles.table}>
             {data.map((item, index) => (
@@ -21,7 +14,7 @@ export function StepsPageList({
                     <div>description: {item.description}</div>
                     <div className={styles.buttons}>
                         <EditParagraph stepData={data} />
-                        <DeleteTattooImage id={item.id} triggerRefetch={triggerRefetch} />
+                        <button>delete</button>
                     </div>
                 </div>
             ))}

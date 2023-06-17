@@ -1,16 +1,9 @@
-import { DeleteTattooImage } from "features/deleteTattooImage"
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import styles from "./ServicesPageList.module.scss"
 import { EditParagraph } from "../EditParagraph/EditParagraph"
 import { IServiceData } from "pages/ServicesPage/types/types"
 
-export function ServicesPageList({
-    serviceData,
-    triggerRefetch,
-}: {
-    serviceData: IServiceData[]
-    triggerRefetch?: () => void
-}) {
+export function ServicesPageList({ serviceData }: { serviceData: IServiceData[] }) {
     return (
         <div className={styles.table}>
             {serviceData.map((item, index) => (
@@ -23,7 +16,7 @@ export function ServicesPageList({
                     <div className={styles.description}>description: {item.description}</div>
                     <div className={styles.buttons}>
                         <EditParagraph serviceData={serviceData} />
-                        <DeleteTattooImage id={item.id} triggerRefetch={triggerRefetch} />
+                        <button>delete</button>
                     </div>
                 </div>
             ))}

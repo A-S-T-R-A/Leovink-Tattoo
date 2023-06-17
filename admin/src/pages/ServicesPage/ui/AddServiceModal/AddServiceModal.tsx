@@ -35,6 +35,8 @@ export function AddServiceModal({ serviceData }: { serviceData: IServiceData[] }
                 onClose={onClose}
                 onChangeLanguage={onChangeLanguage}
                 currentLanguage={currentLanguage}
+                onSaveClick={() => null}
+                onDiscardClick={() => null}
             >
                 <div className={styles.container}>
                     <div className={styles.imgContainer}>
@@ -60,8 +62,6 @@ export function AddServiceModal({ serviceData }: { serviceData: IServiceData[] }
                         label="Description"
                         onChange={value => setData(prev => ({ ...prev, description: value }))}
                     />
-                    <button>save</button>
-                    <button>discard</button>
                 </div>
             </ModalEditorWithTranslation>
             <button onClick={() => setIsOpen(true)}>Add New</button>

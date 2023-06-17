@@ -35,6 +35,8 @@ export function AddStepModal({ stepData }: { stepData: IStepsData[] }) {
                 onClose={onClose}
                 onChangeLanguage={onChangeLanguage}
                 currentLanguage={currentLanguage}
+                onSaveClick={() => null}
+                onDiscardClick={() => null}
             >
                 <div className={styles.container}>
                     <FilePond />
@@ -55,8 +57,6 @@ export function AddStepModal({ stepData }: { stepData: IStepsData[] }) {
                         label="Description"
                         onChange={value => setData(prev => ({ ...prev, description: value }))}
                     />
-                    <button>save</button>
-                    <button>discard</button>
                 </div>
             </ModalEditorWithTranslation>
             <button onClick={() => setIsOpen(true)}>Add New</button>
