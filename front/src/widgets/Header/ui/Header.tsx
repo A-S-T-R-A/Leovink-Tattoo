@@ -11,10 +11,12 @@ export function Header({
     language,
     data,
     children,
+    defaultLanguage,
 }: {
     children: ComponentChildren
     language: LanguageType
     data: NavlistType
+    defaultLanguage: LanguageType
 }) {
     const [isScrolled, setIsScrolled] = useState(false)
 
@@ -34,7 +36,12 @@ export function Header({
             <div className={classNames(styles.wrapper, { [styles.blur]: isScrolled })}>
                 <div className={styles.container}>
                     {children}
-                    <Navbar className={styles.navbar} language={language} data={data} />
+                    <Navbar
+                        className={styles.navbar}
+                        language={language}
+                        defaultLanguage={defaultLanguage}
+                        data={data}
+                    />
                 </div>
             </div>
         </>

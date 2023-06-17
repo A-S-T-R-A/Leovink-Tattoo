@@ -4,7 +4,15 @@ import { classNames } from "shared/lib/classNames/classNames"
 import { useEffect, useRef, useState } from "preact/hooks"
 import type { LanguageType } from "shared/types/types"
 
-export function Languages({ className, language }: { className?: string; language: LanguageType }) {
+export function Languages({
+    className,
+    language,
+    defaultLanguage,
+}: {
+    className?: string
+    language: LanguageType
+    defaultLanguage: LanguageType
+}) {
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -47,7 +55,7 @@ export function Languages({ className, language }: { className?: string; languag
     function localizedLink(lang: LanguageType) {
         const url = window.location.href
         const to = "/" + url.split(".").pop()?.split("/").pop()
-        return lang === "en" ? to : "/" + lang + to
+        return lang === defaultLanguage ? to : "/" + lang + to
     }
 
     return (

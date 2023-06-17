@@ -8,7 +8,7 @@ import {LogoLink} from "shared/components/LogoLink/LogoLink"
 import type { LanguageType } from "shared/types/types";
 
 const language =  i18next.language as LanguageType
-const defaultLanguage = i18next.languages[0]
+const defaultLanguage = "en"
 const layoutData = await fetchSectionData(language, "layout",true) as ILayoutData;
 ---
 
@@ -29,7 +29,7 @@ const layoutData = await fetchSectionData(language, "layout",true) as ILayoutDat
         <title>Leovink Tattoo</title>
     </head>
     <body>
-        <Header client:load language={language} data={layoutData.navlist}>
+        <Header client:load language={language} defaultLanguage={defaultLanguage} data={layoutData.navlist}>
             <LogoLink language={language} defaultLanguage={defaultLanguage}/>
         </Header>
         <slot />
