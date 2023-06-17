@@ -1,7 +1,7 @@
 import { GreatBritianFlag, MoldovaRepublicFlag, RussiaFlag } from "shared/ui/Icons"
 import styles from "./Languages.module.scss"
 import { classNames } from "shared/lib/classNames/classNames"
-import { useRef, useState } from "preact/hooks"
+import { useEffect, useRef, useState } from "preact/hooks"
 import type { LanguageType } from "../../types/type"
 
 export function Languages({ className, language }: { className?: string; language: LanguageType }) {
@@ -44,6 +44,12 @@ export function Languages({ className, language }: { className?: string; languag
         return languageFlag
     })()
 
+    function localizedLink(lang: LanguageType) {
+        const url = window.location.href
+        const to = "/" + url.split(".").pop()?.split("/").pop()
+        return lang === "en" ? to : "/" + lang + to
+    }
+
     return (
         <div
             onClick={() => setDropdownOpen(prev => !prev)}
@@ -55,13 +61,13 @@ export function Languages({ className, language }: { className?: string; languag
                 {LanguageFlag}
                 {dropdownOpen && (
                     <div className={styles.dropdown}>
-                        <a href={`/ro/`} className={styles.language}>
+                        <a href={localizedLink("ro")} className={styles.language}>
                             <MoldovaRepublicFlag /> RO
                         </a>
-                        <a href={`/`} className={styles.language}>
+                        <a href={localizedLink("en")} className={styles.language}>
                             <GreatBritianFlag /> EN
                         </a>
-                        <a href={`/ru/`} className={styles.language}>
+                        <a href={localizedLink("ru")} className={styles.language}>
                             <RussiaFlag /> RU
                         </a>
                     </div>

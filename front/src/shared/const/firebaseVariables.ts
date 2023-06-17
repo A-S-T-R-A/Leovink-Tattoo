@@ -100,6 +100,12 @@ export interface IOtherData {
         faq: string
         form: string
     }
+    filtersData: {
+        artists: string
+        styles: string
+        colors: string
+        reset: string
+    }
     formData: {
         name: string
         phone: string

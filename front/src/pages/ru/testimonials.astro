@@ -6,19 +6,20 @@ import { FormSection } from "widgets/FormSection/FormSection";
 import { TestimonialPage } from "pageComponents/TestimonialsPage/TestimonialsPage";
 import Layout from "layouts/Layout.astro";
 import type { LanguageType } from "widgets/Header";
-import { IOtherData, ITestimonialsData, fetchSectionData } from "shared/const/firebaseVariables";
+import { ILayoutData, IOtherData, ITestimonialsData, fetchSectionData } from "shared/const/firebaseVariables";
 
 changeLanguage("ru");
 
 const language = i18next.language as LanguageType;
 const testimonialsData = await fetchSectionData(language, "testimonials") as ITestimonialsData[];
+const layoutData = await fetchSectionData(language, "layout", true) as ILayoutData;
 const otherData = await fetchSectionData(language, "other", true) as IOtherData;
 const { sectionNames, formData, buttons } = otherData;
 const { cta } = buttons;
 ---
 
 <Layout>
-    <PageWrapper title="Testimonials">
+    <PageWrapper title={layoutData.navlist[4].text} main={layoutData.navlist[0].text}>
         <Section>
             <TestimonialPage client:load cta={cta} data={testimonialsData}/>
         </Section>

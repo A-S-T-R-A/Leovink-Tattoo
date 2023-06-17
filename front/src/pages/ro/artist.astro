@@ -2,18 +2,21 @@
 import i18next, { changeLanguage } from "i18next";
 import Layout from "layouts/Layout.astro";
 import { ArtistPage } from "pageComponents/ArtistPage/ArtistPage";
-import { IArtistsData, IOtherData, fetchSectionData } from "shared/const/firebaseVariables";
+import { IArtistsData, ILayoutData, IOtherData, fetchSectionData } from "shared/const/firebaseVariables";
+import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
 import type { LanguageType } from "widgets/Header";
 
 changeLanguage("ro");
 
 const language = i18next.language as LanguageType;
-const artistsData = await fetchSectionData(language, "artists") as IArtistsData[];
+const layoutData = await fetchSectionData(language, "layout", true) as ILayoutData;
 const otherData = await fetchSectionData(language, "other", true) as IOtherData;
 const { sectionNames, formData, buttons } = otherData;
 const { cta } = buttons;
 ---
 
 <Layout>
-    <ArtistPage client:only="preact"  formTitle={sectionNames.form} cta={cta} formData={formData}/>
+    <PageWrapper title={sectionNames.artists} main={layoutData.navlist[0].text}>
+        <ArtistPage client:only="preact"  formTitle={sectionNames.form} cta={cta} formData={formData}/>
+    </PageWrapper>
 </Layout>

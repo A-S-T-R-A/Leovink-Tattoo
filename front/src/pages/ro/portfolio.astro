@@ -2,17 +2,21 @@
 import i18next, { changeLanguage } from "i18next";
 import Layout from "layouts/Layout.astro";
 import { PortfolioPage } from "pageComponents/PortfolioPage/PortfolioPage";
-import { fetchSectionData, type IOtherData } from "shared/const/firebaseVariables";
+import { fetchSectionData, ILayoutData, type IOtherData } from "shared/const/firebaseVariables";
+import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
 import type { LanguageType } from "widgets/Header";
 
 changeLanguage("ro");
 
 const language = i18next.language as LanguageType;
+const layoutData = await fetchSectionData(language, "layout", true) as ILayoutData;
 const otherData = await fetchSectionData(language, "other", true) as IOtherData;
-const { sectionNames, formData, buttons } = otherData;
+const { sectionNames, formData, buttons, filtersData } = otherData;
 const { cta } = buttons;
 ---
 
 <Layout>
-    <PortfolioPage client:load title={sectionNames.portfolio} formTitle={sectionNames.form} placeholdersData={formData} button={cta}/>
+    <PageWrapper title={layoutData.navlist[1].text} main={layoutData.navlist[0].text}>
+        <PortfolioPage client:load  formTitle={sectionNames.form} placeholdersData={formData} button={cta} filtersData={filtersData}/>
+    </PageWrapper>
 </Layout>

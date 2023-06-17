@@ -30,7 +30,7 @@ export function ArtistPage({
     }
 
     return (
-        <PageWrapper title="ARTIST">
+        <>
             <Section containerClassName={styles.container}>
                 <div className={styles.card}>
                     <div className={styles.left}>
@@ -50,6 +50,6 @@ export function ArtistPage({
                 <GalleryGrid data={galleryData} onClick={clickHandler} />
                 <ModalGallery data={modalData} isOpen={isOpen} onClose={() => setIsOpen(false)} />
             </Section>
-        </PageWrapper>
+        </>
     )
 }

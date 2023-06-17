@@ -25,12 +25,17 @@ interface IFilters {
 }
 
 export function PortfolioPage({
-    title,
     formTitle,
     placeholdersData,
     button,
+    filtersData,
 }: {
-    title: string
+    filtersData: {
+        artists: string
+        styles: string
+        colors: string
+        reset: string
+    }
     formTitle: string
     placeholdersData: { name: string; phone: string }
     button: string
@@ -86,35 +91,35 @@ export function PortfolioPage({
     }, [])
 
     return (
-        <PageWrapper title={title}>
+        <>
             <ModalGallery data={modalData} isOpen={isOpen} onClose={() => setIsOpen(false)} />
             <Section>
                 <div className={styles.filters}>
                     <Dropdown
                         options={tattooArtistsDropdownOptions}
-                        firstOptionText="All tattoo artists"
+                        firstOptionText={filtersData.artists}
                         value={filters.artist}
                         onChange={value => setFilters(prev => ({ ...prev, artist: value }))}
                     />
                     <Dropdown
                         options={tattooStylesDropdownOptions}
-                        firstOptionText="All tattoo styles"
+                        firstOptionText={filtersData.styles}
                         value={filters.style}
                         onChange={value => setFilters(prev => ({ ...prev, style: value }))}
                     />
                     <Dropdown
                         options={tattooColorsDropdownOptions}
-                        firstOptionText="All tattoo colors"
+                        firstOptionText={filtersData.colors}
                         value={filters.color}
                         onChange={value => setFilters(prev => ({ ...prev, color: value }))}
                     />
                     <Button className={styles.btn} onClick={() => resetFiltersHandler()}>
-                        reset filters <AntiClockwiseIcon />
+                        {filtersData.reset} <AntiClockwiseIcon />
                     </Button>
                 </div>
                 <GalleryGrid data={filteredData} onClick={clickHandler} />
                 <FormSection title={formTitle} data={placeholdersData} button={button} />
             </Section>
-        </PageWrapper>
+        </>
     )
 }

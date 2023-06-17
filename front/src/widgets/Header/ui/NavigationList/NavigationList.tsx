@@ -1,5 +1,4 @@
 import { classNames } from "shared/lib/classNames/classNames"
-import { menuData } from "../../const/data"
 import styles from "./NavigationList.module.css"
 import { AppLink } from "shared/ui/AppLink/AppLink"
 import type { NavlistType } from "shared/const/firebaseVariables"
