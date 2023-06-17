@@ -1,0 +1,31 @@
+---
+import { IArtistsData, ILayoutData, IOtherData, fetchSectionData } from "shared/const/firebaseVariables";
+import i18next, { changeLanguage } from "i18next";
+import type { LanguageType } from "shared/types/types";
+import Layout from "layouts/Layout.astro";
+import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
+import { ArtistPage } from "pageComponents/ArtistPage/ArtistPage";
+
+changeLanguage("ru");
+
+const language = i18next.language as LanguageType;
+const layoutData = await fetchSectionData(language, "layout", true) as ILayoutData;
+const otherData = await fetchSectionData(language, "other", true) as IOtherData;
+const { sectionNames, formData, buttons } = otherData;
+const { cta } = buttons;
+export async function getStaticPaths() {
+    const language = i18next.language as LanguageType;
+    const artistsData = await fetchSectionData(language, "artists") as IArtistsData[];
+    return artistsData.map(item => ({
+        params: { artist: item.slug },
+        props: item
+    }));
+}
+const artist = Astro.props as IArtistsData;
+---
+
+<Layout>
+    <PageWrapper title={sectionNames.artists} main={layoutData.navlist[0].text}>
+        <ArtistPage client:load  formTitle={sectionNames.form} cta={cta} formData={formData} data={artist} />
+    </PageWrapper>
+</Layout>

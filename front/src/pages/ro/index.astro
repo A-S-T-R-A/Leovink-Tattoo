@@ -15,6 +15,7 @@ import { fetchSectionData, IStepData, addData, IServicesData, IArtistsData, IFaq
 changeLanguage("ro");
 
 const language = i18next.language as LanguageType;
+const defaultLanguage = "en" as LanguageType;
 const stepsData = await fetchSectionData(language, "steps") as IStepData[];
 const servicesData = await fetchSectionData(language, "services") as IServicesData[];
 const artistsData = await fetchSectionData(language, "artists") as IArtistsData[];
@@ -31,7 +32,7 @@ const { cta, showMore, viewGallery } = buttons;
     <Portfolio client:load title={portfolio} button={showMore}/>
     <Steps data={stepsData} title={steps} button={cta}/>
     <Services client:idle data={servicesData} title={services} button={cta}/>
-    <Artists client:idle data={artistsData} title={artists} button={viewGallery}/>
+    <Artists client:idle data={artistsData} title={artists} button={viewGallery} language={language} defaultLanguage={defaultLanguage}/>
     <Testimonials data={testimonialsData.slice(0,2)} title={testimonials} showMore={showMore} cta={cta}/>
     <Faq client:idle data={faqData} title={faq} button={showMore} />
     <FormSection data={formData} title={form} button={cta}/>
