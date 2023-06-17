@@ -19,7 +19,6 @@ export function ArtistCard({
     const { img, name, description, specialization, slug } = data
 
     function getLocalizedLink(slug: string) {
-        console.log(language, defaultLanguage)
         const path = "/" + slug
         if (language === defaultLanguage) return path
         return "/" + language + path
