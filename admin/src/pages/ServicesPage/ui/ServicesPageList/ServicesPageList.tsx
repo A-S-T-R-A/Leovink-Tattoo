@@ -9,11 +9,13 @@ export function ServicesPageList({ serviceData }: { serviceData: IServiceData[] 
             {serviceData.map((item, index) => (
                 <div className={styles.item} key={index}>
                     <div>id: {index + 1}</div>
-                    {item.img.map(img => {
-                        return <ModalImage className={styles.img} url={img} />
-                    })}
+                    <div className={styles.imgContainer}>
+                        {item.img.map(img => {
+                            return <ModalImage className={styles.img} url={img} />
+                        })}
+                    </div>
                     <div>title: {item.title}</div>
-                    <div className={styles.description}>description: {item.description}</div>
+                    <div className={styles.description}>Description: {item.description}</div>
                     <div className={styles.buttons}>
                         <EditParagraph serviceData={serviceData} />
                         <button>delete</button>
