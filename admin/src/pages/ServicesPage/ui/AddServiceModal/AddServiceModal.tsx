@@ -5,19 +5,19 @@ import { Input } from "shared/ui/Input/Input"
 import { Textarea } from "shared/ui/Textarea/Textarea"
 import styles from "./AddServiceModal.module.scss"
 import { Dropdown } from "shared/ui/Dropdown"
-import { Language } from "shared/types/types"
+import { LanguageType } from "shared/types/types"
 import { IServiceData } from "pages/ServicesPage/types/types"
 
 export function AddServiceModal({ serviceData }: { serviceData: IServiceData[] }) {
     const [data, setData] = useState({ id: 0, img: "", title: "", description: "" })
     const [isOpen, setIsOpen] = useState(false)
-    const [currentLanguage, setCurrentLanguage] = useState<Language>("en")
+    const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
 
     function onClose() {
         setIsOpen(false)
     }
 
-    function onChangeLanguage(lang: Language) {
+    function onChangeLanguage(lang: LanguageType) {
         setCurrentLanguage(lang)
     }
 

@@ -1,14 +1,14 @@
-import { Languages } from "pages/StepsPage/ui/Languages/Languages"
+import { Languages } from "shared/components/Languages/Languages"
 import { ReactNode } from "react"
-import { Language } from "shared/types/types"
+import { LanguageType } from "shared/types/types"
 import { Modal } from "shared/ui/Modal"
 
 interface IModalEditorWithTranslation {
     children: ReactNode
     isOpen: boolean
-    currentLanguage: Language
+    currentLanguage: LanguageType
     onClose: () => void
-    onChangeLanguage: (language: Language) => void
+    onChangeLanguage: (language: LanguageType) => void
 }
 
 export function ModalEditorWithTranslation(props: IModalEditorWithTranslation) {
