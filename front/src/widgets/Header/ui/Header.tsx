@@ -4,9 +4,10 @@ import logo from "shared/assets/images/logo.png"
 import { Navbar } from "./Navbar/Navbar"
 import { Burger } from "./Burger/Burger"
 import { classNames } from "shared/lib/classNames/classNames"
-import { Languages } from "./Languages/Languages"
+import type { LanguageType } from "../types/type"
+import type { NavlistType } from "shared/const/firebaseVariables"
 
-export function Header() {
+export function Header({ language, data }: { language: LanguageType; data: NavlistType }) {
     const [isScrolled, setIsScrolled] = useState(false)
 
     const scrollHandler = () => {
@@ -27,7 +28,7 @@ export function Header() {
                     <div className={styles.logoContainer}>
                         <img src={logo} className={styles.logo} alt="" />
                     </div>
-                    <Navbar className={styles.navbar} />
+                    <Navbar className={styles.navbar} language={language} data={data} />
                 </div>
             </div>
         </>

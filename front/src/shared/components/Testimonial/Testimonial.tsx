@@ -1,16 +1,21 @@
 import { Typography } from "shared/ui/Typography/Typography"
 import styles from "./Testimonial.module.scss"
-import video from "./const/testimonial.mp4"
-import poster from "./const/testimonial1.jpg"
 import { CtaButton } from "shared/components/CtaButton/CtaButton"
+import type { ITestimonialsData } from "shared/const/firebaseVariables"
 
 export function Testimonial({
     isReversed,
     isWithBorder,
+    data,
+    cta,
 }: {
+    data: ITestimonialsData
     isReversed?: boolean
     isWithBorder?: boolean
+    cta: string
 }) {
+    const { title, description, duration, artist, preview, video } = data
+
     return (
         <div
             className={styles.container}
@@ -20,28 +25,22 @@ export function Testimonial({
             }}
         >
             <div className={styles.videoContainer}>
-                <video src={video} poster={poster} controls />
+                <video src={video} poster={preview} controls />
             </div>
             <div className={styles.infoContainer}>
                 <Typography isBold className={styles.title}>
-                    Polynesian tribe tattoo
+                    {title}
                 </Typography>
-                <Typography className={styles.description}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, voluptas
-                    inventore voluptatibus fugit tenetur, numquam suscipit provident sequi nobis
-                    soluta ab laudantium esse dolor vitae est quae asperiores libero porro aut odit
-                    quia! Laborum, iure sint. Laboriosam error hic, natus quae esse dolor, voluptate
-                    sint explicabo quam, totam aspernatur cupiditate.
-                </Typography>
+                <Typography className={styles.description}>{description}</Typography>
                 <div className={styles.info}>
                     <Typography>
-                        <span className={styles.bold}>tattoo artist:</span> Nastia
+                        <span className={styles.bold}>tattoo artist:</span> {artist}
                     </Typography>
                     <Typography>
-                        <span className={styles.bold}>duration:</span> 14 hours
+                        <span className={styles.bold}>duration:</span> {duration}
                     </Typography>
                 </div>
-                <CtaButton />
+                <CtaButton text={cta} />
             </div>
         </div>
     )

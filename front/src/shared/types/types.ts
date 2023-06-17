@@ -12,10 +12,10 @@ interface IFaqQuestion {
     answer: string
 }
 
-export interface IFaqBlock {
+/* export interface IFaqBlock {
     id: number
     title: string
     questions: IFaqQuestion[]
-}
+} */
 
 export type DeviceType = "mobile" | "tablet" | "laptop" | "desktop" | "desktop4K"

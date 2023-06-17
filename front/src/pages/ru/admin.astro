@@ -1,0 +1,11 @@
+---
+import { changeLanguage } from "i18next";
+import Layout from "layouts/Layout.astro";
+import { Redirect } from "../../widgets/Redirect/Redirect";
+
+changeLanguage("ru");
+---
+
+<Layout>
+    <Redirect client:only="preact" />
+</Layout>

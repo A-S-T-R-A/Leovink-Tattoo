@@ -1,0 +1,24 @@
+---
+import i18next, { changeLanguage } from "i18next";
+import Layout from "layouts/Layout.astro";
+import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
+import { FormSection } from "widgets/FormSection/FormSection";
+import { FindUs } from "widgets/FindUs/FindUs";
+import type { LanguageType } from "widgets/Header";
+import { ILayoutData, IOtherData, fetchSectionData } from "shared/const/firebaseVariables";
+
+changeLanguage("ro");
+
+const language = i18next.language as LanguageType;
+const layoutData = await fetchSectionData(language, "layout", true) as ILayoutData;
+const otherData = await fetchSectionData(language, "other", true) as IOtherData;
+const { sectionNames, formData, buttons } = otherData;
+const { cta } = buttons;
+---
+
+<Layout>
+    <PageWrapper title={layoutData.navlist[3].text} main={layoutData.navlist[0].text}>
+        <FindUs />
+        <FormSection client:load title={sectionNames.form} button={cta} data={formData}/>
+    </PageWrapper>
+</Layout>
