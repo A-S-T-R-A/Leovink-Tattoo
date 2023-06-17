@@ -3,7 +3,7 @@ import styles from "./CtaButton.module.scss"
 import { ArrowDownIcon } from "shared/ui/Icons"
 import { classNames } from "shared/lib/classNames/classNames"
 
-export function CtaButton({ className }: { className?: string }) {
+export function CtaButton({ className, text }: { className?: string; text: string }) {
     function scrollToTarget() {
         const targetElement = document.getElementById("formSection")
         if (targetElement) {
@@ -17,7 +17,7 @@ export function CtaButton({ className }: { className?: string }) {
 
     return (
         <Button onClick={scrollToTarget} className={classNames(styles.btn, {}, [className])}>
-            Book an appointment
+            {text}
             <ArrowDownIcon className={styles.icon} />
         </Button>
     )

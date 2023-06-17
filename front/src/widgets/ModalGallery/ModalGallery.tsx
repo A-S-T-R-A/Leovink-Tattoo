@@ -12,6 +12,7 @@ import { useRef } from "preact/hooks"
 import { classNames } from "../../shared/lib/classNames/classNames"
 import type { ITattooImage } from "../../shared/types/types"
 import { ChevronDownIcon, PlusIcon } from "../../shared/ui/Icons"
+import { Typography } from "shared/ui/Typography/Typography"
 
 interface IModalGallery {
     isOpen: boolean
@@ -47,7 +48,14 @@ export function ModalGallery({ data, isOpen, onClose }: IModalGallery) {
                     const { id, img } = item
                     return (
                         <SwiperSlide key={id} className={styles.slide}>
-                            <img src={img} className={styles.img} />
+                            <div className={styles.slideContainer}>
+                                <img src={img} className={styles.img} />
+                                <div className={styles.descriptionContainer}>
+                                    <Typography className={styles.description}>
+                                        Lorem ipsum dolor sit amet.
+                                    </Typography>
+                                </div>
+                            </div>
                         </SwiperSlide>
                     )
                 })}

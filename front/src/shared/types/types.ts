@@ -6,16 +6,5 @@ export interface ITattooImage {
     color: string
 }
 
-interface IFaqQuestion {
-    id: number
-    question: string
-    answer: string
-}
-
-export interface IFaqBlock {
-    id: number
-    title: string
-    questions: IFaqQuestion[]
-}
-
 export type DeviceType = "mobile" | "tablet" | "laptop" | "desktop" | "desktop4K"
+export type LanguageType = "ro" | "en" | "ru"

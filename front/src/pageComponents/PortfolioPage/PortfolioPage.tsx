@@ -16,13 +16,30 @@ import { Section } from "shared/ui/Section/Section"
 import { Button } from "shared/ui/Button/Button"
 import { AntiClockwiseIcon } from "shared/ui/Icons"
 import { GalleryGrid } from "shared/components/GalleryGrid/GalleryGrid"
+import { data as dummyData } from "shared/const/data"
 
 interface IFilters {
     artist: string
     style: string
     color: string
 }
-export function PortfolioPage() {
+
+export function PortfolioPage({
+    formTitle,
+    placeholdersData,
+    button,
+    filtersData,
+}: {
+    filtersData: {
+        artists: string
+        styles: string
+        colors: string
+        reset: string
+    }
+    formTitle: string
+    placeholdersData: { name: string; phone: string }
+    button: string
+}) {
     const [isOpen, setIsOpen] = useState(false)
     const [data, setData] = useState<ITattooImage[]>([])
     const [filteredData, setFilteredData] = useState<ITattooImage[]>([])
@@ -55,12 +72,14 @@ export function PortfolioPage() {
     }
 
     async function fetch() {
-        const fetchedData: ITattooImage[] = []
+        /*  const fetchedData: ITattooImage[] = []
         const q = query(portfolioPicturesRef, (where("isLive", "==", true), orderBy("id", "asc")))
         const d = await getDocs(q)
         d.forEach(doc => {
             fetchedData.push(doc.data() as ITattooImage)
-        })
+        }) */
+
+        const fetchedData = dummyData
 
         setData(fetchedData)
         setModalData(fetchedData)
@@ -72,35 +91,35 @@ export function PortfolioPage() {
     }, [])
 
     return (
-        <PageWrapper title="Portfolio">
+        <>
             <ModalGallery data={modalData} isOpen={isOpen} onClose={() => setIsOpen(false)} />
             <Section>
                 <div className={styles.filters}>
                     <Dropdown
                         options={tattooArtistsDropdownOptions}
-                        firstOptionText="All tattoo artists"
+                        firstOptionText={filtersData.artists}
                         value={filters.artist}
                         onChange={value => setFilters(prev => ({ ...prev, artist: value }))}
                     />
                     <Dropdown
                         options={tattooStylesDropdownOptions}
-                        firstOptionText="All tattoo styles"
+                        firstOptionText={filtersData.styles}
                         value={filters.style}
                         onChange={value => setFilters(prev => ({ ...prev, style: value }))}
                     />
                     <Dropdown
                         options={tattooColorsDropdownOptions}
-                        firstOptionText="All tattoo colors"
+                        firstOptionText={filtersData.colors}
                         value={filters.color}
                         onChange={value => setFilters(prev => ({ ...prev, color: value }))}
                     />
                     <Button className={styles.btn} onClick={() => resetFiltersHandler()}>
-                        reset filters <AntiClockwiseIcon />
+                        {filtersData.reset} <AntiClockwiseIcon />
                     </Button>
                 </div>
                 <GalleryGrid data={filteredData} onClick={clickHandler} />
-                <FormSection />
+                <FormSection title={formTitle} data={placeholdersData} button={button} />
             </Section>
-        </PageWrapper>
+        </>
     )
 }

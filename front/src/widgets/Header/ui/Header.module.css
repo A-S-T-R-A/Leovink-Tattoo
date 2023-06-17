@@ -24,19 +24,6 @@
     align-items: center;
 }
 
-.logoContainer {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 100px;
-    margin-left: 20px;
-}
-
-.logo {
-    width: 100%;
-    position: relative;
-}
-
 @media (max-width: 961px) {
     .logoContainer {
         position: fixed;

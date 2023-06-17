@@ -5,22 +5,27 @@ import "swiper/scss/navigation"
 import "swiper/scss/pagination"
 import "swiper/scss/scrollbar"
 import { Swiper, SwiperSlide } from "swiper/react"
-import SwiperCore from "swiper"
-import { Swiper as SwiperClass } from "swiper/types"
 import { Pagination, Navigation } from "swiper"
 import { ArtistCard } from "./ArtistCard/ArtistCard"
-import { data } from "./const/data"
 import { classNames } from "shared/lib/classNames/classNames"
+import type { IArtistsData } from "shared/const/firebaseVariables"
+import type { LanguageType } from "shared/types/types"
 
-export function Artists() {
+export function Artists({
+    data,
+    title,
+    button,
+    language,
+    defaultLanguage,
+}: {
+    data: IArtistsData[]
+    title: string
+    button: string
+    language: LanguageType
+    defaultLanguage: LanguageType
+}) {
     return (
-        <Section title="Artists">
-            {/* <div className={styles.listContainer}>
-                {data.map(item => (
-                    <ArtistCard key={item.id} data={item} />
-                ))}
-            </div> */}
-
+        <Section title={title}>
             <Swiper
                 spaceBetween={20}
                 slidesPerView={1}
@@ -30,16 +35,17 @@ export function Artists() {
                     769: { slidesPerView: 3 },
                     1200: { slidesPerView: 4 },
                 }}
-                /*  onSwiper={swiper => (swiperRef.current = swiper)}
-                pagination={{
-                    clickable: true,
-                }} */
                 className={classNames(styles.swiper, {}, ["pagination"])}
             >
                 {data.map(item => {
                     return (
-                        <SwiperSlide key={item.id} className={styles.slide}>
-                            <ArtistCard key={item.id} data={item} />
+                        <SwiperSlide className={styles.slide}>
+                            <ArtistCard
+                                data={item}
+                                button={button}
+                                language={language}
+                                defaultLanguage={defaultLanguage}
+                            />
                         </SwiperSlide>
                     )
                 })}
