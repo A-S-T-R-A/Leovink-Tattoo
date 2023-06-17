@@ -8,6 +8,7 @@ import { classNames } from "shared/lib/classNames/classNames"
 import { CtaButton } from "shared/components/CtaButton/CtaButton"
 import { ArrowDownIcon } from "shared/ui/Icons"
 import type { IServicesData } from "shared/const/firebaseVariables"
+import { ModalImage } from "shared/components/ModalImage/ModalImage"
 
 export function Services({
     data,
@@ -71,7 +72,7 @@ export function Services({
                                         </Typography>
                                         <div className={styles.imgContainer}>
                                             {images.map(image => {
-                                                return <img src={image} alt="pic" />
+                                                return <ModalImage url={image} />
                                             })}
                                         </div>
                                         <CtaButton className={styles.btn} text={button} />
