@@ -27,3 +27,5 @@ export interface IFaqBlock {
     title: string
     questions: IFaqQuestion[]
 }
+
+export type LanguageType = "ro" | "en" | "ru"
