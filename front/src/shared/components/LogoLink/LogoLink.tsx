@@ -13,9 +13,7 @@ export function LogoLink({
         if (language === defaultLanguage) return "/"
         return "/" + language + "/"
     }
-
-    console.log(defaultLanguage)
-
+    
     return (
         <a href={getLogoLink(language)} className={styles.logoContainer}>
             <img src={logo} className={styles.logo} alt="" />
