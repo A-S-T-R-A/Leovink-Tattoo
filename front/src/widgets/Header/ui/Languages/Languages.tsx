@@ -2,7 +2,7 @@ import { GreatBritianFlag, MoldovaRepublicFlag, RussiaFlag } from "shared/ui/Ico
 import styles from "./Languages.module.scss"
 import { classNames } from "shared/lib/classNames/classNames"
 import { useEffect, useRef, useState } from "preact/hooks"
-import type { LanguageType } from "../../types/type"
+import type { LanguageType } from "shared/types/types"
 
 export function Languages({ className, language }: { className?: string; language: LanguageType }) {
     const [dropdownOpen, setDropdownOpen] = useState(false)

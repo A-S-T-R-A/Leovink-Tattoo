@@ -4,7 +4,7 @@ import logo from "shared/assets/images/logo.png"
 import { Navbar } from "./Navbar/Navbar"
 import { Burger } from "./Burger/Burger"
 import { classNames } from "shared/lib/classNames/classNames"
-import type { LanguageType } from "../types/type"
+import type { LanguageType } from "shared/types/types"
 import type { NavlistType } from "shared/const/firebaseVariables"
 
 export function Header({ language, data }: { language: LanguageType; data: NavlistType }) {

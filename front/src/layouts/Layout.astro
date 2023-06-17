@@ -2,9 +2,9 @@
 import { Header } from "widgets/Header"
 import { Footer } from "widgets/Footer/Footer";
 import i18next from "i18next";
-import type {LanguageType} from 'widgets/Header' //change
 import { ILayoutData, fetchSectionData } from "shared/const/firebaseVariables";
 import "./Layout.scss"
+import type { LanguageType } from "shared/types/types";
 
 const language =  i18next.language as LanguageType
 const layoutData = await fetchSectionData(language, "layout",true) as ILayoutData;
