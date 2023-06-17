@@ -4,7 +4,15 @@ import { ArrowLeftIcon } from "shared/ui/Icons"
 import styles from "./PageWrapper.module.scss"
 import { AppLink } from "shared/ui/AppLink/AppLink"
 
-export function PageWrapper({ children, title }: { children: ComponentChildren; title: string }) {
+export function PageWrapper({
+    children,
+    title,
+    main,
+}: {
+    children: ComponentChildren
+    title: string
+    main: string
+}) {
     return (
         <div className={styles.wrapper}>
             <div className={styles.header}>
@@ -17,7 +25,7 @@ export function PageWrapper({ children, title }: { children: ComponentChildren; 
                     {title}
                 </Typography>
                 <AppLink className={styles.back} to="/">
-                    <ArrowLeftIcon /> BACK
+                    <ArrowLeftIcon /> {main}
                 </AppLink>
             </div>
 

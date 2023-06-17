@@ -1,0 +1,28 @@
+---
+import i18next, { changeLanguage } from "i18next";
+import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
+import { Section } from "shared/ui/Section/Section";
+import { FormSection } from "widgets/FormSection/FormSection";
+import { TestimonialPage } from "pageComponents/TestimonialsPage/TestimonialsPage";
+import Layout from "layouts/Layout.astro";
+import type { LanguageType } from "shared/types/types";
+import { ILayoutData, IOtherData, ITestimonialsData, fetchSectionData } from "shared/const/firebaseVariables";
+
+changeLanguage("ro");
+
+const language = i18next.language as LanguageType;
+const testimonialsData = await fetchSectionData(language, "testimonials") as ITestimonialsData[];
+const layoutData = await fetchSectionData(language, "layout", true) as ILayoutData;
+const otherData = await fetchSectionData(language, "other", true) as IOtherData;
+const { sectionNames, formData, buttons } = otherData;
+const { cta } = buttons;
+---
+
+<Layout>
+    <PageWrapper title={layoutData.navlist[4].text} main={layoutData.navlist[0].text}>
+        <Section>
+            <TestimonialPage client:load cta={cta} data={testimonialsData}/>
+        </Section>
+        <FormSection client:load title={sectionNames.form} button={cta} data={formData}/>
+    </PageWrapper>
+</Layout>

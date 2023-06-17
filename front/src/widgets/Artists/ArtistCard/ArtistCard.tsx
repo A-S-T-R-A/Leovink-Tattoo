@@ -1,11 +1,29 @@
 import { Typography } from "shared/ui/Typography/Typography"
-import type { IArtistData } from "../types/types"
 import styles from "./ArtistCard.module.scss"
 import { AppLink } from "shared/ui/AppLink/AppLink"
 import { ArrowDownIcon } from "shared/ui/Icons"
+import type { IArtistsData } from "shared/const/firebaseVariables"
+import type { LanguageType } from "shared/types/types"
 
-export function ArtistCard({ data }: { data: IArtistData }) {
-    const { img, name, description, specialization } = data
+export function ArtistCard({
+    data,
+    button,
+    language,
+    defaultLanguage,
+}: {
+    data: IArtistsData
+    button: string
+    language: LanguageType
+    defaultLanguage: LanguageType
+}) {
+    const { img, name, description, specialization, slug } = data
+
+    function getLocalizedLink(slug: string) {
+        console.log(language, defaultLanguage)
+        const path = "/" + slug
+        if (language === defaultLanguage) return path
+        return "/" + language + path
+    }
 
     return (
         <div className={styles.container}>
@@ -19,8 +37,8 @@ export function ArtistCard({ data }: { data: IArtistData }) {
             <Typography variant="h5" component="s" className={styles.description}>
                 {description}
             </Typography>
-            <AppLink to="/artist" className={styles.view}>
-                view gallery <ArrowDownIcon />
+            <AppLink to={getLocalizedLink(slug)} className={styles.view}>
+                {button} <ArrowDownIcon />
             </AppLink>
         </div>
     )

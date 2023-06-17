@@ -1,11 +1,11 @@
 import { useState } from "preact/hooks"
-import type { IFaqBlock } from "shared/types/types"
 import styles from "./FaqBlock.module.scss"
 import { Typography } from "shared/ui/Typography/Typography"
 import { PlusIcon } from "shared/ui/Icons"
 import { classNames } from "shared/lib/classNames/classNames"
+import type { IFaqData } from "shared/const/firebaseVariables"
 
-export function FaqBlock({ data, isWithoutTitle }: { data: IFaqBlock; isWithoutTitle?: boolean }) {
+export function FaqBlock({ data, isWithoutTitle }: { data: IFaqData; isWithoutTitle?: boolean }) {
     const { title, questions } = data
     const [expandedQuestions, setExpandedQuestions] = useState<number[]>([])
 

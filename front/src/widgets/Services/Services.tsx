@@ -7,8 +7,17 @@ import styles from "./Services.module.scss"
 import { classNames } from "shared/lib/classNames/classNames"
 import { CtaButton } from "shared/components/CtaButton/CtaButton"
 import { ArrowDownIcon } from "shared/ui/Icons"
+import type { IServicesData } from "shared/const/firebaseVariables"
 
-export function Services() {
+export function Services({
+    data,
+    title,
+    button,
+}: {
+    data: IServicesData[]
+    title: string
+    button: string
+}) {
     const [open, setOpen] = useState<number>(-1)
 
     function clickHandler(index: number) {
@@ -20,10 +29,10 @@ export function Services() {
     }
 
     return (
-        <Section title="Services">
+        <Section title={title}>
             <ul className={styles.servicesContainer}>
-                {servicesData.map((services, index) => {
-                    const { service, imgs, text } = services
+                {data.map((item, index) => {
+                    const { title, images, description } = item
 
                     return (
                         <>
@@ -33,7 +42,7 @@ export function Services() {
                                     onClick={() => clickHandler(index)}
                                 >
                                     <Typography className={styles.title}>
-                                        0{index + 1}. {service}
+                                        0{index + 1}. {title}
                                         <ArrowDownIcon
                                             className={classNames(
                                                 styles.arrowIcon,
@@ -58,14 +67,14 @@ export function Services() {
                                             className={styles.description}
                                             color="lightgray"
                                         >
-                                            {text}
+                                            {description}
                                         </Typography>
                                         <div className={styles.imgContainer}>
-                                            {imgs.map(image => {
+                                            {images.map(image => {
                                                 return <img src={image} alt="pic" />
                                             })}
                                         </div>
-                                        <CtaButton className={styles.btn} />
+                                        <CtaButton className={styles.btn} text={button} />
                                     </div>
                                 </div>
                             </li>

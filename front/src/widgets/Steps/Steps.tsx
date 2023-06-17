@@ -1,32 +1,26 @@
 import { Section } from "shared/ui/Section/Section"
 import styles from "./Steps.module.scss"
 import { Typography } from "shared/ui/Typography/Typography"
-import { stepsData } from "./const/data"
 import { CtaButton } from "shared/components/CtaButton/CtaButton"
+import type { IStepData } from "shared/const/firebaseVariables"
 
-export function Steps() {
-    /* const stepsInfo = stepsData.map(item => {
-        const { id, step, title, img } = item
-        return (
-            <>
-                <div key={id} className={styles.imgContainer}>
-                    <img src={img} alt="step" className={styles.img} />
-                </div>
-                <Typography>
-                    {step}. {title}
-                </Typography>
-            </>
-        )
-    })  */
-
+export function Steps({
+    data = [],
+    title,
+    button,
+}: {
+    data: IStepData[]
+    title: string
+    button: string
+}) {
     return (
-        <Section title="How It Works">
+        <Section title={title}>
             <div className={styles.container}>
-                {stepsData.map(item => {
-                    const { id, step, title, img, description } = item
+                {data.map((item, index) => {
+                    const { title, img, description } = item
                     return (
                         <div className={styles.stepContainer}>
-                            <div key={id} className={styles.imgContainer}>
+                            <div key={index} className={styles.imgContainer}>
                                 <img src={img} alt="step" className={styles.img} />
                             </div>
                             <Typography
@@ -35,7 +29,7 @@ export function Steps() {
                                 component="xl"
                                 color="base"
                             >
-                                {step}. {title}
+                                {"0" + (index + 1)}. {title}
                             </Typography>
                             <Typography
                                 className={styles.description}
@@ -48,7 +42,21 @@ export function Steps() {
                     )
                 })}
             </div>
-            <CtaButton className={styles.btn} />
+            <CtaButton className={styles.btn} text={button} />
         </Section>
     )
 }
+
+/* const stepsInfo = stepsData.map(item => {
+        const { id, step, title, img } = item
+        return (
+            <>
+                <div key={id} className={styles.imgContainer}>
+                    <img src={img} alt="step" className={styles.img} />
+                </div>
+                <Typography>
+                    {step}. {title}
+                </Typography>
+            </>
+        )
+    })  */
