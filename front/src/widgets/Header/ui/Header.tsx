@@ -32,7 +32,12 @@ export function Header({
 
     return (
         <>
-            <Burger className={styles.burger} />
+            <Burger
+                language={language}
+                defaultLanguage={defaultLanguage}
+                className={styles.burger}
+                data={data}
+            />
             <div className={classNames(styles.wrapper, { [styles.blur]: isScrolled })}>
                 <div className={styles.container}>
                     {children}

@@ -5,8 +5,20 @@ import styles from "./Burger.module.scss"
 import { SocialIcons } from "shared/components/SocialIcons/SocialIcons"
 import { disableScroll } from "shared/lib/disableScroll/disableScroll"
 import { Languages } from "../Languages/Languages"
+import type { LanguageType } from "shared/types/types"
+import type { NavlistType } from "shared/const/firebaseVariables"
 
-export function Burger({ className }: { className?: string }) {
+export function Burger({
+    className,
+    language,
+    defaultLanguage,
+    data,
+}: {
+    className?: string
+    language: LanguageType
+    defaultLanguage: LanguageType
+    data: NavlistType
+}) {
     const [isBurgerVisible, setIsBurgerVisible] = useState(false)
 
     function toggleBurger() {
@@ -18,9 +30,13 @@ export function Burger({ className }: { className?: string }) {
 
     return (
         <>
-            <Languages className={styles.languages} />
+            <Languages
+                language={language}
+                defaultLanguage={defaultLanguage}
+                className={styles.languages}
+            />
             <BurgerIcon className={className} onClick={toggleBurger} isOpen={isBurgerVisible} />
-            <BurgerModal isOpen={isBurgerVisible} onClose={toggleBurger} />
+            <BurgerModal data={data} isOpen={isBurgerVisible} onClose={toggleBurger} />
         </>
     )
 }
@@ -43,7 +59,15 @@ function BurgerIcon(props: { className?: string; onClick: () => void; isOpen: bo
     )
 }
 
-function BurgerModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+function BurgerModal({
+    isOpen,
+    onClose,
+    data,
+}: {
+    isOpen: boolean
+    onClose: () => void
+    data: NavlistType
+}) {
     return (
         <>
             <div
@@ -53,7 +77,7 @@ function BurgerModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
 
             <div className={classNames(styles.wrapper, { [styles.navOpen]: isOpen })}>
                 <div className={styles.container}>
-                    <NavigationList closeClickHandler={onClose} />
+                    <NavigationList data={data} closeClickHandler={onClose} />
                     <SocialIcons />
                 </div>
             </div>
