@@ -1,13 +1,23 @@
 .container {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
 }
 
 .card {
     display: flex;
+    flex-direction: column;
     gap: 20px;
 
     .left {
-        width: 350px;
+        max-width: 350px;
+
+        img {
+            width: 100%;
+            min-width: 200px;
+        }
     }
 
     .right {
@@ -15,11 +25,24 @@
 
         .name {
             text-transform: uppercase;
-            margin-bottom: 20px;
+            margin: 10px 0;
         }
 
         .specialization {
             margin-bottom: 15px;
         }
+    }
+}
+
+@media (min-width: 960px) {
+    .container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+@media (min-width: 1200px) {
+    .card {
+        flex-direction: row;
     }
 }
