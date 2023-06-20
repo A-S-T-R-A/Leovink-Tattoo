@@ -4,6 +4,7 @@ import {
     DocumentData,
     addDoc,
     collection,
+    deleteDoc,
     doc,
     getDocs,
     query,
@@ -40,7 +41,9 @@ export async function getImagesDoc() {
 export async function rewriteImagesDoc(data: any) {
     const d = await getImagesDoc()
     if (!d) return
-    await updateDoc(doc(db, PORTFOLIO_PICTURES_DB, d.id), data)
+    const ref = collection(db, PORTFOLIO_PICTURES_DB)
+    await deleteDoc(doc(db, PORTFOLIO_PICTURES_DB, d.id))
+    await addDoc(ref, data)
 }
 
 export function reformatObjectValuesToArray(obj: any): any[] {
