@@ -14,20 +14,17 @@ import { fetchSectionData, IStepData, fetchImagesData, IServicesData, IArtistsDa
 
 changeLanguage("en");
 
-
-const imagesData = await fetchImagesData() as IImagesData[]
+const imagesData = await fetchImagesData() as IImagesData[];
 const language = i18next.language as LanguageType;
-const defaultLanguage = "en" as LanguageType;
 const stepsData = await fetchSectionData(language, "steps") as IStepData[];
 const servicesData = await fetchSectionData(language, "services") as IServicesData[];
 const artistsData = await fetchSectionData(language, "artists") as IArtistsData[];
 const faqData = await fetchSectionData(language, "faq") as IFaqData[];
 const testimonialsData = await fetchSectionData(language, "testimonials") as ITestimonialsData[];
 const otherData = await fetchSectionData(language, "other", true) as IOtherData;
-const { formData, sectionNames, buttons } = otherData;
+const { formData, sectionNames, buttons, defaultLanguage } = otherData;
 const { portfolio, steps, services, artists, testimonials, faq, form } = sectionNames;
 const { cta, showMore, viewGallery } = buttons;
-
 ---
 
 <Layout>

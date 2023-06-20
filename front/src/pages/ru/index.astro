@@ -10,27 +10,27 @@ import { Faq } from "../../widgets/Faq/Faq";
 import { FormSection } from "../../widgets/FormSection/FormSection";
 import type { LanguageType } from "shared/types/types";
 import i18next, { changeLanguage } from "i18next";
-import { fetchSectionData, IStepData, addData, IServicesData, IArtistsData, IFaqData, ITestimonialsData, IOtherData } from "../../shared/const/firebaseVariables";
+import { fetchSectionData, IStepData, fetchImagesData, IServicesData, IArtistsData, IFaqData, ITestimonialsData, IOtherData, IImagesData } from "../../shared/const/firebaseVariables";
 
 changeLanguage("ru");
 
+const imagesData = await fetchImagesData() as IImagesData[];
 const language = i18next.language as LanguageType;
-const defaultLanguage = "en" as LanguageType;
 const stepsData = await fetchSectionData(language, "steps") as IStepData[];
 const servicesData = await fetchSectionData(language, "services") as IServicesData[];
 const artistsData = await fetchSectionData(language, "artists") as IArtistsData[];
 const faqData = await fetchSectionData(language, "faq") as IFaqData[];
 const testimonialsData = await fetchSectionData(language, "testimonials") as ITestimonialsData[];
 const otherData = await fetchSectionData(language, "other", true) as IOtherData;
-const { formData, sectionNames, buttons } = otherData;
+const { formData, sectionNames, buttons, defaultLanguage } = otherData;
 const { portfolio, steps, services, artists, testimonials, faq, form } = sectionNames;
 const { cta, showMore, viewGallery } = buttons;
 ---
 
 <Layout>
     <Main client:load />
-    <Portfolio client:load title={portfolio} button={showMore}/>
-    <Steps data={stepsData} title={steps} button={cta}/>
+    <Portfolio client:idle title={portfolio} button={showMore} fetchedData={imagesData} language={language}/>
+    <Steps client:load data={stepsData} title={steps} button={cta}/>
     <Services client:idle data={servicesData} title={services} button={cta}/>
     <Artists client:idle data={artistsData} title={artists} button={viewGallery} language={language} defaultLanguage={defaultLanguage}/>
     <Testimonials data={testimonialsData.slice(0,2)} title={testimonials} showMore={showMore} cta={cta}/>

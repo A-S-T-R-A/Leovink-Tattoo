@@ -8,7 +8,7 @@ import type { LanguageType } from "shared/types/types";
 
 changeLanguage("en");
 
-const imagesData = await fetchImagesData() as IImagesData[]
+const imagesData = await fetchImagesData() as IImagesData[];
 const language = i18next.language as LanguageType;
 const layoutData = await fetchSectionData(language, "layout", true) as ILayoutData;
 const otherData = await fetchSectionData(language, "other", true) as IOtherData;

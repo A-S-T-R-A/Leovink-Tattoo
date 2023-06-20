@@ -8,13 +8,8 @@ import { ArtistPage } from "pageComponents/ArtistPage/ArtistPage";
 
 changeLanguage("en");
 
-const imagesData = await fetchImagesData() as IImagesData[]
-const language = i18next.language as LanguageType;
-const layoutData = await fetchSectionData(language, "layout", true) as ILayoutData;
-const otherData = await fetchSectionData(language, "other", true) as IOtherData;
-const { sectionNames, formData, buttons } = otherData;
-const { cta } = buttons;
 export async function getStaticPaths() {
+    changeLanguage("en");
     const language = i18next.language as LanguageType;
     const artistsData = await fetchSectionData(language, "artists") as IArtistsData[];
     return artistsData.map(item => ({
@@ -22,6 +17,12 @@ export async function getStaticPaths() {
         props: item
     }));
 }
+const imagesData = await fetchImagesData() as IImagesData[];
+const language = i18next.language as LanguageType;
+const layoutData = await fetchSectionData(language, "layout", true) as ILayoutData;
+const otherData = await fetchSectionData(language, "other", true) as IOtherData;
+const { sectionNames, formData, buttons } = otherData;
+const { cta } = buttons;
 const artist = Astro.props as IArtistsData;
 ---
 
