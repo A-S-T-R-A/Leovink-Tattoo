@@ -55,7 +55,7 @@ export function sortObjectData(obj: any): any {
     const sortedObject: any = {}
 
     for (const key of sortedKeys) {
-        sortedObject[key] = { id: [key], ...obj[key] }
+        sortedObject[key] = { id: +key, ...obj[key] }
     }
 
     return sortedObject

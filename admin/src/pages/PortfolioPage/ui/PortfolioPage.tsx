@@ -38,6 +38,8 @@ export function PortfolioPage() {
         fetch()
     }, [])
 
+    console.log(data)
+
     const filteredData = useMemo(() => {
         return data
             .filter(item =>

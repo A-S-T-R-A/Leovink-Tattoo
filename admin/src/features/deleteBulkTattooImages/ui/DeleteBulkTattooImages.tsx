@@ -3,7 +3,9 @@ import {
     TATTOO_IMAGES_BUCKET,
     getFirestoreDocumentByFileId,
     getFirestoreDocumentById,
+    getImagesDoc,
     portfolioPicturesRef,
+    rewriteImagesDoc,
 } from "shared/const/firebaseVariables"
 import { deleteObject, getStorage, ref } from "firebase/storage"
 import { deleteDoc, getDocs, query, updateDoc, where } from "firebase/firestore"
@@ -11,6 +13,7 @@ import { useIsAdmin } from "features/authByGoogle"
 import { Modal } from "shared/ui/Modal"
 import { useEffect, useState } from "react"
 import { disableUi } from "shared/lib/disableUi/disableUi"
+import { images } from "shared/const/images"
 
 export function DeleteBulkTattooImages({
     imagesId,
@@ -22,7 +25,6 @@ export function DeleteBulkTattooImages({
     unselectAllHandler: () => void
 }) {
     const [isLoading, setIsLoading] = useState(false)
-
     useEffect(() => {
         isLoading ? disableUi.disable() : disableUi.enable()
     }, [isLoading])
@@ -40,7 +42,27 @@ export function DeleteBulkTattooImages({
 
         setIsLoading(true)
 
-        const deletePromises = imagesId.map(async item => {
+        const currentDoc = await getImagesDoc()
+        if (!currentDoc) return
+        const currentData = currentDoc.data()
+        const newData = {}
+        let i = 0
+
+        for (let i = 0; i < imagesId.length; i++) {
+            const currentImg = currentData[imagesId[i]]
+            const imgName = getImageNameByUrl(currentImg.img)
+            const imgRef = ref(storage, `${TATTOO_IMAGES_BUCKET}/${imgName}`)
+            await deleteObject(imgRef)
+        }
+
+        Object.keys(currentData).forEach(key => {
+            if (!imagesId.includes(+key)) {
+                newData[i] = currentData[key]
+                i++
+            }
+        })
+
+        /* const deletePromises = imagesId.map(async item => {
             try {
                 const file = await getFirestoreDocumentById(item, portfolioPicturesRef)
                 const imgLink = file.data().img
@@ -76,7 +98,10 @@ export function DeleteBulkTattooImages({
                 return new Promise(res => res(true))
             })
 
-            await Promise.all(updateIdPromises)
+            await Promise.all(updateIdPromises) */
+
+        try {
+            await rewriteImagesDoc(newData)
             alert("Delete Success")
         } catch (error) {
             alert("Delete Error")
