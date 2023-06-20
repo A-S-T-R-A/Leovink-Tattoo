@@ -20,10 +20,10 @@ export function GalleryGrid({ data, onClick, maxHeight = "auto" }: IGalleryGrid)
         >
             <div className={styles.gridContainer}>
                 {data.map((item, index) => {
-                    const { id, img } = item
+                    const { img } = item
                     return (
                         <div
-                            key={id}
+                            key={index}
                             className={styles.imgContainer}
                             onClick={() => onClick?.(index)}
                         >

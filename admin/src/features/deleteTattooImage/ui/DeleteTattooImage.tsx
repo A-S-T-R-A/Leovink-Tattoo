@@ -1,14 +1,11 @@
-import { deleteDoc, getDocs, query, updateDoc, where } from "firebase/firestore"
 import { getStorage, ref, deleteObject } from "firebase/storage"
 import { getImageNameByUrl } from "../lib/getImageNameByUrl"
 import {
     TATTOO_IMAGES_BUCKET,
-    getFirestoreDocumentByFileId,
-    getFirestoreDocumentById,
-    portfolioPicturesRef,
+    getImagesDoc,
+    rewriteImagesDoc,
 } from "shared/const/firebaseVariables"
-import { useEffect, useState } from "react"
-import { disableUi } from "shared/lib/disableUi/disableUi"
+import { useState } from "react"
 import { Modal } from "shared/ui/Modal"
 
 export function DeleteTattooImage({
@@ -22,10 +19,6 @@ export function DeleteTattooImage({
 }) {
     const [isLoading, setIsLoading] = useState(false)
 
-    /*   useEffect(() => {
-        isLoading ? disableUi.disable() : disableUi.enable()
-    }, [isLoading]) */
-
     const storage = getStorage()
 
     async function clickHandler() {
@@ -33,39 +26,32 @@ export function DeleteTattooImage({
 
         setIsLoading(true)
         try {
-            const file = await getFirestoreDocumentById(id, portfolioPicturesRef)
-            const imgLink = file.data().img
-            const imgName = getImageNameByUrl(imgLink)
+            const currentDoc = await getImagesDoc()
+            if (!currentDoc) return
+            const currentData = currentDoc.data()
+            const currentImg = currentData[id]
+
+            const imgName = getImageNameByUrl(currentImg.img)
             const imgRef = ref(storage, `${TATTOO_IMAGES_BUCKET}/${imgName}`)
-
             await deleteObject(imgRef)
-            await deleteDoc(getFirestoreDocumentByFileId(file.id))
-            const nq = query(portfolioPicturesRef, where("id", ">", id))
-            const nd = await getDocs(nq)
-            if (nd.empty) {
-                alert("Delete Success")
-                unselectAllHandler()
-                triggerRefetch?.()
-                setIsLoading(false)
-                return
-            }
 
-            const updateIdPromises = nd.docs.map(async (item, index) => {
-                await updateDoc(getFirestoreDocumentByFileId(item.id), {
-                    id: id + index,
-                })
-                return new Promise(res => res(true))
+            const queue = Object.keys(currentData)
+                .sort((a, b) => +a - +b)
+                .slice(+id)
+
+            const newData = { ...currentData }
+            queue.forEach(itemId => {
+                newData[+itemId] = currentData[+itemId + 1]
             })
+            delete newData[queue[queue.length - 1]]
 
-            await Promise.all(updateIdPromises)
+            await rewriteImagesDoc(newData)
             alert("Delete Success")
-            unselectAllHandler()
-            triggerRefetch?.()
         } catch (error) {
             alert("Delete Error")
-            unselectAllHandler()
-            triggerRefetch?.()
         }
+        unselectAllHandler()
+        triggerRefetch?.()
         setIsLoading(false)
     }
 

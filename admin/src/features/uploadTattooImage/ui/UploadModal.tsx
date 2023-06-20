@@ -5,9 +5,14 @@ import { Filepond } from "./Filepond/Filepond"
 import { Button } from "shared/ui/Button/Button"
 import { FilePondFile } from "filepond"
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
-import { storage } from "../../../../firebase"
-import { addDoc, getDocs, orderBy, query } from "firebase/firestore"
-import { TATTOO_IMAGES_BUCKET, portfolioPicturesRef } from "shared/const/firebaseVariables"
+import { db, storage } from "../../../../firebase"
+import { addDoc, collection, doc, getDocs, orderBy, query, updateDoc } from "firebase/firestore"
+import {
+    PORTFOLIO_PICTURES_DB,
+    TATTOO_IMAGES_BUCKET,
+    getImagesDoc,
+    portfolioPicturesRef,
+} from "shared/const/firebaseVariables"
 import { ITattooImage } from "shared/types/types"
 import { disableUi } from "shared/lib/disableUi/disableUi"
 
@@ -20,13 +25,6 @@ export function UploadModal({ triggerRefetch }: { triggerRefetch: () => void }) 
     useEffect(() => {
         isLoading ? disableUi.disable() : disableUi.enable()
     }, [isLoading])
-
-    async function getLastId() {
-        const q = query(portfolioPicturesRef, orderBy("id", "asc"))
-        const d = await getDocs(q)
-
-        return d.docs.pop()?.data().id || 0
-    }
 
     async function uploadImagesToBucket(files: FilePondFile[]): Promise<string[]> {
         const uploadPromises = files.map((item, index) => {
@@ -79,20 +77,30 @@ export function UploadModal({ triggerRefetch }: { triggerRefetch: () => void }) 
     }
 
     async function uploadImagesToDatabase(images: string[]) {
+        const currentDoc = await getImagesDoc()
+        if (!currentDoc) return
+        const currentData = currentDoc.data()
+        const docLength = Object.keys(currentData).length || 0
+
         const uploadPromises = images.map(async (item, index) => {
-            const newId = (await getLastId()) + index + 1
+            const newId = docLength + index
 
             return new Promise((res, rej) => {
-                const schema: ITattooImage = {
-                    artist: "",
-                    color: "",
-                    id: newId,
-                    img: item,
-                    style: "",
-                    isLive: false,
+                const newData = {
+                    [newId]: {
+                        img: item,
+                        alt: { en: "", ro: "", ru: "" },
+                        artist: "",
+                        style: "",
+                        color: "",
+                        isLive: false,
+                    },
                 }
 
-                addDoc(portfolioPicturesRef, schema)
+                updateDoc(doc(db, PORTFOLIO_PICTURES_DB, currentDoc.id), {
+                    ...currentData,
+                    ...newData,
+                })
                     .then(() => res(true))
                     .catch(err => alert("error uploading to database"))
             })

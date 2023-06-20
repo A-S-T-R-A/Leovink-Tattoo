@@ -6,7 +6,7 @@ import type { ITattooImage } from "shared/types/types"
 import { FormSection } from "widgets/FormSection/FormSection"
 import styles from "./PortfolioPage.module.scss"
 import { getDocs, orderBy, query, where } from "firebase/firestore"
-import { portfolioPicturesRef } from "shared/const/firebaseVariables"
+import { IImagesData, portfolioPicturesRef } from "shared/const/firebaseVariables"
 import {
     tattooArtistsDropdownOptions,
     tattooColorsDropdownOptions,
@@ -29,6 +29,7 @@ export function PortfolioPage({
     placeholdersData,
     button,
     filtersData,
+    fetchedData,
 }: {
     filtersData: {
         artists: string
@@ -39,12 +40,14 @@ export function PortfolioPage({
     formTitle: string
     placeholdersData: { name: string; phone: string }
     button: string
+    fetchedData: ITattooImage[]
 }) {
     const [isOpen, setIsOpen] = useState(false)
-    const [data, setData] = useState<ITattooImage[]>([])
     const [filteredData, setFilteredData] = useState<ITattooImage[]>([])
     const [modalData, setModalData] = useState<ITattooImage[]>([])
     const [filters, setFilters] = useState<IFilters>({ artist: "", style: "", color: "" })
+
+    const data = fetchedData
 
     function filterImages(filters: IFilters): ITattooImage[] {
         const newData = data
@@ -70,25 +73,6 @@ export function PortfolioPage({
     function resetFiltersHandler() {
         setFilters({ artist: "", style: "", color: "" })
     }
-
-    async function fetch() {
-        /*  const fetchedData: ITattooImage[] = []
-        const q = query(portfolioPicturesRef, (where("isLive", "==", true), orderBy("id", "asc")))
-        const d = await getDocs(q)
-        d.forEach(doc => {
-            fetchedData.push(doc.data() as ITattooImage)
-        }) */
-
-        const fetchedData = dummyData
-
-        setData(fetchedData)
-        setModalData(fetchedData)
-        setFilteredData(fetchedData)
-    }
-
-    useEffect(() => {
-        fetch()
-    }, [])
 
     return (
         <>
