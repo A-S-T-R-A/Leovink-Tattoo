@@ -10,7 +10,9 @@ import { ArtistType, ColorType, StyleType } from "shared/types/types"
 import {
     getFirestoreDocumentByFileId,
     getFirestoreDocumentById,
+    getImagesDoc,
     portfolioPicturesRef,
+    rewriteImagesDoc,
 } from "shared/const/firebaseVariables"
 import { updateDoc } from "firebase/firestore"
 import { tattooLiveDropdownOptions } from "../const/filterOptions"
@@ -65,14 +67,17 @@ export function EditBulkTattooImages({
 
         setIsLoading(true)
 
-        const editPromises = imagesId.map(async item => {
-            const file = await getFirestoreDocumentById(item, portfolioPicturesRef)
-            await updateDoc(getFirestoreDocumentByFileId(file.id), newData as any)
-            return new Promise(res => res(true))
+        const currentDoc = await getImagesDoc()
+        if (!currentDoc) return
+        const currentData = currentDoc.data()
+        const nData = { ...currentData }
+
+        imagesId.forEach(itemId => {
+            nData[itemId] = { ...nData[itemId], ...data }
         })
 
         try {
-            await Promise.all(editPromises)
+            await rewriteImagesDoc(nData)
             alert(`Successfully edited ${imagesId.length} images`)
             setIsOpen(false)
             setData(defaultData)
