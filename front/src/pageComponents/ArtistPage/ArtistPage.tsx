@@ -8,21 +8,26 @@ import { Form } from "shared/components/Form/Form"
 import { ModalGallery } from "widgets/ModalGallery/ModalGallery"
 import styles from "./ArtistPage.module.scss"
 import { GalleryGrid } from "shared/components/GalleryGrid/GalleryGrid"
-import type { IArtistsData } from "shared/const/firebaseVariables"
+import type { IArtistsData, IImagesData } from "shared/const/firebaseVariables"
+import type { LanguageType } from "shared/types/types"
 
 export function ArtistPage({
     formData,
     formTitle,
     cta,
     data,
+    imagesData,
+    language,
 }: {
     data: IArtistsData
     formData: { name: string; phone: string }
     formTitle: string
     cta: string
+    imagesData: IImagesData[]
+    language: LanguageType
 }) {
     const { name, img, specialization, description } = data
-    const galleryData = [...dummyGalleryData.slice(2, 6), dummyGalleryData[8]]
+    const galleryData = imagesData
     const [modalData, setModalData] = useState(galleryData)
     const [isOpen, setIsOpen] = useState(false)
 
@@ -50,8 +55,13 @@ export function ArtistPage({
                 <Form isVertical placeholdersData={formData} title={formTitle} cta={cta} />
             </Section>
             <Section title="Gallery">
-                <GalleryGrid data={galleryData} onClick={clickHandler} />
-                <ModalGallery data={modalData} isOpen={isOpen} onClose={() => setIsOpen(false)} />
+                <GalleryGrid data={galleryData} onClick={clickHandler} language={language} />
+                <ModalGallery
+                    data={modalData}
+                    isOpen={isOpen}
+                    onClose={() => setIsOpen(false)}
+                    language={language}
+                />
             </Section>
         </>
     )

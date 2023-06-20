@@ -10,17 +10,19 @@ import { Pagination, Navigation } from "swiper"
 import styles from "./ModalGallery.module.scss"
 import { useRef } from "preact/hooks"
 import { classNames } from "../../shared/lib/classNames/classNames"
-import type { ITattooImage } from "../../shared/types/types"
+import type { ITattooImage, LanguageType } from "../../shared/types/types"
 import { ChevronDownIcon, PlusIcon } from "../../shared/ui/Icons"
 import { Typography } from "shared/ui/Typography/Typography"
+import type { IImagesData } from "shared/const/firebaseVariables"
 
 interface IModalGallery {
     isOpen: boolean
     onClose: () => void
-    data: ITattooImage[]
+    data: IImagesData[]
+    language: LanguageType
 }
 
-export function ModalGallery({ data, isOpen, onClose }: IModalGallery) {
+export function ModalGallery({ data, isOpen, onClose, language }: IModalGallery) {
     const swiperRef = useRef<SwiperCore>()
 
     return (
@@ -44,12 +46,12 @@ export function ModalGallery({ data, isOpen, onClose }: IModalGallery) {
                 }} */
                 className={classNames(styles.swiper, {}, ["pagination"])}
             >
-                {data.map(item => {
-                    const { id, img } = item
+                {data.map((item, index) => {
+                    const { img, alt } = item
                     return (
-                        <SwiperSlide key={id} className={styles.slide}>
+                        <SwiperSlide key={index} className={styles.slide}>
                             <div className={styles.slideContainer}>
-                                <img src={img} className={styles.img} />
+                                <img src={img} className={styles.img} alt={alt[language]} />
                                 <div className={styles.descriptionContainer}>
                                     <Typography className={styles.description}>
                                         Lorem ipsum dolor sit amet.

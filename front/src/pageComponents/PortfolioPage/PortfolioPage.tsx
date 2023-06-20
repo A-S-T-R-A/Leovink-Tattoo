@@ -1,12 +1,9 @@
 import { useState, useEffect } from "preact/hooks"
 import { ModalGallery } from "widgets/ModalGallery/ModalGallery"
-import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper"
 import { Dropdown } from "shared/ui/Dropdown"
-import type { ITattooImage } from "shared/types/types"
 import { FormSection } from "widgets/FormSection/FormSection"
 import styles from "./PortfolioPage.module.scss"
-import { getDocs, orderBy, query, where } from "firebase/firestore"
-import { IImagesData, portfolioPicturesRef } from "shared/const/firebaseVariables"
+import type { IImagesData } from "shared/const/firebaseVariables"
 import {
     tattooArtistsDropdownOptions,
     tattooColorsDropdownOptions,
@@ -17,6 +14,7 @@ import { Button } from "shared/ui/Button/Button"
 import { AntiClockwiseIcon } from "shared/ui/Icons"
 import { GalleryGrid } from "shared/components/GalleryGrid/GalleryGrid"
 import { data as dummyData } from "shared/const/data"
+import type { LanguageType } from "shared/types/types"
 
 interface IFilters {
     artist: string
@@ -30,6 +28,7 @@ export function PortfolioPage({
     button,
     filtersData,
     fetchedData,
+    language,
 }: {
     filtersData: {
         artists: string
@@ -40,16 +39,17 @@ export function PortfolioPage({
     formTitle: string
     placeholdersData: { name: string; phone: string }
     button: string
-    fetchedData: ITattooImage[]
+    fetchedData: IImagesData[]
+    language: LanguageType
 }) {
     const [isOpen, setIsOpen] = useState(false)
-    const [filteredData, setFilteredData] = useState<ITattooImage[]>([])
-    const [modalData, setModalData] = useState<ITattooImage[]>([])
+    const [filteredData, setFilteredData] = useState<IImagesData[]>([])
+    const [modalData, setModalData] = useState<IImagesData[]>([])
     const [filters, setFilters] = useState<IFilters>({ artist: "", style: "", color: "" })
 
     const data = fetchedData
 
-    function filterImages(filters: IFilters): ITattooImage[] {
+    function filterImages(filters: IFilters): IImagesData[] {
         const newData = data
             .filter(item => (!filters.artist ? true : item.artist === filters.artist))
             .filter(item => (!filters.style ? true : item.style === filters.style))
@@ -76,7 +76,12 @@ export function PortfolioPage({
 
     return (
         <>
-            <ModalGallery data={modalData} isOpen={isOpen} onClose={() => setIsOpen(false)} />
+            <ModalGallery
+                data={modalData}
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                language={language}
+            />
             <Section>
                 <div className={styles.filters}>
                     <Dropdown
@@ -101,7 +106,7 @@ export function PortfolioPage({
                         {filtersData.reset} <AntiClockwiseIcon />
                     </Button>
                 </div>
-                <GalleryGrid data={filteredData} onClick={clickHandler} />
+                <GalleryGrid data={filteredData} onClick={clickHandler} language={language} />
                 <FormSection title={formTitle} data={placeholdersData} button={button} />
             </Section>
         </>

@@ -2,13 +2,13 @@
 import i18next, { changeLanguage } from "i18next";
 import Layout from "layouts/Layout.astro";
 import { PortfolioPage } from "pageComponents/PortfolioPage/PortfolioPage";
-import { fetchImagesData, fetchSectionData, ILayoutData, type IOtherData } from "shared/const/firebaseVariables";
+import { fetchImagesData, fetchSectionData, IImagesData, ILayoutData, type IOtherData } from "shared/const/firebaseVariables";
 import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
 import type { LanguageType } from "shared/types/types";
 
 changeLanguage("en");
 
-const imagesData = await fetchImagesData()
+const imagesData = await fetchImagesData() as IImagesData[]
 const language = i18next.language as LanguageType;
 const layoutData = await fetchSectionData(language, "layout", true) as ILayoutData;
 const otherData = await fetchSectionData(language, "other", true) as IOtherData;
@@ -18,6 +18,13 @@ const { cta } = buttons;
 
 <Layout>
     <PageWrapper title={layoutData.navlist[1].text} main={layoutData.navlist[0].text}>
-        <PortfolioPage client:load  formTitle={sectionNames.form} placeholdersData={formData} button={cta} filtersData={filtersData} fetchedData={imagesData}/>
+        <PortfolioPage client:load 
+         formTitle={sectionNames.form}
+         placeholdersData={formData}
+         button={cta}
+         filtersData={filtersData}
+         fetchedData={imagesData}
+         language={language}
+         />
     </PageWrapper>
 </Layout>
