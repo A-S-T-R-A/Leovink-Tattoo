@@ -32,7 +32,7 @@ const { cta, showMore, viewGallery } = buttons;
 
 <Layout>
     <Main client:load />
-    <Portfolio client:load title={portfolio} button={showMore} fetchedData={imagesData}/>
+    <Portfolio client:idle title={portfolio} button={showMore} fetchedData={imagesData}/>
     <Steps client:load data={stepsData} title={steps} button={cta}/>
     <Services client:idle data={servicesData} title={services} button={cta}/>
     <Artists client:idle data={artistsData} title={artists} button={viewGallery} language={language} defaultLanguage={defaultLanguage}/>

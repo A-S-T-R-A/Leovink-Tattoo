@@ -17,7 +17,6 @@ export function Portfolio({
     fetchedData: ITattooImage[]
 }) {
     const [isOpen, setIsOpen] = useState(false)
-    /*  const [data, setData] = useState<ITattooImage[]>(() => fetchedData) */
     const [modalData, setModalData] = useState<ITattooImage[]>([])
 
     const data = fetchedData.slice(0, 12)
@@ -27,22 +26,7 @@ export function Portfolio({
         setIsOpen(true)
         setModalData(newModalData)
     }
-    console.log(fetchedData)
-
-    /*  async function fetch() {
-       
-
-        const fetchedData = dummyData
-
-        const limitedData = fetchedData.slice(16, 36)
-
-        setData(limitedData)
-        setModalData(limitedData)
-    }
-
-    useEffect(() => {
-        fetch()
-    }, []) */
+   
 
     return (
         <Section title={title}>

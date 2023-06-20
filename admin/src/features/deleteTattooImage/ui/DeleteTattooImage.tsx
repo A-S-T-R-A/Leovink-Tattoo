@@ -1,14 +1,9 @@
-import { deleteDoc, getDocs, query, updateDoc, where } from "firebase/firestore"
 import { getStorage, ref, deleteObject } from "firebase/storage"
 import { getImageNameByUrl } from "../lib/getImageNameByUrl"
 import {
     TATTOO_IMAGES_BUCKET,
-    getFirestoreDocumentByFileId,
-    getFirestoreDocumentById,
     getImagesDoc,
-    portfolioPicturesRef,
     rewriteImagesDoc,
-    sortObjectData,
 } from "shared/const/firebaseVariables"
 import { useState } from "react"
 import { Modal } from "shared/ui/Modal"

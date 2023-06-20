@@ -7,14 +7,7 @@ import {
     tattooStylesDropdownOptions,
 } from "shared/const/filters"
 import { ArtistType, ColorType, StyleType } from "shared/types/types"
-import {
-    getFirestoreDocumentByFileId,
-    getFirestoreDocumentById,
-    getImagesDoc,
-    portfolioPicturesRef,
-    rewriteImagesDoc,
-} from "shared/const/firebaseVariables"
-import { updateDoc } from "firebase/firestore"
+import { getImagesDoc, rewriteImagesDoc } from "shared/const/firebaseVariables"
 import { tattooLiveDropdownOptions } from "../const/filterOptions"
 import styles from "./EditBulkTattooImages.module.scss"
 import { disableUi } from "shared/lib/disableUi/disableUi"
