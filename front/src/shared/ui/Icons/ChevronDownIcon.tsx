@@ -8,7 +8,7 @@ export function ChevronDownIcon({ className }: { className?: string }) {
             viewBox="0 0 24 24"
             width="24px"
             height="24px"
-            strokeWidth={2}
+            strokeWidth={1.5}
             stroke="currentColor"
             className={classNames("", {}, [className])}
         >
