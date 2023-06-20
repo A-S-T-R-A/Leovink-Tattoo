@@ -1,4 +1,4 @@
-import { useState } from "preact/hooks"
+import { useEffect, useState } from "preact/hooks"
 import { classNames } from "shared/lib/classNames/classNames"
 import { NavigationList } from "../NavigationList/NavigationList"
 import styles from "./Burger.module.scss"
@@ -22,11 +22,12 @@ export function Burger({
     const [isBurgerVisible, setIsBurgerVisible] = useState(false)
 
     function toggleBurger() {
-        setIsBurgerVisible(prev => {
-            disableScroll(prev)
-            return !prev
-        })
+        setIsBurgerVisible(prev => !prev)
     }
+
+    useEffect(() => {
+        disableScroll(isBurgerVisible)
+    }, [isBurgerVisible])
 
     return (
         <>

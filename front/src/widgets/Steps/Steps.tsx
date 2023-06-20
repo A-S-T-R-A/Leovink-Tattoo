@@ -4,7 +4,6 @@ import { Typography } from "shared/ui/Typography/Typography"
 import { CtaButton } from "shared/components/CtaButton/CtaButton"
 import type { IStepData } from "shared/const/firebaseVariables"
 import { useState } from "preact/hooks"
-import { Button } from "shared/ui/Button/Button"
 import { ChevronDownIcon } from "shared/ui/Icons"
 import { classNames } from "shared/lib/classNames/classNames"
 

@@ -4,6 +4,7 @@ import cls from "./Modal.module.scss"
 import { Portal } from "./components/Portal"
 import { MODAL_ANIMATION_DELAY } from "../const/const"
 import { Mods, classNames } from "shared/lib/classNames/classNames"
+import { disableScroll } from "shared/lib/disableScroll/disableScroll"
 
 interface ModalProps {
     className?: string
@@ -34,6 +35,7 @@ export const Modal = (props: ModalProps) => {
                 setIsMounted(false)
             }, MODAL_ANIMATION_DELAY)
         }
+        disableScroll(isOpen)
     }, [isOpen, isMounted])
 
     const mods: Mods = {
