@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react"
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import {
     tattooArtistsDropdownOptions,
@@ -9,10 +8,9 @@ import { ITattooImage } from "shared/types/types"
 import { Dropdown } from "shared/ui/Dropdown"
 import { Modal } from "shared/ui/Modal"
 import styles from "./EditModal.module.scss"
-import { getDocs } from "firebase/firestore"
-import { portfolioPicturesRef } from "shared/const/firebaseVariables"
 
 interface IEditModalProps {
+    length: number
     data: ITattooImage
     isOpen: boolean
     isLoading: boolean
@@ -23,24 +21,21 @@ interface IEditModalProps {
 }
 
 export function EditModal(props: IEditModalProps) {
-    const { data, isOpen, isLoading, onClose, setData, saveClickHandler, discardClickHandler } =
-        props
-
-    const [length, setLength] = useState(0)
-
-    async function getLength() {
-        const docs = await getDocs(portfolioPicturesRef)
-        setLength(docs.size)
-    }
-
-    useEffect(() => {
-        getLength()
-    }, [data])
+    const {
+        length,
+        data,
+        isOpen,
+        isLoading,
+        onClose,
+        setData,
+        saveClickHandler,
+        discardClickHandler,
+    } = props
 
     const dropdownNumbers = Array(length)
         .fill("")
         .map((_, index) => {
-            const v = (index + 1).toString()
+            const v = index.toString()
             return { label: v, value: v }
         })
 

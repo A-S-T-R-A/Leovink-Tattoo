@@ -6,7 +6,12 @@ import { PortfolioPageFilters } from "./PortfolioPageFilters/PortfolioPageFilter
 import { PortfolioPageList } from "./PortfolioPageList/PortfolioPageList"
 import { ITattooImage } from "shared/types/types"
 import styles from "./PortfolioPage.module.scss"
-import { portfolioPicturesRef } from "shared/const/firebaseVariables"
+import {
+    getImagesDoc,
+    portfolioPicturesRef,
+    reformatObjectValuesToArray,
+    sortObjectData,
+} from "shared/const/firebaseVariables"
 import { localStorageView } from "../lib/localStorageLib"
 
 export function PortfolioPage() {
@@ -20,13 +25,13 @@ export function PortfolioPage() {
     })
 
     async function fetch() {
-        const fetchedData: ITattooImage[] = []
-        const q = query(portfolioPicturesRef, orderBy("id", "asc"))
-        const d = await getDocs(q)
-        d.forEach(doc => {
-            fetchedData.push(doc.data() as ITattooImage)
-        })
-        setData(fetchedData)
+        const currentDoc = await getImagesDoc()
+        if (!currentDoc) return
+        const currentData = currentDoc.data()
+        const ascSortedData = sortObjectData(currentData)
+        const dataArray = reformatObjectValuesToArray(ascSortedData)
+        // const liveData = dataArray.filter(item => item.isLive)
+        setData(dataArray)
     }
 
     useEffect(() => {

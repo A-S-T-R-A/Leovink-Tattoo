@@ -5,7 +5,6 @@ const PORTFOLIO_PICTURES_DB = "portfolio_pictures"
 const DATA_COLLECTION = "data"
 
 const DATA_BUCKET = "data"
-const DATA_STEPS = "steps"
 
 const LANGUAGE_DOCUMENT = {
     en: "english",
@@ -118,22 +117,49 @@ export interface IOtherData {
     }
 }
 
-export function addData(lang: keyof typeof LANGUAGE_DOCUMENT) {
-    const ref = collection(db, DATA_COLLECTION, LANGUAGE_DOCUMENT[lang], SECTION_COLLECTION.other)
+export const TattooArtists = {
+    Dinu: "Dinu",
+    Katia: "Katia",
+    Nastia: "Nastia",
+} as const
+
+export const TattooStyles = {
+    First: "First",
+    Second: "Second",
+} as const
+
+export const TattooColors = {
+    Black: "Black",
+    Color: "Color",
+} as const
+
+export type ArtistType = (typeof TattooArtists)[keyof typeof TattooArtists]
+export type StyleType = (typeof TattooStyles)[keyof typeof TattooStyles]
+export type ColorType = (typeof TattooColors)[keyof typeof TattooColors]
+
+export interface IFilters {
+    artist: ArtistType | ""
+    style: StyleType | ""
+    color: ColorType | ""
+    isLive: boolean
+}
+
+export interface ITattooImage extends IFilters {
+    img: string
+    alt: string
+}
+
+export function addData() {
+    const ref = collection(db, PORTFOLIO_PICTURES_DB)
 
     const data = {
-        sectionNames: {
-            portfolio: "Портфолио",
-            steps: "Как это работает",
-            services: "Услуги",
-            artists: "Тату мастера",
-            testimonials: "Отзывы",
-            faq: "Частые Вопросы",
-            form: "Оставить заявку",
-        },
-        formData: {
-            name: "Имя",
-            phone: "Телефон",
+        0: {
+            img: "",
+            alt: "",
+            artist: "",
+            style: "",
+            color: "",
+            isLive: false,
         },
     }
 
