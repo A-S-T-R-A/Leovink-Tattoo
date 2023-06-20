@@ -6,6 +6,7 @@ import { Header } from "widgets/Header/Header"
 import { RequireAuth } from "features/authByGoogle"
 import { StepsPage } from "pages/StepsPage"
 import { ServicesPage } from "pages/ServicesPage"
+import { ReviewPage } from "pages/ReviewPage/ui/ReviewPage"
 
 function App() {
     return (
@@ -36,6 +37,14 @@ function App() {
                         element={
                             <RequireAuth>
                                 <ServicesPage />
+                            </RequireAuth>
+                        }
+                    />
+                    <Route
+                        path="/review"
+                        element={
+                            <RequireAuth>
+                                <ReviewPage />
                             </RequireAuth>
                         }
                     />
