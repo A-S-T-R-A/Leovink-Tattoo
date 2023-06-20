@@ -20,7 +20,6 @@ export function PortfolioPageList({
     const [selected, setSelected] = useState<number[]>([])
 
     function checkboxChangeHandler(id: number) {
-        console.log(id)
         if (selected.includes(id)) {
             setSelected(prev => prev.filter(item => item !== id))
         } else {
