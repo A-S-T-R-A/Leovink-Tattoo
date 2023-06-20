@@ -11,6 +11,7 @@ export function Sidebar() {
                 {!!user && <Link to="/portfolio">Portfolio</Link>}
                 {!!user && <Link to="/steps">Steps</Link>}
                 {!!user && <Link to="/services">Services</Link>}
+                {!!user && <Link to="/review">Review</Link>}
             </div>
         </div>
     )
