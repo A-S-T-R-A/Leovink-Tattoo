@@ -19,7 +19,7 @@ export function Services({
     title: string
     button: string
 }) {
-    const [open, setOpen] = useState<number>(-1)
+    const [open, setOpen] = useState<number>(0)
 
     function clickHandler(index: number) {
         if (open !== index) {

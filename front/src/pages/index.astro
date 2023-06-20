@@ -30,7 +30,7 @@ const { cta, showMore, viewGallery } = buttons;
 <Layout>
     <Main client:load />
     <Portfolio client:load title={portfolio} button={showMore}/>
-    <Steps data={stepsData} title={steps} button={cta}/>
+    <Steps client:load data={stepsData} title={steps} button={cta}/>
     <Services client:idle data={servicesData} title={services} button={cta}/>
     <Artists client:idle data={artistsData} title={artists} button={viewGallery} language={language} defaultLanguage={defaultLanguage}/>
     <Testimonials data={testimonialsData.slice(0,2)} title={testimonials} showMore={showMore} cta={cta}/>
