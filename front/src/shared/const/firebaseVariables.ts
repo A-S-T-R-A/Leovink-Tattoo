@@ -46,7 +46,58 @@ export async function fetchSectionData(
     return data
 }
 
+export function sortObjectData(obj: any): any {
+    const sortedKeys = Object.keys(obj).sort((a, b) => Number(a) - Number(b))
+    const sortedObject: any = {}
+
+    for (const key of sortedKeys) {
+        sortedObject[key] = { id: +key, ...obj[key] }
+    }
+
+    return sortedObject
+}
+
+export async function fetchImagesData() {
+    const ref = collection(db, PORTFOLIO_PICTURES_DB)
+    const docs = await getDocs(ref)
+    if (docs.empty) return
+    const currentData = docs.docs[0].data()
+    const ascSortedData = sortObjectData(currentData)
+    const dataArray = reformatObjectValuesToArray(ascSortedData)
+    const liveData = dataArray.filter(item => item.isLive)
+    return liveData
+}
+
 export const portfolioPicturesRef = collection(db, PORTFOLIO_PICTURES_DB)
+
+export const TattooArtists = {
+    Dinu: "Dinu",
+    Katia: "Katia",
+    Nastia: "Nastia",
+} as const
+
+export const TattooStyles = {
+    First: "First",
+    Second: "Second",
+} as const
+
+export const TattooColors = {
+    Black: "Black",
+    Color: "Color",
+} as const
+
+export type ArtistType = (typeof TattooArtists)[keyof typeof TattooArtists]
+export type StyleType = (typeof TattooStyles)[keyof typeof TattooStyles]
+export type ColorType = (typeof TattooColors)[keyof typeof TattooColors]
+
+export interface IImagesData {
+    alt: { en: ""; ro: ""; ru: "" }
+    img: string
+    artist: ArtistType
+    style: StyleType
+    color: ColorType
+    isLive: boolean
+}
 
 export interface IStepData {
     img: string
@@ -117,26 +168,6 @@ export interface IOtherData {
     }
 }
 
-export const TattooArtists = {
-    Dinu: "Dinu",
-    Katia: "Katia",
-    Nastia: "Nastia",
-} as const
-
-export const TattooStyles = {
-    First: "First",
-    Second: "Second",
-} as const
-
-export const TattooColors = {
-    Black: "Black",
-    Color: "Color",
-} as const
-
-export type ArtistType = (typeof TattooArtists)[keyof typeof TattooArtists]
-export type StyleType = (typeof TattooStyles)[keyof typeof TattooStyles]
-export type ColorType = (typeof TattooColors)[keyof typeof TattooColors]
-
 export interface IFilters {
     artist: ArtistType | ""
     style: StyleType | ""
@@ -149,7 +180,7 @@ export interface ITattooImage extends IFilters {
     alt: string
 }
 
-export function addData() {
+/* export function addData() {
     const ref = collection(db, PORTFOLIO_PICTURES_DB)
 
     const data = {
@@ -164,4 +195,4 @@ export function addData() {
     }
 
     addDoc(ref, data)
-}
+} */
