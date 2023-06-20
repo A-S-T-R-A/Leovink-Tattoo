@@ -10,12 +10,12 @@ import { Faq } from "../widgets/Faq/Faq";
 import { FormSection } from "../widgets/FormSection/FormSection";
 import type { LanguageType } from "shared/types/types";
 import i18next, { changeLanguage } from "i18next";
-import { fetchSectionData, IStepData, fetchImagesData, IServicesData, IArtistsData, IFaqData, ITestimonialsData, IOtherData } from "../shared/const/firebaseVariables";
+import { fetchSectionData, IStepData, fetchImagesData, IServicesData, IArtistsData, IFaqData, ITestimonialsData, IOtherData, IImagesData } from "../shared/const/firebaseVariables";
 
 changeLanguage("en");
 
 
-const imagesData = await fetchImagesData()
+const imagesData = await fetchImagesData() as IImagesData[]
 const language = i18next.language as LanguageType;
 const defaultLanguage = "en" as LanguageType;
 const stepsData = await fetchSectionData(language, "steps") as IStepData[];
@@ -32,7 +32,7 @@ const { cta, showMore, viewGallery } = buttons;
 
 <Layout>
     <Main client:load />
-    <Portfolio client:idle title={portfolio} button={showMore} fetchedData={imagesData}/>
+    <Portfolio client:idle title={portfolio} button={showMore} fetchedData={imagesData} language={language}/>
     <Steps client:load data={stepsData} title={steps} button={cta}/>
     <Services client:idle data={servicesData} title={services} button={cta}/>
     <Artists client:idle data={artistsData} title={artists} button={viewGallery} language={language} defaultLanguage={defaultLanguage}/>

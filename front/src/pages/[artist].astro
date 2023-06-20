@@ -1,5 +1,5 @@
 ---
-import { IArtistsData, ILayoutData, IOtherData, fetchSectionData } from "shared/const/firebaseVariables";
+import { IArtistsData, IImagesData, ILayoutData, IOtherData, fetchImagesData, fetchSectionData } from "shared/const/firebaseVariables";
 import i18next, { changeLanguage } from "i18next";
 import type { LanguageType } from "shared/types/types";
 import Layout from "layouts/Layout.astro";
@@ -8,6 +8,7 @@ import { ArtistPage } from "pageComponents/ArtistPage/ArtistPage";
 
 changeLanguage("en");
 
+const imagesData = await fetchImagesData() as IImagesData[]
 const language = i18next.language as LanguageType;
 const layoutData = await fetchSectionData(language, "layout", true) as ILayoutData;
 const otherData = await fetchSectionData(language, "other", true) as IOtherData;
@@ -26,6 +27,13 @@ const artist = Astro.props as IArtistsData;
 
 <Layout>
     <PageWrapper title={sectionNames.artists} main={layoutData.navlist[0].text}>
-        <ArtistPage client:load  formTitle={sectionNames.form} cta={cta} formData={formData} data={artist} />
+        <ArtistPage 
+        client:load 
+        formTitle={sectionNames.form} 
+        cta={cta} 
+        formData={formData} 
+        data={artist} 
+        imagesData={imagesData} 
+        language={language}/>
     </PageWrapper>
 </Layout>
