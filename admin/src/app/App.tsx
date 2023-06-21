@@ -7,6 +7,7 @@ import { RequireAuth } from "features/authByGoogle"
 import { StepsPage } from "pages/StepsPage"
 import { ServicesPage } from "pages/ServicesPage"
 import { ReviewPage } from "pages/ReviewPage/ui/ReviewPage"
+import { FAQPage } from "pages/FAQPage"
 
 function App() {
     return (
@@ -45,6 +46,14 @@ function App() {
                         element={
                             <RequireAuth>
                                 <ReviewPage />
+                            </RequireAuth>
+                        }
+                    />
+                    <Route
+                        path="/faq"
+                        element={
+                            <RequireAuth>
+                                <FAQPage />
                             </RequireAuth>
                         }
                     />
