@@ -27,11 +27,11 @@ export function EditImage({ onChange }: { onChange: (v: string) => void }) {
             e.target.value = null
             return
         }
+        reader.readAsArrayBuffer(file)
 
-        reader.readAsDataURL(file)
-        reader.onload = () => {
-            const imageDataURL = reader.result
-            onChange?.(imageDataURL as string)
+        reader.onloadend = () => {
+            const blob = new Blob([reader.result])
+            onChange?.(blob)
         }
     }
 

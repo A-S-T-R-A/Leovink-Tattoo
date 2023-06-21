@@ -30,7 +30,7 @@ export function EditParagraph({
 }) {
     const defaultData = { id: -1, img: "", title: "", description: "" }
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
-    const [newImage, setNewImage] = useState("")
+    const [newImage, setNewImage] = useState({ blob: "", url: "" })
     const [newData, setNewData] = useState(() => data?.[currentLanguage][id] || defaultData)
     const [isOpen, setIsOpen] = useState(false)
 
@@ -58,8 +58,15 @@ export function EditParagraph({
         try {
             if (newImage) {
                 const rand = (Math.random() * 100000000).toFixed()
-                const img = await uploadImageToBucket(newImage, `${DATA_BUCKET.steps}/st${rand}`)
-                dataToUpload.img = img
+                const img = await uploadImageToBucket(
+                    newImage.blob,
+                    `${DATA_BUCKET.steps}/st${rand}`
+                )
+                if (img) {
+                    dataToUpload.img = img
+                }
+
+                //if changed image, update all languages
             }
 
             documentData[newData.id] = dataToUpload
@@ -79,6 +86,11 @@ export function EditParagraph({
         setIsOpen(false)
     }
 
+    function editImageChangeHandler(blob: any) {
+        const url = URL.createObjectURL(blob)
+        setNewImage({ blob, url })
+    }
+
     return (
         <>
             <ModalEditorWithTranslation
@@ -92,10 +104,10 @@ export function EditParagraph({
                 <div className={styles.container}>
                     <div className={styles.imgContainer}>
                         <ModalImage
-                            url={newImage ? newImage : newData?.img || ""}
+                            url={newImage.url ? newImage.url : newData?.img || ""}
                             className={styles.img}
                         />
-                        <EditImage onChange={val => setNewImage(val)} />
+                        <EditImage onChange={editImageChangeHandler} />
                     </div>
                     <div>
                         id:

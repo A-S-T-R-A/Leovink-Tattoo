@@ -136,7 +136,7 @@ export async function uploadImageToBucket(file: any, bucketPath: string): Promis
     const fileRef = ref(storage, bucketPath)
     const uploadTask = uploadBytesResumable(fileRef, file)
 
-    return new Promise((res, rej) => {
+    return await new Promise((res, rej) => {
         uploadTask.on(
             "state_changed",
             snapshot => {
