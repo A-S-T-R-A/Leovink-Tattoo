@@ -1,15 +1,24 @@
 import { useState } from "react"
-import { FilePond } from "react-filepond"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
-import { Input } from "shared/ui/Input/Input"
 import { Textarea } from "shared/ui/Textarea/Textarea"
-import styles from "./AddFaqModal.module.scss"
 import { Dropdown } from "shared/ui/Dropdown"
 import { LanguageType } from "shared/types/types"
+import styles from "./EditFaqTitle.module.scss"
 import { IFaqData } from "pages/FAQPage/types/types"
+import { Input } from "shared/ui/Input/Input"
 
-export function AddFaqModal({ faqData }: { faqData: IFaqData[] }) {
-    const [data, setData] = useState({ title: "", questions: [{ question: "", answer: "" }] })
+export function EditFaqTitle({
+    faqData,
+    id,
+    triggerRefetch,
+    unselectAllHandler,
+}: {
+    faqData: IFaqData[]
+    id?: number
+    triggerRefetch?: () => void
+    unselectAllHandler?: () => void
+}) {
+    const [data, setData] = useState({ id: 0, title: "" })
     const [isOpen, setIsOpen] = useState(false)
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
 
@@ -20,6 +29,13 @@ export function AddFaqModal({ faqData }: { faqData: IFaqData[] }) {
     function onChangeLanguage(lang: LanguageType) {
         setCurrentLanguage(lang)
     }
+
+    const dropdownNumbers = Array(faqData.length)
+        .fill("")
+        .map((_, index) => {
+            const v = (index + 1).toString()
+            return { label: v, value: v }
+        })
 
     return (
         <>
@@ -32,32 +48,22 @@ export function AddFaqModal({ faqData }: { faqData: IFaqData[] }) {
                 onDiscardClick={() => null}
             >
                 <div className={styles.container}>
+                    <div>
+                        id:
+                        <Dropdown
+                            options={dropdownNumbers}
+                            value={data.id?.toString()}
+                            onChange={id => setData(prev => ({ ...prev, id: +id }))}
+                        />
+                    </div>
                     <Input
                         label="Title"
                         value={data.title}
                         onChange={value => setData(prev => ({ ...prev, title: value }))}
                     />
-                    <Textarea
-                        label="Question"
-                        onChange={value =>
-                            setData(prev => ({
-                                ...prev,
-                                questions: [{ ...prev.questions[0], question: value }],
-                            }))
-                        }
-                    />
-                    <Textarea
-                        label="Answer"
-                        onChange={value =>
-                            setData(prev => ({
-                                ...prev,
-                                questions: [{ ...prev.questions[0], answer: value }],
-                            }))
-                        }
-                    />
                 </div>
             </ModalEditorWithTranslation>
-            <button onClick={() => setIsOpen(true)}>Add New</button>
+            <button onClick={() => setIsOpen(true)}>Edit</button>
         </>
     )
 }

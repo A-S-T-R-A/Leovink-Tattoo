@@ -1,25 +1,23 @@
 import { useState } from "react"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
-import { ModalImage } from "shared/components/ModalImage/ModalImage"
-import { Input } from "shared/ui/Input/Input"
 import { Textarea } from "shared/ui/Textarea/Textarea"
 import { Dropdown } from "shared/ui/Dropdown"
 import { LanguageType } from "shared/types/types"
-import styles from "./EditParagraph.module.scss"
+import styles from "./EditQuestion.module.scss"
 import { IFaqData } from "pages/FAQPage/types/types"
 
-export function EditParagraph({
-    faqData,
+export function EditQuestion({
+    questionsData,
     id,
     triggerRefetch,
     unselectAllHandler,
 }: {
-    faqData: IFaqData[]
+    questionsData: { question: string; answer: string }[]
     id?: number
     triggerRefetch?: () => void
     unselectAllHandler?: () => void
 }) {
-    const [data, setData] = useState({ id: 0, title: "", description: "" })
+    const [data, setData] = useState({ id: 0, question: "", answer: "" })
     const [isOpen, setIsOpen] = useState(false)
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
 
@@ -31,7 +29,7 @@ export function EditParagraph({
         setCurrentLanguage(lang)
     }
 
-    const dropdownNumbers = Array(faqData.length)
+    const dropdownNumbers = Array(questionsData.length)
         .fill("")
         .map((_, index) => {
             const v = (index + 1).toString()
@@ -49,14 +47,6 @@ export function EditParagraph({
                 onDiscardClick={() => null}
             >
                 <div className={styles.container}>
-                    <div className={styles.imgContainer}>
-                        <ModalImage
-                            url="https://images.pexels.com/photos/1547813/pexels-photo-1547813.jpeg?auto=compress&cs=tinysrgb&w=800"
-                            className={styles.img}
-                        />
-                        <label htmlFor="my-file">Edit</label>
-                        <input type="file" id="my-file" className={styles.file} />
-                    </div>
                     <div>
                         id:
                         <Dropdown
@@ -65,14 +55,13 @@ export function EditParagraph({
                             onChange={id => setData(prev => ({ ...prev, id: +id }))}
                         />
                     </div>
-                    <Input
-                        label="Title"
-                        value={data.title}
-                        onChange={value => setData(prev => ({ ...prev, title: value }))}
+                    <Textarea
+                        label="question"
+                        onChange={value => setData(prev => ({ ...prev, question: value }))}
                     />
                     <Textarea
-                        label="Description"
-                        onChange={value => setData(prev => ({ ...prev, description: value }))}
+                        label="answer"
+                        onChange={value => setData(prev => ({ ...prev, answer: value }))}
                     />
                 </div>
             </ModalEditorWithTranslation>

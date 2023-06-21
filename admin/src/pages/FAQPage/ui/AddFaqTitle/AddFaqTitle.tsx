@@ -1,15 +1,12 @@
 import { useState } from "react"
-import { FilePond } from "react-filepond"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
 import { Input } from "shared/ui/Input/Input"
-import { Textarea } from "shared/ui/Textarea/Textarea"
-import styles from "./AddFaqModal.module.scss"
-import { Dropdown } from "shared/ui/Dropdown"
+import styles from "./AddFaqTitle.module.scss"
 import { LanguageType } from "shared/types/types"
 import { IFaqData } from "pages/FAQPage/types/types"
 
-export function AddFaqModal({ faqData }: { faqData: IFaqData[] }) {
-    const [data, setData] = useState({ title: "", questions: [{ question: "", answer: "" }] })
+export function AddFaqTitle({ faqData }: { faqData: IFaqData[] }) {
+    const [data, setData] = useState({ title: "" })
     const [isOpen, setIsOpen] = useState(false)
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
 
@@ -37,27 +34,9 @@ export function AddFaqModal({ faqData }: { faqData: IFaqData[] }) {
                         value={data.title}
                         onChange={value => setData(prev => ({ ...prev, title: value }))}
                     />
-                    <Textarea
-                        label="Question"
-                        onChange={value =>
-                            setData(prev => ({
-                                ...prev,
-                                questions: [{ ...prev.questions[0], question: value }],
-                            }))
-                        }
-                    />
-                    <Textarea
-                        label="Answer"
-                        onChange={value =>
-                            setData(prev => ({
-                                ...prev,
-                                questions: [{ ...prev.questions[0], answer: value }],
-                            }))
-                        }
-                    />
                 </div>
             </ModalEditorWithTranslation>
-            <button onClick={() => setIsOpen(true)}>Add New</button>
+            <button onClick={() => setIsOpen(true)}>Add new title</button>
         </>
     )
 }
