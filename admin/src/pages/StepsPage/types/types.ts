@@ -1,6 +1,11 @@
 export interface IStepsData {
-    id: number
-    title: string
     img: string
+    title: string
     description: string
+}
+
+export interface ITranslatedStepsData {
+    en: IStepsData[]
+    ro: IStepsData[]
+    ru: IStepsData[]
 }

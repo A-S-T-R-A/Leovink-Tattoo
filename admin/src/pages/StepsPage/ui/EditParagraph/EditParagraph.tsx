@@ -4,24 +4,35 @@ import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { Input } from "shared/ui/Input/Input"
 import { Textarea } from "shared/ui/Textarea/Textarea"
 import styles from "./EditParagraph.module.scss"
-import { IStepsData } from "pages/StepsPage/types/types"
+import { ITranslatedStepsData } from "pages/StepsPage/types/types"
 import { Dropdown } from "shared/ui/Dropdown"
 import { LanguageType } from "shared/types/types"
+import {
+    DATA_BUCKET,
+    reformatArrayToObject,
+    updateSectionData,
+    uploadImageToBucket,
+} from "shared/const/firebaseVariables"
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
+import { storage } from "../../../../../firebase"
+import { EditImage } from "features/editImage"
 
 export function EditParagraph({
-    stepData,
+    data,
+    length,
     id,
     triggerRefetch,
-    unselectAllHandler,
 }: {
-    stepData: IStepsData[]
-    id?: number
+    data: ITranslatedStepsData | null
+    length: number
+    id: number
     triggerRefetch?: () => void
-    unselectAllHandler?: () => void
 }) {
-    const [data, setData] = useState({ id: 0, title: "", description: "" })
-    const [isOpen, setIsOpen] = useState(false)
+    const defaultData = { id: -1, img: "", title: "", description: "" }
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
+    const [newImage, setNewImage] = useState("")
+    const [newData, setNewData] = useState(() => data?.[currentLanguage][id] || defaultData)
+    const [isOpen, setIsOpen] = useState(false)
 
     function onClose() {
         setIsOpen(false)
@@ -29,14 +40,44 @@ export function EditParagraph({
 
     function onChangeLanguage(lang: LanguageType) {
         setCurrentLanguage(lang)
+        setNewData(data?.[lang][id])
     }
 
-    const dropdownNumbers = Array(stepData.length)
+    const dropdownNumbers = Array(length)
         .fill("")
         .map((_, index) => {
-            const v = (index + 1).toString()
+            const v = index.toString()
             return { label: v, value: v }
         })
+
+    async function saveClickHandler() {
+        if (!data || !newData) return
+        const documentData = data[currentLanguage]
+        const dataToUpload = { ...newData }
+
+        try {
+            if (newImage) {
+                const rand = (Math.random() * 100000000).toFixed()
+                const img = await uploadImageToBucket(newImage, `${DATA_BUCKET.steps}/st${rand}`)
+                dataToUpload.img = img
+            }
+
+            documentData[newData.id] = dataToUpload
+            const objectData = reformatArrayToObject(documentData)
+
+            await updateSectionData(currentLanguage, "steps", objectData)
+            alert("Success")
+        } catch (error) {
+            alert("Error")
+        }
+        triggerRefetch?.()
+        setIsOpen(false)
+    }
+
+    function discardClickHandler() {
+        setNewData(defaultData)
+        setIsOpen(false)
+    }
 
     return (
         <>
@@ -45,34 +86,34 @@ export function EditParagraph({
                 onClose={onClose}
                 onChangeLanguage={onChangeLanguage}
                 currentLanguage={currentLanguage}
-                onSaveClick={() => null}
-                onDiscardClick={() => null}
+                onSaveClick={saveClickHandler}
+                onDiscardClick={discardClickHandler}
             >
                 <div className={styles.container}>
                     <div className={styles.imgContainer}>
                         <ModalImage
-                            url="https://images.pexels.com/photos/1547813/pexels-photo-1547813.jpeg?auto=compress&cs=tinysrgb&w=800"
+                            url={newImage ? newImage : newData?.img || ""}
                             className={styles.img}
                         />
-                        <label htmlFor="my-file">Edit</label>
-                        <input type="file" id="my-file" className={styles.file} />
+                        <EditImage onChange={val => setNewImage(val)} />
                     </div>
                     <div>
                         id:
                         <Dropdown
                             options={dropdownNumbers}
-                            value={data.id?.toString()}
-                            onChange={id => setData(prev => ({ ...prev, id: +id }))}
+                            value={newData?.id.toString() || ""}
+                            onChange={id => setNewData(prev => ({ ...prev, id: +id }))}
                         />
                     </div>
                     <Input
                         label="Title"
-                        value={data.title}
-                        onChange={value => setData(prev => ({ ...prev, title: value }))}
+                        value={newData?.title || ""}
+                        onChange={value => setNewData(prev => ({ ...prev, title: value }))}
                     />
                     <Textarea
                         label="Description"
-                        onChange={value => setData(prev => ({ ...prev, description: value }))}
+                        value={newData.description}
+                        onChange={value => setNewData(prev => ({ ...prev, description: value }))}
                     />
                 </div>
             </ModalEditorWithTranslation>

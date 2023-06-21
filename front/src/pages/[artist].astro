@@ -9,7 +9,6 @@ import { ArtistPage } from "pageComponents/ArtistPage/ArtistPage";
 changeLanguage("en");
 
 export async function getStaticPaths() {
-    changeLanguage("en");
     const language = i18next.language as LanguageType;
     const artistsData = await fetchSectionData(language, "artists") as IArtistsData[];
     return artistsData.map(item => ({

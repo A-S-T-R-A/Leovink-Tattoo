@@ -4,14 +4,14 @@ import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTra
 import { Input } from "shared/ui/Input/Input"
 import { Textarea } from "shared/ui/Textarea/Textarea"
 import styles from "./AddStepModal.module.scss"
-import { IStepsData } from "pages/StepsPage/types/types"
+import { IStepsData, ITranslatedStepsData } from "../../types/types"
 import { Dropdown } from "shared/ui/Dropdown"
 import { LanguageType } from "shared/types/types"
 
-export function AddStepModal({ stepData }: { stepData: IStepsData[] }) {
-    const [data, setData] = useState({ id: 0, title: "", description: "" })
-    const [isOpen, setIsOpen] = useState(false)
+export function AddStepModal({ length }: { length: number }) {
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
+    const [currentStepData, setCurrentStepData] = useState({ img: "", description: "", title: "" })
+    const [isOpen, setIsOpen] = useState(false)
 
     function onClose() {
         setIsOpen(false)
@@ -21,7 +21,7 @@ export function AddStepModal({ stepData }: { stepData: IStepsData[] }) {
         setCurrentLanguage(lang)
     }
 
-    const dropdownNumbers = Array(stepData.length)
+    const dropdownNumbers = Array(length)
         .fill("")
         .map((_, index) => {
             const v = (index + 1).toString()
@@ -40,22 +40,25 @@ export function AddStepModal({ stepData }: { stepData: IStepsData[] }) {
             >
                 <div className={styles.container}>
                     <FilePond />
-                    <div>
+                    {/* <div>
                         id:
                         <Dropdown
                             options={dropdownNumbers}
                             value={data.id?.toString()}
                             onChange={id => setData(prev => ({ ...prev, id: +id }))}
                         />
-                    </div>
+                    </div> */}
                     <Input
                         label="Title"
-                        value={data.title}
-                        onChange={value => setData(prev => ({ ...prev, title: value }))}
+                        value={currentStepData.title}
+                        onChange={value => setCurrentStepData(prev => ({ ...prev, title: value }))}
                     />
                     <Textarea
                         label="Description"
-                        onChange={value => setData(prev => ({ ...prev, description: value }))}
+                        value={currentStepData.description}
+                        onChange={value =>
+                            setCurrentStepData(prev => ({ ...prev, description: value }))
+                        }
                     />
                 </div>
             </ModalEditorWithTranslation>
