@@ -1,0 +1,36 @@
+.table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height: 800px;
+    margin: 10px;
+
+    .location,
+    .phone,
+    .mail,
+    .description,
+    .socialContainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        border-bottom: 1px solid var(--color-base);
+        padding: 10px 20px;
+    }
+
+    & > div > div:last-child {
+        margin-bottom: 0;
+    }
+
+    .socials {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--color-base);
+
+        .title {
+            padding: 10px;
+            text-align: center;
+            border: 2px solid var(--color-base);
+        }
+    }
+}

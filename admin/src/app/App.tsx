@@ -9,6 +9,7 @@ import { ServicesPage } from "pages/ServicesPage"
 import { ReviewPage } from "pages/ReviewPage/ui/ReviewPage"
 import { FAQPage } from "pages/FAQPage"
 import { OtherPage } from "pages/OtherPage"
+import { ContactsPage } from "pages/ContactPage/ui/ContactsPage"
 
 function App() {
     return (
@@ -55,6 +56,14 @@ function App() {
                         element={
                             <RequireAuth>
                                 <FAQPage />
+                            </RequireAuth>
+                        }
+                    />
+                    <Route
+                        path="/contacts"
+                        element={
+                            <RequireAuth>
+                                <ContactsPage />
                             </RequireAuth>
                         }
                     />
