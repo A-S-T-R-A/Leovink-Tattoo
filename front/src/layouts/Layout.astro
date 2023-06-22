@@ -5,8 +5,10 @@ import { ILayoutData, IOtherData, fetchSectionData } from "shared/const/firebase
 import "./Layout.scss"
 import {LogoLink} from "shared/components/LogoLink/LogoLink"
 import type { LanguageType } from "shared/types/types";
+import {getLangFromUrl} from 'shared/lib/i18n/getLangFromUrl'
 
-const language: LanguageType = "en" 
+
+const language: LanguageType =  getLangFromUrl(Astro.url)
 const otherData = await fetchSectionData(language, "other", true) as IOtherData;
 const {defaultLanguage} = otherData;
 const layoutData = await fetchSectionData(language, "layout",true) as ILayoutData;
