@@ -1,4 +1,4 @@
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
+import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import { db, storage } from "../../../firebase"
 import {
     CollectionReference,
@@ -158,4 +158,18 @@ export async function uploadImageToBucket(file: any, bucketPath: string): Promis
             }
         )
     })
+}
+
+export function getImageNameByUrl(url: string): string {
+    const startIndex = url.lastIndexOf("%2F") + 3
+    const endIndex = url.indexOf("?")
+    const extractedParam = url.substring(startIndex, endIndex)
+
+    return extractedParam
+}
+
+export async function deleteImageFromBucket(oldImg: string, path: string) {
+    const imgName = getImageNameByUrl(oldImg)
+    const imgRef = ref(storage, `${path}/${imgName}`)
+    await deleteObject(imgRef)
 }

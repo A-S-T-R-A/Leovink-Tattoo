@@ -5,33 +5,37 @@ import { Input } from "shared/ui/Input/Input"
 import { Textarea } from "shared/ui/Textarea/Textarea"
 import styles from "./EditParagraph.module.scss"
 import { ITranslatedStepsData } from "pages/StepsPage/types/types"
-import { Dropdown } from "shared/ui/Dropdown"
 import { LanguageType } from "shared/types/types"
 import {
     DATA_BUCKET,
+    deleteImageFromBucket,
     reformatArrayToObject,
     updateSectionData,
     uploadImageToBucket,
 } from "shared/const/firebaseVariables"
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
-import { storage } from "../../../../../firebase"
 import { EditImage } from "features/editImage"
+import { isShallowEqual } from "shared/lib/isShallowEqual/isShallowEqual"
+import { allLanguages } from "shared/const/languages"
 
 export function EditParagraph({
     data,
-    length,
     id,
     triggerRefetch,
 }: {
     data: ITranslatedStepsData | null
-    length: number
     id: number
     triggerRefetch?: () => void
 }) {
-    const defaultData = { id: -1, img: "", title: "", description: "" }
+    const defaultPreviewImage = { blob: "", url: "" }
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
-    const [newImage, setNewImage] = useState({ blob: "", url: "" })
-    const [newData, setNewData] = useState(() => data?.[currentLanguage][id] || defaultData)
+    const defaultData = data?.[currentLanguage][id] || {
+        id: -1,
+        img: "",
+        title: "",
+        description: "",
+    }
+    const [previewImage, setPreviewImage] = useState(defaultPreviewImage)
+    const [newData, setNewData] = useState(defaultData)
     const [isOpen, setIsOpen] = useState(false)
 
     function onClose() {
@@ -40,55 +44,71 @@ export function EditParagraph({
 
     function onChangeLanguage(lang: LanguageType) {
         setCurrentLanguage(lang)
-        setNewData(data?.[lang][id])
+        if (data) setNewData(data[lang][id])
     }
-
-    const dropdownNumbers = Array(length)
-        .fill("")
-        .map((_, index) => {
-            const v = index.toString()
-            return { label: v, value: v }
-        })
 
     async function saveClickHandler() {
         if (!data || !newData) return
+        if (isShallowEqual(newData, data[currentLanguage][id]) && previewImage.url === "") {
+            alert("Nothing to save")
+            setIsOpen(false)
+            return
+        }
+
         const documentData = data[currentLanguage]
         const dataToUpload = { ...newData }
 
         try {
-            if (newImage) {
+            if (previewImage.url !== "") {
                 const rand = (Math.random() * 100000000).toFixed()
                 const img = await uploadImageToBucket(
-                    newImage.blob,
+                    previewImage.blob,
                     `${DATA_BUCKET.steps}/st${rand}`
                 )
-                if (img) {
-                    dataToUpload.img = img
+                if (!img) throw new Error()
+
+                if (newData.img) {
+                    await deleteImageFromBucket(newData.img, DATA_BUCKET.steps)
                 }
 
-                //if changed image, update all languages
+                dataToUpload.img = img
+
+                const allStepsData = { ...data }
+
+                for (const lang of allLanguages) {
+                    if (lang === currentLanguage) {
+                        allStepsData[lang][id] = dataToUpload
+                    }
+                    allStepsData[lang][id].img = img
+                    const objectData = reformatArrayToObject(allStepsData[lang])
+                    await updateSectionData(lang, "steps", objectData)
+                }
+            } else {
+                console.log(dataToUpload)
+                documentData[id] = dataToUpload
+                const objectData = reformatArrayToObject(documentData)
+                await updateSectionData(currentLanguage, "steps", objectData)
             }
 
-            documentData[newData.id] = dataToUpload
-            const objectData = reformatArrayToObject(documentData)
-
-            await updateSectionData(currentLanguage, "steps", objectData)
             alert("Success")
         } catch (error) {
             alert("Error")
         }
-        triggerRefetch?.()
         setIsOpen(false)
+        setPreviewImage(defaultPreviewImage)
+        setNewData(defaultData)
+        triggerRefetch?.()
     }
 
     function discardClickHandler() {
-        setNewData(defaultData)
         setIsOpen(false)
+        setNewData(defaultData)
+        setPreviewImage(defaultPreviewImage)
     }
 
     function editImageChangeHandler(blob: any) {
         const url = URL.createObjectURL(blob)
-        setNewImage({ blob, url })
+        setPreviewImage({ blob, url })
     }
 
     return (
@@ -104,19 +124,12 @@ export function EditParagraph({
                 <div className={styles.container}>
                     <div className={styles.imgContainer}>
                         <ModalImage
-                            url={newImage.url ? newImage.url : newData?.img || ""}
+                            url={previewImage.url ? previewImage.url : newData?.img || ""}
                             className={styles.img}
                         />
                         <EditImage onChange={editImageChangeHandler} />
                     </div>
-                    <div>
-                        id:
-                        <Dropdown
-                            options={dropdownNumbers}
-                            value={newData?.id.toString() || ""}
-                            onChange={id => setNewData(prev => ({ ...prev, id: +id }))}
-                        />
-                    </div>
+                    <div>id: {id}</div>
                     <Input
                         label="Title"
                         value={newData?.title || ""}

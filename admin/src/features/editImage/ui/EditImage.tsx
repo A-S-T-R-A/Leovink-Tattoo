@@ -1,7 +1,7 @@
 import styles from "./EditImage.module.scss"
 import { v4 as uuid } from "uuid"
 
-export function EditImage({ onChange }: { onChange: (v: string) => void }) {
+export function EditImage({ onChange }: { onChange: (v: Blob) => void }) {
     const allowedTypes = ["image/jpeg", "image/png", "image/webp"]
     const maxSize = 0.5 * 1024 * 1024
 
@@ -30,7 +30,8 @@ export function EditImage({ onChange }: { onChange: (v: string) => void }) {
         reader.readAsArrayBuffer(file)
 
         reader.onloadend = () => {
-            const blob = new Blob([reader.result])
+            const arrayBuffer = reader.result as ArrayBuffer
+            const blob = new Blob([arrayBuffer], { type: file.type })
             onChange?.(blob)
         }
     }
