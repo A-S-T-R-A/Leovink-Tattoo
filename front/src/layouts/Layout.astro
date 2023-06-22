@@ -6,7 +6,7 @@ import "./Layout.scss"
 import {LogoLink} from "shared/components/LogoLink/LogoLink"
 import type { LanguageType } from "shared/types/types";
 
-const language: LanguageType =  "en" 
+const language: LanguageType = "en" 
 const otherData = await fetchSectionData(language, "other", true) as IOtherData;
 const {defaultLanguage} = otherData;
 const layoutData = await fetchSectionData(language, "layout",true) as ILayoutData;
