@@ -9,7 +9,7 @@ import styles from "./PortfolioPage.module.scss"
 import {
     getImagesDoc,
     portfolioPicturesRef,
-    reformatObjectValuesToArray,
+    reformatAndSortObjectValuesToArray,
     sortObjectData,
 } from "shared/const/firebaseVariables"
 import { localStorageView } from "../lib/localStorageLib"
@@ -28,8 +28,7 @@ export function PortfolioPage() {
         const currentDoc = await getImagesDoc()
         if (!currentDoc) return
         const currentData = currentDoc.data()
-        const ascSortedData = sortObjectData(currentData)
-        const dataArray = reformatObjectValuesToArray(ascSortedData)
+        const dataArray = reformatAndSortObjectValuesToArray(currentData)
         // const liveData = dataArray.filter(item => item.isLive)
         setData(dataArray)
     }

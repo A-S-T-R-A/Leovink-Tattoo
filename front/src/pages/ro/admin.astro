@@ -1,11 +1,3 @@
 ---
-import { changeLanguage } from "i18next";
-import Layout from "layouts/Layout.astro";
-import { Redirect } from "../../widgets/Redirect/Redirect";
-
-changeLanguage("ro");
+return Astro.redirect("https://leovink-admin.web.app/")
 ---
-
-<Layout>
-    <Redirect client:only="preact" />
-</Layout>
