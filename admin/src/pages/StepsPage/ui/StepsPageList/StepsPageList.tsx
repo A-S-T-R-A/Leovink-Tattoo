@@ -2,7 +2,7 @@ import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import styles from "./StepsPageList.module.scss"
 import { EditParagraph } from "../EditParagraph/EditParagraph"
 import { ITranslatedStepsData } from "pages/StepsPage/types/types"
-import { defaultLanguage } from "shared/const/defaultLanguage"
+import { defaultLanguage } from "shared/const/languages"
 
 export function StepsPageList({
     data,

@@ -8,15 +8,14 @@ import { ITranslatedStepsData } from "pages/StepsPage/types/types"
 import { LanguageType } from "shared/types/types"
 import {
     DATA_BUCKET,
+    deleteImageFromBucket,
     reformatArrayToObject,
     updateSectionData,
     uploadImageToBucket,
 } from "shared/const/firebaseVariables"
 import { EditImage } from "features/editImage"
 import { isShallowEqual } from "shared/lib/isShallowEqual/isShallowEqual"
-import { storage } from "../../../../../firebase"
-import { deleteObject, ref } from "firebase/storage"
-import { getImageNameByUrl } from "features/deleteTattooImage/lib/getImageNameByUrl"
+import { allLanguages } from "shared/const/languages"
 
 export function EditParagraph({
     data,
@@ -48,11 +47,6 @@ export function EditParagraph({
         if (data) setNewData(data[lang][id])
     }
 
-    async function deleteOldImage(oldImg: string) {
-        const imgName = getImageNameByUrl(oldImg)
-        const imgRef = ref(storage, `${DATA_BUCKET.steps}/${imgName}`)
-        await deleteObject(imgRef)
-    }
     async function saveClickHandler() {
         if (!data || !newData) return
         if (isShallowEqual(newData, data[currentLanguage][id]) && previewImage.url === "") {
@@ -74,15 +68,14 @@ export function EditParagraph({
                 if (!img) throw new Error()
 
                 if (newData.img) {
-                    await deleteOldImage(newData.img)
+                    await deleteImageFromBucket(newData.img, DATA_BUCKET.steps)
                 }
 
                 dataToUpload.img = img
 
-                const languages: LanguageType[] = ["en", "ro", "ru"]
-
                 const allStepsData = { ...data }
-                for (const lang of languages) {
+
+                for (const lang of allLanguages) {
                     if (lang === currentLanguage) {
                         allStepsData[lang][id] = dataToUpload
                     }
