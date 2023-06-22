@@ -1,15 +1,13 @@
 ---
-import i18next, { changeLanguage } from "i18next";
 import Layout from "layouts/Layout.astro";
 import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
 import { FormSection } from "widgets/FormSection/FormSection";
 import { FindUs } from "widgets/FindUs/FindUs";
-import type { LanguageType } from "shared/types/types";
 import { ILayoutData, IOtherData, fetchSectionData } from "shared/const/firebaseVariables";
+import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl";
 
-changeLanguage("ru");
 
-const language = i18next.language as LanguageType;
+const language = getLangFromUrl(Astro.url)
 const layoutData = await fetchSectionData(language, "layout", true) as ILayoutData;
 const otherData = await fetchSectionData(language, "other", true) as IOtherData;
 const { sectionNames, formData, buttons } = otherData;
