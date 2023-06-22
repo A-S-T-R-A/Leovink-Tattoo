@@ -2,14 +2,20 @@ import { Section } from "shared/ui/Section/Section"
 import styles from "./Steps.module.scss"
 import { Typography } from "shared/ui/Typography/Typography"
 import { CtaButton } from "shared/components/CtaButton/CtaButton"
-import { fetchSectionData, type IStepData } from "shared/const/firebaseVariables"
+import type { IStepData } from "shared/const/firebaseVariables"
 import { useState } from "preact/hooks"
 import { ChevronDownIcon } from "shared/ui/Icons"
 import { classNames } from "shared/lib/classNames/classNames"
 
-const data = (await fetchSectionData("en", "steps")) as IStepData[]
-
-export function Steps({ title, button }: { title: string; button: string }) {
+export function Steps({
+    data,
+    title,
+    button,
+}: {
+    title: string
+    button: string
+    data: IStepData[]
+}) {
     const [selected, setSelected] = useState(0)
 
     return (
