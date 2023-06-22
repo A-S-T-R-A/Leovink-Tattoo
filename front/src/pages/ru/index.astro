@@ -1,21 +1,19 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import { Main } from "../../widgets/Main/Main";
-import { Portfolio } from "../../widgets/Portfolio/Portfolio";
-import { Steps } from "../../widgets/Steps/Steps";
-import { Services } from "../../widgets/Services/Services";
-import { Artists } from "../../widgets/Artists/Artists";
-import { Testimonials } from "../../widgets/Testimonials/Testimonials";
-import { Faq } from "../../widgets/Faq/Faq";
-import { FormSection } from "../../widgets/FormSection/FormSection";
-import type { LanguageType } from "shared/types/types";
-import i18next, { changeLanguage } from "i18next";
-import { fetchSectionData, IStepData, fetchImagesData, IServicesData, IArtistsData, IFaqData, ITestimonialsData, IOtherData, IImagesData } from "../../shared/const/firebaseVariables";
+import Layout from "layouts/Layout.astro";
+import { Main } from "widgets/Main/Main";
+import { Portfolio } from "widgets/Portfolio/Portfolio";
+import { Steps } from "widgets/Steps/Steps";
+import { Services } from "widgets/Services/Services";
+import { Artists } from "widgets/Artists/Artists";
+import { Testimonials } from "widgets/Testimonials/Testimonials";
+import { Faq } from "widgets/Faq/Faq";
+import { FormSection } from "widgets/FormSection/FormSection";
+import { fetchSectionData, IStepData, fetchImagesData, IServicesData, IArtistsData, IFaqData, ITestimonialsData, IOtherData, IImagesData } from "shared/const/firebaseVariables";
+import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl";
 
-changeLanguage("ru");
 
 const imagesData = await fetchImagesData() as IImagesData[];
-const language = i18next.language as LanguageType;
+const language = getLangFromUrl(Astro.url)
 const stepsData = await fetchSectionData(language, "steps") as IStepData[];
 const servicesData = await fetchSectionData(language, "services") as IServicesData[];
 const artistsData = await fetchSectionData(language, "artists") as IArtistsData[];
@@ -26,6 +24,7 @@ const { formData, sectionNames, buttons, defaultLanguage } = otherData;
 const { portfolio, steps, services, artists, testimonials, faq, form } = sectionNames;
 const { cta, showMore, viewGallery } = buttons;
 ---
+
 
 <Layout>
     <Main client:load />
