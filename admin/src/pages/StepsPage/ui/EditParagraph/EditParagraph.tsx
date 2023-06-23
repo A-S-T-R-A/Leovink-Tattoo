@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { Input } from "shared/ui/Input/Input"
@@ -28,8 +28,7 @@ export function EditParagraph({
 }) {
     const defaultPreviewImage = { blob: "", url: "" }
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
-    const defaultData = data?.[currentLanguage][id] || {
-        id: -1,
+    const defaultData = {
         img: "",
         title: "",
         description: "",
@@ -37,6 +36,12 @@ export function EditParagraph({
     const [previewImage, setPreviewImage] = useState(defaultPreviewImage)
     const [newData, setNewData] = useState(defaultData)
     const [isOpen, setIsOpen] = useState(false)
+
+    useEffect(() => {
+        if (data) {
+            setNewData(data[currentLanguage][id])
+        }
+    }, [data, currentLanguage, id])
 
     function onClose() {
         setIsOpen(false)
@@ -55,7 +60,7 @@ export function EditParagraph({
             return
         }
 
-        const documentData = data[currentLanguage]
+        const documentData = [...data[currentLanguage]]
         const dataToUpload = { ...newData }
 
         try {
@@ -68,7 +73,7 @@ export function EditParagraph({
                 if (!img) throw new Error()
 
                 if (newData.img) {
-                    await deleteImageFromBucket(newData.img, DATA_BUCKET.steps)
+                    deleteImageFromBucket(newData.img, DATA_BUCKET.steps)
                 }
 
                 dataToUpload.img = img
@@ -96,7 +101,6 @@ export function EditParagraph({
         }
         setIsOpen(false)
         setPreviewImage(defaultPreviewImage)
-        setNewData(defaultData)
         triggerRefetch?.()
     }
 
