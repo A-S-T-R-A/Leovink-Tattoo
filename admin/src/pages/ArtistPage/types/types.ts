@@ -1,6 +1,7 @@
-export interface IArtistData {
-    photo: string
+export interface IArtistsData {
     name: string
-    specialization: string
     description: string
+    specialization: string
+    img: string
+    slug: string
 }

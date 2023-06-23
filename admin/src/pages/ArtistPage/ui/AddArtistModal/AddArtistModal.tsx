@@ -4,15 +4,17 @@ import { Input } from "shared/ui/Input/Input"
 import { Textarea } from "shared/ui/Textarea/Textarea"
 import styles from "./AddArtistModal.module.scss"
 import { LanguageType } from "shared/types/types"
-import { IArtistData } from "pages/ArtistPage/types/types"
+import { IArtistsData } from "../../types/types"
 
-export function AddArtistModal({ artistData }: { artistData: IArtistData[] }) {
-    const [data, setData] = useState<IArtistData>({
-        photo: "",
+export function AddArtistModal({ artistData }: { artistData: IArtistsData[] }) {
+    const [data, setData] = useState<IArtistsData>({
         name: "",
-        specialization: "",
         description: "",
+        specialization: "",
+        img: "",
+        slug: "",
     })
+
     const [isOpen, setIsOpen] = useState(false)
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
 
@@ -59,6 +61,7 @@ export function AddArtistModal({ artistData }: { artistData: IArtistData[] }) {
                     <div>
                         <Textarea
                             label="Description"
+                            value={data.description}
                             onChange={value => setData(prev => ({ ...prev, description: value }))}
                         />
                     </div>

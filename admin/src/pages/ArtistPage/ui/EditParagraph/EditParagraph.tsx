@@ -3,26 +3,14 @@ import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTra
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { Input } from "shared/ui/Input/Input"
 import { Textarea } from "shared/ui/Textarea/Textarea"
-import { Dropdown } from "shared/ui/Dropdown"
 import { LanguageType } from "shared/types/types"
 import styles from "./EditParagraph.module.scss"
-import { IReviewData } from "pages/ReviewPage/types/types"
-import { IArtistData } from "pages/ArtistPage/types/types"
+import { IArtistsData } from "../../types/types"
 
-export function EditParagraph({
-    artistData,
-    id,
-    triggerRefetch,
-    unselectAllHandler,
-}: {
-    artistData: IArtistData[]
-    id?: number
-    triggerRefetch?: () => void
-    unselectAllHandler?: () => void
-}) {
+export function EditParagraph({ artistData, id }: { artistData: IArtistsData; id: number }) {
     const [data, setData] = useState({
-        id: 0,
-        photo: "",
+        id: -1,
+        img: "",
         name: "",
         specialization: "",
         description: "",
@@ -38,12 +26,12 @@ export function EditParagraph({
         setCurrentLanguage(lang)
     }
 
-    const dropdownNumbers = Array(artistData.length)
+    /*  const dropdownNumbers = Array(artistData.length)
         .fill("")
         .map((_, index) => {
-            const v = (index + 1).toString()
+            const v = index.toString()
             return { label: v, value: v }
-        })
+        }) */
 
     return (
         <>
@@ -58,29 +46,29 @@ export function EditParagraph({
                 <div className={styles.container}>
                     <div className={styles.imgContainer}>
                         photo:
-                        <ModalImage url={artistData[0].photo} className={styles.img} />
+                        <ModalImage url={artistData.img} className={styles.img} />
                         <label htmlFor="my-file">Edit</label>
                         <input type="file" id="my-file" className={styles.file} />
                     </div>
                     <div>
-                        id:
-                        <Dropdown
+                        id: {id}
+                        {/* <Dropdown
                             options={dropdownNumbers}
                             value={data.id?.toString()}
                             onChange={id => setData(prev => ({ ...prev, id: +id }))}
-                        />
+                        /> */}
                     </div>
                     <div>
                         <Input
                             label="Name"
-                            value={data.name}
-                            onChange={value => setData(prev => ({ ...prev, title: value }))}
+                            value={artistData.name}
+                            onChange={value => setData(prev => ({ ...prev, name: value }))}
                         />
                     </div>
                     <div>
                         <Input
                             label="Specialization"
-                            value={data.specialization}
+                            value={artistData.specialization}
                             onChange={value =>
                                 setData(prev => ({ ...prev, specialization: value }))
                             }
@@ -89,6 +77,7 @@ export function EditParagraph({
                     <div>
                         <Textarea
                             label="Description"
+                            value={artistData.description}
                             onChange={value => setData(prev => ({ ...prev, description: value }))}
                         />
                     </div>
