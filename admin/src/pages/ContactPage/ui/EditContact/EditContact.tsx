@@ -4,8 +4,8 @@ import { LanguageType } from "shared/types/types"
 import styles from "./EditContact.module.scss"
 import { Input } from "shared/ui/Input/Input"
 
-export function EditContact({ label }: { label: string }) {
-    const [data, setData] = useState({ contact: "" })
+export function EditContact({ label, contact }: { label: string; contact: string }) {
+    const [info, setInfo] = useState("")
     const [isOpen, setIsOpen] = useState(false)
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
 
@@ -28,11 +28,7 @@ export function EditContact({ label }: { label: string }) {
                 onDiscardClick={() => null}
             >
                 <div className={styles.container}>
-                    <Input
-                        label={label}
-                        value={data.contact}
-                        onChange={value => setData(prev => ({ ...prev, title: value }))}
-                    />
+                    <Input label={label} value={contact} onChange={value => setInfo(value)} />
                 </div>
             </ModalEditorWithTranslation>
             <button onClick={() => setIsOpen(true)}>Edit</button>

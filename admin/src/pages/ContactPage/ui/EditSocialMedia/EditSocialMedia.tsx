@@ -3,11 +3,10 @@ import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTra
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { Input } from "shared/ui/Input/Input"
 import styles from "./EditSocialMedia.module.scss"
-import { IStepsData } from "pages/StepsPage/types/types"
 import { LanguageType } from "shared/types/types"
-import { ISocialMedia } from "pages/ContactPage/types/type"
+import { ISocialMedia } from "../../types/type"
 
-export function EditSocialMedia({ icon }: { icon: string }) {
+export function EditSocialMedia({ social }: { social: ISocialMedia }) {
     const [data, setData] = useState<ISocialMedia>({ icon: "", link: "" })
     const [isOpen, setIsOpen] = useState(false)
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
@@ -32,13 +31,13 @@ export function EditSocialMedia({ icon }: { icon: string }) {
             >
                 <div className={styles.container}>
                     <div className={styles.imgContainer}>
-                        <ModalImage url={icon} className={styles.img} />
+                        <ModalImage url={social.icon} className={styles.img} />
                         <label htmlFor="my-file">Edit</label>
                         <input type="file" id="my-file" className={styles.file} />
                     </div>
                     <Input
                         label="link"
-                        value={data.link}
+                        value={social.link}
                         onChange={value => setData(prev => ({ ...prev, link: value }))}
                     />
                 </div>

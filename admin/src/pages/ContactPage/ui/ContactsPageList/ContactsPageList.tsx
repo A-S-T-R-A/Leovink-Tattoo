@@ -1,4 +1,4 @@
-import { IContactData } from "pages/ContactPage/types/type"
+import { IContactData } from "../../types/type"
 import styles from "./ContactsPageList.module.scss"
 import { EditContact } from "../EditContact/EditContact"
 import { EditDescription } from "../EditDescription/EditDescription"
@@ -10,25 +10,25 @@ export function ContactsPageList({ contactData }: { contactData: IContactData })
             <div className={styles.location}>
                 Location: {contactData.location}
                 <div className={styles.btns}>
-                    <EditContact label="location" />
+                    <EditContact label="location" contact={contactData.location} />
                 </div>
             </div>
             <div className={styles.phone}>
                 Phone: {contactData.phone}
                 <div className={styles.btns}>
-                    <EditContact label="phone" />
+                    <EditContact label="phone" contact={contactData.phone} />
                 </div>
             </div>
             <div className={styles.mail}>
                 Mail: {contactData.mail}
                 <div className={styles.btns}>
-                    <EditContact label="mail" />
+                    <EditContact label="mail" contact={contactData.mail} />
                 </div>
             </div>
             <div className={styles.description}>
                 Description: {contactData.description}
                 <div className={styles.btns}>
-                    <EditDescription />
+                    <EditDescription description={contactData.description} />
                 </div>
             </div>
             <div className={styles.socials}>
@@ -42,7 +42,7 @@ export function ContactsPageList({ contactData }: { contactData: IContactData })
                             </p>
                             <p>link: {link}</p>
                             <div className={styles.btns}>
-                                <EditSocialMedia icon={icon} />
+                                <EditSocialMedia social={item} />
                             </div>
                         </div>
                     )

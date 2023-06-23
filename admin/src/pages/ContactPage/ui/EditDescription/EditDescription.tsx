@@ -4,8 +4,8 @@ import { LanguageType } from "shared/types/types"
 import styles from "./EditDescription.module.scss"
 import { Textarea } from "shared/ui/Textarea/Textarea"
 
-export function EditDescription() {
-    const [data, setData] = useState({ description: "" })
+export function EditDescription({ description }: { description: string }) {
+    const [info, setInfo] = useState("")
     const [isOpen, setIsOpen] = useState(false)
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
 
@@ -30,7 +30,8 @@ export function EditDescription() {
                 <div className={styles.container}>
                     <Textarea
                         label="Description"
-                        onChange={value => setData(prev => ({ ...prev, description: value }))}
+                        value={description}
+                        onChange={value => setInfo(value)}
                     />
                 </div>
             </ModalEditorWithTranslation>
