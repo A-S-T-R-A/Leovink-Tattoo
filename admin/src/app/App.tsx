@@ -57,6 +57,14 @@ function App() {
                             </RequireAuth>
                         }
                     />
+                    <Route
+                        path="/faq"
+                        element={
+                            <RequireAuth>
+                                <FAQPage />
+                            </RequireAuth>
+                        }
+                    />
                 </Routes>
             </div>
         </div>
