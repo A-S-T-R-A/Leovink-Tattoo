@@ -1,10 +1,15 @@
-.imgContainer {
+.img {
+    width: 50px;
+}
+
+.imgContainer,
+.videoContainer {
     display: flex;
     align-items: center;
     margin: 20px 0;
     gap: 40px;
 
-    .fileLabel {
+    label {
         margin-left: 20px;
         display: block;
         padding: 2px 10px;
@@ -20,6 +25,10 @@
         opacity: 0;
         padding: 14px 0;
         cursor: pointer;
+    }
+
+    video {
+        max-width: 80px;
     }
 }
 

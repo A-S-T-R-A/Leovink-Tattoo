@@ -9,7 +9,6 @@ export function EditImage({ onChange }: { onChange: (v: Blob) => void }) {
 
     async function imageChangeHandler(e: any) {
         const file = e.target.files[0]
-        const reader = new FileReader()
 
         if (!file) {
             e.target.value = null
@@ -27,8 +26,9 @@ export function EditImage({ onChange }: { onChange: (v: Blob) => void }) {
             e.target.value = null
             return
         }
-        reader.readAsArrayBuffer(file)
+        const reader = new FileReader()
 
+        reader.readAsArrayBuffer(file)
         reader.onloadend = () => {
             const arrayBuffer = reader.result as ArrayBuffer
             const blob = new Blob([arrayBuffer], { type: file.type })

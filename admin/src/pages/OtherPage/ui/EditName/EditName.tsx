@@ -4,8 +4,8 @@ import { LanguageType } from "shared/types/types"
 import styles from "./EditName.module.scss"
 import { Input } from "shared/ui/Input/Input"
 
-export function EditName() {
-    const [data, setData] = useState({ name: "" })
+export function EditName({ sectionName }: { sectionName: string }) {
+    const [name, setName] = useState("")
     const [isOpen, setIsOpen] = useState(false)
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
 
@@ -28,11 +28,7 @@ export function EditName() {
                 onDiscardClick={() => null}
             >
                 <div className={styles.container}>
-                    <Input
-                        label="Name"
-                        value={data.name}
-                        onChange={value => setData(prev => ({ ...prev, title: value }))}
-                    />
+                    <Input label="Name" value={sectionName} onChange={value => setName(value)} />
                 </div>
             </ModalEditorWithTranslation>
             <button onClick={() => setIsOpen(true)}>Edit</button>

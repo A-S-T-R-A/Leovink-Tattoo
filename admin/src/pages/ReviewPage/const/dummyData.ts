@@ -1,9 +1,7 @@
-import { AddReviewModal } from "./AddReviewModal/AddReviewModal"
-import { ReviewPageList } from "./ReviewPageList/ReviewPageList"
-import video from "./const/testimonial.mp4"
-import preview from "./const/testimonial1.jpg"
+import video from "./testimonial.mp4"
+import preview from "./testimonial1.jpg"
 
-const data = [
+export const dummyData = [
     {
         preview: preview,
         video: video,
@@ -21,12 +19,3 @@ const data = [
         duration: "14 hours",
     },
 ]
-
-export function ReviewPage() {
-    return (
-        <>
-            <AddReviewModal reviewData={data} />
-            <ReviewPageList reviewData={data} />
-        </>
-    )
-}
