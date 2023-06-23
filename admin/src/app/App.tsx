@@ -7,10 +7,10 @@ import { RequireAuth } from "features/authByGoogle"
 import { StepsPage } from "pages/StepsPage"
 import { ServicesPage } from "pages/ServicesPage"
 import { ReviewsPage } from "pages/ReviewPage"
-import { ArtistPage } from "pages/ArtistPage"
 import { FAQPage } from "pages/FAQPage"
 import { OtherPage } from "pages/OtherPage"
 import { ContactsPage } from "pages/ContactPage/ui/ContactsPage"
+import { ArtistPage } from "pages/ArtistPage"
 
 function App() {
     return (
