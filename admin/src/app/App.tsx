@@ -8,6 +8,8 @@ import { StepsPage } from "pages/StepsPage"
 import { ServicesPage } from "pages/ServicesPage"
 import { ReviewPage } from "pages/ReviewPage"
 import { ArtistPage } from "pages/ArtistPage"
+import { FAQPage } from "pages/FAQPage"
+import { OtherPage } from "pages/OtherPage"
 
 function App() {
     return (
@@ -54,6 +56,22 @@ function App() {
                         element={
                             <RequireAuth>
                                 <ArtistPage />
+                            </RequireAuth>
+                        }
+                    />
+                    <Route
+                        path="/faq"
+                        element={
+                            <RequireAuth>
+                                <FAQPage />
+                            </RequireAuth>
+                        }
+                    />
+                    <Route
+                        path="/other"
+                        element={
+                            <RequireAuth>
+                                <OtherPage />
                             </RequireAuth>
                         }
                     />
