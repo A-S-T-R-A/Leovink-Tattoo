@@ -16,7 +16,7 @@ import {
     uploadImageToBucket,
 } from "shared/const/firebaseVariables"
 import { findArraysDifference } from "shared/lib/findArrayDifference/findArrayDifference"
-import { allLanguages } from "shared/const/languages"
+import { allLanguages, defaultLanguage } from "shared/const/languages"
 
 export function EditParagraph({
     id,
@@ -27,7 +27,7 @@ export function EditParagraph({
     id: number
     triggerRefetch?: () => void
 }) {
-    const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
+    const [currentLanguage, setCurrentLanguage] = useState<LanguageType>(defaultLanguage)
     const defaultNewData = { title: "", description: "", images: [] }
     const [newData, setNewData] = useState<IServiceData>(defaultNewData)
     const [isOpen, setIsOpen] = useState(false)

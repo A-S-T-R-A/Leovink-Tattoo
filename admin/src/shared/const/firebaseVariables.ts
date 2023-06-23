@@ -17,6 +17,7 @@ export const TATTOO_IMAGES_BUCKET = "tattoo_images"
 export const DATA_BUCKET = {
     steps: "data/steps",
     services: "data/services",
+    testimonials: "data/testimonials",
 }
 export const PORTFOLIO_PICTURES_DB = "portfolio_pictures"
 
