@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { AddStepModal } from "./AddStepModal/AddStepModal"
 import { StepsPageList } from "./StepsPageList/StepsPageList"
 import { fetchSectionData } from "shared/const/firebaseVariables"
 import { IStepsData, ITranslatedStepsData } from "../types/types"
@@ -22,10 +21,5 @@ export function StepsPage() {
         fetch()
     }, [])
 
-    return (
-        <>
-            {/* <AddStepModal length={data?.["en"]?.length || 0} /> */}
-            <StepsPageList data={data} triggerRefetch={triggerRefetch} />
-        </>
-    )
+    return <StepsPageList data={data} triggerRefetch={triggerRefetch} />
 }
