@@ -1,13 +1,13 @@
-import styles from "./EditImage.module.scss"
+import styles from "./EditVideo.module.scss"
 import { v4 as uuid } from "uuid"
 
-export function EditImage({ onChange }: { onChange: (v: Blob) => void }) {
-    const allowedTypes = ["image/jpeg", "image/png", "image/webp"]
-    const maxSize = 0.5 * 1024 * 1024
+export function EditVideo({ onChange }: { onChange: (v: Blob) => void }) {
+    const allowedTypes = ["video/mp4", "video/webm", "video/quicktime"]
+    const maxSize = 10 * 1024 * 1024
 
     const id = uuid()
 
-    async function imageChangeHandler(e: any) {
+    async function videoChangeHandler(e: any) {
         const file = e.target.files[0]
 
         if (!file) {
@@ -22,13 +22,14 @@ export function EditImage({ onChange }: { onChange: (v: Blob) => void }) {
         }
 
         if (!allowedTypes.includes(file.type)) {
-            alert("Invalid file type. Please select a JPEG, PNG or WEBP image.")
+            alert("Invalid file type. Please select a MP4, WebM, or QuickTime video.")
             e.target.value = null
             return
         }
         const reader = new FileReader()
 
         reader.readAsArrayBuffer(file)
+
         reader.onloadend = () => {
             const arrayBuffer = reader.result as ArrayBuffer
             const blob = new Blob([arrayBuffer], { type: file.type })
@@ -39,7 +40,7 @@ export function EditImage({ onChange }: { onChange: (v: Blob) => void }) {
     return (
         <>
             <label htmlFor={id}>Edit</label>
-            <input type="file" id={id} className={styles.file} onChange={imageChangeHandler} />
+            <input type="file" id={id} className={styles.file} onChange={videoChangeHandler} />
         </>
     )
 }

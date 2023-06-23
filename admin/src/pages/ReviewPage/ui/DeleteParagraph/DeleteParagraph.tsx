@@ -1,4 +1,4 @@
-import { ITranslatedServiceData } from "pages/ServicesPage/types/types"
+import { ITranslatedTestimonialsData } from "../../types/types"
 import { useState } from "react"
 import {
     DATA_BUCKET,
@@ -13,7 +13,7 @@ export function DeleteParagraph({
     data,
     triggerRefetch,
 }: {
-    data: ITranslatedServiceData | null
+    data: ITranslatedTestimonialsData | null
     id: number
     triggerRefetch?: () => void
 }) {
@@ -25,18 +25,16 @@ export function DeleteParagraph({
 
         setIsLoading(true)
 
-        const images = data[defaultLanguage][id].images
-        for (const img of images) {
-            deleteImageFromBucket(img, DATA_BUCKET.services)
-        }
+        deleteImageFromBucket(data[defaultLanguage][id].preview, DATA_BUCKET.testimonials)
+        deleteImageFromBucket(data[defaultLanguage][id].video, DATA_BUCKET.testimonials)
 
-        const allStepsData = { ...data }
+        const allReviewsData = { ...data }
 
         try {
             for (const lang of allLanguages) {
-                delete allStepsData[lang][id]
-                const objectData = reformatArrayToObject(allStepsData[lang])
-                await updateSectionData(lang, "services", objectData)
+                delete allReviewsData[lang][id]
+                const objectData = reformatArrayToObject(allReviewsData[lang])
+                await updateSectionData(lang, "testimonials", objectData)
             }
             alert("Success")
         } catch (error) {
