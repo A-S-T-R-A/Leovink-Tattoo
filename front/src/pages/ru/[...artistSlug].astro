@@ -1,28 +1,24 @@
 ---
 import { IArtistsData, IImagesData, ILayoutData, IOtherData, fetchImagesData, fetchSectionData } from "shared/const/firebaseVariables";
-import i18next, { changeLanguage } from "i18next";
+//import i18next, { changeLanguage } from "i18next";
 import type { LanguageType } from "shared/types/types";
 import Layout from "layouts/Layout.astro";
 import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
 import { ArtistPage } from "pageComponents/ArtistPage/ArtistPage";
+import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl";
 
-changeLanguage("ru");
 
-export async function getStaticPaths() {
-    const language = i18next.language as LanguageType;
-    const artistsData = await fetchSectionData(language, "artists") as IArtistsData[];
-    return artistsData.map(item => ({
-        params: { artist: item.slug },
-        props: item
-    }));
-}
+const language = getLangFromUrl(Astro.url)
+const {artistSlug} = Astro.params
+const pages = await fetchSectionData(language, "artists") as IArtistsData[];
+const artist = pages.find((page) => page.slug === artistSlug);
+if (!artist) return Astro.redirect("/404");
+
 const imagesData = await fetchImagesData() as IImagesData[];
-const language = i18next.language as LanguageType;
 const layoutData = await fetchSectionData(language, "layout", true) as ILayoutData;
 const otherData = await fetchSectionData(language, "other", true) as IOtherData;
 const { sectionNames, formData, buttons } = otherData;
 const { cta } = buttons;
-const artist = Astro.props as IArtistsData;
 ---
 
 <Layout>

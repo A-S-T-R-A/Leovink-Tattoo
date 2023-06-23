@@ -1,15 +1,12 @@
 ---
-import i18next, { changeLanguage } from "i18next";
 import Layout from "layouts/Layout.astro";
 import { PortfolioPage } from "pageComponents/PortfolioPage/PortfolioPage";
 import { fetchImagesData, fetchSectionData, IImagesData, ILayoutData, type IOtherData } from "shared/const/firebaseVariables";
+import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl";
 import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
-import type { LanguageType } from "shared/types/types";
-
-changeLanguage("ro");
 
 const imagesData = await fetchImagesData() as IImagesData[];
-const language = i18next.language as LanguageType;
+const language = getLangFromUrl(Astro.url)
 const layoutData = await fetchSectionData(language, "layout", true) as ILayoutData;
 const otherData = await fetchSectionData(language, "other", true) as IOtherData;
 const { sectionNames, formData, buttons, filtersData } = otherData;

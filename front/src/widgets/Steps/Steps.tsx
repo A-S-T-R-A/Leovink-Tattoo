@@ -8,13 +8,13 @@ import { ChevronDownIcon } from "shared/ui/Icons"
 import { classNames } from "shared/lib/classNames/classNames"
 
 export function Steps({
-    data = [],
+    data,
     title,
     button,
 }: {
-    data: IStepData[]
     title: string
     button: string
+    data: IStepData[]
 }) {
     const [selected, setSelected] = useState(0)
 
