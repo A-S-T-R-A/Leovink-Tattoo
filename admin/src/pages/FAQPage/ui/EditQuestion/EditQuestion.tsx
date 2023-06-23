@@ -4,20 +4,20 @@ import { Textarea } from "shared/ui/Textarea/Textarea"
 import { Dropdown } from "shared/ui/Dropdown"
 import { LanguageType } from "shared/types/types"
 import styles from "./EditQuestion.module.scss"
-import { IFaqData } from "pages/FAQPage/types/types"
+
+interface IQuestionsData {
+    question: string
+    answer: string
+}
 
 export function EditQuestion({
     questionsData,
-    id,
-    triggerRefetch,
-    unselectAllHandler,
+    question,
 }: {
-    questionsData: { question: string; answer: string }[]
-    id?: number
-    triggerRefetch?: () => void
-    unselectAllHandler?: () => void
+    questionsData: IQuestionsData[]
+    question: IQuestionsData
 }) {
-    const [data, setData] = useState({ id: 0, question: "", answer: "" })
+    const [data, setData] = useState({ id: -1, question: "", answer: "" })
     const [isOpen, setIsOpen] = useState(false)
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
 
@@ -32,7 +32,7 @@ export function EditQuestion({
     const dropdownNumbers = Array(questionsData.length)
         .fill("")
         .map((_, index) => {
-            const v = (index + 1).toString()
+            const v = index.toString()
             return { label: v, value: v }
         })
 
@@ -57,10 +57,12 @@ export function EditQuestion({
                     </div>
                     <Textarea
                         label="question"
+                        value={question.question}
                         onChange={value => setData(prev => ({ ...prev, question: value }))}
                     />
                     <Textarea
                         label="answer"
+                        value={question.answer}
                         onChange={value => setData(prev => ({ ...prev, answer: value }))}
                     />
                 </div>

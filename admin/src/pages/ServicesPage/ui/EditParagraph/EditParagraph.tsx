@@ -1,27 +1,44 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
-import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { Input } from "shared/ui/Input/Input"
 import { Textarea } from "shared/ui/Textarea/Textarea"
-import { Dropdown } from "shared/ui/Dropdown"
 import { LanguageType } from "shared/types/types"
-import { IServiceData } from "pages/ServicesPage/types/types"
+import { IPreviewImage, IServiceData, ITranslatedServiceData } from "../../types/types"
 import styles from "./EditParagraph.module.scss"
+import { EditImage } from "features/editImage"
+import { ImagesList } from "../ImagesList/ImagesList"
+import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
+import {
+    DATA_BUCKET,
+    deleteImageFromBucket,
+    reformatArrayToObject,
+    updateSectionData,
+    uploadImageToBucket,
+} from "shared/const/firebaseVariables"
+import { findArraysDifference } from "shared/lib/findArrayDifference/findArrayDifference"
+import { allLanguages, defaultLanguage } from "shared/const/languages"
 
 export function EditParagraph({
-    serviceData,
     id,
+    data,
     triggerRefetch,
-    unselectAllHandler,
 }: {
-    serviceData: IServiceData[]
-    id?: number
+    data: ITranslatedServiceData | null
+    id: number
     triggerRefetch?: () => void
-    unselectAllHandler?: () => void
 }) {
-    const [data, setData] = useState({ id: 0, title: "", description: "" })
+    const [currentLanguage, setCurrentLanguage] = useState<LanguageType>(defaultLanguage)
+    const defaultNewData = { title: "", description: "", images: [] }
+    const [newData, setNewData] = useState<IServiceData>(defaultNewData)
     const [isOpen, setIsOpen] = useState(false)
-    const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
+    const [isLoading, setIsLoading] = useState(false)
+    const [previewImages, setPreviewImages] = useState<IPreviewImage[]>([])
+
+    useEffect(() => {
+        if (data) {
+            setNewData(data[currentLanguage][id])
+        }
+    }, [data, currentLanguage, id])
 
     function onClose() {
         setIsOpen(false)
@@ -29,14 +46,97 @@ export function EditParagraph({
 
     function onChangeLanguage(lang: LanguageType) {
         setCurrentLanguage(lang)
+        if (data) setNewData(data[lang][id])
     }
 
-    const dropdownNumbers = Array(serviceData.length)
-        .fill("")
-        .map((_, index) => {
-            const v = (index + 1).toString()
-            return { label: v, value: v }
-        })
+    async function saveClickHandler() {
+        if (!data || !newData) return
+        if (isDeepEqual(data?.[currentLanguage][id], newData) && previewImages.length === 0) {
+            alert("Nothing to save")
+            setIsOpen(false)
+            return
+        }
+        setIsLoading(true)
+
+        const documentData = [...data[currentLanguage]]
+        const dataToUpload = { ...newData }
+
+        const imagesToDelete = findArraysDifference(documentData[id].images, newData.images)
+
+        const isNewDataImagesChanged = imagesToDelete.length > 0
+        const isPreviewImagesChanged = previewImages.length > 0
+        try {
+            if (isNewDataImagesChanged || isPreviewImagesChanged) {
+                const uploadedImages: string[] = [...newData.images]
+                if (isNewDataImagesChanged) {
+                    for (const img of imagesToDelete) {
+                        deleteImageFromBucket(img, DATA_BUCKET.services)
+                    }
+                }
+
+                if (isPreviewImagesChanged) {
+                    for (const img of previewImages) {
+                        const rand = (Math.random() * 100000000).toFixed()
+                        const url = await uploadImageToBucket(
+                            img.blob,
+                            `${DATA_BUCKET.services}/serv${rand}`
+                        )
+                        uploadedImages.push(url)
+                    }
+                }
+
+                const allServicesData = { ...data }
+
+                for (const lang of allLanguages) {
+                    if (lang === currentLanguage) {
+                        dataToUpload.images = uploadedImages
+                        allServicesData[lang][id] = dataToUpload
+                    }
+                    allServicesData[lang][id].images = uploadedImages
+                    const objectData = reformatArrayToObject(allServicesData[lang])
+                    await updateSectionData(lang, "services", objectData)
+                }
+            } else {
+                documentData[id] = dataToUpload
+                const objectData = reformatArrayToObject(documentData)
+                await updateSectionData(currentLanguage, "services", objectData)
+            }
+
+            alert("Success")
+        } catch (error) {
+            alert("Error")
+        }
+
+        setIsOpen(false)
+        setPreviewImages([])
+        triggerRefetch?.()
+    }
+
+    function discardClickHandler() {
+        setIsOpen(false)
+        setIsLoading(false)
+        setNewData(defaultNewData)
+    }
+
+    function editImageChangeHandler(blob: any) {
+        const url = URL.createObjectURL(blob)
+        setPreviewImages(prev => [...prev, { blob, url }])
+    }
+
+    function deleteImageHandler(url: string) {
+        const isPreviewImage = previewImages.filter(item => item.url === url).length > 0
+        const isNewDataImage = newData.images.includes(url)
+
+        if (isPreviewImage) {
+            setPreviewImages(prev => prev.filter(item => item.url !== url))
+        }
+
+        if (isNewDataImage) {
+            setNewData(prev => ({ ...prev, images: prev.images.filter(item => item !== url) }))
+        }
+    }
+
+    const previewImagesUrl = previewImages.map(item => item.url)
 
     return (
         <>
@@ -45,34 +145,27 @@ export function EditParagraph({
                 onClose={onClose}
                 onChangeLanguage={onChangeLanguage}
                 currentLanguage={currentLanguage}
-                onSaveClick={() => null}
-                onDiscardClick={() => null}
+                onSaveClick={saveClickHandler}
+                onDiscardClick={discardClickHandler}
             >
                 <div className={styles.container}>
                     <div className={styles.imgContainer}>
-                        <ModalImage
-                            url="https://images.pexels.com/photos/1547813/pexels-photo-1547813.jpeg?auto=compress&cs=tinysrgb&w=800"
-                            className={styles.img}
+                        <ImagesList
+                            data={[...newData.images, ...previewImagesUrl]}
+                            onDelete={deleteImageHandler}
                         />
-                        <label htmlFor="my-file">Edit</label>
-                        <input type="file" id="my-file" className={styles.file} />
+                        <EditImage onChange={editImageChangeHandler} />
                     </div>
-                    <div>
-                        id:
-                        <Dropdown
-                            options={dropdownNumbers}
-                            value={data.id?.toString()}
-                            onChange={id => setData(prev => ({ ...prev, id: +id }))}
-                        />
-                    </div>
+                    <div>id: {id}</div>
                     <Input
                         label="Title"
-                        value={data.title}
-                        onChange={value => setData(prev => ({ ...prev, title: value }))}
+                        value={newData.title}
+                        onChange={value => setNewData(prev => ({ ...prev, title: value }))}
                     />
                     <Textarea
                         label="Description"
-                        onChange={value => setData(prev => ({ ...prev, description: value }))}
+                        value={newData.description}
+                        onChange={value => setNewData(prev => ({ ...prev, description: value }))}
                     />
                 </div>
             </ModalEditorWithTranslation>
