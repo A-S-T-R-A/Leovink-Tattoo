@@ -8,7 +8,7 @@ export function RussiaFlag({ className }: { className?: string }) {
             className={className}
             xmlns="http://www.w3.org/2000/svg"
         >
-            <g clip-path="url(#clip0_2_2)">
+            <g clipPath="url(#clip0_2_2)">
                 <path
                     d="M12.9594 0.8125C7.67812 0.8125 3.16875 4.225 1.50312 8.9375H24.4969C22.7906 4.225 18.2812 0.8125 12.9594 0.8125Z"
                     fill="#F9F9F9"
