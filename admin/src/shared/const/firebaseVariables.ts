@@ -16,6 +16,8 @@ import {
 export const TATTOO_IMAGES_BUCKET = "tattoo_images"
 export const DATA_BUCKET = {
     steps: "data/steps",
+    services: "data/services",
+    testimonials: "data/testimonials",
 }
 export const PORTFOLIO_PICTURES_DB = "portfolio_pictures"
 
@@ -168,8 +170,8 @@ export function getImageNameByUrl(url: string): string {
     return extractedParam
 }
 
-export async function deleteImageFromBucket(oldImg: string, path: string) {
-    const imgName = getImageNameByUrl(oldImg)
+export async function deleteImageFromBucket(oldImgUrl: string, path: string) {
+    const imgName = getImageNameByUrl(oldImgUrl)
     const imgRef = ref(storage, `${path}/${imgName}`)
     await deleteObject(imgRef)
 }
