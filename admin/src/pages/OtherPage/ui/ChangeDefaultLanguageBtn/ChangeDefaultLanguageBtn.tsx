@@ -5,7 +5,7 @@ import styles from "./EditName.module.scss"
 import { Dropdown } from "shared/ui/Dropdown"
 
 export function ChangeDefaultLanguageBtn() {
-    const [data, setData] = useState({ language: "en" })
+    const [lang, setLang] = useState("en")
     const [isOpen, setIsOpen] = useState(false)
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
 
@@ -37,8 +37,8 @@ export function ChangeDefaultLanguageBtn() {
                     <Dropdown
                         label="Language"
                         options={languages}
-                        //value={data.id?.toString()}
-                        onChange={language => setData(prev => ({ ...prev, language: language }))}
+                        value={lang}
+                        onChange={language => setLang(language)}
                     />
                 </div>
             </ModalEditorWithTranslation>
