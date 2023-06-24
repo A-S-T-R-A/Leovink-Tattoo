@@ -50,6 +50,7 @@ export function EditQuestion({
                     <div>
                         id:
                         <Dropdown
+                            className={styles.dropdown}
                             options={dropdownNumbers}
                             value={data.id?.toString()}
                             onChange={id => setData(prev => ({ ...prev, id: +id }))}
