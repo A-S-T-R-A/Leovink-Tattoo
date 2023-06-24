@@ -3,12 +3,23 @@ import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTra
 import { Input } from "shared/ui/Input/Input"
 import styles from "./AddFaqTitle.module.scss"
 import { LanguageType } from "shared/types/types"
-import { IFaqData } from "../../types/types"
+import { INewAllTitlesData, ITranslatedFaqData } from "../../types/types"
+import { allLanguages, defaultLanguage } from "shared/const/languages"
+import { defaultNewAllTitlesData } from "pages/FAQPage/const/const"
+import { reformatArrayToObject, updateSectionData } from "shared/const/firebaseVariables"
 
-export function AddFaqTitle({ faqData }: { faqData: IFaqData[] }) {
-    const [title, setTitle] = useState("")
+export function AddFaqTitle({
+    data,
+    triggerRefetch,
+}: {
+    data: ITranslatedFaqData | null
+    triggerRefetch?: () => void
+}) {
+    const [newAllTitlesData, setNewAllTitlesData] =
+        useState<INewAllTitlesData>(defaultNewAllTitlesData)
     const [isOpen, setIsOpen] = useState(false)
-    const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
+    const [currentLanguage, setCurrentLanguage] = useState<LanguageType>(defaultLanguage)
+    const [isLoading, setIsLoading] = useState(false)
 
     function onClose() {
         setIsOpen(false)
@@ -18,6 +29,41 @@ export function AddFaqTitle({ faqData }: { faqData: IFaqData[] }) {
         setCurrentLanguage(lang)
     }
 
+    function discardClickHandler() {
+        setIsOpen(false)
+        setIsLoading(false)
+        setNewAllTitlesData(defaultNewAllTitlesData)
+    }
+
+    async function saveClickHandler() {
+        if (!data) return
+        if (Object.values(newAllTitlesData).some(item => item === "")) {
+            alert("You have to fill up all languages")
+            return
+        }
+
+        setIsLoading(true)
+
+        try {
+            const allFaqData = { ...data }
+            const id = allFaqData[defaultLanguage].length
+            for (const lang of allLanguages) {
+                allFaqData[lang][id] = { title: newAllTitlesData[lang], questions: [] }
+                const objectData = reformatArrayToObject(allFaqData[lang])
+                await updateSectionData(lang, "faq", objectData)
+            }
+
+            alert("Success")
+        } catch (error) {
+            alert("Error")
+        }
+
+        setIsOpen(false)
+        setIsLoading(false)
+        setNewAllTitlesData(defaultNewAllTitlesData)
+        triggerRefetch?.()
+    }
+
     return (
         <>
             <ModalEditorWithTranslation
@@ -25,11 +71,17 @@ export function AddFaqTitle({ faqData }: { faqData: IFaqData[] }) {
                 onClose={onClose}
                 onChangeLanguage={onChangeLanguage}
                 currentLanguage={currentLanguage}
-                onSaveClick={() => null}
-                onDiscardClick={() => null}
+                onSaveClick={saveClickHandler}
+                onDiscardClick={discardClickHandler}
             >
                 <div className={styles.container}>
-                    <Input label="Title" value={title} onChange={value => setTitle(value)} />
+                    <Input
+                        label="Title"
+                        value={newAllTitlesData[currentLanguage]}
+                        onChange={value =>
+                            setNewAllTitlesData(prev => ({ ...prev, [currentLanguage]: value }))
+                        }
+                    />
                 </div>
             </ModalEditorWithTranslation>
             <button onClick={() => setIsOpen(true)}>Add new title</button>

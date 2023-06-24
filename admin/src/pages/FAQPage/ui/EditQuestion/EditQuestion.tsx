@@ -1,25 +1,34 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
 import { Textarea } from "shared/ui/Textarea/Textarea"
 import { Dropdown } from "shared/ui/Dropdown"
 import { LanguageType } from "shared/types/types"
 import styles from "./EditQuestion.module.scss"
-
-interface IQuestionsData {
-    question: string
-    answer: string
-}
+import { ITranslatedFaqData } from "../../types/types"
+import { defaultLanguage } from "shared/const/languages"
+import { isShallowEqual } from "shared/lib/isShallowEqual/isShallowEqual"
+import { reformatArrayToObject, updateSectionData } from "shared/const/firebaseVariables"
 
 export function EditQuestion({
-    questionsData,
-    question,
+    data,
+    titleId,
+    id,
+    triggerRefetch,
 }: {
-    questionsData: IQuestionsData[]
-    question: IQuestionsData
+    data: ITranslatedFaqData | null
+    titleId: number
+    id: number
+    triggerRefetch: () => void
 }) {
-    const [data, setData] = useState({ id: -1, question: "", answer: "" })
     const [isOpen, setIsOpen] = useState(false)
-    const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
+    const [currentLanguage, setCurrentLanguage] = useState<LanguageType>(defaultLanguage)
+    const defaultNewQuestion = { question: "", answer: "" }
+    const [newQuestion, setNewQuestion] = useState(defaultNewQuestion)
+    const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        refreshNewData()
+    }, [data, currentLanguage, id, titleId])
 
     function onClose() {
         setIsOpen(false)
@@ -29,12 +38,42 @@ export function EditQuestion({
         setCurrentLanguage(lang)
     }
 
-    const dropdownNumbers = Array(questionsData.length)
-        .fill("")
-        .map((_, index) => {
-            const v = index.toString()
-            return { label: v, value: v }
-        })
+    function refreshNewData() {
+        if (data) {
+            setNewQuestion(data[currentLanguage][titleId].questions[id])
+        }
+    }
+
+    function discardClickHandler() {
+        setIsOpen(false)
+        setIsLoading(false)
+        refreshNewData()
+    }
+
+    async function saveClickHandler() {
+        if (!data) return
+        if (isShallowEqual(data[currentLanguage][titleId].questions[id], newQuestion)) {
+            alert("Nothing to save")
+            return
+        }
+
+        setIsLoading(true)
+
+        try {
+            const documentData = [...data[currentLanguage]]
+            documentData[titleId].questions[id] = newQuestion
+            const objectData = reformatArrayToObject(documentData)
+            await updateSectionData(currentLanguage, "faq", objectData)
+
+            alert("Success")
+        } catch (error) {
+            alert("Error")
+        }
+
+        setIsLoading(false)
+        setIsOpen(false)
+        triggerRefetch?.()
+    }
 
     return (
         <>
@@ -43,28 +82,20 @@ export function EditQuestion({
                 onClose={onClose}
                 onChangeLanguage={onChangeLanguage}
                 currentLanguage={currentLanguage}
-                onSaveClick={() => null}
-                onDiscardClick={() => null}
+                onSaveClick={saveClickHandler}
+                onDiscardClick={discardClickHandler}
             >
                 <div className={styles.container}>
-                    <div>
-                        id:
-                        <Dropdown
-                            className={styles.dropdown}
-                            options={dropdownNumbers}
-                            value={data.id?.toString()}
-                            onChange={id => setData(prev => ({ ...prev, id: +id }))}
-                        />
-                    </div>
+                    <div>id: {id}</div>
                     <Textarea
                         label="question"
-                        value={question.question}
-                        onChange={value => setData(prev => ({ ...prev, question: value }))}
+                        value={newQuestion.question}
+                        onChange={value => setNewQuestion(prev => ({ ...prev, question: value }))}
                     />
                     <Textarea
                         label="answer"
-                        value={question.answer}
-                        onChange={value => setData(prev => ({ ...prev, answer: value }))}
+                        value={newQuestion.answer}
+                        onChange={value => setNewQuestion(prev => ({ ...prev, answer: value }))}
                     />
                 </div>
             </ModalEditorWithTranslation>
