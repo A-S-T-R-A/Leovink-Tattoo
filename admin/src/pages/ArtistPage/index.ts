@@ -1,3 +1,1 @@
-import { ArtistPage } from "./ui/ArtistPage"
-
-export { ArtistPage }
+export { ArtistPage } from "./ui/ArtistPage"

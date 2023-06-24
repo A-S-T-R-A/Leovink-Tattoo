@@ -1,3 +1,1 @@
-import { ReviewPage } from "./ui/ReviewPage"
-
-export { ReviewPage }
+export { ReviewsPage } from "./ui/ReviewsPage"

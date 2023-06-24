@@ -1,12 +1,13 @@
 import { useState } from "react"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { Input } from "shared/ui/Input/Input"
-import styles from "./AddFaqTitle.module.scss"
+import styles from "./EditSocialMedia.module.scss"
 import { LanguageType } from "shared/types/types"
-import { IFaqData } from "../../types/types"
+import { ISocialMedia } from "../../types/type"
 
-export function AddFaqTitle({ faqData }: { faqData: IFaqData[] }) {
-    const [title, setTitle] = useState("")
+export function EditSocialMedia({ social }: { social: ISocialMedia }) {
+    const [data, setData] = useState<ISocialMedia>({ icon: "", link: "" })
     const [isOpen, setIsOpen] = useState(false)
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
 
@@ -29,10 +30,19 @@ export function AddFaqTitle({ faqData }: { faqData: IFaqData[] }) {
                 onDiscardClick={() => null}
             >
                 <div className={styles.container}>
-                    <Input label="Title" value={title} onChange={value => setTitle(value)} />
+                    <div className={styles.imgContainer}>
+                        <ModalImage url={social.icon} className={styles.img} />
+                        <label htmlFor="my-file">Edit</label>
+                        <input type="file" id="my-file" className={styles.file} />
+                    </div>
+                    <Input
+                        label="link"
+                        value={social.link}
+                        onChange={value => setData(prev => ({ ...prev, link: value }))}
+                    />
                 </div>
             </ModalEditorWithTranslation>
-            <button onClick={() => setIsOpen(true)}>Add new title</button>
+            <button onClick={() => setIsOpen(true)}>Edit</button>
         </>
     )
 }

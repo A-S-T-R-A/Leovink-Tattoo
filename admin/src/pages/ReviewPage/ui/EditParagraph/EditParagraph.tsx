@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { Input } from "shared/ui/Input/Input"
@@ -6,30 +6,45 @@ import { Textarea } from "shared/ui/Textarea/Textarea"
 import { Dropdown } from "shared/ui/Dropdown"
 import { LanguageType } from "shared/types/types"
 import styles from "./EditParagraph.module.scss"
-import { IReviewData } from "pages/ReviewPage/types/types"
+import { ITestimonialData, ITranslatedTestimonialsData } from "../../types/types"
+import { allLanguages, defaultLanguage } from "shared/const/languages"
+import { EditImage } from "features/editImage"
+import { EditVideo } from "features/editVideo"
+import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
+import {
+    DATA_BUCKET,
+    deleteImageFromBucket,
+    reformatArrayToObject,
+    updateSectionData,
+    uploadImageToBucket,
+} from "shared/const/firebaseVariables"
+import { defaultNewData } from "../../const/const"
 
 export function EditParagraph({
-    reviewData,
     id,
+    data,
     triggerRefetch,
-    unselectAllHandler,
 }: {
-    reviewData: IReviewData[]
-    id?: number
+    data: ITranslatedTestimonialsData | null
+    id: number
     triggerRefetch?: () => void
-    unselectAllHandler?: () => void
 }) {
-    const [data, setData] = useState({
-        id: 0,
-        preview: "",
-        video: "",
-        title: "",
-        description: "",
-        tattoo_artist: "",
-        duration: "",
-    })
+    const [currentLanguage, setCurrentLanguage] = useState<LanguageType>(defaultLanguage)
+
+    const [newData, setNewData] = useState<ITestimonialData>(defaultNewData)
     const [isOpen, setIsOpen] = useState(false)
-    const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
+    const [isLoading, setIsLoading] = useState(false)
+    const defaultPreviewAssets = {
+        preview: { url: "", blob: "" },
+        video: { url: "", blob: "" },
+    }
+    const [previewAssets, setPreviewAssets] = useState(defaultPreviewAssets)
+
+    useEffect(() => {
+        if (data) {
+            setNewData(data[currentLanguage][id])
+        }
+    }, [data, currentLanguage, id])
 
     function onClose() {
         setIsOpen(false)
@@ -37,14 +52,89 @@ export function EditParagraph({
 
     function onChangeLanguage(lang: LanguageType) {
         setCurrentLanguage(lang)
+        if (data) setNewData(data[lang][id])
     }
 
-    const dropdownNumbers = Array(reviewData.length)
-        .fill("")
-        .map((_, index) => {
-            const v = (index + 1).toString()
-            return { label: v, value: v }
-        })
+    async function saveClickHandler() {
+        if (!data) return
+        const isNewPreviewAsset = previewAssets.preview.url !== "" || previewAssets.video.url !== ""
+        if (isDeepEqual(data?.[currentLanguage][id], newData) && !isNewPreviewAsset) {
+            alert("Nothing to save")
+            setIsOpen(false)
+            return
+        }
+        setIsLoading(true)
+
+        const documentData = [...data[currentLanguage]]
+        const dataToUpload = { ...newData }
+
+        try {
+            if (isNewPreviewAsset) {
+                let newPreview = ""
+                let newVideo = ""
+
+                if (previewAssets.preview.url !== "") {
+                    const rand = (Math.random() * 100000000).toFixed()
+                    newPreview = await uploadImageToBucket(
+                        previewAssets.preview.blob,
+                        `${DATA_BUCKET.testimonials}/preview${rand}`
+                    )
+                    deleteImageFromBucket(newData.preview, DATA_BUCKET.testimonials)
+                }
+
+                if (previewAssets.video.url !== "") {
+                    const rand = (Math.random() * 100000000).toFixed()
+                    newVideo = await uploadImageToBucket(
+                        previewAssets.video.blob,
+                        `${DATA_BUCKET.testimonials}/video${rand}`
+                    )
+                    deleteImageFromBucket(newData.video, DATA_BUCKET.testimonials)
+                }
+
+                const allServicesData = { ...data }
+
+                for (const lang of allLanguages) {
+                    if (lang === currentLanguage) {
+                        if (newPreview !== "") dataToUpload.preview = newPreview
+                        if (newVideo !== "") dataToUpload.video = newVideo
+                        allServicesData[lang][id] = dataToUpload
+                    }
+                    if (newPreview !== "") allServicesData[lang][id].preview = newPreview
+                    if (newVideo !== "") allServicesData[lang][id].video = newVideo
+                    const objectData = reformatArrayToObject(allServicesData[lang])
+                    await updateSectionData(lang, "testimonials", objectData)
+                }
+            } else {
+                documentData[id] = dataToUpload
+                const objectData = reformatArrayToObject(documentData)
+                await updateSectionData(currentLanguage, "testimonials", objectData)
+            }
+
+            alert("Success")
+        } catch (error) {
+            alert("Error")
+        }
+
+        setIsOpen(false)
+        setPreviewAssets(defaultPreviewAssets)
+        triggerRefetch?.()
+    }
+
+    function discardClickHandler() {
+        setIsOpen(false)
+        setIsLoading(false)
+        setNewData(defaultNewData)
+    }
+
+    function editImageChangeHandler(blob: any) {
+        const url = URL.createObjectURL(blob)
+        setPreviewAssets(prev => ({ ...prev, preview: { url, blob } }))
+    }
+
+    function editVideoChangeHandler(blob: any) {
+        const url = URL.createObjectURL(blob)
+        setPreviewAssets(prev => ({ ...prev, video: { url, blob } }))
+    }
 
     return (
         <>
@@ -53,57 +143,54 @@ export function EditParagraph({
                 onClose={onClose}
                 onChangeLanguage={onChangeLanguage}
                 currentLanguage={currentLanguage}
-                onSaveClick={() => null}
-                onDiscardClick={() => null}
+                onSaveClick={saveClickHandler}
+                onDiscardClick={discardClickHandler}
             >
                 <div className={styles.container}>
                     <div className={styles.imgContainer}>
                         preview:
-                        <ModalImage url={reviewData[0].preview} className={styles.img} />
-                        <label htmlFor="my-file">Edit</label>
-                        <input type="file" id="my-file" className={styles.file} />
+                        <ModalImage
+                            url={previewAssets.preview.url || newData.preview}
+                            className={styles.img}
+                        />
+                        <EditImage onChange={editImageChangeHandler} />
                     </div>
                     <div className={styles.videoContainer}>
                         Video:
-                        <video src={reviewData[0].video}></video>
-                        <label htmlFor="my-file" className={styles.fileLabel}>
-                            add
-                        </label>
-                        <input type="file" id="my-file" className={styles.file} />
+                        <video src={previewAssets.video.url || newData.video} />
+                        <EditVideo onChange={editVideoChangeHandler} />
                     </div>
-                    <div>
-                        id:
-                        <Dropdown
-                            options={dropdownNumbers}
-                            value={data.id?.toString()}
-                            onChange={id => setData(prev => ({ ...prev, id: +id }))}
-                        />
-                    </div>
+                    <div>id: {id}</div>
                     <div>
                         <Input
                             label="Title"
-                            value={data.title}
-                            onChange={value => setData(prev => ({ ...prev, title: value }))}
+                            value={newData.title}
+                            onChange={value => setNewData(prev => ({ ...prev, title: value }))}
                         />
                     </div>
                     <div>
                         <Textarea
                             label="Description"
-                            onChange={value => setData(prev => ({ ...prev, description: value }))}
+                            value={newData.description}
+                            onChange={value =>
+                                setNewData(prev => ({ ...prev, description: value }))
+                            }
                         />
                     </div>
                     <div>
                         <Input
                             label="Tattoo Artist"
-                            value={data.tattoo_artist}
-                            onChange={value => setData(prev => ({ ...prev, tattoo_artist: value }))}
+                            value={newData.artist}
+                            onChange={value =>
+                                setNewData(prev => ({ ...prev, tattoo_artist: value }))
+                            }
                         />
                     </div>
                     <div>
                         <Input
                             label="Duration"
-                            value={data.duration}
-                            onChange={value => setData(prev => ({ ...prev, duration: value }))}
+                            value={newData.duration}
+                            onChange={value => setNewData(prev => ({ ...prev, duration: value }))}
                         />
                     </div>
                 </div>
