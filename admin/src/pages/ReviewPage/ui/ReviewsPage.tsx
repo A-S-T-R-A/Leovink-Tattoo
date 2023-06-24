@@ -7,6 +7,7 @@ import { defaultLanguage } from "shared/const/languages"
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { EditParagraph } from "./EditParagraph/EditParagraph"
 import { DeleteParagraph } from "./DeleteParagraph/DeleteParagraph"
+import { ModalVideo } from "shared/components/ModalVideo/ModalVideo"
 
 export function ReviewsPage() {
     const [data, setData] = useState<ITranslatedTestimonialsData | null>(null)
@@ -34,8 +35,10 @@ export function ReviewsPage() {
                     <div className={styles.item} key={index}>
                         <div>id: {index}</div>
                         <div className={styles.imgContainer}>
+                            Poster:
                             <ModalImage className={styles.img} url={item.preview} />
-                            <video src={item.video}></video>
+                            Video:
+                            <ModalVideo video={item.video} poster={item.preview} />
                         </div>
                         <div>title: {item.title}</div>
                         <div className={styles.description}>Description: {item.description}</div>
