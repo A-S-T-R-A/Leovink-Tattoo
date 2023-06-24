@@ -10,7 +10,7 @@ import { ReviewsPage } from "pages/ReviewPage"
 import { FAQPage } from "pages/FAQPage"
 import { OtherPage } from "pages/OtherPage"
 import { ContactsPage } from "pages/ContactPage/ui/ContactsPage"
-import { ArtistPage } from "pages/ArtistPage"
+import { ArtistsPage } from "pages/ArtistsPage"
 
 function App() {
     return (
@@ -53,10 +53,10 @@ function App() {
                         }
                     />
                     <Route
-                        path="/artist"
+                        path="/artists"
                         element={
                             <RequireAuth>
-                                <ArtistPage />
+                                <ArtistsPage />
                             </RequireAuth>
                         }
                     />

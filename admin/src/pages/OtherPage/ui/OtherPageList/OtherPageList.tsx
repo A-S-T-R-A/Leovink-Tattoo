@@ -4,14 +4,17 @@ import { EditBtn } from "../EditBtn/EditBtn"
 import styles from "./OtherPageList.module.scss"
 import { IOtherData } from "../../types/type"
 import { AddBtn } from "../AddBtn/AddBtn"
+import { useNavigate } from "react-router-dom"
 
 export function OtherPageList({ otherData }: { otherData: IOtherData }) {
     const sectionsName = Object.values(otherData.sectionNames)
     const buttons = Object.values(otherData.buttons)
     const [sectionOpen, setSectionOpen] = useState("sectionsName")
 
+    const navigate = useNavigate()
+
     function redirectToPage() {
-        window.open("/artist", "_blank")
+        navigate("/artist")
     }
 
     return (

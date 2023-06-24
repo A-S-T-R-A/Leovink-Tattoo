@@ -3,11 +3,12 @@ import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTra
 import { LanguageType } from "shared/types/types"
 import styles from "./AddBtn.module.scss"
 import { Input } from "shared/ui/Input/Input"
+import { defaultLanguage } from "shared/const/languages"
 
 export function AddBtn({ label }: { label: string }) {
     const [name, setName] = useState("")
     const [isOpen, setIsOpen] = useState(false)
-    const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
+    const [currentLanguage, setCurrentLanguage] = useState<LanguageType>(defaultLanguage)
 
     function onClose() {
         setIsOpen(false)

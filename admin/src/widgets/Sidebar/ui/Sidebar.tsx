@@ -11,9 +11,8 @@ export function Sidebar() {
                 {!!user && <Link to="/portfolio">Portfolio</Link>}
                 {!!user && <Link to="/steps">Steps</Link>}
                 {!!user && <Link to="/services">Services</Link>}
-                {!!user && <Link to="/review">Review</Link>}
-                {!!user && <Link to="/artist">Artist</Link>}
                 {!!user && <Link to="/reviews">Reviews</Link>}
+                {!!user && <Link to="/artists">Artist</Link>}
                 {!!user && <Link to="/faq">FAQ</Link>}
                 {!!user && <Link to="/contacts">Contacts</Link>}
                 {!!user && <Link to="/other">Other</Link>}
