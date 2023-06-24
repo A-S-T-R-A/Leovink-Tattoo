@@ -16,5 +16,11 @@ export const otherData: IOtherData = {
         viewGallery: "view gallery",
         resetFilters: "reset filters",
     },
+    filters: {
+        artist: ["Dinu", "Katia", "Nastia"],
+        style: ["first", "second"],
+        color: ["black", "color"],
+    },
+
     defaultLanguage: "en",
 }

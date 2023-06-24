@@ -16,5 +16,11 @@ export interface IOtherData {
         viewGallery: string
         resetFilters: string
     }
+    filters: {
+        artist: string[]
+        style: string[]
+        color: string[]
+    }
+
     defaultLanguage: LanguageType
 }
