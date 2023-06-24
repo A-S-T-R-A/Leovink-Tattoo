@@ -2,6 +2,7 @@ import { useState, InputHTMLAttributes, useMemo, ChangeEvent } from "react"
 
 import styles from "./Dropdown.module.scss"
 import { ChevronDownIcon } from "shared/ui/Icons"
+import { classNames } from "shared/lib/classNames/classNames"
 
 type HTMLDropdownProps = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange">
 
@@ -40,7 +41,7 @@ export function Dropdown(props: DropdownProps) {
     }
 
     return (
-        <div className={styles.container}>
+        <div className={classNames(styles.container, {}, [className])}>
             <ChevronDownIcon className={styles.chevron} />
             <select
                 data-testid="dropdown-label"
