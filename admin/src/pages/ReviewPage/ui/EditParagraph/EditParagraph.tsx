@@ -30,7 +30,6 @@ export function EditParagraph({
     triggerRefetch?: () => void
 }) {
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>(defaultLanguage)
-
     const [newData, setNewData] = useState<ITestimonialData>(defaultNewData)
     const [isOpen, setIsOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
@@ -60,7 +59,6 @@ export function EditParagraph({
         const isNewPreviewAsset = previewAssets.preview.url !== "" || previewAssets.video.url !== ""
         if (isDeepEqual(data?.[currentLanguage][id], newData) && !isNewPreviewAsset) {
             alert("Nothing to save")
-            setIsOpen(false)
             return
         }
         setIsLoading(true)

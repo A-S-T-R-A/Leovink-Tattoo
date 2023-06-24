@@ -20,6 +20,7 @@ export const DATA_BUCKET = {
     steps: "data/steps",
     services: "data/services",
     testimonials: "data/testimonials",
+    artists: "data/artists",
 }
 export const PORTFOLIO_PICTURES_DB = "portfolio_pictures"
 
