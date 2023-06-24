@@ -35,10 +35,10 @@ export function ReviewsPage() {
                     <div className={styles.item} key={index}>
                         <div>id: {index}</div>
                         <div className={styles.imgContainer}>
-                            Poster:
+                            Preview:
                             <ModalImage className={styles.img} url={item.preview} />
                             Video:
-                            <ModalVideo video={item.video} poster={item.preview} />
+                            <ModalVideo video={item.video} />
                         </div>
                         <div>title: {item.title}</div>
                         <div className={styles.description}>Description: {item.description}</div>

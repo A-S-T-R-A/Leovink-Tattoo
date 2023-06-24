@@ -6,12 +6,11 @@ import styles from "./ModalVideo.module.scss"
 
 interface IModalVideo {
     video: string
-    poster: string
     className?: string
 }
 
 export function ModalVideo(props: IModalVideo) {
-    const { video, poster, className } = props
+    const { video, className } = props
     const [isOpen, setIsOpen] = useState(false)
 
     function onClose() {
@@ -28,12 +27,7 @@ export function ModalVideo(props: IModalVideo) {
                 <video src={video} controls className={styles.ModalVideo} />
             </Modal>
             <div className={styles.videoContainer}>
-                <video
-                    src={video}
-                    poster={poster}
-                    className={className}
-                    onClick={() => setIsOpen(true)}
-                />
+                <video src={video} className={className} onClick={() => setIsOpen(true)} />
                 <PlayIcon className={styles.playIcon} />
             </div>
         </>
