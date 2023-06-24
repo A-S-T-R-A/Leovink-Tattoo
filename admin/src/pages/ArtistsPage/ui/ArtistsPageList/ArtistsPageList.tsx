@@ -1,12 +1,12 @@
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
-import styles from "./ArtistPageList.module.scss"
+import styles from "./ArtistsPageList.module.scss"
 import { EditParagraph } from "../EditParagraph/EditParagraph"
 import { IArtistsData } from "../../types/types"
 
-export function ArtistPageList({ artistData }: { artistData: IArtistsData[] }) {
+export function ArtistsPageList({ artistsData }: { artistsData: IArtistsData[] }) {
     return (
         <div className={styles.table}>
-            {artistData.map((item, index) => (
+            {artistsData.map((item, index) => (
                 <div className={styles.item} key={index}>
                     <div>id: {index}</div>
                     <div className={styles.imgContainer}>

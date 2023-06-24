@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
 import { LanguageType } from "shared/types/types"
-import styles from "./EditName.module.scss"
+import styles from "./EditBtn.module.scss"
 import { Input } from "shared/ui/Input/Input"
 
-export function EditName({ sectionName }: { sectionName: string }) {
+export function EditBtn({ label, sectionName }: { label: string; sectionName: string }) {
     const [name, setName] = useState("")
     const [isOpen, setIsOpen] = useState(false)
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
@@ -28,7 +28,7 @@ export function EditName({ sectionName }: { sectionName: string }) {
                 onDiscardClick={() => null}
             >
                 <div className={styles.container}>
-                    <Input label="Name" value={sectionName} onChange={value => setName(value)} />
+                    <Input label={label} value={sectionName} onChange={value => setName(value)} />
                 </div>
             </ModalEditorWithTranslation>
             <button onClick={() => setIsOpen(true)}>Edit</button>

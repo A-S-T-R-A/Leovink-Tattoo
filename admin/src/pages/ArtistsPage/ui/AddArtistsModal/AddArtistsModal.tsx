@@ -2,11 +2,11 @@ import { useState } from "react"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
 import { Input } from "shared/ui/Input/Input"
 import { Textarea } from "shared/ui/Textarea/Textarea"
-import styles from "./AddArtistModal.module.scss"
+import styles from "./AddArtistsModal.module.scss"
 import { LanguageType } from "shared/types/types"
 import { IArtistsData } from "../../types/types"
 
-export function AddArtistModal({ artistData }: { artistData: IArtistsData[] }) {
+export function AddArtistsModal({ artistsData }: { artistsData: IArtistsData[] }) {
     const [data, setData] = useState<IArtistsData>({
         name: "",
         description: "",
