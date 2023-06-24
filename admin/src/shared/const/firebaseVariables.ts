@@ -12,6 +12,8 @@ import {
     updateDoc,
     where,
 } from "firebase/firestore"
+import { allLanguages } from "./languages"
+import { IFaqData, ITranslatedFaqData } from "pages/FAQPage/types/types"
 
 export const TATTOO_IMAGES_BUCKET = "tattoo_images"
 export const DATA_BUCKET = {
@@ -116,6 +118,20 @@ export async function fetchSectionData(
     return data
 }
 
+export async function copyPaste() {
+    for (const lang of allLanguages) {
+        const ref = collection(db, DATA_COLLECTION, LANGUAGE_DOCUMENT[lang], SECTION_COLLECTION.faq)
+        const docs = await getDocs(ref)
+        if (docs.empty) return
+        const d = docs.docs[0].data()
+        const reformattedNewData = reformatAndSortObjectValuesToArray(d) as IFaqData[]
+        const newData = { ...reformattedNewData }
+        newData[2].questions = Object.entries(newData[2].questions).map(([key, value]) => value)
+
+        await addDoc(ref, newData)
+    }
+}
+
 export async function updateSectionData(
     language: keyof typeof LANGUAGE_DOCUMENT,
     section: keyof typeof SECTION_COLLECTION,
@@ -130,8 +146,8 @@ export async function updateSectionData(
     const docs = await getDocs(ref)
     if (docs.empty) return
     const d = docs.docs[0]
-    await deleteDoc(doc(ref, d.id))
     await addDoc(ref, data)
+    await deleteDoc(doc(ref, d.id))
 }
 
 export async function uploadImageToBucket(file: any, bucketPath: string): Promise<string> {

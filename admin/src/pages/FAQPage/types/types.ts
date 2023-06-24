@@ -13,3 +13,15 @@ export interface ITranslatedFaqData {
     ro: IFaqData[]
     ru: IFaqData[]
 }
+
+export interface INewAllTitlesData {
+    en: string
+    ro: string
+    ru: string
+}
+
+export interface INewAllQuestionData {
+    en: IQuestion
+    ro: IQuestion
+    ru: IQuestion
+}

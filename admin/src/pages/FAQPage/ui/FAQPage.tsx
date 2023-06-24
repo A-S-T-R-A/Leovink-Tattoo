@@ -8,6 +8,8 @@ import styles from "./FaqPage.module.scss"
 import { fetchSectionData } from "shared/const/firebaseVariables"
 import { IFaqData, ITranslatedFaqData } from "../types/types"
 import { defaultLanguage } from "shared/const/languages"
+import { DeleteFaqTitle } from "./DeleteFaqTitle/DeleteFaqTitle"
+import { DeleteQuestion } from "./DeleteQuestion/DeleteQuestion"
 
 export function FAQPage() {
     const [data, setData] = useState<ITranslatedFaqData | null>(null)
@@ -29,27 +31,31 @@ export function FAQPage() {
 
     return (
         <>
-            <AddFaqTitle faqData={dummyData} />
+            <AddFaqTitle data={data} triggerRefetch={triggerRefetch} />
             <div className={styles.table}>
-                {data?.[defaultLanguage].map((data, index) => {
+                {data?.[defaultLanguage]?.map((titleItem, titleIndex) => {
                     return (
-                        <Fragment key={index}>
+                        <Fragment key={titleIndex}>
                             <div className={styles.titleContainer}>
-                                <div className={styles.id}>id: {index}</div>
-                                <div className={styles.title}>title: {data.title}</div>
-                                {data.title !== "index" && (
+                                <div className={styles.id}>id: {titleIndex}</div>
+                                <div className={styles.title}>title: {titleItem.title}</div>
+                                {titleItem.title !== "index" && (
                                     <div className={styles.buttons}>
                                         <EditFaqTitle
                                             data={data}
-                                            id={index}
+                                            id={titleIndex}
                                             triggerRefetch={triggerRefetch}
                                         />
-                                        <button>delete</button>
+                                        <DeleteFaqTitle
+                                            data={data}
+                                            id={titleIndex}
+                                            triggerRefetch={triggerRefetch}
+                                        />
                                     </div>
                                 )}
                             </div>
                             <div className={styles.questionsContainer}>
-                                {data.questions.map((item, index) => {
+                                {titleItem.questions.map((item, index) => {
                                     const { question, answer } = item
                                     return (
                                         <div key={index} className={styles.questionContainer}>
@@ -60,15 +66,26 @@ export function FAQPage() {
                                             <div className={styles.answer}>answer: {answer}</div>
                                             <div className={styles.buttons}>
                                                 <EditQuestion
-                                                    questionsData={data.questions}
-                                                    question={item}
+                                                    data={data}
+                                                    titleId={titleIndex}
+                                                    id={index}
+                                                    triggerRefetch={triggerRefetch}
                                                 />
-                                                <button>delete</button>
+                                                <DeleteQuestion
+                                                    data={data}
+                                                    titleId={titleIndex}
+                                                    id={index}
+                                                    triggerRefetch={triggerRefetch}
+                                                />
                                             </div>
                                         </div>
                                     )
                                 })}
-                                <AddQuestion className={styles.addBtn} />
+                                <AddQuestion
+                                    data={data}
+                                    titleId={titleIndex}
+                                    triggerRefetch={triggerRefetch}
+                                />
                             </div>
                         </Fragment>
                     )
