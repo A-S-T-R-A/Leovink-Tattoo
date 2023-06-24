@@ -1,0 +1,81 @@
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100vw;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+
+    video {
+        max-width: 100%;
+    }
+}
+
+.cross {
+    > svg {
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+
+        stroke: var(--color-base);
+        transition: all 0.3s ease;
+
+        &:hover {
+            stroke: var(--color-accent);
+        }
+    }
+}
+
+.cross {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 40px;
+
+    z-index: 1000;
+
+    > svg {
+        width: 40px;
+        height: 40px;
+        transform: rotate(45deg);
+    }
+}
+
+.prev {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 40px;
+    z-index: 900;
+
+    > svg {
+        transform: rotate(90deg);
+    }
+}
+
+.videoContainer {
+    position: relative;
+    cursor: pointer;
+
+    .playIcon {
+        opacity: 0;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        fill: white;
+        stroke: black;
+        width: 30px;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+    }
+
+    &:hover {
+        .playIcon {
+            opacity: 1;
+        }
+    }
+}
