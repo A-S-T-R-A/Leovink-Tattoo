@@ -3,8 +3,8 @@
     "type": "module",
     "version": "0.0.1",
     "scripts": {
-        "dev": "astro dev",
-        "start": "astro dev",
+        "dev": "cross-env IS_DEV=true astro dev ",
+        "dev:prod": "cross-env IS_DEV=false astro dev",
         "build": "astro build",
         "translate": "npx astro-i18next generate",
         "deploy": "npm run translate && npm run build && firebase deploy",
@@ -17,6 +17,7 @@
         "@preact/compat": "^17.1.2",
         "astro": "^2.6.6",
         "astro-i18next": "^1.0.0-beta.21",
+        "cross-env": "^7.0.3",
         "firebase": "^9.22.2",
         "preact": "^10.15.1",
         "react": "npm:@preact/compat@^17.1.2",
