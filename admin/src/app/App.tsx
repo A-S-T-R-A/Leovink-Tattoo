@@ -11,9 +11,15 @@ import { FAQPage } from "pages/FAQPage"
 import { OtherPage } from "pages/OtherPage"
 import { ContactsPage } from "pages/ContactPage/ui/ContactsPage"
 import { ArtistsPage } from "pages/ArtistsPage"
-import { Alert } from "shared/ui/Alert"
+import { Alert, Confirm } from "shared/ui/Alert"
 
 function App() {
+    async function saveClickHandler() {
+        if (await Confirm("Are you sure you want to delete selected images?")) {
+            return
+        }
+    }
+
     return (
         <div className="app">
             <Sidebar />
@@ -37,6 +43,7 @@ function App() {
                                 <button onClick={() => Alert.info("some information")}>
                                     click info
                                 </button>
+                                <button onClick={saveClickHandler}>click info</button>
                             </div>
                         }
                     />
