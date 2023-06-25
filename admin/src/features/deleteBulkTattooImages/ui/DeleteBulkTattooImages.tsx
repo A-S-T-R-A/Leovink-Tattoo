@@ -5,10 +5,10 @@ import {
     rewriteImagesDoc,
 } from "shared/const/firebaseVariables"
 import { deleteObject, getStorage, ref } from "firebase/storage"
-import { useIsAdmin } from "features/authByGoogle"
 import { Modal } from "shared/ui/Modal"
 import { useEffect, useState } from "react"
 import { disableUi } from "shared/lib/disableUi/disableUi"
+import { useUserRole } from "features/authByGoogle"
 
 export function DeleteBulkTattooImages({
     imagesId,
@@ -25,10 +25,10 @@ export function DeleteBulkTattooImages({
     }, [isLoading])
 
     const storage = getStorage()
-    const isAdmin = useIsAdmin()
+    const role = useUserRole()
 
     async function clickHandler() {
-        if (!isAdmin) {
+        if (role !== "admin") {
             alert("You have to be logged as admin to perform this action")
             return
         }

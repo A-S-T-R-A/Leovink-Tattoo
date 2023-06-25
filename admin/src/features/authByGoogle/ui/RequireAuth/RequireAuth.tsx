@@ -1,11 +1,18 @@
 import { Navigate } from "react-router-dom"
-import { useAuth } from "../../context/AuthContext"
 import { ReactNode } from "react"
+import { useUserRole, UserRoleType } from "features/authByGoogle"
 
-export function RequireAuth({ children }: { children: ReactNode }) {
-    const user = useAuth()
+export function RequireAuth({
+    children,
+    allowedRoles,
+}: {
+    children: ReactNode
+    allowedRoles?: UserRoleType[]
+}) {
+    const role = useUserRole()
+    const isAllowed = allowedRoles ? allowedRoles.includes(role) : role !== "none"
 
-    if (!user) {
+    if (!isAllowed) {
         return <Navigate to="/" />
     }
 

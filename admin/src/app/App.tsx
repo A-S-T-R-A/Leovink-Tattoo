@@ -98,7 +98,7 @@ function App() {
                     <Route
                         path="/contacts"
                         element={
-                            <RequireAuth>
+                            <RequireAuth allowedRoles={["dev"]}>
                                 <ContactsPage />
                             </RequireAuth>
                         }
@@ -106,7 +106,7 @@ function App() {
                     <Route
                         path="/other"
                         element={
-                            <RequireAuth>
+                            <RequireAuth allowedRoles={["dev"]}>
                                 <OtherPage />
                             </RequireAuth>
                         }

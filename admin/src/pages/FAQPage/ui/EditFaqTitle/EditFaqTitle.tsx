@@ -1,14 +1,35 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
 import { LanguageType } from "shared/types/types"
 import styles from "./EditFaqTitle.module.scss"
-import { IFaqData } from "../../types/types"
+import { ITranslatedFaqData } from "../../types/types"
 import { Input } from "shared/ui/Input/Input"
+import { defaultLanguage } from "shared/const/languages"
+import { reformatArrayToObject, updateSectionData } from "shared/const/firebaseVariables"
 
-export function EditFaqTitle({ faq, id }: { faq: IFaqData; id?: number }) {
-    const [title, setTitle] = useState("")
+export function EditFaqTitle({
+    data,
+    id,
+    triggerRefetch,
+}: {
+    data: ITranslatedFaqData | null
+    id: number
+    triggerRefetch: () => void
+}) {
     const [isOpen, setIsOpen] = useState(false)
-    const [currentLanguage, setCurrentLanguage] = useState<LanguageType>("en")
+    const [isLoading, setIsLoading] = useState(false)
+    const [currentLanguage, setCurrentLanguage] = useState<LanguageType>(defaultLanguage)
+    const [newTitle, setNewTitle] = useState("")
+
+    useEffect(() => {
+        refreshNewData()
+    }, [data, currentLanguage, id])
+
+    function refreshNewData() {
+        if (data) {
+            setNewTitle(data[currentLanguage][id].title)
+        }
+    }
 
     function onClose() {
         setIsOpen(false)
@@ -18,6 +39,37 @@ export function EditFaqTitle({ faq, id }: { faq: IFaqData; id?: number }) {
         setCurrentLanguage(lang)
     }
 
+    function discardClickHandler() {
+        setIsOpen(false)
+        setIsLoading(false)
+        refreshNewData()
+    }
+
+    async function saveClickHandler() {
+        if (!data) return
+        if (data?.[currentLanguage][id].title === newTitle) {
+            alert("Nothing to save")
+            return
+        }
+
+        setIsLoading(true)
+
+        try {
+            const documentData = [...data[currentLanguage]]
+            documentData[id].title = newTitle
+            const objectData = reformatArrayToObject(documentData)
+            await updateSectionData(currentLanguage, "faq", objectData)
+
+            alert("Success")
+        } catch (error) {
+            alert("Error")
+        }
+
+        setIsLoading(false)
+        setIsOpen(false)
+        triggerRefetch?.()
+    }
+
     return (
         <>
             <ModalEditorWithTranslation
@@ -25,12 +77,12 @@ export function EditFaqTitle({ faq, id }: { faq: IFaqData; id?: number }) {
                 onClose={onClose}
                 onChangeLanguage={onChangeLanguage}
                 currentLanguage={currentLanguage}
-                onSaveClick={() => null}
-                onDiscardClick={() => null}
+                onSaveClick={saveClickHandler}
+                onDiscardClick={discardClickHandler}
             >
                 <div className={styles.container}>
                     <div>id: {id}</div>
-                    <Input label="Title" value={faq.title} onChange={value => setTitle(value)} />
+                    <Input label="Title" value={newTitle} onChange={value => setNewTitle(value)} />
                 </div>
             </ModalEditorWithTranslation>
             <button onClick={() => setIsOpen(true)}>Edit</button>
