@@ -11,15 +11,9 @@ import { FAQPage } from "pages/FAQPage"
 import { OtherPage } from "pages/OtherPage"
 import { ContactsPage } from "pages/ContactPage/ui/ContactsPage"
 import { ArtistsPage } from "pages/ArtistsPage"
-import { Alert, Confirm } from "shared/ui/Alert"
+import { DevPage } from "pages/DevPage"
 
 function App() {
-    async function saveClickHandler() {
-        if (await Confirm("Are you sure you want to delete selected images?")) {
-            return
-        }
-    }
-
     return (
         <div className="app">
             <Sidebar />
@@ -27,29 +21,7 @@ function App() {
             <div className="page-wrapper">
                 <Routes>
                     <Route path="/" element={<div>Home</div>} />
-                    <Route
-                        path="/test"
-                        element={
-                            <RequireAuth allowedRoles={["dev"]}>
-                                <div>
-                                    Home
-                                    <button onClick={() => Alert.error("Something goes wrong...")}>
-                                        click err
-                                    </button>
-                                    <button onClick={() => Alert.warning("oh, are u sure?")}>
-                                        click war
-                                    </button>
-                                    <button onClick={() => Alert.success("everything is ok")}>
-                                        click suc
-                                    </button>
-                                    <button onClick={() => Alert.info("some information")}>
-                                        click info
-                                    </button>
-                                    <button onClick={saveClickHandler}>click info</button>
-                                </div>
-                            </RequireAuth>
-                        }
-                    />
+
                     <Route
                         path="/portfolio"
                         element={
@@ -111,6 +83,14 @@ function App() {
                         element={
                             <RequireAuth allowedRoles={["dev"]}>
                                 <OtherPage />
+                            </RequireAuth>
+                        }
+                    />
+                    <Route
+                        path="/test"
+                        element={
+                            <RequireAuth allowedRoles={["dev"]}>
+                                <DevPage />
                             </RequireAuth>
                         }
                     />

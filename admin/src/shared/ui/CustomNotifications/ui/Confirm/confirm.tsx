@@ -25,7 +25,7 @@ export function Confirm(message: string): Promise<boolean> {
     buttonContainerEl.classList.add(styles.btnContainer)
     messageEl.classList.add(styles.message)
 
-    containerEl.style.transition = `all ${TRANSITION_TIME}s ease-in`
+    containerEl.style.transition = `all ${TRANSITION_TIME}ms ease-in`
 
     buttonContainerEl.append(confirmBtnEl)
     buttonContainerEl.append(refuseBtnEl)
@@ -45,7 +45,7 @@ export function Confirm(message: string): Promise<boolean> {
 
         setTimeout(() => {
             wrapperEl.remove()
-        }, timeout + 1000)
+        }, timeout + TRANSITION_TIME)
     }
 
     requestAnimationFrame(() => {

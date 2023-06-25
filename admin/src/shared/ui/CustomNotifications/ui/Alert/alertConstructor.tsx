@@ -21,7 +21,7 @@ export function alertConstructor(
     alertContainerEl.classList.add(styles[variant])
     messageEl.classList.add(styles.message)
 
-    alertContainerEl.style.transition = `transform ${TRANSITION_TIME}s ease`
+    alertContainerEl.style.transition = `transform ${TRANSITION_TIME}ms ease`
 
     alertContainerEl.append(iconEl)
     alertContainerEl.append(strongTextEl)
@@ -37,7 +37,7 @@ export function alertConstructor(
 
         setTimeout(() => {
             alertContainerEl.remove()
-        }, timeout + 1000)
+        }, timeout + TRANSITION_TIME)
     }
 
     requestAnimationFrame(() => {
