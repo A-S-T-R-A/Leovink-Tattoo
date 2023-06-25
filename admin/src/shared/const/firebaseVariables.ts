@@ -13,8 +13,12 @@ import {
     where,
 } from "firebase/firestore"
 import { allLanguages } from "./languages"
-import { IFaqData, ITranslatedFaqData } from "pages/FAQPage/types/types"
+import { IFaqData } from "pages/FAQPage/types/types"
 
+const IS_DEV = import.meta.env.MODE === "development"
+
+export const PORTFOLIO_PICTURES_DB = IS_DEV ? "dev_portfolio_pictures" : "portfolio_pictures"
+const DATA_COLLECTION = IS_DEV ? "dev_data" : "data"
 export const TATTOO_IMAGES_BUCKET = "tattoo_images"
 export const DATA_BUCKET = {
     steps: "data/steps",
@@ -22,7 +26,21 @@ export const DATA_BUCKET = {
     testimonials: "data/testimonials",
     artists: "data/artists",
 }
-export const PORTFOLIO_PICTURES_DB = "portfolio_pictures"
+const LANGUAGE_DOCUMENT = {
+    en: "english",
+    ro: "romanian",
+    ru: "russian",
+}
+
+const SECTION_COLLECTION = {
+    steps: "steps",
+    services: "services",
+    artists: "artists",
+    faq: "faq",
+    testimonials: "testimonials",
+    layout: "layout",
+    other: "other",
+}
 
 export const portfolioPicturesRef = collection(db, PORTFOLIO_PICTURES_DB)
 
@@ -81,24 +99,6 @@ export function sortObjectData(obj: any): any {
     return sortedObject
 }
 
-const LANGUAGE_DOCUMENT = {
-    en: "english",
-    ro: "romanian",
-    ru: "russian",
-}
-
-const SECTION_COLLECTION = {
-    steps: "steps",
-    services: "services",
-    artists: "artists",
-    faq: "faq",
-    testimonials: "testimonials",
-    layout: "layout",
-    other: "other",
-}
-
-const DATA_COLLECTION = "data"
-
 export async function fetchSectionData(
     language: keyof typeof LANGUAGE_DOCUMENT,
     section: keyof typeof SECTION_COLLECTION,
@@ -119,7 +119,7 @@ export async function fetchSectionData(
     return data
 }
 
-export async function copyPaste() {
+/* export async function copyPaste() {
     for (const lang of allLanguages) {
         const ref = collection(db, DATA_COLLECTION, LANGUAGE_DOCUMENT[lang], SECTION_COLLECTION.faq)
         const docs = await getDocs(ref)
@@ -131,7 +131,7 @@ export async function copyPaste() {
 
         await addDoc(ref, newData)
     }
-}
+} */
 
 export async function updateSectionData(
     language: keyof typeof LANGUAGE_DOCUMENT,
