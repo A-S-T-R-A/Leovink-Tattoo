@@ -11,6 +11,7 @@ import { FAQPage } from "pages/FAQPage"
 import { OtherPage } from "pages/OtherPage"
 import { ContactsPage } from "pages/ContactPage/ui/ContactsPage"
 import { ArtistsPage } from "pages/ArtistsPage"
+import { DevPage } from "pages/DevPage"
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
             <div className="page-wrapper">
                 <Routes>
                     <Route path="/" element={<div>Home</div>} />
+
                     <Route
                         path="/portfolio"
                         element={
@@ -81,6 +83,14 @@ function App() {
                         element={
                             <RequireAuth allowedRoles={["dev"]}>
                                 <OtherPage />
+                            </RequireAuth>
+                        }
+                    />
+                    <Route
+                        path="/test"
+                        element={
+                            <RequireAuth allowedRoles={["dev"]}>
+                                <DevPage />
                             </RequireAuth>
                         }
                     />

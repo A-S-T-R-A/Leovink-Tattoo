@@ -1,0 +1,70 @@
+.wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5000;
+    background-color: transparent;
+}
+
+.container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    top: 0;
+    right: 50%;
+    transform: translate(50%, -100%);
+    width: fit-content;
+    min-height: 100px;
+    padding: 20px 50px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 0, 0.2);
+    color: black;
+
+    &.appended {
+        top: 50%;
+        transform: translate(50%, -50%);
+    }
+
+    .icon {
+        position: absolute;
+        left: 10px;
+        top: 15px;
+        stroke: black;
+        width: 30px;
+        margin-right: 10px;
+    }
+
+    .cross {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        font-weight: 700;
+        width: 24px;
+        cursor: pointer;
+        transform: rotate(45deg);
+
+        &:hover {
+            stroke: darkgray;
+        }
+    }
+
+    .btnContainer {
+        display: flex;
+        gap: 40px;
+        justify-content: flex-end;
+
+        button {
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            font-weight: bold;
+
+            &:hover {
+                color: darkgray;
+            }
+        }
+    }
+}
