@@ -3,7 +3,7 @@ import { infoAlert } from "./ui/infoAlert/infoAlert"
 import { successAlert } from "./ui/successAlert/successAlert"
 import { warningAlert } from "./ui/warningAlert/warningAlert"
 
-export const alert = {
+export const Alert = {
     error(message: string) {
         errorAlert(message)
     },

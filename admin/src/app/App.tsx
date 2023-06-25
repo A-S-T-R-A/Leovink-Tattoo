@@ -11,7 +11,7 @@ import { FAQPage } from "pages/FAQPage"
 import { OtherPage } from "pages/OtherPage"
 import { ContactsPage } from "pages/ContactPage/ui/ContactsPage"
 import { ArtistsPage } from "pages/ArtistsPage"
-import { alert } from "shared/ui/Alert"
+import { Alert } from "shared/ui/Alert"
 
 function App() {
     return (
@@ -25,16 +25,16 @@ function App() {
                         element={
                             <div>
                                 Home
-                                <button onClick={() => alert.error("Something goes wrong...")}>
+                                <button onClick={() => Alert.error("Something goes wrong...")}>
                                     click err
                                 </button>
-                                <button onClick={() => alert.warning("oh, are u sure?")}>
+                                <button onClick={() => Alert.warning("oh, are u sure?")}>
                                     click war
                                 </button>
-                                <button onClick={() => alert.success("everything is ok")}>
+                                <button onClick={() => Alert.success("everything is ok")}>
                                     click suc
                                 </button>
-                                <button onClick={() => alert.info("some information")}>
+                                <button onClick={() => Alert.info("some information")}>
                                     click info
                                 </button>
                             </div>
