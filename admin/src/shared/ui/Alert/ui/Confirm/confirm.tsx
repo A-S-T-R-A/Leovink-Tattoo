@@ -1,9 +1,10 @@
-import { DISAPPEARING_DELAY, TRANSITION_TIME } from "../../const/const"
+import { TRANSITION_TIME } from "../../const/const"
 import { crossIcon } from "../../svg/crossIcon"
 import { questionIcon } from "../../svg/questionIcon"
 import styles from "./confirm.module.scss"
 
 export function Confirm(message: string): Promise<boolean> {
+    const wrapperEl = document.createElement("div")
     const containerEl = document.createElement("div")
     const buttonContainerEl = document.createElement("div")
     const messageEl = document.createElement("p")
@@ -19,9 +20,9 @@ export function Confirm(message: string): Promise<boolean> {
     strongTextEl.textContent = "Please confirm your action:"
     messageEl.textContent = message
 
+    wrapperEl.classList.add(styles.wrapper)
     containerEl.classList.add(styles.container)
     buttonContainerEl.classList.add(styles.btnContainer)
-    containerEl.classList.add(styles.error)
     messageEl.classList.add(styles.message)
 
     containerEl.style.transition = `all ${TRANSITION_TIME}s ease-in`
@@ -33,8 +34,9 @@ export function Confirm(message: string): Promise<boolean> {
     containerEl.append(messageEl)
     containerEl.append(closeIconEl)
     containerEl.append(buttonContainerEl)
+    wrapperEl.append(containerEl)
 
-    document.body.append(containerEl)
+    document.body.append(wrapperEl)
 
     function cleanup(timeout = 0) {
         setTimeout(() => {
@@ -42,7 +44,7 @@ export function Confirm(message: string): Promise<boolean> {
         }, timeout)
 
         setTimeout(() => {
-            containerEl.remove()
+            wrapperEl.remove()
         }, timeout + 1000)
     }
 
