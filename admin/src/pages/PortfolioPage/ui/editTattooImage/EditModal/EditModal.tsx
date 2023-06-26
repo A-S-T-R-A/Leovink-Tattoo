@@ -40,7 +40,7 @@ export function EditModal(props: IEditModalProps) {
         })
 
     return (
-        <Modal isOpen={isOpen || isLoading} onClose={onClose}>
+        <Modal isOpen={isOpen || isLoading} onClose={onClose} className={styles.container}>
             {isLoading ? (
                 "Loading..."
             ) : (
