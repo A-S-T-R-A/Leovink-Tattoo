@@ -18,6 +18,7 @@ import {
 import { findArraysDifference } from "shared/lib/findArrayDifference/findArrayDifference"
 import { allLanguages, defaultLanguage } from "shared/const/languages"
 import { Alert } from "shared/ui/CustomNotifications"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function EditParagraph({
     id,
@@ -106,7 +107,7 @@ export function EditParagraph({
                 const objectData = reformatArrayToObject(documentData)
                 await updateSectionData(currentLanguage, "services", objectData)
             }
-
+            setIsLoading(false)
             Alert.success("Success")
         } catch (error) {
             Alert.error("Error")
@@ -145,6 +146,7 @@ export function EditParagraph({
 
     return (
         <>
+            <LoadingModal isLoading={isLoading} />
             <ModalEditorWithTranslation
                 isOpen={isOpen}
                 onClose={onClose}

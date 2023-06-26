@@ -16,6 +16,7 @@ import {
     uploadImageToBucket,
 } from "shared/const/firebaseVariables"
 import { Alert } from "shared/ui/CustomNotifications"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function AddServiceModal({
     data,
@@ -110,6 +111,7 @@ export function AddServiceModal({
 
     return (
         <>
+            <LoadingModal isLoading={isLoading} />
             <ModalEditorWithTranslation
                 isOpen={isOpen}
                 onClose={onClose}

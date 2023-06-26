@@ -18,6 +18,7 @@ import {
     updateSectionData,
     uploadImageToBucket,
 } from "shared/const/firebaseVariables"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function AddArtistsModal({
     data,
@@ -93,6 +94,7 @@ export function AddArtistsModal({
 
     return (
         <>
+            <LoadingModal isLoading={isLoading} />
             <ModalEditorWithTranslation
                 isOpen={isOpen}
                 onClose={onClose}

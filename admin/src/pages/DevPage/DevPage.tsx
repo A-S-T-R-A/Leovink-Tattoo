@@ -2,7 +2,8 @@ import { Alert, Confirm } from "shared/ui/CustomNotifications"
 
 export function DevPage() {
     async function saveClickHandler() {
-        if (await Confirm("Are you sure you want to delete selected images?")) {
+        const isConfirmed = await Confirm("Are you sure you want to delete selected images?")
+        if (isConfirmed) {
             return
         }
     }

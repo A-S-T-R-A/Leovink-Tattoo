@@ -1,3 +1,4 @@
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 import { ITranslatedTestimonialsData } from "../../types/types"
 import { useState } from "react"
 import {
@@ -22,7 +23,8 @@ export function DeleteParagraph({
 
     async function deleteClickHandler() {
         if (!data) return
-        if (!Confirm(`Delete id:${id}`)) return
+        const isConfirmed = await Confirm(`Delete id:${id}`)
+        if (!isConfirmed) return
 
         setIsLoading(true)
 
@@ -46,5 +48,10 @@ export function DeleteParagraph({
         triggerRefetch?.()
     }
 
-    return <button onClick={deleteClickHandler}>Delete</button>
+    return (
+        <>
+            <LoadingModal isLoading={isLoading} />
+            <button onClick={deleteClickHandler}>Delete</button>
+        </>
+    )
 }

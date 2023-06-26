@@ -8,6 +8,7 @@ import { allLanguages, defaultLanguage } from "shared/const/languages"
 import { defaultNewAllTitlesData } from "pages/FAQPage/const/const"
 import { reformatArrayToObject, updateSectionData } from "shared/const/firebaseVariables"
 import { Alert } from "shared/ui/CustomNotifications"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function AddFaqTitle({
     data,
@@ -67,6 +68,7 @@ export function AddFaqTitle({
 
     return (
         <>
+            <LoadingModal isLoading={isLoading} />
             <ModalEditorWithTranslation
                 isOpen={isOpen}
                 onClose={onClose}

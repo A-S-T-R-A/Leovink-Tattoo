@@ -18,6 +18,7 @@ import {
     uploadImageToBucket,
 } from "shared/const/firebaseVariables"
 import { Alert } from "shared/ui/CustomNotifications"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function AddReviewModal({
     data,
@@ -114,6 +115,7 @@ export function AddReviewModal({
 
     return (
         <>
+            <LoadingModal isLoading={isLoading} />
             <ModalEditorWithTranslation
                 isOpen={isOpen}
                 onClose={onClose}

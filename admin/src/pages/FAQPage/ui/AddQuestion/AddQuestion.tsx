@@ -9,6 +9,7 @@ import { allLanguages, defaultLanguage } from "shared/const/languages"
 import { isAllEntriesFilledUp } from "../../lib/isAllEntriesFilledUp"
 import { reformatArrayToObject, updateSectionData } from "shared/const/firebaseVariables"
 import { Alert } from "shared/ui/CustomNotifications"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function AddQuestion({
     data,
@@ -70,6 +71,7 @@ export function AddQuestion({
 
     return (
         <>
+            <LoadingModal isLoading={isLoading} />
             <ModalEditorWithTranslation
                 isOpen={isOpen}
                 onClose={onClose}

@@ -7,6 +7,7 @@ import { Input } from "shared/ui/Input/Input"
 import { defaultLanguage } from "shared/const/languages"
 import { reformatArrayToObject, updateSectionData } from "shared/const/firebaseVariables"
 import { Alert } from "shared/ui/CustomNotifications"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function EditFaqTitle({
     data,
@@ -73,6 +74,7 @@ export function EditFaqTitle({
 
     return (
         <>
+            <LoadingModal isLoading={isLoading} />
             <ModalEditorWithTranslation
                 isOpen={isOpen}
                 onClose={onClose}

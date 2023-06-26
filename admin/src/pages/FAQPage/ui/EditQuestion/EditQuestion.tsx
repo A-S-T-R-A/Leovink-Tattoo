@@ -9,6 +9,7 @@ import { defaultLanguage } from "shared/const/languages"
 import { isShallowEqual } from "shared/lib/isShallowEqual/isShallowEqual"
 import { reformatArrayToObject, updateSectionData } from "shared/const/firebaseVariables"
 import { Alert } from "shared/ui/CustomNotifications"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function EditQuestion({
     data,
@@ -78,6 +79,7 @@ export function EditQuestion({
 
     return (
         <>
+            <LoadingModal isLoading={isLoading} />
             <ModalEditorWithTranslation
                 isOpen={isOpen}
                 onClose={onClose}

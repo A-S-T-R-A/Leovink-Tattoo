@@ -8,6 +8,7 @@ import {
 import { useState } from "react"
 import { Modal } from "shared/ui/Modal"
 import { Alert, Confirm } from "shared/ui/CustomNotifications"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function DeleteTattooImage({
     id,
@@ -23,7 +24,8 @@ export function DeleteTattooImage({
     const storage = getStorage()
 
     async function clickHandler() {
-        if (!Confirm(`Delete image id:${id}?`)) return
+        const isConfirmed = await Confirm(`Delete image id:${id}?`)
+        if (!isConfirmed) return
 
         setIsLoading(true)
         try {
@@ -58,9 +60,7 @@ export function DeleteTattooImage({
 
     return (
         <>
-            <Modal isOpen={isLoading} onClose={() => null}>
-                Loading...
-            </Modal>
+            <LoadingModal isLoading={isLoading} />
             <button onClick={clickHandler}>Delete</button>
         </>
     )

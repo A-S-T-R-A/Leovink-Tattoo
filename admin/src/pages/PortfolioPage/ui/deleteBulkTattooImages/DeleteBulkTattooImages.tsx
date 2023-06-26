@@ -9,6 +9,7 @@ import { Modal } from "shared/ui/Modal"
 import { useState } from "react"
 import { useUserRole } from "features/authByGoogle"
 import { Alert, Confirm } from "shared/ui/CustomNotifications"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function DeleteBulkTattooImages({
     imagesId,
@@ -29,8 +30,8 @@ export function DeleteBulkTattooImages({
             Alert.warning("You have to be logged as admin to perform this action")
             return
         }
-
-        if (!Confirm(`Delete ${imagesId.length} images?`)) return
+        const isConfirmed = await Confirm(`Delete ${imagesId.length} images?`)
+        if (!isConfirmed) return
 
         setIsLoading(true)
 
@@ -68,9 +69,7 @@ export function DeleteBulkTattooImages({
 
     return (
         <>
-            <Modal isOpen={isLoading} onClose={() => null}>
-                Loading...
-            </Modal>
+            <LoadingModal isLoading={isLoading} />
             <button onClick={clickHandler}>Delete Selected</button>
         </>
     )

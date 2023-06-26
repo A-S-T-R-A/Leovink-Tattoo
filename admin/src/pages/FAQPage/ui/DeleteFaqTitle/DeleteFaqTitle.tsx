@@ -3,6 +3,7 @@ import { ITranslatedFaqData } from "../../types/types"
 import { useState } from "react"
 import { reformatArrayToObject, updateSectionData } from "shared/const/firebaseVariables"
 import { Alert, Confirm } from "shared/ui/CustomNotifications"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function DeleteFaqTitle({
     id,
@@ -17,7 +18,8 @@ export function DeleteFaqTitle({
 
     async function deleteClickHandler() {
         if (!data) return
-        if (!Confirm(`Delete title id:${id} and all its questions?`)) return
+        const isConfirmed = await Confirm(`Delete title id:${id} and all its questions?`)
+        if (!isConfirmed) return
 
         setIsLoading(true)
 
@@ -37,5 +39,10 @@ export function DeleteFaqTitle({
         setIsLoading(false)
         triggerRefetch?.()
     }
-    return <button onClick={deleteClickHandler}>Delete</button>
+    return (
+        <>
+            <LoadingModal isLoading={isLoading} />
+            <button onClick={deleteClickHandler}>Delete</button>
+        </>
+    )
 }
