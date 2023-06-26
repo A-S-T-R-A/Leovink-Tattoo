@@ -14,9 +14,9 @@ export function Sidebar() {
                 {user !== "none" && <Link to="/reviews">Reviews</Link>}
                 {user !== "none" && <Link to="/artists">Artists</Link>}
                 {user !== "none" && <Link to="/faq">FAQ</Link>}
-                {user === "dev" && <Link to="/contacts">Contacts</Link>}
-                {user === "dev" && <Link to="/other">Other</Link>}
-                {user === "dev" && <Link to="/test">Test</Link>}
+                {user === "dev" && <Link to="/contacts">*Contacts</Link>}
+                {user === "dev" && <Link to="/other">*Other</Link>}
+                {user === "dev" && <Link to="/test">*Test</Link>}
             </div>
         </div>
     )
