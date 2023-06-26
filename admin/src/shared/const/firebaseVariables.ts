@@ -9,17 +9,14 @@ import {
     doc,
     getDocs,
     query,
-    updateDoc,
     where,
 } from "firebase/firestore"
-import { allLanguages } from "./languages"
-import { IFaqData } from "pages/FAQPage/types/types"
 
 const IS_DEV = import.meta.env.MODE === "development"
 
 export const PORTFOLIO_PICTURES_DB = IS_DEV ? "dev_portfolio_pictures" : "portfolio_pictures"
 const DATA_COLLECTION = IS_DEV ? "dev_data" : "data"
-export const TATTOO_IMAGES_BUCKET = "tattoo_images"
+export const TATTOO_IMAGES_BUCKET = IS_DEV ? "dev_tattoo_images" : "tattoo_images"
 export const DATA_BUCKET = {
     steps: "data/steps",
     services: "data/services",
