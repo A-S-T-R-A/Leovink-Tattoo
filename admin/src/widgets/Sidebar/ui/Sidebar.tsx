@@ -1,22 +1,31 @@
 import { useUserRole } from "features/authByGoogle"
 import styles from "./Sidebar.module.scss"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
+import { classNames } from "shared/lib/classNames/classNames"
+import { routes } from "shared/config/routes"
 
 export function Sidebar() {
     const user = useUserRole()
+    const { pathname } = useLocation()
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.container}>
-                <Link to="/">Home</Link>
-                {user !== "none" && <Link to="/portfolio">Portfolio</Link>}
-                {user !== "none" && <Link to="/steps">Steps</Link>}
-                {user !== "none" && <Link to="/services">Services</Link>}
-                {user !== "none" && <Link to="/reviews">Reviews</Link>}
-                {user !== "none" && <Link to="/artists">Artists</Link>}
-                {user !== "none" && <Link to="/faq">FAQ</Link>}
-                {user === "dev" && <Link to="/contacts">*Contacts</Link>}
-                {user === "dev" && <Link to="/other">*Other</Link>}
-                {user === "dev" && <Link to="/test">*Test</Link>}
+                {routes.map(item => {
+                    if (item.private && user === "none") return null
+                    if (item.allowedRoles && !item.allowedRoles?.includes(user)) return null
+
+                    return (
+                        <Link
+                            className={classNames(styles.link, {
+                                [styles.currentLink]: pathname === item.path,
+                            })}
+                            to={item.path}
+                        >
+                            {item.name}
+                        </Link>
+                    )
+                })}
             </div>
         </div>
     )

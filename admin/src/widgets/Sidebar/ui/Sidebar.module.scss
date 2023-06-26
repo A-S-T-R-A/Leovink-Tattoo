@@ -12,4 +12,22 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    .link {
+        display: flex;
+        justify-content: center;
+        width: 150px;
+        padding: 5px 10px;
+        transition: all 0.2s ease;
+
+        &.currentLink {
+            display: flex;
+            justify-content: center;
+            width: 150px;
+            padding: 5px 0;
+            background-color: orangered;
+            color: white;
+            border-radius: 10px;
+        }
+    }
 }
