@@ -6,8 +6,7 @@ import {
 } from "shared/const/firebaseVariables"
 import { deleteObject, getStorage, ref } from "firebase/storage"
 import { Modal } from "shared/ui/Modal"
-import { useEffect, useState } from "react"
-import { disableUi } from "shared/lib/disableUi/disableUi"
+import { useState } from "react"
 import { useUserRole } from "features/authByGoogle"
 
 export function DeleteBulkTattooImages({
@@ -20,9 +19,6 @@ export function DeleteBulkTattooImages({
     unselectAllHandler: () => void
 }) {
     const [isLoading, setIsLoading] = useState(false)
-    useEffect(() => {
-        isLoading ? disableUi.disable() : disableUi.enable()
-    }, [isLoading])
 
     const storage = getStorage()
     const role = useUserRole()
