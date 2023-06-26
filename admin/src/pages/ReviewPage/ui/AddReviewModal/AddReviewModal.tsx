@@ -152,6 +152,7 @@ export function AddReviewModal({
                     </div>
                     <div>
                         <Textarea
+                            className={styles.textarea}
                             label="Description"
                             value={newAllData[currentLanguage].description}
                             onChange={value =>

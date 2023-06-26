@@ -88,11 +88,13 @@ export function EditQuestion({
                 <div className={styles.container}>
                     <div>id: {id}</div>
                     <Textarea
+                        className={styles.textarea}
                         label="question"
                         value={newQuestion.question}
                         onChange={value => setNewQuestion(prev => ({ ...prev, question: value }))}
                     />
                     <Textarea
+                        className={styles.textarea}
                         label="answer"
                         value={newQuestion.answer}
                         onChange={value => setNewQuestion(prev => ({ ...prev, answer: value }))}

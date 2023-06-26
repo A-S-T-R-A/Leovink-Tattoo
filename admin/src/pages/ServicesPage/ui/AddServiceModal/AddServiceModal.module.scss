@@ -11,6 +11,7 @@
         background-color: white;
         color: black;
         cursor: pointer;
+        border: 1px solid red;
     }
 
     .file {
@@ -24,6 +25,15 @@
 }
 
 .container {
+    width: 300px;
+    min-height: fit-content;
+    .textarea {
+        textarea {
+            min-height: 200px;
+            margin-bottom: 10px;
+        }
+    }
+
     label {
         margin: 5px 0;
     }

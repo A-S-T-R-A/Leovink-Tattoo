@@ -38,7 +38,9 @@ export function EditImage({ onChange }: { onChange: (v: Blob) => void }) {
 
     return (
         <>
-            <label htmlFor={id}>Edit</label>
+            <label className={styles.editLabel} htmlFor={id}>
+                Edit
+            </label>
             <input type="file" id={id} className={styles.file} onChange={imageChangeHandler} />
         </>
     )

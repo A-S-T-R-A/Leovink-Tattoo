@@ -138,6 +138,7 @@ export function AddArtistsModal({
                     </div>
                     <div>
                         <Textarea
+                            className={styles.textarea}
                             label="Description"
                             value={newAllData[currentLanguage].description}
                             onChange={value =>
@@ -152,7 +153,7 @@ export function AddArtistsModal({
                         />
                     </div>
                     <div>
-                        <Textarea
+                        <Input
                             label="Slug"
                             value={newAllData[currentLanguage].slug}
                             onChange={value =>

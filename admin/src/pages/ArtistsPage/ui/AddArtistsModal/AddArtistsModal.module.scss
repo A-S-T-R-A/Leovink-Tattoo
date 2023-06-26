@@ -29,6 +29,14 @@
 }
 
 .container {
+    width: 300px;
+
+    .textarea {
+        textarea {
+            min-height: 200px;
+        }
+    }
+
     label {
         margin: 5px 0;
     }
@@ -37,12 +45,13 @@
         background-color: white;
     }
 
-    & > :nth-child(4) {
-        margin-bottom: 5px;
+    & > :nth-child(5) {
+        margin-bottom: 10px;
     }
 
     button {
         margin-left: 30px;
         padding: 1px 5px;
+        border: 1px solid red;
     }
 }
