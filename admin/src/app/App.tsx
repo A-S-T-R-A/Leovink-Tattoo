@@ -21,7 +21,6 @@ function App() {
             <div className="page-wrapper">
                 <Routes>
                     <Route path="/" element={<div>Home</div>} />
-
                     <Route
                         path="/portfolio"
                         element={
