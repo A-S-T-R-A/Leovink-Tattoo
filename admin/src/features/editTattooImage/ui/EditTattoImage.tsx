@@ -23,7 +23,6 @@ export function EditTattooImage({
         color: "" as ColorType,
     }
     const [newData, setNewData] = useState<ITattooImage>(defaultData)
-    //const [currentData, setCurrentData] = useState(defaultData)
     const [allImagesData, setAllImagesData] = useState<any>([])
     const [isLoading, setIsLoading] = useState(false)
 
@@ -87,6 +86,7 @@ export function EditTattooImage({
 
         setIsLoading(false)
         setIsOpen(false)
+        unselectAllHandler()
         triggerRefetch?.()
     }
 
