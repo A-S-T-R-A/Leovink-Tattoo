@@ -19,6 +19,8 @@ import {
     uploadImageToBucket,
 } from "shared/const/firebaseVariables"
 import { isStringUrlFriendly } from "shared/lib/isStringUrlFriendly/isStringUrlFriendly"
+import { Alert } from "shared/ui/CustomNotifications"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function EditParagraph({
     id,
@@ -69,11 +71,11 @@ export function EditParagraph({
     async function saveClickHandler() {
         if (!data) return
         if (isDeepEqual(data[currentLanguage][id], newData) && previewImage.url === "") {
-            alert("Nothing to save")
+            Alert.info("Nothing to save")
             return
         }
         if (!isStringUrlFriendly(newData.slug)) {
-            alert("Slug has to be URL friendly")
+            Alert.info("Slug has to be URL friendly")
             return
         }
 
@@ -107,9 +109,9 @@ export function EditParagraph({
                 await updateSectionData(currentLanguage, "artists", objectData)
             }
 
-            alert("Success")
+            Alert.success("Success")
         } catch (error) {
-            alert("Error")
+            Alert.error("Error")
         }
 
         setIsOpen(false)
@@ -120,6 +122,7 @@ export function EditParagraph({
 
     return (
         <>
+            <LoadingModal isLoading={isLoading} />
             <ModalEditorWithTranslation
                 isOpen={isOpen}
                 onClose={onClose}

@@ -11,6 +11,7 @@ import {
     query,
     where,
 } from "firebase/firestore"
+import { Alert } from "shared/ui/CustomNotifications"
 
 const IS_DEV = import.meta.env.MODE === "development"
 
@@ -166,7 +167,7 @@ export async function uploadImageToBucket(file: any, bucketPath: string): Promis
                 }
             },
             error => {
-                alert("Error")
+                Alert.error("Error")
                 rej(error)
             },
             () => {

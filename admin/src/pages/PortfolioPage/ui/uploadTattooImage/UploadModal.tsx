@@ -13,6 +13,7 @@ import {
     getImagesDoc,
 } from "shared/const/firebaseVariables"
 import { disableUi } from "shared/lib/disableUi/disableUi"
+import { Alert } from "shared/ui/CustomNotifications"
 
 export function UploadModal({ triggerRefetch }: { triggerRefetch: () => void }) {
     const [isOpen, setIsOpen] = useState(false)
@@ -69,7 +70,7 @@ export function UploadModal({ triggerRefetch }: { triggerRefetch: () => void }) 
         try {
             return await Promise.all(uploadPromises).then(values => values)
         } catch (error) {
-            alert("error uploading to bucket")
+            Alert.error("error uploading to bucket")
             return Promise.reject()
         }
     }
@@ -100,14 +101,14 @@ export function UploadModal({ triggerRefetch }: { triggerRefetch: () => void }) 
                     ...newData,
                 })
                     .then(() => res(true))
-                    .catch(err => alert("error uploading to database"))
+                    .catch(err => Alert.error("error uploading to database"))
             })
         })
 
         try {
             await Promise.all(uploadPromises)
         } catch (error) {
-            alert("error uploading to database")
+            Alert.error("error uploading to database")
             return Promise.reject(error)
         }
     }
@@ -123,11 +124,11 @@ export function UploadModal({ triggerRefetch }: { triggerRefetch: () => void }) 
             setFiles([])
             setProgress([])
             await uploadImagesToDatabase(urls)
-            alert("Successful Loading")
+            Alert.success("Successful Loading")
             setIsOpen(false)
             triggerRefetch?.()
         } catch (error) {
-            alert("Unexpected Error")
+            Alert.error("Unexpected Error")
             triggerRefetch?.()
         }
         setIsLoading(false)

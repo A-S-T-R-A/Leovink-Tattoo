@@ -8,6 +8,8 @@ import { deleteObject, getStorage, ref } from "firebase/storage"
 import { Modal } from "shared/ui/Modal"
 import { useState } from "react"
 import { useUserRole } from "features/authByGoogle"
+import { Alert, Confirm } from "shared/ui/CustomNotifications"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function DeleteBulkTattooImages({
     imagesId,
@@ -25,11 +27,11 @@ export function DeleteBulkTattooImages({
 
     async function clickHandler() {
         if (role !== "admin") {
-            alert("You have to be logged as admin to perform this action")
+            Alert.warning("You have to be logged as admin to perform this action")
             return
         }
-
-        if (!confirm(`Delete ${imagesId.length} images?`)) return
+        const isConfirmed = await Confirm(`Delete ${imagesId.length} images?`)
+        if (!isConfirmed) return
 
         setIsLoading(true)
 
@@ -55,9 +57,9 @@ export function DeleteBulkTattooImages({
 
         try {
             await rewriteImagesDoc(newData)
-            alert("Delete Success")
+            Alert.success("Delete Success")
         } catch (error) {
-            alert("Delete Error")
+            Alert.error("Delete Error")
         }
 
         setIsLoading(false)
@@ -67,9 +69,7 @@ export function DeleteBulkTattooImages({
 
     return (
         <>
-            <Modal isOpen={isLoading} onClose={() => null}>
-                Loading...
-            </Modal>
+            <LoadingModal isLoading={isLoading} />
             <button onClick={clickHandler}>Delete Selected</button>
         </>
     )

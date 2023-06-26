@@ -1,3 +1,4 @@
+import { Alert } from "shared/ui/CustomNotifications"
 import styles from "./EditImage.module.scss"
 import { v4 as uuid } from "uuid"
 
@@ -16,13 +17,13 @@ export function EditImage({ onChange }: { onChange: (v: Blob) => void }) {
         }
 
         if (file.size > maxSize) {
-            alert("File size exceeds the maximum allowed limit.")
+            Alert.warning("File size exceeds the maximum allowed limit.")
             e.target.value = null
             return
         }
 
         if (!allowedTypes.includes(file.type)) {
-            alert("Invalid file type. Please select a JPEG, PNG or WEBP image.")
+            Alert.warning("Invalid file type. Please select a JPEG, PNG or WEBP image.")
             e.target.value = null
             return
         }

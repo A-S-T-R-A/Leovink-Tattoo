@@ -4,6 +4,7 @@ import { EditModal } from "./EditModal/EditModal"
 import { getImagesDoc, rewriteImagesDoc } from "shared/const/firebaseVariables"
 import styles from "./EditTattooImage.module.scss"
 import { isShallowEqual } from "shared/lib/isShallowEqual/isShallowEqual"
+import { Alert } from "shared/ui/CustomNotifications"
 
 export function EditTattooImage({
     id,
@@ -38,7 +39,7 @@ export function EditTattooImage({
             setNewData(currentImg)
             setIsOpen(true)
         } catch (error) {
-            alert("Unexpected Error")
+            Alert.error("Unexpected Error")
             setIsOpen(false)
         }
     }
@@ -47,7 +48,7 @@ export function EditTattooImage({
         if (!newData) return
         const { id: _, ...restNewData } = newData
         if (isShallowEqual(allImagesData[id], restNewData) && id === newData.id) {
-            alert("Nothing to Save")
+            Alert.info("Nothing to Save")
             return
         }
 
@@ -57,7 +58,7 @@ export function EditTattooImage({
         try {
             if (id === newData.id) {
                 await rewriteImagesDoc(dataToUpload)
-                alert("Edit Success")
+                Alert.success("Edit Success")
             } else {
                 const from = id
                 const to = newData.id
@@ -78,10 +79,10 @@ export function EditTattooImage({
                 dataToUpload[to] = restNewData
 
                 await rewriteImagesDoc(dataToUpload)
-                alert("Reorder Success")
+                Alert.success("Reorder Success")
             }
         } catch (error) {
-            alert("Unexpected Error")
+            Alert.error("Unexpected Error")
         }
 
         setIsLoading(false)

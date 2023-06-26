@@ -17,6 +17,8 @@ import {
     updateSectionData,
     uploadImageToBucket,
 } from "shared/const/firebaseVariables"
+import { Alert } from "shared/ui/CustomNotifications"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function AddReviewModal({
     data,
@@ -59,7 +61,7 @@ export function AddReviewModal({
     async function saveClickHandler() {
         if (!data) return
         if (!isAllLanguagesFilledUp(newAllData) && previewAssets.preview.url) {
-            alert("You have to fill up all languages and a preview")
+            Alert.info("You have to fill up all languages and a preview")
             return
         }
 
@@ -99,9 +101,9 @@ export function AddReviewModal({
                 await updateSectionData(lang, "testimonials", objectData)
             }
 
-            alert("Success")
+            Alert.success("Success")
         } catch (error) {
-            alert("Error")
+            Alert.error("Error")
         }
 
         setIsOpen(false)
@@ -113,6 +115,7 @@ export function AddReviewModal({
 
     return (
         <>
+            <LoadingModal isLoading={isLoading} />
             <ModalEditorWithTranslation
                 isOpen={isOpen}
                 onClose={onClose}

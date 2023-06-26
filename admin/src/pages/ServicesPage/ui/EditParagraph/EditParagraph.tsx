@@ -17,6 +17,8 @@ import {
 } from "shared/const/firebaseVariables"
 import { findArraysDifference } from "shared/lib/findArrayDifference/findArrayDifference"
 import { allLanguages, defaultLanguage } from "shared/const/languages"
+import { Alert } from "shared/ui/CustomNotifications"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function EditParagraph({
     id,
@@ -56,7 +58,7 @@ export function EditParagraph({
     async function saveClickHandler() {
         if (!data || !newData) return
         if (isDeepEqual(data?.[currentLanguage][id], newData) && previewImages.length === 0) {
-            alert("Nothing to save")
+            Alert.info("Nothing to save")
             setIsOpen(false)
             return
         }
@@ -105,10 +107,10 @@ export function EditParagraph({
                 const objectData = reformatArrayToObject(documentData)
                 await updateSectionData(currentLanguage, "services", objectData)
             }
-
-            alert("Success")
+            setIsLoading(false)
+            Alert.success("Success")
         } catch (error) {
-            alert("Error")
+            Alert.error("Error")
         }
 
         setIsOpen(false)
@@ -144,6 +146,7 @@ export function EditParagraph({
 
     return (
         <>
+            <LoadingModal isLoading={isLoading} />
             <ModalEditorWithTranslation
                 isOpen={isOpen}
                 onClose={onClose}

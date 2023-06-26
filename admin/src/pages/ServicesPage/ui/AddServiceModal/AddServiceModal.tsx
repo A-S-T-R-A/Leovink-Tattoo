@@ -15,6 +15,8 @@ import {
     updateSectionData,
     uploadImageToBucket,
 } from "shared/const/firebaseVariables"
+import { Alert } from "shared/ui/CustomNotifications"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function AddServiceModal({
     data,
@@ -65,7 +67,7 @@ export function AddServiceModal({
     async function saveClickHandler() {
         if (!data) return
         if (!isAllLanguagesFilledUp(newAllData)) {
-            alert("You have to fill up all languages")
+            Alert.info("You have to fill up all languages")
             return
         }
 
@@ -95,9 +97,9 @@ export function AddServiceModal({
                 await updateSectionData(lang, "services", objectData)
             }
 
-            alert("Success")
+            Alert.success("Success")
         } catch (error) {
-            alert("Error")
+            Alert.error("Error")
         }
 
         setIsOpen(false)
@@ -109,6 +111,7 @@ export function AddServiceModal({
 
     return (
         <>
+            <LoadingModal isLoading={isLoading} />
             <ModalEditorWithTranslation
                 isOpen={isOpen}
                 onClose={onClose}

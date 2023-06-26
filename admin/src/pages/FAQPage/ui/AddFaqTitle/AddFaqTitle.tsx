@@ -7,6 +7,8 @@ import { INewAllTitlesData, ITranslatedFaqData } from "../../types/types"
 import { allLanguages, defaultLanguage } from "shared/const/languages"
 import { defaultNewAllTitlesData } from "pages/FAQPage/const/const"
 import { reformatArrayToObject, updateSectionData } from "shared/const/firebaseVariables"
+import { Alert } from "shared/ui/CustomNotifications"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function AddFaqTitle({
     data,
@@ -38,7 +40,7 @@ export function AddFaqTitle({
     async function saveClickHandler() {
         if (!data) return
         if (Object.values(newAllTitlesData).some(item => item === "")) {
-            alert("You have to fill up all languages")
+            Alert.info("You have to fill up all languages")
             return
         }
 
@@ -53,9 +55,9 @@ export function AddFaqTitle({
                 await updateSectionData(lang, "faq", objectData)
             }
 
-            alert("Success")
+            Alert.success("Success")
         } catch (error) {
-            alert("Error")
+            Alert.error("Error")
         }
 
         setIsOpen(false)
@@ -66,6 +68,7 @@ export function AddFaqTitle({
 
     return (
         <>
+            <LoadingModal isLoading={isLoading} />
             <ModalEditorWithTranslation
                 isOpen={isOpen}
                 onClose={onClose}

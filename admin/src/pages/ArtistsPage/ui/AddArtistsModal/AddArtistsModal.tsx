@@ -10,6 +10,7 @@ import { allLanguages, defaultLanguage } from "shared/const/languages"
 import { EditImage } from "features/editImage"
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { isAllEntriesFilledUp } from "../../lib/isAllEntriesFilledUp"
+import { Alert } from "shared/ui/CustomNotifications"
 import {
     DATA_BUCKET,
     deleteImageFromBucket,
@@ -17,6 +18,7 @@ import {
     updateSectionData,
     uploadImageToBucket,
 } from "shared/const/firebaseVariables"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function AddArtistsModal({
     data,
@@ -54,7 +56,7 @@ export function AddArtistsModal({
     async function saveClickHandler() {
         if (!data) return
         if (!isAllEntriesFilledUp(newAllData) || previewImage.url === "") {
-            alert("You have to fill up all languages and an image")
+            Alert.info("You have to fill up all languages and an image")
             return
         }
 
@@ -78,9 +80,9 @@ export function AddArtistsModal({
                 await updateSectionData(lang, "artists", objectData)
             }
 
-            alert("Success")
+            Alert.success("Success")
         } catch (error) {
-            alert("Error")
+            Alert.error("Error")
         }
 
         setIsOpen(false)
@@ -92,6 +94,7 @@ export function AddArtistsModal({
 
     return (
         <>
+            <LoadingModal isLoading={isLoading} />
             <ModalEditorWithTranslation
                 isOpen={isOpen}
                 onClose={onClose}

@@ -8,6 +8,8 @@ import { defaultNewAllQuestionData } from "../../const/const"
 import { allLanguages, defaultLanguage } from "shared/const/languages"
 import { isAllEntriesFilledUp } from "../../lib/isAllEntriesFilledUp"
 import { reformatArrayToObject, updateSectionData } from "shared/const/firebaseVariables"
+import { Alert } from "shared/ui/CustomNotifications"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function AddQuestion({
     data,
@@ -41,7 +43,7 @@ export function AddQuestion({
     async function saveClickHandler() {
         if (!data) return
         if (!isAllEntriesFilledUp(newAllQuestionData)) {
-            alert("You have to fill up all languages")
+            Alert.info("You have to fill up all languages")
             return
         }
 
@@ -56,9 +58,9 @@ export function AddQuestion({
                 await updateSectionData(lang, "faq", objectData)
             }
 
-            alert("Success")
+            Alert.success("Success")
         } catch (error) {
-            alert("Error")
+            Alert.error("Error")
         }
 
         setIsOpen(false)
@@ -69,6 +71,7 @@ export function AddQuestion({
 
     return (
         <>
+            <LoadingModal isLoading={isLoading} />
             <ModalEditorWithTranslation
                 isOpen={isOpen}
                 onClose={onClose}
