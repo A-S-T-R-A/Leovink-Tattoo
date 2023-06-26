@@ -54,7 +54,7 @@ export function ModalGallery({ data, isOpen, onClose, language }: IModalGallery)
                                 <img src={img} className={styles.img} alt={alt[language]} />
                                 <div className={styles.descriptionContainer}>
                                     <Typography className={styles.description}>
-                                        Lorem ipsum dolor sit amet.
+                                        {alt[language]}
                                     </Typography>
                                 </div>
                             </div>

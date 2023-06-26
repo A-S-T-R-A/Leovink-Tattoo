@@ -14,6 +14,7 @@ export interface IFilters {
 export interface ITattooImage extends IFilters {
     id: number
     img: string
+    alt: { en: string; ro: string; ru: string }
 }
 
 interface IFaqQuestion {

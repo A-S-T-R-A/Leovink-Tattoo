@@ -9,6 +9,7 @@ import { EditTattooImage } from "../editTattooImage/EditTattoImage"
 import { DeleteTattooImage } from "../deleteTattooImage/DeleteTattooImage"
 import { EditBulkTattooImages } from "../editBulkTattooImages/EditBulkTattooImages"
 import { DeleteBulkTattooImages } from "../deleteBulkTattooImages/DeleteBulkTattooImages"
+import { defaultLanguage } from "shared/const/languages"
 
 export function PortfolioPageList({
     data,
@@ -50,6 +51,7 @@ export function PortfolioPageList({
                     <div>artist: {item.artist}</div>
                     <div>style: {item.style}</div>
                     <div>color: {item.color}</div>
+                    <div>description: {item.alt[defaultLanguage]}</div>
                     <div>{item.isLive ? "Published" : "Unpublished"}</div>
                     <div className={styles.buttons}>
                         <EditTattooImage
@@ -110,6 +112,7 @@ export function PortfolioPageList({
                         <div>artist: {item.artist}</div>
                         <div>style: {item.style}</div>
                         <div>color: {item.color}</div>
+                        <div>description: {item.alt[defaultLanguage]}</div>
                         <div>{item.isLive ? "Published" : "Unpublished"}</div>
                         <div className={styles.buttons}>
                             <EditTattooImage

@@ -62,10 +62,6 @@ export function Dropdown(props: DropdownProps) {
                     </option>
                 ))}
             </select>
-            {/* <p>
-                Selected option:
-                <span>{selectedValue.toUpperCase()}</span>
-            </p> */}
         </div>
     )
 }
