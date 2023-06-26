@@ -38,10 +38,14 @@ export function EditParagraph({
     const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
+        refreshNewData()
+    }, [data, currentLanguage, id])
+
+    function refreshNewData() {
         if (data) {
             setNewData(data[currentLanguage][id])
         }
-    }, [data, currentLanguage, id])
+    }
 
     function onClose() {
         setIsOpen(false)
@@ -106,7 +110,7 @@ export function EditParagraph({
 
     function discardClickHandler() {
         setIsOpen(false)
-        setNewData(defaultData)
+        refreshNewData()
         setPreviewImage(defaultPreviewImage)
     }
 

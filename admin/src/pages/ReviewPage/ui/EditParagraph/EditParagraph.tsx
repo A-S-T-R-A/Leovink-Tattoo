@@ -40,10 +40,14 @@ export function EditParagraph({
     const [previewAssets, setPreviewAssets] = useState(defaultPreviewAssets)
 
     useEffect(() => {
+        refreshNewData()
+    }, [data, currentLanguage, id])
+
+    function refreshNewData() {
         if (data) {
             setNewData(data[currentLanguage][id])
         }
-    }, [data, currentLanguage, id])
+    }
 
     function onClose() {
         setIsOpen(false)
@@ -121,7 +125,7 @@ export function EditParagraph({
     function discardClickHandler() {
         setIsOpen(false)
         setIsLoading(false)
-        setNewData(defaultNewData)
+        refreshNewData()
     }
 
     function editImageChangeHandler(blob: any) {
