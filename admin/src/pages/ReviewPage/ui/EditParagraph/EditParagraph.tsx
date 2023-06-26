@@ -172,6 +172,7 @@ export function EditParagraph({
                     </div>
                     <div>
                         <Textarea
+                            className={styles.textarea}
                             label="Description"
                             value={newData.description}
                             onChange={value =>

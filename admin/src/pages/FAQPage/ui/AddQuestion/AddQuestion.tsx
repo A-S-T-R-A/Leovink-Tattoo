@@ -79,6 +79,7 @@ export function AddQuestion({
             >
                 <div className={styles.container}>
                     <Textarea
+                        className={styles.textarea}
                         label="question"
                         value={newAllQuestionData[currentLanguage].question}
                         onChange={value =>
@@ -89,6 +90,7 @@ export function AddQuestion({
                         }
                     />
                     <Textarea
+                        className={styles.textarea}
                         label="answer"
                         value={newAllQuestionData[currentLanguage].answer}
                         onChange={value =>

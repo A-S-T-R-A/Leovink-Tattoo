@@ -136,6 +136,7 @@ export function AddServiceModal({
                         }
                     />
                     <Textarea
+                        className={styles.textarea}
                         label="Description"
                         value={newAllData[currentLanguage].description}
                         onChange={value =>

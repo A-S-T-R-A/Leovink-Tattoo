@@ -153,6 +153,7 @@ export function EditParagraph({
                     </div>
                     <div>
                         <Textarea
+                            className={styles.textarea}
                             label="Description"
                             value={newData.description}
                             onChange={value =>
@@ -161,7 +162,7 @@ export function EditParagraph({
                         />
                     </div>
                     <div>
-                        <Textarea
+                        <Input
                             label="Slug"
                             value={newData.slug}
                             onChange={value => setNewData(prev => ({ ...prev, slug: value }))}

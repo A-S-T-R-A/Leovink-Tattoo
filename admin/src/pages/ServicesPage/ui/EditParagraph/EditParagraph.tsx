@@ -167,6 +167,7 @@ export function EditParagraph({
                         onChange={value => setNewData(prev => ({ ...prev, title: value }))}
                     />
                     <Textarea
+                        className={styles.textarea}
                         label="Description"
                         value={newData.description}
                         onChange={value => setNewData(prev => ({ ...prev, description: value }))}

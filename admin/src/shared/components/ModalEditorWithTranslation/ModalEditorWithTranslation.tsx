@@ -2,6 +2,7 @@ import { Languages } from "shared/components/Languages/Languages"
 import { ReactNode } from "react"
 import { LanguageType } from "shared/types/types"
 import { Modal } from "shared/ui/Modal"
+import styles from "./ModalEditorWithTranslation.module.scss"
 
 interface IModalEditorWithTranslation {
     children: ReactNode
@@ -28,7 +29,7 @@ export function ModalEditorWithTranslation(props: IModalEditorWithTranslation) {
         <Modal isOpen={isOpen} onClose={onClose}>
             <Languages currentLanguage={currentLanguage} onChangeLanguage={onChangeLanguage} />
             {children}
-            <div>
+            <div className={styles.btnContainer}>
                 <button onClick={onSaveClick}>save</button>
                 <button onClick={onDiscardClick}>discard</button>
             </div>
