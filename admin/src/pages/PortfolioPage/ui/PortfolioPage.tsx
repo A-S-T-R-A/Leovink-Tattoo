@@ -37,8 +37,6 @@ export function PortfolioPage() {
         fetch()
     }, [])
 
-    console.log(data)
-
     const filteredData = useMemo(() => {
         return data
             .filter(item =>
@@ -72,9 +70,9 @@ export function PortfolioPage() {
 
     return (
         <div className={styles.wrapper}>
-            <PortfolioPageHeader view={view} setView={setView} triggerRefetch={() => fetch()} />
+            <PortfolioPageHeader view={view} setView={setView} triggerRefetch={fetch} />
             <PortfolioPageFilters filters={filters} setFilters={setFilters} />
-            <PortfolioPageList data={filteredData} view={view} triggerRefetch={() => fetch()} />
+            <PortfolioPageList data={filteredData} view={view} triggerRefetch={fetch} />
         </div>
     )
 }

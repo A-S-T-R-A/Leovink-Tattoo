@@ -1,15 +1,9 @@
-import { getDocs, orderBy, query, updateDoc, where } from "firebase/firestore"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { ArtistType, ColorType, ITattooImage, StyleType } from "shared/types/types"
 import { EditModal } from "./EditModal/EditModal"
-import {
-    getFirestoreDocumentByFileId,
-    getFirestoreDocumentById,
-    getImagesDoc,
-    portfolioPicturesRef,
-    rewriteImagesDoc,
-} from "shared/const/firebaseVariables"
+import { getImagesDoc, rewriteImagesDoc } from "shared/const/firebaseVariables"
 import styles from "./EditTattooImage.module.scss"
+import { isShallowEqual } from "shared/lib/isShallowEqual/isShallowEqual"
 
 export function EditTattooImage({
     id,
@@ -28,7 +22,8 @@ export function EditTattooImage({
         style: "" as StyleType,
         color: "" as ColorType,
     }
-    const [data, setData] = useState<ITattooImage>(defaultData)
+    const [newData, setNewData] = useState<ITattooImage>(defaultData)
+    //const [currentData, setCurrentData] = useState(defaultData)
     const [allImagesData, setAllImagesData] = useState<any>([])
     const [isLoading, setIsLoading] = useState(false)
 
@@ -41,7 +36,7 @@ export function EditTattooImage({
             const currentData = currentDoc.data()
             const currentImg = { id: id, ...currentData[id] }
             setAllImagesData(currentData)
-            setData(currentImg)
+            setNewData(currentImg)
             setIsOpen(true)
         } catch (error) {
             alert("Unexpected Error")
@@ -50,22 +45,25 @@ export function EditTattooImage({
     }
 
     async function saveClickHandler() {
-        if (!data) return
-        setIsLoading(true)
-        const newData = { ...allImagesData }
-        newData[id] = data
+        if (!newData) return
+        const { id: _, ...restNewData } = newData
+        if (isShallowEqual(allImagesData[id], restNewData) && id === newData.id) {
+            alert("Nothing to Save")
+            return
+        }
 
+        setIsLoading(true)
+        const dataToUpload = { ...allImagesData }
+        dataToUpload[id] = restNewData
         try {
-            if (id === data.id) {
-                await rewriteImagesDoc(newData)
+            if (id === newData.id) {
+                await rewriteImagesDoc(dataToUpload)
                 alert("Edit Success")
             } else {
                 const from = id
-                const to = data.id
+                const to = newData.id
                 const minId = Math.min(from, to)
                 const maxId = Math.max(from, to)
-
-                const newData = { ...allImagesData }
 
                 const queue = Object.keys(allImagesData)
                     .sort((a, b) => +a - +b)
@@ -75,12 +73,12 @@ export function EditTattooImage({
                 const itemsToPut = queue.filter(item => +item != from)
 
                 for (let i = 0; i < slots.length; i++) {
-                    newData[slots[i]] = allImagesData[itemsToPut[i]]
+                    dataToUpload[slots[i]] = allImagesData[itemsToPut[i]]
                 }
-                const { id: _, ...restData } = data
-                newData[to] = { ...restData }
 
-                await rewriteImagesDoc(newData)
+                dataToUpload[to] = restNewData
+
+                await rewriteImagesDoc(dataToUpload)
                 alert("Reorder Success")
             }
         } catch (error) {
@@ -93,7 +91,7 @@ export function EditTattooImage({
     }
 
     function discardClickHandler() {
-        setData(defaultData)
+        setNewData(defaultData)
         setIsOpen(false)
     }
 
@@ -105,11 +103,11 @@ export function EditTattooImage({
         <>
             <EditModal
                 length={length}
-                data={data}
+                data={newData}
                 isOpen={isOpen}
                 isLoading={isLoading}
                 onClose={onClose}
-                setData={setData}
+                setData={setNewData}
                 saveClickHandler={saveClickHandler}
                 discardClickHandler={discardClickHandler}
             />
