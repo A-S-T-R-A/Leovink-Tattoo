@@ -14,6 +14,7 @@ export function StepsPage() {
     }
 
     function triggerRefetch() {
+        setData(null)
         fetch()
     }
 

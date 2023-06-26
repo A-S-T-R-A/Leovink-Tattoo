@@ -26,6 +26,11 @@ export function PortfolioPage() {
         setData(dataArray)
     }
 
+    function triggerRefetch() {
+        setData([])
+        fetch()
+    }
+
     useEffect(() => {
         fetch()
     }, [])
@@ -63,9 +68,9 @@ export function PortfolioPage() {
 
     return (
         <div className={styles.wrapper}>
-            <PortfolioPageHeader view={view} setView={setView} triggerRefetch={fetch} />
+            <PortfolioPageHeader view={view} setView={setView} triggerRefetch={triggerRefetch} />
             <PortfolioPageFilters filters={filters} setFilters={setFilters} />
-            <PortfolioPageList data={filteredData} view={view} triggerRefetch={fetch} />
+            <PortfolioPageList data={filteredData} view={view} triggerRefetch={triggerRefetch} />
         </div>
     )
 }

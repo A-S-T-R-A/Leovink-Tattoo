@@ -3,6 +3,7 @@ import { classNames } from "shared/lib/classNames/classNames"
 import { ViewType } from "../../types/types"
 import { localStorageView } from "pages/PortfolioPage/lib/localStorageLib"
 import { UploadModal } from "../uploadTattooImage/UploadModal"
+import { TriggerRefetchBtn } from "shared/components/TriggerRefetchBtn/TriggerRefetchBtn"
 
 export function PortfolioPageHeader({
     view,
@@ -21,6 +22,7 @@ export function PortfolioPageHeader({
     return (
         <div className={styles.header}>
             <UploadModal triggerRefetch={triggerRefetch} />
+            <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
             <div className={styles.viewToggle}>
                 <button
                     onClick={() => changeView("table")}
