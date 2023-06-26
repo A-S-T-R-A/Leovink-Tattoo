@@ -1,8 +1,8 @@
-import { UploadModal } from "features/uploadTattooImage"
 import styles from "./PortfolioPageHeader.module.scss"
 import { classNames } from "shared/lib/classNames/classNames"
 import { ViewType } from "../../types/types"
 import { localStorageView } from "pages/PortfolioPage/lib/localStorageLib"
+import { UploadModal } from "../uploadTattooImage/UploadModal"
 
 export function PortfolioPageHeader({
     view,

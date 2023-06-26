@@ -1,6 +1,6 @@
-import { getImageNameByUrl } from "../lib/getImageNameByUrl"
 import {
     TATTOO_IMAGES_BUCKET,
+    getImageNameByUrl,
     getImagesDoc,
     rewriteImagesDoc,
 } from "shared/const/firebaseVariables"
@@ -47,7 +47,7 @@ export function DeleteBulkTattooImages({
             const currentImg = currentData[imagesId[i]]
             const imgName = getImageNameByUrl(currentImg.img)
             const imgRef = ref(storage, `${TATTOO_IMAGES_BUCKET}/${imgName}`)
-            await deleteObject(imgRef)
+            deleteObject(imgRef)
         }
 
         Object.keys(currentData).forEach(key => {
