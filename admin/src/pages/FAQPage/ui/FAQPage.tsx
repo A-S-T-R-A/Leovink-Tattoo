@@ -10,6 +10,7 @@ import { IFaqData, ITranslatedFaqData } from "../types/types"
 import { defaultLanguage } from "shared/const/languages"
 import { DeleteFaqTitle } from "./DeleteFaqTitle/DeleteFaqTitle"
 import { DeleteQuestion } from "./DeleteQuestion/DeleteQuestion"
+import { TriggerRefetchBtn } from "shared/components/TriggerRefetchBtn/TriggerRefetchBtn"
 
 export function FAQPage() {
     const [data, setData] = useState<ITranslatedFaqData | null>(null)
@@ -22,6 +23,7 @@ export function FAQPage() {
     }
 
     function triggerRefetch() {
+        setData(null)
         fetch()
     }
 
@@ -32,6 +34,7 @@ export function FAQPage() {
     return (
         <>
             <AddFaqTitle data={data} triggerRefetch={triggerRefetch} />
+            <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
             <div className={styles.table}>
                 {data?.[defaultLanguage]?.map((titleItem, titleIndex) => {
                     return (

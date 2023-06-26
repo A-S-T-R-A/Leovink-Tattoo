@@ -7,6 +7,7 @@ import { IArtistData, ITranslatedArtistsData } from "../types/types"
 import { fetchSectionData } from "shared/const/firebaseVariables"
 import { defaultLanguage } from "shared/const/languages"
 import { DeleteParagraph } from "./DeleteParagraph/DeleteParagraph"
+import { TriggerRefetchBtn } from "shared/components/TriggerRefetchBtn/TriggerRefetchBtn"
 
 export function ArtistsPage() {
     const [data, setData] = useState<ITranslatedArtistsData | null>(null)
@@ -19,6 +20,7 @@ export function ArtistsPage() {
     }
 
     function triggerRefetch() {
+        setData(null)
         fetch()
     }
 
@@ -29,6 +31,7 @@ export function ArtistsPage() {
     return (
         <>
             <AddArtistsModal data={data} triggerRefetch={triggerRefetch} />
+            <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
             <div className={styles.table}>
                 {data?.[defaultLanguage].map((item, index) => (
                     <div className={styles.item} key={index}>

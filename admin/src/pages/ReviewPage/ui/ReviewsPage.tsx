@@ -8,6 +8,7 @@ import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { EditParagraph } from "./EditParagraph/EditParagraph"
 import { DeleteParagraph } from "./DeleteParagraph/DeleteParagraph"
 import { ModalVideo } from "shared/components/ModalVideo/ModalVideo"
+import { TriggerRefetchBtn } from "shared/components/TriggerRefetchBtn/TriggerRefetchBtn"
 
 export function ReviewsPage() {
     const [data, setData] = useState<ITranslatedTestimonialsData | null>(null)
@@ -20,6 +21,7 @@ export function ReviewsPage() {
     }
 
     function triggerRefetch() {
+        setData(null)
         fetch()
     }
 
@@ -30,6 +32,7 @@ export function ReviewsPage() {
     return (
         <>
             <AddReviewModal data={data} triggerRefetch={triggerRefetch} />
+            <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
             <div className={styles.table}>
                 {data?.[defaultLanguage].map((item, index) => (
                     <div className={styles.item} key={index}>
