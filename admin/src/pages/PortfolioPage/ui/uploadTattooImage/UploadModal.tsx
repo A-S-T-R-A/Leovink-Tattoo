@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react"
 import { Modal } from "shared/ui/Modal"
 import styles from "./UploadModal.module.scss"
-import { Filepond } from "./Filepond/Filepond"
+import { Filepond } from "./Filepond"
 import { Button } from "shared/ui/Button/Button"
 import { FilePondFile } from "filepond"
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
-import { db, storage } from "../../../../firebase"
-import { addDoc, collection, doc, getDocs, orderBy, query, updateDoc } from "firebase/firestore"
+import { db, storage } from "../../../../../firebase"
+import { doc, updateDoc } from "firebase/firestore"
 import {
     PORTFOLIO_PICTURES_DB,
     TATTOO_IMAGES_BUCKET,
     getImagesDoc,
-    portfolioPicturesRef,
 } from "shared/const/firebaseVariables"
-import { ITattooImage } from "shared/types/types"
 import { disableUi } from "shared/lib/disableUi/disableUi"
 
 export function UploadModal({ triggerRefetch }: { triggerRefetch: () => void }) {

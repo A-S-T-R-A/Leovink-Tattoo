@@ -1,12 +1,14 @@
 import { useState } from "react"
 import { ITattooImage } from "shared/types/types"
-import { EditTattooImage } from "features/editTattooImage"
-import { DeleteTattooImage } from "features/deleteTattooImage"
+
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { ViewType } from "../../types/types"
-import { EditBulkTattooImages } from "features/editBulkTattooImages"
-import { DeleteBulkTattooImages } from "features/deleteBulkTattooImages"
+
 import styles from "./PortfolioPageList.module.scss"
+import { EditTattooImage } from "../editTattooImage/EditTattoImage"
+import { DeleteTattooImage } from "../deleteTattooImage/DeleteTattooImage"
+import { EditBulkTattooImages } from "../editBulkTattooImages/EditBulkTattooImages"
+import { DeleteBulkTattooImages } from "../deleteBulkTattooImages/DeleteBulkTattooImages"
 
 export function PortfolioPageList({
     data,

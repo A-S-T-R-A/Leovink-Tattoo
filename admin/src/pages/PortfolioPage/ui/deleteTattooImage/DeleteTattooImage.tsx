@@ -1,7 +1,7 @@
 import { getStorage, ref, deleteObject } from "firebase/storage"
-import { getImageNameByUrl } from "../lib/getImageNameByUrl"
 import {
     TATTOO_IMAGES_BUCKET,
+    getImageNameByUrl,
     getImagesDoc,
     rewriteImagesDoc,
 } from "shared/const/firebaseVariables"
@@ -33,7 +33,7 @@ export function DeleteTattooImage({
 
             const imgName = getImageNameByUrl(currentImg.img)
             const imgRef = ref(storage, `${TATTOO_IMAGES_BUCKET}/${imgName}`)
-            await deleteObject(imgRef)
+            deleteObject(imgRef)
 
             const queue = Object.keys(currentData)
                 .sort((a, b) => +a - +b)

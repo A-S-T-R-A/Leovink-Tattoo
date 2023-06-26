@@ -1,17 +1,11 @@
 import { useEffect, useState, useMemo } from "react"
-import { getDocs, orderBy, query } from "firebase/firestore"
 import { IFiltersData, ViewType } from "../types/types"
 import { PortfolioPageHeader } from "./PortfolioPageHeader/PortfolioPageHeader"
 import { PortfolioPageFilters } from "./PortfolioPageFilters/PortfolioPageFilters"
 import { PortfolioPageList } from "./PortfolioPageList/PortfolioPageList"
 import { ITattooImage } from "shared/types/types"
 import styles from "./PortfolioPage.module.scss"
-import {
-    getImagesDoc,
-    portfolioPicturesRef,
-    reformatAndSortObjectValuesToArray,
-    sortObjectData,
-} from "shared/const/firebaseVariables"
+import { getImagesDoc, reformatAndSortObjectValuesToArray } from "shared/const/firebaseVariables"
 import { localStorageView } from "../lib/localStorageLib"
 
 export function PortfolioPage() {
@@ -29,7 +23,6 @@ export function PortfolioPage() {
         if (!currentDoc) return
         const currentData = currentDoc.data()
         const dataArray = reformatAndSortObjectValuesToArray(currentData)
-        // const liveData = dataArray.filter(item => item.isLive)
         setData(dataArray)
     }
 

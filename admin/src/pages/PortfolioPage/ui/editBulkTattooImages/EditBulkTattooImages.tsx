@@ -8,9 +8,9 @@ import {
 } from "shared/const/filters"
 import { ArtistType, ColorType, StyleType } from "shared/types/types"
 import { getImagesDoc, rewriteImagesDoc } from "shared/const/firebaseVariables"
-import { tattooLiveDropdownOptions } from "../const/filterOptions"
 import styles from "./EditBulkTattooImages.module.scss"
 import { disableUi } from "shared/lib/disableUi/disableUi"
+import { tattooLiveDropdownOptions } from "../../const/filterOptions"
 
 export function EditBulkTattooImages({
     imagesId,
