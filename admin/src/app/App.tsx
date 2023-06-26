@@ -12,12 +12,15 @@ import { OtherPage } from "pages/OtherPage"
 import { ContactsPage } from "pages/ContactPage/ui/ContactsPage"
 import { ArtistsPage } from "pages/ArtistsPage"
 import { DevPage } from "pages/DevPage"
+import { useState } from "react"
 
 function App() {
+    const [section, setSection] = useState("Home")
+
     return (
         <div className="app">
-            <Sidebar />
-            <Header />
+            <Sidebar setSection={setSection} section={section} />
+            <Header section={section} />
             <div className="page-wrapper">
                 <Routes>
                     <Route path="/" element={<div>Home</div>} />
