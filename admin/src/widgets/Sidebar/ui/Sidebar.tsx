@@ -1,24 +1,33 @@
 import { useUserRole } from "features/authByGoogle"
 import styles from "./Sidebar.module.scss"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
+import { classNames } from "shared/lib/classNames/classNames"
+import { routes } from "shared/config/routes"
 
-export function Sidebar({ setSection, section }: { setSection: any; section: string }) {
+export function Sidebar() {
     const user = useUserRole()
-    function clickHandler(currentSection: string) {
-        setSection(currentSection)
-    }
+    const { pathname } = useLocation()
 
     return (
         <div className={styles.wrapper}>
             <div className={styles.container}>
-                <Link
-                    className={`${styles.link} ${section === "Home" && styles.currentLink}`}
-                    onClick={() => clickHandler("Home")}
-                    to="/"
-                >
-                    Home
-                </Link>
-                {user !== "none" && (
+                {routes.map((item, index) => {
+                    if (item.private && user === "none") return null
+                    if (item.allowedRoles && !item.allowedRoles?.includes(user)) return null
+
+                    return (
+                        <Link
+                            className={classNames(styles.link, {
+                                [styles.currentLink]: pathname === item.path,
+                            })}
+                            to={item.path}
+                        >
+                            {item.name}
+                        </Link>
+                    )
+                })}
+
+                {/* {user !== "none" && (
                     <Link
                         className={`${styles.link} ${
                             section === "Portfolio" && styles.currentLink
@@ -100,7 +109,7 @@ export function Sidebar({ setSection, section }: { setSection: any; section: str
                     >
                         *Test
                     </Link>
-                )}
+                )} */}
             </div>
         </div>
     )
