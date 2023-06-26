@@ -1,33 +1,41 @@
 import { Dropdown } from "shared/ui/Dropdown"
 import styles from "./PortfolioPageFilters.module.scss"
-import {
-    tattooArtistsDropdownOptions,
-    tattooColorsDropdownOptions,
-    tattooStylesDropdownOptions,
-} from "shared/const/filters"
 import { tattooLiveDropdownOptions } from "pages/PortfolioPage/const/filtersData"
-import { IFiltersData } from "pages/PortfolioPage/types/types"
+import { useMemo } from "react"
+import { IFiltersData } from "features/portfolioFilters/types/types"
 
 interface IPortfolioPageFilters {
-    filters: IFiltersData
+    filters: IFiltersData | null
     setFilters: (val: any) => void
+    filtersData: any | null
+    resetFilters: () => void
 }
 
-export function PortfolioPageFilters({ filters, setFilters }: IPortfolioPageFilters) {
-    const artistOptions = [
-        { label: "No artist", value: "Unassigned" },
-        ...tattooArtistsDropdownOptions,
-    ]
+export function PortfolioPageFilters({
+    filters,
+    setFilters,
+    filtersData,
+    resetFilters,
+}: IPortfolioPageFilters) {
+    const dropdownOptions = useMemo(() => {
+        const options = []
+        for (const key in filtersData) {
+            const otherOptions = filtersData[key].map(item => ({ label: item, value: item }))
 
-    const styleOptions = [
-        { label: "No style", value: "Unassigned" },
-        ...tattooStylesDropdownOptions,
-    ]
+            const option = {
+                name: key,
+                options: [{ label: `No ${key}`, value: "Unassigned" }, ...otherOptions],
+            }
 
-    const colorOptions = [
-        { label: "No color", value: "Unassigned" },
-        ...tattooColorsDropdownOptions,
-    ]
+            options.push(option)
+        }
+
+        return options
+    }, [filtersData])
+
+    console.log(filters)
+
+    if (!filters) return null
 
     return (
         <div className={styles.container}>
@@ -35,38 +43,25 @@ export function PortfolioPageFilters({ filters, setFilters }: IPortfolioPageFilt
                 options={tattooLiveDropdownOptions}
                 firstOptionText="Published and Unpublished"
                 value={filters.isLive}
-                onChange={isLive => setFilters((prev: IFiltersData) => ({ ...prev, isLive }))}
+                onChange={value => setFilters((prev: IFiltersData) => ({ ...prev, isLive: value }))}
             />
-            <Dropdown
-                options={artistOptions}
-                firstOptionText="All artists"
-                value={filters.artist as string}
-                onChange={artist => setFilters((prev: IFiltersData) => ({ ...prev, artist }))}
-            />
-            <Dropdown
-                options={styleOptions}
-                firstOptionText="All styles"
-                value={filters.style as string}
-                onChange={style => setFilters((prev: IFiltersData) => ({ ...prev, style }))}
-            />
-            <Dropdown
-                options={colorOptions}
-                firstOptionText="All colors"
-                value={filters.color as string}
-                onChange={color => setFilters((prev: IFiltersData) => ({ ...prev, color }))}
-            />
-            <button
-                onClick={() => {
-                    setFilters({
-                        artist: "",
-                        style: "",
-                        color: "",
-                        isLive: "",
-                    })
-                }}
-            >
-                Reset Filters
-            </button>
+            {dropdownOptions.map((item, index) => {
+                const { name, options } = item
+
+                return (
+                    <Dropdown
+                        key={index}
+                        options={options}
+                        firstOptionText={`All ${name}s`}
+                        value={filters[name] as string}
+                        onChange={value =>
+                            setFilters((prev: IFiltersData) => ({ ...prev, [name]: value }))
+                        }
+                    />
+                )
+            })}
+
+            <button onClick={resetFilters}>Reset Filters</button>
         </div>
     )
 }

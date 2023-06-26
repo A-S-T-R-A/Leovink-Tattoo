@@ -1,22 +1,23 @@
 import { useEffect, useState, useMemo } from "react"
-import { IFiltersData, ViewType } from "../types/types"
+import { ViewType } from "../types/types"
 import { PortfolioPageHeader } from "./PortfolioPageHeader/PortfolioPageHeader"
 import { PortfolioPageFilters } from "./PortfolioPageFilters/PortfolioPageFilters"
 import { PortfolioPageList } from "./PortfolioPageList/PortfolioPageList"
 import { ITattooImage } from "shared/types/types"
 import styles from "./PortfolioPage.module.scss"
-import { getImagesDoc, reformatAndSortObjectValuesToArray } from "shared/const/firebaseVariables"
+import {
+    fetchSectionData,
+    getImagesDoc,
+    reformatAndSortObjectValuesToArray,
+} from "shared/const/firebaseVariables"
 import { localStorageView } from "../lib/localStorageLib"
+import { IFiltersData } from "features/portfolioFilters/types/types"
 
 export function PortfolioPage() {
     const [data, setData] = useState<ITattooImage[]>([])
     const [view, setView] = useState<ViewType>(localStorageView.get() || "icons")
-    const [filters, setFilters] = useState<IFiltersData>({
-        artist: "",
-        style: "",
-        color: "",
-        isLive: "",
-    })
+    const [filters, setFilters] = useState<IFiltersData | null>(null)
+    const [filtersData, setFiltersData] = useState(null)
 
     async function fetch() {
         const currentDoc = await getImagesDoc()
@@ -24,47 +25,54 @@ export function PortfolioPage() {
         const currentData = currentDoc.data()
         const dataArray = reformatAndSortObjectValuesToArray(currentData)
         setData(dataArray)
+        const { filtersData } = await fetchSectionData("en", "other", true)
+        setFiltersData(filtersData.filters)
+        const f = { isLive: "" }
+        Object.keys(filtersData.filters).forEach(item => (f[item] = ""))
+        setFilters(f)
     }
 
     useEffect(() => {
         fetch()
     }, [])
 
-    const filteredData = useMemo(() => {
-        return data
-            .filter(item =>
-                filters.artist === ""
-                    ? true
-                    : filters.artist === ("Unassigned" as any)
-                    ? item.artist === ""
-                    : item.artist === (filters.artist as any)
-            )
-            .filter(item =>
-                filters.style === ""
-                    ? true
-                    : filters.style === ("Unassigned" as any)
-                    ? item.style === ""
-                    : item.style === (filters.style as any)
-            )
-            .filter(item =>
-                filters.color === ""
-                    ? true
-                    : filters.color === ("Unassigned" as any)
-                    ? item.color === ""
-                    : item.color === (filters.color as any)
-            )
-            .filter(
+    function filter(data: any, keys: any[] = []) {
+        if (!filtersData) return []
+        if (keys.length === 0)
+            return data.filter(
                 item =>
                     filters.isLive === "" ||
                     (item.isLive && filters.isLive === "live") ||
                     (!item.isLive && filters.isLive === "not_live")
             )
-    }, [filters, data])
+
+        const newData = data.filter(item => {
+            return filters[keys[0]] === ""
+                ? true
+                : filters[keys[0]] === ("Unassigned" as any)
+                ? item[keys[0]] === ""
+                : item[keys[0]] === (filters[keys[0]] as any)
+        })
+
+        return filter(newData, keys.slice(1))
+    }
+
+    const filteredData = useMemo(() => {
+        const keys = filtersData ? Object.keys(filtersData).filter(item => item !== "reset") : []
+        return filter(data, keys)
+    }, [data, filters])
+
+    console.log(filters)
 
     return (
         <div className={styles.wrapper}>
             <PortfolioPageHeader view={view} setView={setView} triggerRefetch={fetch} />
-            <PortfolioPageFilters filters={filters} setFilters={setFilters} />
+            <PortfolioPageFilters
+                filtersData={filtersData}
+                filters={filters}
+                setFilters={setFilters}
+                resetFilters={() => setFilters(filtersData)}
+            />
             <PortfolioPageList data={filteredData} view={view} triggerRefetch={fetch} />
         </div>
     )
