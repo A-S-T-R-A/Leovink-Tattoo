@@ -16,6 +16,7 @@ import {
 import { EditImage } from "features/editImage"
 import { isShallowEqual } from "shared/lib/isShallowEqual/isShallowEqual"
 import { allLanguages } from "shared/const/languages"
+import { Alert } from "shared/ui/CustomNotifications"
 
 export function EditParagraph({
     data,
@@ -59,7 +60,7 @@ export function EditParagraph({
     async function saveClickHandler() {
         if (!data || !newData) return
         if (isShallowEqual(newData, data[currentLanguage][id]) && previewImage.url === "") {
-            alert("Nothing to save")
+            Alert.info("Nothing to save")
             setIsOpen(false)
             return
         }
@@ -99,9 +100,9 @@ export function EditParagraph({
                 await updateSectionData(currentLanguage, "steps", objectData)
             }
 
-            alert("Success")
+            Alert.success("Success")
         } catch (error) {
-            alert("Error")
+            Alert.error("Error")
         }
         setIsOpen(false)
         setPreviewImage(defaultPreviewImage)

@@ -7,6 +7,7 @@ import {
     updateSectionData,
 } from "shared/const/firebaseVariables"
 import { allLanguages, defaultLanguage } from "shared/const/languages"
+import { Alert, Confirm } from "shared/ui/CustomNotifications"
 
 export function DeleteParagraph({
     id,
@@ -21,7 +22,7 @@ export function DeleteParagraph({
 
     async function deleteClickHandler() {
         if (!data) return
-        if (!confirm(`Delete id:${id}`)) return
+        if (!Confirm(`Delete id:${id}`)) return
 
         setIsLoading(true)
 
@@ -35,9 +36,9 @@ export function DeleteParagraph({
                 const objectData = reformatArrayToObject(allArtistsData[lang])
                 await updateSectionData(lang, "artists", objectData)
             }
-            alert("Success")
+            Alert.success("Success")
         } catch (error) {
-            alert("Error")
+            Alert.error("Error")
         }
 
         setIsLoading(false)

@@ -4,6 +4,7 @@ import { useContext, useEffect } from "react"
 import { AuthContext } from "../../context/AuthContext"
 import styles from "./AuthComponent.module.scss"
 import { checkIsEmailWhitelisted } from "../../lib/checkIsEmailWhitelisted"
+import { Alert } from "shared/ui/CustomNotifications"
 
 const auth = getAuth(app)
 const provider = new GoogleAuthProvider()
@@ -28,7 +29,7 @@ export function AuthComponent() {
                 updateUser({ name, img, email })
             })
             .catch(err => {
-                alert("Auth error")
+                Alert.error("Auth error")
                 logOutWithGoogle()
             })
     }

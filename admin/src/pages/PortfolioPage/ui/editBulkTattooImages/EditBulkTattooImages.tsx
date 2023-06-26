@@ -11,6 +11,7 @@ import { getImagesDoc, rewriteImagesDoc } from "shared/const/firebaseVariables"
 import styles from "./EditBulkTattooImages.module.scss"
 import { disableUi } from "shared/lib/disableUi/disableUi"
 import { tattooLiveDropdownOptions } from "../../const/filterOptions"
+import { Alert } from "shared/ui/CustomNotifications"
 
 export function EditBulkTattooImages({
     imagesId,
@@ -54,7 +55,7 @@ export function EditBulkTattooImages({
         }
 
         if (Object.keys(newData).length === 0) {
-            alert("Nothing to edit")
+            Alert.info("Nothing to edit")
             return
         }
 
@@ -71,12 +72,12 @@ export function EditBulkTattooImages({
 
         try {
             await rewriteImagesDoc(nData)
-            alert(`Successfully edited ${imagesId.length} images`)
+            Alert.success(`Successfully edited ${imagesId.length} images`)
             setIsOpen(false)
             setData(defaultData)
             triggerRefetch?.()
         } catch (error) {
-            alert("Unexpected error")
+            Alert.error("Unexpected error")
             setIsOpen(false)
             setData(defaultData)
             triggerRefetch?.()

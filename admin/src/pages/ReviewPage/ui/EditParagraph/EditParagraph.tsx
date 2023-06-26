@@ -19,6 +19,7 @@ import {
     uploadImageToBucket,
 } from "shared/const/firebaseVariables"
 import { defaultNewData } from "../../const/const"
+import { Alert } from "shared/ui/CustomNotifications"
 
 export function EditParagraph({
     id,
@@ -62,7 +63,7 @@ export function EditParagraph({
         if (!data) return
         const isNewPreviewAsset = previewAssets.preview.url !== "" || previewAssets.video.url !== ""
         if (isDeepEqual(data?.[currentLanguage][id], newData) && !isNewPreviewAsset) {
-            alert("Nothing to save")
+            Alert.info("Nothing to save")
             return
         }
         setIsLoading(true)
@@ -112,9 +113,9 @@ export function EditParagraph({
                 await updateSectionData(currentLanguage, "testimonials", objectData)
             }
 
-            alert("Success")
+            Alert.success("Success")
         } catch (error) {
-            alert("Error")
+            Alert.error("Error")
         }
 
         setIsOpen(false)

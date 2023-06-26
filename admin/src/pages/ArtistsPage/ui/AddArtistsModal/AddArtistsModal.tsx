@@ -10,6 +10,7 @@ import { allLanguages, defaultLanguage } from "shared/const/languages"
 import { EditImage } from "features/editImage"
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { isAllEntriesFilledUp } from "../../lib/isAllEntriesFilledUp"
+import { Alert } from "shared/ui/CustomNotifications"
 import {
     DATA_BUCKET,
     deleteImageFromBucket,
@@ -54,7 +55,7 @@ export function AddArtistsModal({
     async function saveClickHandler() {
         if (!data) return
         if (!isAllEntriesFilledUp(newAllData) || previewImage.url === "") {
-            alert("You have to fill up all languages and an image")
+            Alert.info("You have to fill up all languages and an image")
             return
         }
 
@@ -78,9 +79,9 @@ export function AddArtistsModal({
                 await updateSectionData(lang, "artists", objectData)
             }
 
-            alert("Success")
+            Alert.success("Success")
         } catch (error) {
-            alert("Error")
+            Alert.error("Error")
         }
 
         setIsOpen(false)

@@ -8,6 +8,7 @@ import { ITranslatedFaqData } from "../../types/types"
 import { defaultLanguage } from "shared/const/languages"
 import { isShallowEqual } from "shared/lib/isShallowEqual/isShallowEqual"
 import { reformatArrayToObject, updateSectionData } from "shared/const/firebaseVariables"
+import { Alert } from "shared/ui/CustomNotifications"
 
 export function EditQuestion({
     data,
@@ -53,7 +54,7 @@ export function EditQuestion({
     async function saveClickHandler() {
         if (!data) return
         if (isShallowEqual(data[currentLanguage][titleId].questions[id], newQuestion)) {
-            alert("Nothing to save")
+            Alert.info("Nothing to save")
             return
         }
 
@@ -65,9 +66,9 @@ export function EditQuestion({
             const objectData = reformatArrayToObject(documentData)
             await updateSectionData(currentLanguage, "faq", objectData)
 
-            alert("Success")
+            Alert.success("Success")
         } catch (error) {
-            alert("Error")
+            Alert.error("Error")
         }
 
         setIsLoading(false)

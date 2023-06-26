@@ -7,6 +7,7 @@ import {
 } from "shared/const/firebaseVariables"
 import { useState } from "react"
 import { Modal } from "shared/ui/Modal"
+import { Alert, Confirm } from "shared/ui/CustomNotifications"
 
 export function DeleteTattooImage({
     id,
@@ -22,7 +23,7 @@ export function DeleteTattooImage({
     const storage = getStorage()
 
     async function clickHandler() {
-        if (!confirm(`Delete image id:${id}?`)) return
+        if (!Confirm(`Delete image id:${id}?`)) return
 
         setIsLoading(true)
         try {
@@ -46,9 +47,9 @@ export function DeleteTattooImage({
             delete newData[queue[queue.length - 1]]
 
             await rewriteImagesDoc(newData)
-            alert("Delete Success")
+            Alert.success("Delete Success")
         } catch (error) {
-            alert("Delete Error")
+            Alert.error("Delete Error")
         }
         unselectAllHandler()
         triggerRefetch?.()

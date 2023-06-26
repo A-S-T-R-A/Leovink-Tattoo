@@ -2,6 +2,7 @@ import { allLanguages } from "shared/const/languages"
 import { ITranslatedFaqData } from "../../types/types"
 import { useState } from "react"
 import { reformatArrayToObject, updateSectionData } from "shared/const/firebaseVariables"
+import { Alert, Confirm } from "shared/ui/CustomNotifications"
 
 export function DeleteQuestion({
     id,
@@ -18,7 +19,7 @@ export function DeleteQuestion({
 
     async function deleteClickHandler() {
         if (!data) return
-        if (!confirm(`Delete question id:${id}?`)) return
+        if (!Confirm(`Delete question id:${id}?`)) return
 
         setIsLoading(true)
 
@@ -32,9 +33,9 @@ export function DeleteQuestion({
                 const objectData = reformatArrayToObject(allFaqData[lang])
                 await updateSectionData(lang, "faq", objectData)
             }
-            alert("Success")
+            Alert.success("Success")
         } catch (error) {
-            alert(error)
+            Alert.error("error")
         }
 
         setIsLoading(false)
