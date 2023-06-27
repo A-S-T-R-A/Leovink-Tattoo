@@ -10,6 +10,7 @@ import { localStorageView } from "../lib/localStorageLib"
 
 export function PortfolioPage() {
     const [data, setData] = useState<ITattooImage[]>([])
+    const [isDataLoading, setIsDataLoading] = useState(false)
     const [view, setView] = useState<ViewType>(localStorageView.get() || "icons")
     const [filters, setFilters] = useState<IFiltersData>({
         artist: "",
@@ -19,7 +20,9 @@ export function PortfolioPage() {
     })
 
     async function fetch() {
+        setIsDataLoading(true)
         const currentDoc = await getImagesDoc()
+        setIsDataLoading(false)
         if (!currentDoc) return
         const currentData = currentDoc.data()
         const dataArray = reformatAndSortObjectValuesToArray(currentData)
@@ -60,6 +63,13 @@ export function PortfolioPage() {
                     (!item.isLive && filters.isLive === "not_live")
             )
     }, [filters, data])
+
+    if (isDataLoading)
+        return (
+            <div>
+                <h2>Loading...</h2>
+            </div>
+        )
 
     return (
         <div className={styles.wrapper}>

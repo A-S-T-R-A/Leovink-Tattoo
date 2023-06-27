@@ -7,9 +7,11 @@ import { IArtistData, ITranslatedArtistsData } from "../types/types"
 import { fetchSectionData } from "shared/const/firebaseVariables"
 import { defaultLanguage } from "shared/const/languages"
 import { DeleteParagraph } from "./DeleteParagraph/DeleteParagraph"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function ArtistsPage() {
     const [data, setData] = useState<ITranslatedArtistsData | null>(null)
+    const [dataLoading, setDataLoading] = useState(true)
 
     async function fetch() {
         const en = (await fetchSectionData("en", "artists")) as IArtistData[]
@@ -28,6 +30,7 @@ export function ArtistsPage() {
 
     return (
         <>
+            <LoadingModal isLoading={dataLoading} />
             <AddArtistsModal data={data} triggerRefetch={triggerRefetch} />
             <div className={styles.table}>
                 {data?.[defaultLanguage].map((item, index) => (
