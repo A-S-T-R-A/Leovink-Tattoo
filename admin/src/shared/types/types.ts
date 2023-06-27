@@ -5,15 +5,14 @@ export type StyleType = (typeof TattooStyles)[keyof typeof TattooStyles]
 export type ColorType = (typeof TattooColors)[keyof typeof TattooColors]
 
 export interface IFilters {
-    artist: ArtistType | ""
-    style: StyleType | ""
-    color: ColorType | ""
-    isLive?: boolean
+    [key: string]: string
 }
 
-export interface ITattooImage extends IFilters {
+export interface ITattooImage {
     id: number
     img: string
+    isLive?: boolean
+    [key: string]: unknown
 }
 
 interface IFaqQuestion {

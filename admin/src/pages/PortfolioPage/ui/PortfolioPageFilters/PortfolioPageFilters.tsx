@@ -1,13 +1,13 @@
+import { useMemo } from "react"
 import { Dropdown } from "shared/ui/Dropdown"
 import styles from "./PortfolioPageFilters.module.scss"
-import { tattooLiveDropdownOptions } from "pages/PortfolioPage/const/filtersData"
-import { useMemo } from "react"
-import { IFiltersData } from "features/portfolioFilters/types/types"
+import { IFilters, IFiltersData } from "features/portfolioFilters/types/types"
+import { tattooLiveDropdownOptions } from "../../const/const"
 
 interface IPortfolioPageFilters {
-    filters: IFiltersData | null
+    filters: { [key: string]: string } | null
     setFilters: (val: any) => void
-    filtersData: any | null
+    filtersData: IFilters | null
     resetFilters: () => void
 }
 
@@ -20,7 +20,10 @@ export function PortfolioPageFilters({
     const dropdownOptions = useMemo(() => {
         const options = []
         for (const key in filtersData) {
-            const otherOptions = filtersData[key].map(item => ({ label: item, value: item }))
+            const otherOptions = filtersData[key].map(item => ({
+                label: item.label,
+                value: item.key,
+            }))
             const option = {
                 name: key,
                 options: [{ label: `No ${key}`, value: "Unassigned" }, ...otherOptions],
@@ -47,7 +50,7 @@ export function PortfolioPageFilters({
                     <Dropdown
                         key={index}
                         options={options}
-                        firstOptionText={`All ${name}s`}
+                        firstOptionText={`All ${name}`}
                         value={filters[name] as string}
                         onChange={value =>
                             setFilters((prev: IFiltersData) => ({ ...prev, [name]: value }))

@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom"
 import { fetchSectionData } from "shared/const/firebaseVariables"
 import styles from "./PortfolioFilters.module.scss"
-import { useEffect, useMemo, useState } from "react"
-import { IFilters, IFiltersData } from "../types/types"
+import { Fragment, useEffect, useMemo, useState } from "react"
+import { IFilters, IFiltersData, IOtherData } from "../types/types"
 import { Confirm } from "shared/ui/CustomNotifications"
 import { AddNewFilter } from "./AddNewFilter/AddNewFilter"
 import { AddNewItem } from "./AddNewItem/AddNewItem"
@@ -10,6 +10,7 @@ import { EditFilter } from "./EditFilter/EditFilter"
 import { EditItem } from "./EditItem/EditItem"
 import { DeleteFilter } from "./DeleteFilter/DeleteFilter"
 import { DeleteItem } from "./DeleteItem/DeleteItem"
+import { defaultLanguage } from "shared/const/languages"
 
 export function PortfolioFilters({
     isExpanded,
@@ -18,15 +19,20 @@ export function PortfolioFilters({
     isExpanded: boolean
     onOpen: () => void
 }) {
-    const [filtersData, setFiltersData] = useState<IFilters | null>(null)
+    const [data, setData] = useState<IOtherData | null>(null)
 
     const navigate = useNavigate()
 
+    async function fetch() {
+        const data = (await fetchSectionData(defaultLanguage, "other", true)) as IOtherData
+        setData(data)
+    }
+
+    function triggerRefetch() {
+        fetch()
+    }
+
     useEffect(() => {
-        async function fetch() {
-            const { filtersData } = (await fetchSectionData("en", "other", true)) as any
-            setFiltersData(filtersData.filters)
-        }
         fetch()
     }, [])
 
@@ -36,19 +42,22 @@ export function PortfolioFilters({
         }
     }
 
+    const filters = data?.filtersData.filters
+
     return (
         <>
             <div className={styles.titleContainer} onClick={onOpen}>
-                <div className={styles.title}>filters 🡇</div> <AddNewFilter />
+                <div className={styles.title}>filters 🡇</div>{" "}
+                <AddNewFilter data={data} triggerRefetch={triggerRefetch} />
             </div>
             {isExpanded && (
                 <div className={styles.listContainer}>
                     <div className={styles.titleContainer}>
                         Artists <button onClick={artistEditClickHandler}>Edit</button>
                     </div>
-                    {filtersData?.artist.map(item => (
+                    {filters?.artist.map(item => (
                         <div className={styles.infoContainer}>
-                            <p>artist: {item}</p>
+                            <p>artist: {item.label}</p>
                             <button onClick={artistEditClickHandler}>edit</button>
                         </div>
                     ))}
@@ -56,12 +65,12 @@ export function PortfolioFilters({
                         <button onClick={artistEditClickHandler}>Add New</button>
                     </div>
 
-                    {filtersData &&
-                        Object.entries(filtersData)
+                    {filters &&
+                        Object.entries(filters)
                             .filter(([key]) => key !== "artist")
-                            .map(([key, value]) => {
+                            .map(([key, value], index) => {
                                 return (
-                                    <>
+                                    <Fragment key={index}>
                                         <div className={styles.titleContainer}>
                                             {key} <EditFilter />
                                             <DeleteFilter />
@@ -69,7 +78,7 @@ export function PortfolioFilters({
                                         {value.map(item => (
                                             <div className={styles.infoContainer}>
                                                 <p>
-                                                    {key}: {item}
+                                                    {key}: {item.label}
                                                 </p>
                                                 <EditItem />
                                                 <DeleteItem />
@@ -78,7 +87,7 @@ export function PortfolioFilters({
                                         <div className={styles.infoContainer}>
                                             <AddNewItem />
                                         </div>
-                                    </>
+                                    </Fragment>
                                 )
                             })}
                 </div>

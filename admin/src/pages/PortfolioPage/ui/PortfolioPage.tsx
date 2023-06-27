@@ -1,9 +1,8 @@
 import { useEffect, useState, useMemo } from "react"
-import { ViewType } from "../types/types"
+import { ITattooImage, ViewType } from "../types/types"
 import { PortfolioPageHeader } from "./PortfolioPageHeader/PortfolioPageHeader"
 import { PortfolioPageFilters } from "./PortfolioPageFilters/PortfolioPageFilters"
 import { PortfolioPageList } from "./PortfolioPageList/PortfolioPageList"
-import { ITattooImage } from "shared/types/types"
 import styles from "./PortfolioPage.module.scss"
 import {
     fetchSectionData,
@@ -11,13 +10,14 @@ import {
     reformatAndSortObjectValuesToArray,
 } from "shared/const/firebaseVariables"
 import { localStorageView } from "../lib/localStorageLib"
-import { IFiltersData } from "features/portfolioFilters/types/types"
+import { IFilters, IFiltersData, IOtherData } from "features/portfolioFilters/types/types"
+import { defaultLanguage } from "shared/const/languages"
 
 export function PortfolioPage() {
     const [data, setData] = useState<ITattooImage[]>([])
     const [view, setView] = useState<ViewType>(localStorageView.get() || "icons")
-    const [filters, setFilters] = useState<IFiltersData | null>(null)
-    const [filtersData, setFiltersData] = useState(null)
+    const [filters, setFilters] = useState<{ [key: string]: string } | null>(null)
+    const [filtersData, setFiltersData] = useState<IFilters | null>(null)
 
     async function fetch() {
         const currentDoc = await getImagesDoc()
@@ -25,10 +25,12 @@ export function PortfolioPage() {
         const currentData = currentDoc.data()
         const dataArray = reformatAndSortObjectValuesToArray(currentData)
         setData(dataArray)
-        const { filtersData } = await fetchSectionData("en", "other", true)
-        setFiltersData(filtersData.filters)
-        const f = { isLive: "" }
-        Object.keys(filtersData.filters).forEach(item => (f[item] = ""))
+        const data = (await fetchSectionData(defaultLanguage, "other", true)) as IOtherData
+        if (data) {
+            setFiltersData(data.filtersData.filters)
+        }
+        const f: { [key: string]: string } = { isLive: "" }
+        Object.keys(data.filtersData.filters).forEach(item => (f[item] = ""))
         setFilters(f)
     }
 
@@ -36,31 +38,43 @@ export function PortfolioPage() {
         fetch()
     }, [])
 
-    function filter(data: any, keys: any[] = []) {
-        if (!filtersData) return []
-        if (keys.length === 0)
+    function filter(data: ITattooImage[], keys: string[] = []) {
+        if (!filters) return []
+        if (keys.length === 0) {
             return data.filter(
                 item =>
                     filters.isLive === "" ||
-                    (item.isLive && filters.isLive === "live") ||
-                    (!item.isLive && filters.isLive === "not_live")
+                    (item.filters.isLive && filters.isLive === "live") ||
+                    (!item.filters.isLive && filters.isLive === "not_live")
             )
+        }
 
         const newData = data.filter(item => {
+            console.log(item)
             return filters[keys[0]] === ""
                 ? true
                 : filters[keys[0]] === ("Unassigned" as any)
-                ? item[keys[0]] === ""
-                : item[keys[0]] === (filters[keys[0]] as any)
+                ? item.filters[keys[0]] === ""
+                : item.filters[keys[0]] === (filters[keys[0]] as any)
         })
 
         return filter(newData, keys.slice(1))
     }
 
+    const keys = filtersData ? Object.keys(filtersData).sort() : []
     const filteredData = useMemo(() => {
-        const keys = filtersData ? Object.keys(filtersData).filter(item => item !== "reset") : []
         return filter(data, keys)
     }, [data, filters])
+
+    function resetFilters() {
+        if (!filtersData) return
+        const initialFilters: { [key: string]: string } = { isLive: "" }
+
+        for (const key in filtersData) {
+            initialFilters[key] = ""
+        }
+        setFilters(initialFilters)
+    }
 
     return (
         <div className={styles.wrapper}>
@@ -69,9 +83,15 @@ export function PortfolioPage() {
                 filtersData={filtersData}
                 filters={filters}
                 setFilters={setFilters}
-                resetFilters={() => setFilters(filtersData)}
+                resetFilters={resetFilters}
             />
-            <PortfolioPageList data={filteredData} view={view} triggerRefetch={fetch} />
+            <PortfolioPageList
+                data={data}
+                filteredData={filteredData}
+                view={view}
+                triggerRefetch={fetch}
+                filtersData={filtersData}
+            />
         </div>
     )
 }

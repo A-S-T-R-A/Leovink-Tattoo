@@ -1,22 +1,26 @@
 import { useState } from "react"
-import { ITattooImage } from "shared/types/types"
 
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
-import { ViewType } from "../../types/types"
+import { ITattooImage, ViewType } from "../../types/types"
 
 import styles from "./PortfolioPageList.module.scss"
 import { EditTattooImage } from "../editTattooImage/EditTattoImage"
 import { DeleteTattooImage } from "../deleteTattooImage/DeleteTattooImage"
 import { EditBulkTattooImages } from "../editBulkTattooImages/EditBulkTattooImages"
 import { DeleteBulkTattooImages } from "../deleteBulkTattooImages/DeleteBulkTattooImages"
+import { IFilters } from "features/portfolioFilters/types/types"
 
 export function PortfolioPageList({
     data,
+    filteredData,
     view,
+    filtersData,
     triggerRefetch,
 }: {
     data: ITattooImage[]
+    filteredData: ITattooImage[]
     view: ViewType
+    filtersData: IFilters | null
     triggerRefetch: () => void
 }) {
     const [selected, setSelected] = useState<number[]>([])
@@ -30,10 +34,10 @@ export function PortfolioPageList({
     }
 
     function selectAllHandler() {
-        if (data.length === selected.length) {
+        if (filteredData.length === selected.length) {
             setSelected([])
         } else {
-            setSelected(data.map(item => item.id))
+            setSelected(filteredData.map(item => item.id))
         }
     }
 
@@ -41,20 +45,28 @@ export function PortfolioPageList({
         setSelected([])
     }
 
+    const filterKeys = filtersData ? Object.keys(filtersData).sort() : []
+
     return view === "icons" ? (
         <div className={styles.icons}>
-            {data.map((item, index) => (
+            {filteredData.map((item, index) => (
                 <div className={styles.item} key={index}>
                     <ModalImage className={styles.img} url={item.img} />
                     <div>id: {item.id}</div>
-                    <div>artist: {item.artist}</div>
-                    <div>style: {item.style}</div>
-                    <div>color: {item.color}</div>
-                    <div>{item.isLive ? "Published" : "Unpublished"}</div>
+                    {filterKeys.map(key => {
+                        return (
+                            <div>
+                                {key}: {item.filters[key] || ""}
+                            </div>
+                        )
+                    })}
+                    <div>{item.filters.isLive ? "Published" : "Unpublished"}</div>
                     <div className={styles.buttons}>
                         <EditTattooImage
                             id={item.id}
                             triggerRefetch={triggerRefetch}
+                            data={data}
+                            filtersData={filtersData}
                             unselectAllHandler={unselectAllHandler}
                         />
                         <DeleteTattooImage
@@ -70,13 +82,15 @@ export function PortfolioPageList({
         <>
             <div className={styles.tableButtons}>
                 <button onClick={selectAllHandler}>
-                    {data.length === selected.length ? "Unselect All" : "Select All"}
+                    {filteredData.length === selected.length ? "Unselect All" : "Select All"}
                 </button>
                 {selected.length === 1 && (
                     <>
                         <EditTattooImage
                             id={selected[0]}
                             triggerRefetch={triggerRefetch}
+                            data={data}
+                            filtersData={filtersData}
                             unselectAllHandler={unselectAllHandler}
                         />
                         <DeleteTattooImage
@@ -98,7 +112,7 @@ export function PortfolioPageList({
                 )}
             </div>
             <div className={styles.table}>
-                {data.map((item, index) => (
+                {filteredData.map((item, index) => (
                     <div className={styles.item} key={index}>
                         <input
                             type="checkbox"
@@ -107,14 +121,21 @@ export function PortfolioPageList({
                         />
                         <div>id: {item.id}</div>
                         <ModalImage className={styles.img} url={item.img} />
-                        <div>artist: {item.artist}</div>
-                        <div>style: {item.style}</div>
-                        <div>color: {item.color}</div>
-                        <div>{item.isLive ? "Published" : "Unpublished"}</div>
+
+                        {filterKeys.map(key => {
+                            return (
+                                <div>
+                                    {key}: {item.filters[key] || ""}
+                                </div>
+                            )
+                        })}
+                        <div>{item.filters.isLive ? "Published" : "Unpublished"}</div>
                         <div className={styles.buttons}>
                             <EditTattooImage
                                 id={item.id}
                                 triggerRefetch={triggerRefetch}
+                                data={data}
+                                filtersData={filtersData}
                                 unselectAllHandler={unselectAllHandler}
                             />
                             <DeleteTattooImage

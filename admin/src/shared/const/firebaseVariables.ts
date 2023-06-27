@@ -12,6 +12,7 @@ import {
     where,
 } from "firebase/firestore"
 import { Alert } from "shared/ui/CustomNotifications"
+import { allLanguages } from "./languages"
 
 const IS_DEV = import.meta.env.MODE === "development"
 
@@ -130,6 +131,41 @@ export async function fetchSectionData(
         await addDoc(ref, newData)
     }
 } */
+
+const newFiltersData = {
+    filtersData: {
+        reset: "Reset filters",
+        filters: {
+            artist: [
+                { key: "Dinu", label: "Dinu" },
+                { key: "Katia", label: "Katia" },
+                { key: "Nastia", label: "Nastia" },
+            ],
+            color: [{ key: "Black", label: "Black" }],
+            style: [{ key: "Realism", label: "Realism" }],
+            pussies: [
+                { key: "Felicia", label: "Felicia" },
+                { key: "Bob", label: "Bob" },
+            ],
+        },
+    },
+}
+
+export async function uploadOtherData() {
+    for (const lang of allLanguages) {
+        const ref = collection(
+            db,
+            DATA_COLLECTION,
+            LANGUAGE_DOCUMENT[lang],
+            SECTION_COLLECTION.other
+        )
+        const docs = await getDocs(ref)
+        if (docs.empty) return
+        const d = docs.docs[0]
+        await addDoc(ref, newFiltersData)
+        deleteDoc(doc(ref, d.id))
+    }
+}
 
 export async function updateSectionData(
     language: keyof typeof LANGUAGE_DOCUMENT,
