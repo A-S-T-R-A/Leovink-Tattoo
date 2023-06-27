@@ -7,6 +7,7 @@ import { fetchSectionData } from "shared/const/firebaseVariables"
 import { defaultLanguage } from "shared/const/languages"
 import { DeleteParagraph } from "../DeleteParagraph/DeleteParagraph"
 import { AddServiceModal } from "../AddServiceModal/AddServiceModal"
+import { TriggerRefetchBtn } from "shared/components/TriggerRefetchBtn/TriggerRefetchBtn"
 
 export function ServicesPageList() {
     const [data, setData] = useState<ITranslatedServiceData | null>(null)
@@ -19,6 +20,7 @@ export function ServicesPageList() {
     }
 
     function triggerRefetch() {
+        setData(null)
         fetch()
     }
 
@@ -29,6 +31,7 @@ export function ServicesPageList() {
     return (
         <>
             <AddServiceModal data={data} triggerRefetch={triggerRefetch} />
+            <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
             <div className={styles.table}>
                 {data?.[defaultLanguage].map((item, index) => (
                     <div className={styles.item} key={index}>

@@ -168,7 +168,9 @@ export function UploadModal({ triggerRefetch }: { triggerRefetch: () => void }) 
                     )}
                 </div>
             </Modal>
-            <button onClick={() => setIsOpen(true)}>Upload Image</button>
+            <button className={styles.uploadBtn} onClick={() => setIsOpen(true)}>
+                Upload Image
+            </button>
         </>
     )
 }
