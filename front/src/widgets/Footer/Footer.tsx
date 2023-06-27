@@ -14,9 +14,12 @@ export function Footer({ data, children }: { data: FooterType; children: Compone
                 <Typography className={styles.header} variant="h3" component="xxl">
                     {footerList[0]}
                 </Typography>
-                <Typography className={styles.text} variant="h5" component="m">
+                <a
+                    href="https://yandex.ru/maps/org/leovink_tattoo_studio/184496310101/?utm_medium=mapframe&utm_source=maps"
+                    className={styles.text}
+                >
                     {location}
-                </Typography>
+                </a>
             </div>
             <div className={styles.contactsContainer}>
                 <Typography className={styles.header} variant="h3" component="xxl">
