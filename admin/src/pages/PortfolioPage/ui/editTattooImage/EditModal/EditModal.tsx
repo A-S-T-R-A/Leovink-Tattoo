@@ -13,7 +13,7 @@ interface IEditModalProps {
     isOpen: boolean
     isLoading: boolean
     onClose: () => void
-    setData: (data: any) => void
+    setNewData: (data: any) => void
     saveClickHandler: () => void
     discardClickHandler: () => void
 }
@@ -26,7 +26,7 @@ export function EditModal(props: IEditModalProps) {
         isOpen,
         isLoading,
         onClose,
-        setData,
+        setNewData,
         saveClickHandler,
         discardClickHandler,
     } = props
@@ -65,7 +65,9 @@ export function EditModal(props: IEditModalProps) {
                         <Dropdown
                             options={dropdownNumbers}
                             value={newData.id?.toString()}
-                            onChange={id => setData((prev: ITattooImage) => ({ ...prev, id: +id }))}
+                            onChange={id =>
+                                setNewData((prev: ITattooImage) => ({ ...prev, id: +id }))
+                            }
                         />
                     </div>
                     <div>
@@ -80,7 +82,7 @@ export function EditModal(props: IEditModalProps) {
                                     options={item.options}
                                     value={newData.filters[item.name] as string}
                                     onChange={value =>
-                                        setData((prev: ITattooImage) => ({
+                                        setNewData((prev: ITattooImage) => ({
                                             ...prev,
                                             filters: { ...prev.filters, [item.name]: value },
                                         }))
@@ -95,7 +97,7 @@ export function EditModal(props: IEditModalProps) {
                             type="checkbox"
                             checked={newData.filters.isLive}
                             onChange={e =>
-                                setData((prev: ITattooImage) => ({
+                                setNewData((prev: ITattooImage) => ({
                                     ...prev,
                                     filters: { ...prev.filters, isLive: e.target.checked },
                                 }))

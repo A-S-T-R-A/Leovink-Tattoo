@@ -28,10 +28,10 @@ export function PortfolioPage() {
         const data = (await fetchSectionData(defaultLanguage, "other", true)) as IOtherData
         if (data) {
             setFiltersData(data.filtersData.filters)
+            const f: { [key: string]: string } = { isLive: "" }
+            Object.keys(data.filtersData.filters).forEach(item => (f[item] = ""))
+            setFilters(f)
         }
-        const f: { [key: string]: string } = { isLive: "" }
-        Object.keys(data.filtersData.filters).forEach(item => (f[item] = ""))
-        setFilters(f)
     }
 
     useEffect(() => {

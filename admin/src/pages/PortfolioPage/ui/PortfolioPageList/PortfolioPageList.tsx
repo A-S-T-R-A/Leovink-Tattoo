@@ -1,8 +1,6 @@
 import { useState } from "react"
-
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { ITattooImage, ViewType } from "../../types/types"
-
 import styles from "./PortfolioPageList.module.scss"
 import { EditTattooImage } from "../editTattooImage/EditTattoImage"
 import { DeleteTattooImage } from "../deleteTattooImage/DeleteTattooImage"
@@ -102,7 +100,11 @@ export function PortfolioPageList({
                 )}
                 {selected.length > 1 && (
                     <>
-                        <EditBulkTattooImages imagesId={selected} triggerRefetch={triggerRefetch} />
+                        <EditBulkTattooImages
+                            imagesId={selected}
+                            triggerRefetch={triggerRefetch}
+                            filtersData={filtersData}
+                        />
                         <DeleteBulkTattooImages
                             imagesId={selected}
                             triggerRefetch={triggerRefetch}

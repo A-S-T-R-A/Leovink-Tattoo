@@ -5,6 +5,7 @@ export const defaultNewData = {
     img: "",
     alt: { en: "", ro: "", ru: "" },
     filters: {
+        artists: "",
         isLive: false,
     },
 }

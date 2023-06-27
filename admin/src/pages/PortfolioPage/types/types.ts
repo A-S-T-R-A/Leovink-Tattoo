@@ -6,6 +6,11 @@ export interface ITattooImageLive {
     label: string
 }
 
+export interface IChosenFilter {
+    [key: string]: string | boolean
+    isLive: boolean
+}
+
 export interface ITattooImage {
     id: number
     img: string
@@ -14,7 +19,7 @@ export interface ITattooImage {
         ro: string
         ru: string
     }
-    filters: { [key: string]: any; isLive: boolean }
+    filters: IChosenFilter
 }
 
 export type UploadTattooImageType = { [key: number]: Omit<ITattooImage, "id"> }

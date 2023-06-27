@@ -98,7 +98,7 @@ export function EditTattooImage({
                 isOpen={isOpen}
                 isLoading={isLoading}
                 onClose={onClose}
-                setData={setNewData}
+                setNewData={setNewData}
                 filtersData={filtersData}
                 saveClickHandler={saveClickHandler}
                 discardClickHandler={discardClickHandler}

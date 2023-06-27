@@ -1,5 +1,5 @@
 import { Modal } from "shared/ui/Modal"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Dropdown } from "shared/ui/Dropdown"
 import {
     tattooArtistsDropdownOptions,
@@ -9,37 +9,41 @@ import {
 import { ArtistType, ColorType, StyleType } from "shared/types/types"
 import { getImagesDoc, rewriteImagesDoc } from "shared/const/firebaseVariables"
 import styles from "./EditBulkTattooImages.module.scss"
-import { disableUi } from "shared/lib/disableUi/disableUi"
 import { Alert } from "shared/ui/CustomNotifications"
 import { tattooLiveDropdownOptions } from "../../const/const"
+import { IFilters } from "features/portfolioFilters/types/types"
 
 export function EditBulkTattooImages({
     imagesId,
+    filtersData,
     triggerRefetch,
 }: {
     imagesId: number[]
+    filtersData: IFilters | null
     triggerRefetch: () => void
 }) {
     const [isOpen, setIsOpen] = useState(false)
-    const defaultData = {
-        artist: "" as ArtistType | "" | "Unassigned",
-        style: "" as StyleType | "" | "Unassigned",
-        color: "" as ColorType | "" | "Unassigned",
-        isLive: "",
-    }
-    const [data, setData] = useState<typeof defaultData>(defaultData)
+    const [newData, setNewData] = useState<{ [key: string]: string } | null>(null)
     const [isLoading, setIsLoading] = useState(false)
-
-    useEffect(() => {
-        isLoading ? disableUi.disable() : disableUi.enable()
-    }, [isLoading])
 
     function onClose() {
         setIsOpen(false)
     }
 
+    function refreshNewData() {
+        if (filtersData) {
+            const f: { [key: string]: string } = { isLive: "" }
+            Object.keys(filtersData).forEach(item => (f[item] = ""))
+            setNewData(f)
+        }
+    }
+
+    useEffect(() => {
+        refreshNewData()
+    }, [filtersData])
+
     async function saveClickHandler() {
-        const { artist, style, color, isLive } = data
+        /*  const { artist, style, color, isLive } = data
         const newData: any = {}
         if (artist !== "") {
             newData.artist = artist === "Unassigned" ? "" : artist
@@ -82,15 +86,16 @@ export function EditBulkTattooImages({
             setData(defaultData)
             triggerRefetch?.()
         }
-        setIsLoading(false)
+        setIsLoading(false) */
     }
 
     function discardClickHandler() {
-        setData(defaultData)
+        refreshNewData()
+        setIsLoading(false)
         setIsOpen(true)
     }
 
-    const artistsOption = [
+    /*  const artistsOption = [
         { label: "No artist", value: "Unassigned" },
         ...tattooArtistsDropdownOptions,
     ]
@@ -103,8 +108,25 @@ export function EditBulkTattooImages({
     const colorsOption = [
         { label: "No color", value: "Unassigned" },
         ...tattooColorsDropdownOptions,
-    ]
+    ] */
 
+    const dropdownOptions = useMemo(() => {
+        const options = []
+        for (const key in filtersData) {
+            const otherOptions = filtersData[key].map(item => ({
+                label: item.label,
+                value: item.key,
+            }))
+            const option = {
+                name: key,
+                options: [{ label: `No ${key}`, value: "Unassigned" }, ...otherOptions],
+            }
+            options.push(option)
+        }
+        return options
+    }, [filtersData])
+
+    console.log(newData)
     return (
         <>
             <Modal isOpen={isOpen || isLoading} onClose={onClose} className={styles.container}>
@@ -113,7 +135,25 @@ export function EditBulkTattooImages({
                 ) : (
                     <>
                         <h4>Edit {imagesId.length} images</h4>
-                        <div>
+                        {dropdownOptions.map(item => {
+                            return (
+                                <div>
+                                    {item.name}:
+                                    <Dropdown
+                                        firstOptionText={`Select ${item.name}`}
+                                        options={item.options}
+                                        value={newData?.[item.name] as string}
+                                        onChange={value =>
+                                            setNewData(prev => ({
+                                                ...prev,
+                                                [item.name]: value,
+                                            }))
+                                        }
+                                    />
+                                </div>
+                            )
+                        })}
+                        {/* <div>
                             artist:
                             <Dropdown
                                 firstOptionText="Select an artist"
@@ -148,7 +188,7 @@ export function EditBulkTattooImages({
                                 value={data.isLive}
                                 onChange={isLive => setData((prev: any) => ({ ...prev, isLive }))}
                             />
-                        </div>
+                        </div> */}
                         <button onClick={saveClickHandler}>Save</button>
                         <button onClick={discardClickHandler}>Discard</button>
                     </>
