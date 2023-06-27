@@ -2,3 +2,10 @@
     width: calc(100vw - var(--sidebar-width) - 100px);
     height: calc(100vh - var(--navbar-height) - 50px);
 }
+
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+}

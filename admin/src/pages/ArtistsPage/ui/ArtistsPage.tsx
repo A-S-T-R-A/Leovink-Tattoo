@@ -33,7 +33,7 @@ export function ArtistsPage() {
 
     if (isDataLoading) {
         return (
-            <div>
+            <div className={styles.loadingContainer}>
                 <h2>Loading...</h2>
             </div>
         )

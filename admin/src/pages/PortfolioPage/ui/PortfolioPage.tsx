@@ -69,18 +69,27 @@ export function PortfolioPage() {
             )
     }, [filters, data])
 
-    if (isDataLoading)
+    if (isDataLoading) {
         return (
-            <div>
+            <div className={styles.loadingContainer}>
                 <h2>Loading...</h2>
             </div>
         )
-
-    return (
-        <div className={styles.wrapper}>
-            <PortfolioPageHeader view={view} setView={setView} triggerRefetch={triggerRefetch} />
-            <PortfolioPageFilters filters={filters} setFilters={setFilters} />
-            <PortfolioPageList data={filteredData} view={view} triggerRefetch={triggerRefetch} />
-        </div>
-    )
+    } else {
+        return (
+            <div className={styles.wrapper}>
+                <PortfolioPageHeader
+                    view={view}
+                    setView={setView}
+                    triggerRefetch={triggerRefetch}
+                />
+                <PortfolioPageFilters filters={filters} setFilters={setFilters} />
+                <PortfolioPageList
+                    data={filteredData}
+                    view={view}
+                    triggerRefetch={triggerRefetch}
+                />
+            </div>
+        )
+    }
 }
