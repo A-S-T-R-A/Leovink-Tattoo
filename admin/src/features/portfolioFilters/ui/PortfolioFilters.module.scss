@@ -1,56 +1,168 @@
-.table {
+.filterTableContainer {
     display: flex;
     flex-direction: column;
+    border-bottom: none;
     width: 100%;
-    max-height: 800px;
-    margin: 10px;
-    gap: 20px;
+    border-radius: 5px;
 
     .titleContainer {
         display: flex;
-        justify-content: center;
         align-items: center;
-        border: 2px solid var(--color-base);
-        padding: 5px;
+        width: 100%;
+        min-height: 50px;
+        gap: 10px;
+        border: 3px solid black;
+        border-radius: 5px 5px 0 5px;
+        padding: 0 15px;
         cursor: pointer;
 
-        .buttons {
-            display: flex;
-            gap: 4px;
-        }
-    }
-
-    .listContainer {
-        border: 1px solid var(--color-base);
-        margin-bottom: 10px;
-
-        .addBtn {
-            margin: 10px;
+        .arrow {
+            color: orange;
+            font-size: 24px;
+            text-shadow: 0px 1px 1px black;
         }
 
-        .infoContainer {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            justify-items: center;
-            align-items: center;
-            border-bottom: 1px solid var(--color-base);
-            padding: 5px;
+        .titleAddBtn {
+            width: fit-content;
+            height: fit-content;
+            border-radius: 5px;
+            border: 1px solid orange;
+            background-color: orange;
+            padding: 2px 10px;
+            margin-left: auto;
+            cursor: pointer;
 
-            .buttons {
-                display: flex;
-                gap: 4px;
+            &:hover {
+                filter: brightness(90%);
             }
         }
     }
 
-    .languageContainer {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        justify-items: center;
-        align-items: center;
-        padding: 5px;
-        border: 2px solid var(--color-base);
+    .filtersContainer {
+        border-top: none;
+        border-radius: 5px;
+        padding-left: 27px;
+
+        .filterContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            border: 2px solid black;
+            margin-top: -2px;
+            border-radius: 0 0 5px 5px;
+            border-top: none;
+
+            .filterTitleContainer {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                width: 100%;
+                min-height: 40px;
+                padding: 0 15px 0 45px;
+                border-bottom: 2px solid gray;
+                border-bottom-left-radius: 5px;
+
+                .titleEditBtn {
+                    font-size: 14px;
+                    width: fit-content;
+                    height: fit-content;
+                    border-radius: 5px;
+                    border: 1px solid orange;
+                    background-color: orange;
+                    padding: 2px 10px;
+                    margin-left: auto;
+                    cursor: pointer;
+
+                    &:hover {
+                        filter: brightness(90%);
+                    }
+                }
+
+                .titleDeletBtn {
+                    font-size: 14px;
+                    width: fit-content;
+                    min-height: fit-content;
+                    border-radius: 5px;
+                    border: 2px solid orangered;
+                    color: orangered;
+                    background-color: transparent;
+                    padding: 2px 10px;
+                    cursor: pointer;
+
+                    &:hover {
+                        filter: brightness(90%);
+                    }
+                }
+            }
+
+            .filterContentContainer {
+                display: flex;
+                align-items: center;
+                width: 95%;
+                min-height: 40px;
+                gap: 10px;
+                margin-top: -2px;
+                padding: 0 15px 0 150px;
+                border: 1px solid darkgray;
+                border-top: none;
+                border-right: none;
+                border-radius: 0 0 5px 5px;
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                .filterEditBtn {
+                    font-size: 14px;
+                    width: fit-content;
+                    height: fit-content;
+                    border-radius: 5px;
+                    border: 1px solid orange;
+                    background-color: orange;
+                    padding: 2px 6px;
+                    margin-left: auto;
+                    cursor: pointer;
+
+                    &:hover {
+                        filter: brightness(90%);
+                    }
+                }
+
+                .filterDeleteBtn {
+                    font-size: 14px;
+                    width: fit-content;
+                    height: fit-content;
+                    border-radius: 5px;
+                    border: 2px solid orangered;
+                    color: orangered;
+                    background-color: transparent;
+                    padding: 2px 6px;
+                    cursor: pointer;
+
+                    &:hover {
+                        filter: brightness(90%);
+                    }
+                }
+            }
+
+            .addNewFilterBtn {
+                width: fit-content;
+                height: fit-content;
+                border-radius: 5px;
+                border: orange;
+                background-color: orange;
+                padding: 2px 10px;
+                margin: 10px 0;
+                cursor: pointer;
+
+                &:hover {
+                    filter: brightness(90%);
+                }
+            }
+        }
+
+        .title {
+            text-transform: capitalize;
+        }
     }
 }

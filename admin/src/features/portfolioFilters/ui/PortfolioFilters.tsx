@@ -10,6 +10,7 @@ import { EditFilter } from "./EditFilter/EditFilter"
 import { EditItem } from "./EditItem/EditItem"
 import { DeleteFilter } from "./DeleteFilter/DeleteFilter"
 import { DeleteItem } from "./DeleteItem/DeleteItem"
+import { Typography, TypographySize } from "shared/ui/Typography/Typography"
 
 export function PortfolioFilters({
     isExpanded,
@@ -18,17 +19,23 @@ export function PortfolioFilters({
     isExpanded: boolean
     onOpen: () => void
 }) {
-    const [filtersData, setFiltersData] = useState<IFilters | null>(null)
-
     const navigate = useNavigate()
 
-    useEffect(() => {
+    const filterdata = {
+        artist: ["Dinu", "Katia", "Nastia"],
+        color: ["Black"],
+        pussies: ["Felicia", "Bob"],
+        style: ["Realism"],
+    }
+    const [filtersData, setFiltersData] = useState<IFilters | null>(filterdata)
+
+    /*    useEffect(() => {
         async function fetch() {
             const { filtersData } = (await fetchSectionData("en", "other", true)) as any
             setFiltersData(filtersData.filters)
         }
         fetch()
-    }, [])
+    }, []) */
 
     async function artistEditClickHandler() {
         if (await Confirm("You can edit artists only on Artists Page. Redirect?")) {
@@ -37,23 +44,54 @@ export function PortfolioFilters({
     }
 
     return (
-        <>
+        <div className={styles.filterTableContainer}>
             <div className={styles.titleContainer} onClick={onOpen}>
-                <div className={styles.title}>filters 🡇</div> <AddNewFilter />
+                <span className={styles.arrow}>🡇</span>
+                <Typography size={TypographySize.H4} className={styles.title}>
+                    Filters
+                </Typography>
+                <AddNewFilter className={styles.titleAddBtn} />
             </div>
             {isExpanded && (
-                <div className={styles.listContainer}>
-                    <div className={styles.titleContainer}>
-                        Artists <button onClick={artistEditClickHandler}>Edit</button>
-                    </div>
-                    {filtersData?.artist.map(item => (
-                        <div className={styles.infoContainer}>
-                            <p>artist: {item}</p>
-                            <button onClick={artistEditClickHandler}>edit</button>
+                <div className={styles.filtersContainer}>
+                    <div className={styles.filterContainer}>
+                        <div className={styles.filterTitleContainer}>
+                            <Typography size={TypographySize.H5} isBold className={styles.title}>
+                                Artists
+                            </Typography>
+                            <button
+                                className={styles.addNewFilterBtn}
+                                onClick={artistEditClickHandler}
+                            >
+                                + Add New Artist
+                            </button>
+                            <button
+                                className={styles.titleEditBtn}
+                                onClick={artistEditClickHandler}
+                            >
+                                Edit Filter
+                            </button>
+                            <button
+                                className={styles.titleDeletBtn}
+                                onClick={artistEditClickHandler}
+                            >
+                                Delete Filter
+                            </button>
                         </div>
-                    ))}
-                    <div className={styles.infoContainer}>
-                        <button onClick={artistEditClickHandler}>Add New</button>
+                        {filterdata?.artist.map(item => (
+                            <div className={styles.filterContentContainer}>
+                                <Typography size={TypographySize.BASE}>
+                                    <strong>Artist:</strong> {item}
+                                </Typography>
+                                <button
+                                    className={styles.filterEditBtn}
+                                    onClick={artistEditClickHandler}
+                                >
+                                    Edit Artist Name
+                                </button>
+                                <button className={styles.filterDeleteBtn}>Delete Artist</button>
+                            </div>
+                        ))}
                     </div>
 
                     {filtersData &&
@@ -61,28 +99,36 @@ export function PortfolioFilters({
                             .filter(([key]) => key !== "artist")
                             .map(([key, value]) => {
                                 return (
-                                    <>
-                                        <div className={styles.titleContainer}>
-                                            {key} <EditFilter />
-                                            <DeleteFilter />
+                                    <div className={styles.filterContainer}>
+                                        <div className={styles.filterTitleContainer}>
+                                            <Typography
+                                                size={TypographySize.H5}
+                                                className={styles.title}
+                                                isBold
+                                            >
+                                                {key}
+                                            </Typography>
+                                            <AddNewItem className={styles.addNewFilterBtn} />
+                                            <EditFilter className={styles.titleEditBtn} />
+                                            <DeleteFilter className={styles.titleDeletBtn} />
                                         </div>
                                         {value.map(item => (
-                                            <div className={styles.infoContainer}>
-                                                <p>
-                                                    {key}: {item}
-                                                </p>
-                                                <EditItem />
-                                                <DeleteItem />
+                                            <div className={styles.filterContentContainer}>
+                                                <Typography
+                                                    size={TypographySize.BASE}
+                                                    className={styles.title}
+                                                >
+                                                    <strong>{key}:</strong> {item}
+                                                </Typography>
+                                                <EditFilter className={styles.filterEditBtn} />
+                                                <DeleteFilter className={styles.filterDeleteBtn} />
                                             </div>
                                         ))}
-                                        <div className={styles.infoContainer}>
-                                            <AddNewItem />
-                                        </div>
-                                    </>
+                                    </div>
                                 )
                             })}
                 </div>
             )}
-        </>
+        </div>
     )
 }

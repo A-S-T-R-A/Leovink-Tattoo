@@ -1,3 +1,3 @@
-export function EditFilter() {
-    return <button>Edit Filter</button>
+export function EditFilter({ className }: { className: string }) {
+    return <button className={className}>Edit Filter</button>
 }

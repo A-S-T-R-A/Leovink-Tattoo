@@ -1,3 +1,3 @@
-export function AddNewItem() {
-    return <button>Add New Item</button>
+export function AddNewItem({ className }: { className: string }) {
+    return <button className={className}>+ Add New Item</button>
 }
