@@ -62,8 +62,6 @@ export function PortfolioPage() {
         return filter(data, keys)
     }, [data, filters])
 
-    console.log(filters)
-
     return (
         <div className={styles.wrapper}>
             <PortfolioPageHeader view={view} setView={setView} triggerRefetch={fetch} />

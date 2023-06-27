@@ -21,19 +21,14 @@ export function PortfolioPageFilters({
         const options = []
         for (const key in filtersData) {
             const otherOptions = filtersData[key].map(item => ({ label: item, value: item }))
-
             const option = {
                 name: key,
                 options: [{ label: `No ${key}`, value: "Unassigned" }, ...otherOptions],
             }
-
             options.push(option)
         }
-
         return options
     }, [filtersData])
-
-    console.log(filters)
 
     if (!filters) return null
 
