@@ -10,6 +10,7 @@ import { localStorageView } from "../lib/localStorageLib"
 
 export function PortfolioPage() {
     const [data, setData] = useState<ITattooImage[]>([])
+    const [isDataLoading, setIsDataLoading] = useState(false)
     const [view, setView] = useState<ViewType>(localStorageView.get() || "icons")
     const [filters, setFilters] = useState<IFiltersData>({
         artist: "",
@@ -19,7 +20,9 @@ export function PortfolioPage() {
     })
 
     async function fetch() {
+        setIsDataLoading(true)
         const currentDoc = await getImagesDoc()
+        setIsDataLoading(false)
         if (!currentDoc) return
         const currentData = currentDoc.data()
         const dataArray = reformatAndSortObjectValuesToArray(currentData)
@@ -66,11 +69,27 @@ export function PortfolioPage() {
             )
     }, [filters, data])
 
-    return (
-        <div className={styles.wrapper}>
-            <PortfolioPageHeader view={view} setView={setView} triggerRefetch={triggerRefetch} />
-            <PortfolioPageFilters filters={filters} setFilters={setFilters} />
-            <PortfolioPageList data={filteredData} view={view} triggerRefetch={triggerRefetch} />
-        </div>
-    )
+    if (isDataLoading) {
+        return (
+            <div className={styles.loadingContainer}>
+                <h2>Loading...</h2>
+            </div>
+        )
+    } else {
+        return (
+            <div className={styles.wrapper}>
+                <PortfolioPageHeader
+                    view={view}
+                    setView={setView}
+                    triggerRefetch={triggerRefetch}
+                />
+                <PortfolioPageFilters filters={filters} setFilters={setFilters} />
+                <PortfolioPageList
+                    data={filteredData}
+                    view={view}
+                    triggerRefetch={triggerRefetch}
+                />
+            </div>
+        )
+    }
 }

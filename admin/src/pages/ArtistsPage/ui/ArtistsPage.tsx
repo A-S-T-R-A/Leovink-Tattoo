@@ -11,12 +11,15 @@ import { TriggerRefetchBtn } from "shared/components/TriggerRefetchBtn/TriggerRe
 
 export function ArtistsPage() {
     const [data, setData] = useState<ITranslatedArtistsData | null>(null)
+    const [isDataLoading, setIsDataLoading] = useState(false)
 
     async function fetch() {
+        setIsDataLoading(true)
         const en = (await fetchSectionData("en", "artists")) as IArtistData[]
         const ro = (await fetchSectionData("ro", "artists")) as IArtistData[]
         const ru = (await fetchSectionData("ru", "artists")) as IArtistData[]
         setData({ en, ro, ru })
+        setIsDataLoading(false)
     }
 
     function triggerRefetch() {
@@ -28,31 +31,45 @@ export function ArtistsPage() {
         fetch()
     }, [])
 
-    return (
-        <>
-            <AddArtistsModal data={data} triggerRefetch={triggerRefetch} />
-            <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
-            <div className={styles.table}>
-                {data?.[defaultLanguage].map((item, index) => (
-                    <div className={styles.item} key={index}>
-                        <div>id: {index}</div>
-                        <div className={styles.imgContainer}>
-                            <ModalImage className={styles.img} url={item.img} />
-                        </div>
-                        <div>Name: {item.name}</div>
-                        <div>Specialization: {item.specialization}</div>
-                        <div className={styles.description}>Description: {item.description}</div>
-                        <div className={styles.buttons}>
-                            <EditParagraph data={data} id={index} triggerRefetch={triggerRefetch} />
-                            <DeleteParagraph
-                                data={data}
-                                id={index}
-                                triggerRefetch={triggerRefetch}
-                            />
-                        </div>
-                    </div>
-                ))}
+    if (isDataLoading) {
+        return (
+            <div className={styles.loadingContainer}>
+                <h2>Loading...</h2>
             </div>
-        </>
-    )
+        )
+    } else {
+        return (
+            <>
+                <AddArtistsModal data={data} triggerRefetch={triggerRefetch} />
+                <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
+                <div className={styles.table}>
+                    {data?.[defaultLanguage].map((item, index) => (
+                        <div className={styles.item} key={index}>
+                            <div>id: {index}</div>
+                            <div className={styles.imgContainer}>
+                                <ModalImage className={styles.img} url={item.img} />
+                            </div>
+                            <div>Name: {item.name}</div>
+                            <div>Specialization: {item.specialization}</div>
+                            <div className={styles.description}>
+                                Description: {item.description}
+                            </div>
+                            <div className={styles.buttons}>
+                                <EditParagraph
+                                    data={data}
+                                    id={index}
+                                    triggerRefetch={triggerRefetch}
+                                />
+                                <DeleteParagraph
+                                    data={data}
+                                    id={index}
+                                    triggerRefetch={triggerRefetch}
+                                />
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </>
+        )
+    }
 }
