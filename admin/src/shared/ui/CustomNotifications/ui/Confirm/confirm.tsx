@@ -1,4 +1,5 @@
 import { TRANSITION_TIME } from "../../const/const"
+import { disableKeyboard } from "../../lib/disableKeyBoard"
 import { crossIcon } from "../../svg/crossIcon"
 import { questionIcon } from "../../svg/questionIcon"
 import styles from "./confirm.module.scss"
@@ -39,6 +40,7 @@ export function Confirm(message: string): Promise<boolean> {
     document.body.append(wrapperEl)
 
     function cleanup(timeout = 0) {
+        disableKeyboard.remove()
         setTimeout(() => {
             containerEl.classList.remove(styles.appended)
         }, timeout)
@@ -51,6 +53,8 @@ export function Confirm(message: string): Promise<boolean> {
     requestAnimationFrame(() => {
         containerEl.classList.add(styles.appended)
     })
+
+    disableKeyboard.add()
 
     return new Promise((res, rej) => {
         confirmBtnEl.onclick = () => {
