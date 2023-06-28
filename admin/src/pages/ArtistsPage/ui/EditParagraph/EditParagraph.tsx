@@ -21,14 +21,17 @@ import {
 import { isStringUrlFriendly } from "shared/lib/isStringUrlFriendly/isStringUrlFriendly"
 import { Alert } from "shared/ui/CustomNotifications"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
+import { IOtherData, ITranslatedOtherData } from "features/portfolioFilters/types/types"
 
 export function EditParagraph({
     id,
     data,
+    otherData,
     triggerRefetch,
 }: {
     data: ITranslatedArtistsData | null
     id: number
+    otherData: ITranslatedOtherData | null
     triggerRefetch?: () => void
 }) {
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>(defaultLanguage)
@@ -107,6 +110,45 @@ export function EditParagraph({
                 documentData[id] = dataToUpload
                 const objectData = reformatArrayToObject(documentData)
                 await updateSectionData(currentLanguage, "artists", objectData)
+
+                const updatedOtherData = otherData ? { ...otherData } : null
+
+                if (updatedOtherData?.[currentLanguage]?.filtersData) {
+                    const oldArtists = updatedOtherData[
+                        currentLanguage
+                    ].filtersData.filters.artists.filter(
+                        item => item.key !== data[defaultLanguage][id].name
+                    )
+
+                    if (currentLanguage === defaultLanguage) {
+                        for (const lang of allLanguages) {
+                            if (lang === defaultLanguage) {
+                                updatedOtherData[defaultLanguage].filtersData.filters.artists = [
+                                    ...oldArtists,
+                                    { label: newData.name, key: newData.name },
+                                ]
+                            } else {
+                                updatedOtherData[lang].filtersData.filters.artists = [
+                                    ...oldArtists,
+                                    { label: data[lang][id].name, key: newData.name },
+                                ]
+                            }
+
+                            await updateSectionData(lang, "other", updatedOtherData[lang])
+                        }
+                    } else {
+                        updatedOtherData[currentLanguage].filtersData.filters.artists = [
+                            ...oldArtists,
+                            { label: newData.name, key: data[defaultLanguage][id].name },
+                        ]
+
+                        await updateSectionData(
+                            currentLanguage,
+                            "other",
+                            updatedOtherData[currentLanguage]
+                        )
+                    }
+                }
             }
 
             Alert.success("Success")

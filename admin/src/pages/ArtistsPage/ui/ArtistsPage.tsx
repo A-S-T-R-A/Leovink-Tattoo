@@ -1,21 +1,27 @@
+import { useEffect, useState } from "react"
 import { AddArtistsModal } from "./AddArtistsModal/AddArtistsModal"
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { EditParagraph } from "./EditParagraph/EditParagraph"
 import styles from "./ArtistsPage.module.scss"
-import { useEffect, useState } from "react"
 import { IArtistData, ITranslatedArtistsData } from "../types/types"
 import { fetchSectionData } from "shared/const/firebaseVariables"
 import { defaultLanguage } from "shared/const/languages"
 import { DeleteParagraph } from "./DeleteParagraph/DeleteParagraph"
+import { IOtherData, ITranslatedOtherData } from "features/portfolioFilters/types/types"
 
 export function ArtistsPage() {
     const [data, setData] = useState<ITranslatedArtistsData | null>(null)
+    const [otherData, setOtherData] = useState<ITranslatedOtherData | null>(null)
 
     async function fetch() {
         const en = (await fetchSectionData("en", "artists")) as IArtistData[]
         const ro = (await fetchSectionData("ro", "artists")) as IArtistData[]
         const ru = (await fetchSectionData("ru", "artists")) as IArtistData[]
         setData({ en, ro, ru })
+        const enOtherData = (await fetchSectionData(defaultLanguage, "other", true)) as IOtherData
+        const roOtherData = (await fetchSectionData(defaultLanguage, "other", true)) as IOtherData
+        const ruOtherData = (await fetchSectionData(defaultLanguage, "other", true)) as IOtherData
+        setOtherData({ en: enOtherData, ro: roOtherData, ru: ruOtherData })
     }
 
     function triggerRefetch() {
@@ -28,7 +34,7 @@ export function ArtistsPage() {
 
     return (
         <>
-            <AddArtistsModal data={data} triggerRefetch={triggerRefetch} />
+            <AddArtistsModal data={data} otherData={otherData} triggerRefetch={triggerRefetch} />
             <div className={styles.table}>
                 {data?.[defaultLanguage].map((item, index) => (
                     <div className={styles.item} key={index}>
@@ -40,9 +46,15 @@ export function ArtistsPage() {
                         <div>Specialization: {item.specialization}</div>
                         <div className={styles.description}>Description: {item.description}</div>
                         <div className={styles.buttons}>
-                            <EditParagraph data={data} id={index} triggerRefetch={triggerRefetch} />
+                            <EditParagraph
+                                data={data}
+                                otherData={otherData}
+                                id={index}
+                                triggerRefetch={triggerRefetch}
+                            />
                             <DeleteParagraph
                                 data={data}
+                                otherData={otherData}
                                 id={index}
                                 triggerRefetch={triggerRefetch}
                             />

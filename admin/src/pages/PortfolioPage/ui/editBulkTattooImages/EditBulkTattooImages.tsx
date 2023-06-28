@@ -1,18 +1,11 @@
 import { Modal } from "shared/ui/Modal"
 import { useEffect, useMemo, useState } from "react"
 import { Dropdown } from "shared/ui/Dropdown"
-import {
-    tattooArtistsDropdownOptions,
-    tattooColorsDropdownOptions,
-    tattooStylesDropdownOptions,
-} from "shared/const/filters"
-import { ArtistType, ColorType, StyleType } from "shared/types/types"
 import { getImagesDoc, rewriteImagesDoc } from "shared/const/firebaseVariables"
-import styles from "./EditBulkTattooImages.module.scss"
 import { Alert } from "shared/ui/CustomNotifications"
 import { tattooLiveDropdownOptions } from "../../const/const"
 import { IFilters } from "features/portfolioFilters/types/types"
-import { ITattooImage } from "../../types/types"
+import styles from "./EditBulkTattooImages.module.scss"
 
 export function EditBulkTattooImages({
     imagesId,

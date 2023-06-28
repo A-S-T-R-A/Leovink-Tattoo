@@ -19,12 +19,15 @@ import {
     uploadImageToBucket,
 } from "shared/const/firebaseVariables"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
+import { IOtherData, ITranslatedOtherData } from "features/portfolioFilters/types/types"
 
 export function AddArtistsModal({
     data,
+    otherData,
     triggerRefetch,
 }: {
     data: ITranslatedArtistsData | null
+    otherData: ITranslatedOtherData | null
     triggerRefetch: () => void
 }) {
     const [newAllData, setNewAllData] = useState<INewAllData>(defaultNewAllData)
@@ -78,11 +81,22 @@ export function AddArtistsModal({
 
                 const objectData = reformatArrayToObject(allArtistsData[lang])
                 await updateSectionData(lang, "artists", objectData)
+
+                const updatedOtherData = otherData ? { ...otherData } : null
+                if (updatedOtherData?.[lang]?.filtersData) {
+                    updatedOtherData[lang].filtersData.filters.artists = [
+                        ...updatedOtherData[lang].filtersData.filters.artists,
+                        { label: newAllData[lang].name, key: newAllData[defaultLanguage].name },
+                    ]
+
+                    await updateSectionData(lang, "other", updatedOtherData[lang])
+                }
             }
 
             Alert.success("Success")
         } catch (error) {
             Alert.error("Error")
+            console.log(error)
         }
 
         setIsOpen(false)
