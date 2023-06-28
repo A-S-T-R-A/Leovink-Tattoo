@@ -55,6 +55,9 @@ export function EditBulkTattooImages({
         } = { ...newData }
 
         for (const key in dataToUpload) {
+            if (dataToUpload[key] === "") {
+                delete dataToUpload[key]
+            }
             if (dataToUpload[key] === "Unassigned") {
                 dataToUpload[key] = ""
             }
@@ -73,11 +76,10 @@ export function EditBulkTattooImages({
             imagesId.forEach(itemId => {
                 nData[itemId] = {
                     ...nData[itemId],
-                    filters: { ...nData[itemId].filters, ...newData },
+                    filters: { ...nData[itemId].filters, ...dataToUpload },
                 }
             })
-            console.log("nData", nData)
-            //  await rewriteImagesDoc(nData)
+            await rewriteImagesDoc(nData)
             Alert.success(`Successfully edited ${imagesId.length} images`)
         } catch (error) {
             Alert.error("Unexpected error")
