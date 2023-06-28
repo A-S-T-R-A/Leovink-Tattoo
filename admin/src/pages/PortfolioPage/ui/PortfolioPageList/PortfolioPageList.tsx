@@ -101,6 +101,7 @@ export function PortfolioPageList({
                 {selected.length > 1 && (
                     <>
                         <EditBulkTattooImages
+                            data={data}
                             imagesId={selected}
                             triggerRefetch={triggerRefetch}
                             filtersData={filtersData}

@@ -12,6 +12,7 @@ import styles from "./EditBulkTattooImages.module.scss"
 import { Alert } from "shared/ui/CustomNotifications"
 import { tattooLiveDropdownOptions } from "../../const/const"
 import { IFilters } from "features/portfolioFilters/types/types"
+import { ITattooImage } from "../../types/types"
 
 export function EditBulkTattooImages({
     imagesId,
@@ -43,72 +44,55 @@ export function EditBulkTattooImages({
     }, [filtersData])
 
     async function saveClickHandler() {
-        /*  const { artist, style, color, isLive } = data
-        const newData: any = {}
-        if (artist !== "") {
-            newData.artist = artist === "Unassigned" ? "" : artist
-        }
-        if (style !== "") {
-            newData.style = style === "Unassigned" ? "" : style
-        }
-        if (color !== "") {
-            newData.color = color === "Unassigned" ? "" : color
-        }
-        if (isLive !== "") {
-            newData.isLive = isLive === "live"
-        }
-
-        if (Object.keys(newData).length === 0) {
-            Alert.info("Nothing to edit")
+        if (!newData) return
+        if (Object.values(newData).every(item => item === "")) {
+            Alert.warning("Nothing to save")
             return
         }
 
+        const dataToUpload: {
+            [key: string]: string | boolean
+        } = { ...newData }
+
+        for (const key in dataToUpload) {
+            if (dataToUpload[key] === "Unassigned") {
+                dataToUpload[key] = ""
+            }
+            if (key === "isLive") {
+                dataToUpload[key] = dataToUpload[key] === "live"
+            }
+        }
+
         setIsLoading(true)
-
-        const currentDoc = await getImagesDoc()
-        if (!currentDoc) return
-        const currentData = currentDoc.data()
-        const nData = { ...currentData }
-
-        imagesId.forEach(itemId => {
-            nData[itemId] = { ...nData[itemId], ...data }
-        })
-
         try {
-            await rewriteImagesDoc(nData)
+            const currentDoc = await getImagesDoc()
+            if (!currentDoc) return
+            const currentData = currentDoc.data()
+            const nData = { ...currentData }
+
+            imagesId.forEach(itemId => {
+                nData[itemId] = {
+                    ...nData[itemId],
+                    filters: { ...nData[itemId].filters, ...newData },
+                }
+            })
+            console.log("nData", nData)
+            //  await rewriteImagesDoc(nData)
             Alert.success(`Successfully edited ${imagesId.length} images`)
-            setIsOpen(false)
-            setData(defaultData)
-            triggerRefetch?.()
         } catch (error) {
             Alert.error("Unexpected error")
-            setIsOpen(false)
-            setData(defaultData)
-            triggerRefetch?.()
         }
-        setIsLoading(false) */
+        setIsOpen(false)
+        setIsLoading(false)
+        refreshNewData()
+        triggerRefetch?.()
     }
 
     function discardClickHandler() {
         refreshNewData()
         setIsLoading(false)
-        setIsOpen(true)
+        setIsOpen(false)
     }
-
-    /*  const artistsOption = [
-        { label: "No artist", value: "Unassigned" },
-        ...tattooArtistsDropdownOptions,
-    ]
-
-    const stylesOption = [
-        { label: "No style", value: "Unassigned" },
-        ...tattooStylesDropdownOptions,
-    ]
-
-    const colorsOption = [
-        { label: "No color", value: "Unassigned" },
-        ...tattooColorsDropdownOptions,
-    ] */
 
     const dropdownOptions = useMemo(() => {
         const options = []
@@ -126,7 +110,6 @@ export function EditBulkTattooImages({
         return options
     }, [filtersData])
 
-    console.log(newData)
     return (
         <>
             <Modal isOpen={isOpen || isLoading} onClose={onClose} className={styles.container}>
@@ -153,42 +136,20 @@ export function EditBulkTattooImages({
                                 </div>
                             )
                         })}
-                        {/* <div>
-                            artist:
-                            <Dropdown
-                                firstOptionText="Select an artist"
-                                options={artistsOption}
-                                value={data.artist}
-                                onChange={artist => setData((prev: any) => ({ ...prev, artist }))}
-                            />
-                        </div>
-                        <div>
-                            style:
-                            <Dropdown
-                                firstOptionText="Select a style"
-                                options={stylesOption}
-                                value={data.style}
-                                onChange={style => setData((prev: any) => ({ ...prev, style }))}
-                            />
-                        </div>
-                        <div>
-                            color:
-                            <Dropdown
-                                firstOptionText="Select a color"
-                                options={colorsOption}
-                                value={data.color}
-                                onChange={color => setData((prev: any) => ({ ...prev, color }))}
-                            />
-                        </div>
                         <div>
                             published:
                             <Dropdown
                                 firstOptionText="Publish / Unpublish"
                                 options={tattooLiveDropdownOptions}
-                                value={data.isLive}
-                                onChange={isLive => setData((prev: any) => ({ ...prev, isLive }))}
+                                value={newData?.isLive}
+                                onChange={isLive =>
+                                    setNewData(prev => ({
+                                        ...prev,
+                                        isLive,
+                                    }))
+                                }
                             />
-                        </div> */}
+                        </div>
                         <button onClick={saveClickHandler}>Save</button>
                         <button onClick={discardClickHandler}>Discard</button>
                     </>
