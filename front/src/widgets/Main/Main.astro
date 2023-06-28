@@ -35,7 +35,7 @@ import { ScrollIcon } from "shared/ui/ScrollIcon/ScrollIcon"
         class={`${styles.layerFront} ${styles.layer}`}
             style={{ backgroundImage: `url(${layerFrontImg})` }}
         ></div>
-        <ScrollIcon className={styles.scroll} />
+        <ScrollIcon client:load className={styles.scroll} />
     </div>
 </header>
 <slot />
