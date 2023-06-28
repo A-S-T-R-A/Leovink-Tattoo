@@ -47,7 +47,7 @@ export function PortfolioFilters({
     return (
         <>
             <div className={styles.titleContainer} onClick={onOpen}>
-                <div className={styles.title}>filters 🡇</div>{" "}
+                <div className={styles.title}>filters 🡇</div>
                 <AddNewFilter data={data} triggerRefetch={triggerRefetch} />
             </div>
             {isExpanded && (
@@ -55,7 +55,7 @@ export function PortfolioFilters({
                     <div className={styles.titleContainer}>
                         Artists <button onClick={artistEditClickHandler}>Edit</button>
                     </div>
-                    {filters?.artist.map(item => (
+                    {filters?.artists.map(item => (
                         <div className={styles.infoContainer}>
                             <p>artist: {item.label}</p>
                             <button onClick={artistEditClickHandler}>edit</button>
