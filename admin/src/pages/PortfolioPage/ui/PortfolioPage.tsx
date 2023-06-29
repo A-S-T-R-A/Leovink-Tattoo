@@ -26,11 +26,11 @@ export function PortfolioPage() {
         const dataArray = reformatAndSortObjectValuesToArray(currentData)
         setData(dataArray)
 
-        const data = await fetchGlobalData()
+        const d = await fetchGlobalData()
 
-        setFiltersData(data.filtersData.filters)
+        setFiltersData(d.filtersData.filters)
         const f: { [key: string]: string } = { isLive: "" }
-        data.filtersData.filters.forEach(item => (f[item.title[defaultLanguage]] = ""))
+        d.filtersData.filters.forEach(item => (f[item.title[defaultLanguage]] = ""))
         setFilters(f)
     }
 

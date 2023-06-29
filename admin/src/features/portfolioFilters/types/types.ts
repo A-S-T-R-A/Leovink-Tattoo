@@ -22,14 +22,8 @@ export interface IOtherData {
     filtersData: IFiltersData
 }
 
-/* export interface ITranslatedOtherData {
-    en: IOtherData
-    ro: IOtherData
-    ru: IOtherData
-}
-
 export interface INewFilter {
     en: string
     ro: string
     ru: string
-} */
+}

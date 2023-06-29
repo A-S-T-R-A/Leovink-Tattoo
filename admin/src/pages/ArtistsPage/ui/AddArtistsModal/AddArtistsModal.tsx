@@ -15,19 +15,20 @@ import {
     DATA_BUCKET,
     deleteImageFromBucket,
     reformatArrayToObject,
+    updateFiltersData,
     updateSectionData,
     uploadImageToBucket,
 } from "shared/const/firebaseVariables"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
-import { IOtherData, ITranslatedOtherData } from "features/portfolioFilters/types/types"
+import { IFiltersData, IOtherData } from "features/portfolioFilters/types/types"
 
 export function AddArtistsModal({
     data,
-    otherData,
+    filtersData,
     triggerRefetch,
 }: {
     data: ITranslatedArtistsData | null
-    otherData: ITranslatedOtherData | null
+    filtersData: IFiltersData | null
     triggerRefetch: () => void
 }) {
     const [newAllData, setNewAllData] = useState<INewAllData>(defaultNewAllData)
@@ -82,14 +83,31 @@ export function AddArtistsModal({
                 const objectData = reformatArrayToObject(allArtistsData[lang])
                 await updateSectionData(lang, "artists", objectData)
 
-                const updatedOtherData = otherData ? { ...otherData } : null
-                if (updatedOtherData?.[lang]?.filtersData) {
-                    updatedOtherData[lang].filtersData.filters.artists = [
-                        ...updatedOtherData[lang].filtersData.filters.artists,
-                        { label: newAllData[lang].name, key: newAllData[defaultLanguage].name },
-                    ]
+                if (filtersData) {
+                    const updatedFiltersData = JSON.parse(
+                        JSON.stringify(filtersData)
+                    ) as IFiltersData
 
-                    await updateSectionData(lang, "other", updatedOtherData[lang])
+                    const newFiltersItem = {
+                        key: "",
+                        label: {
+                            en: "",
+                            ro: "",
+                            ru: "",
+                        },
+                    }
+
+                    for (const key in newAllData) {
+                        const lang = key as LanguageType
+                        newFiltersItem.label[lang] = newAllData[lang].name
+                        if (lang === defaultLanguage) {
+                            newFiltersItem.key = newAllData[lang].name
+                        }
+                    }
+
+                    updatedFiltersData.filters[0].items.push(newFiltersItem)
+
+                    await updateFiltersData(updatedFiltersData)
                 }
             }
 

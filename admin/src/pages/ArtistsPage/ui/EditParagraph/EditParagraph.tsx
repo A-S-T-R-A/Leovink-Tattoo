@@ -14,24 +14,29 @@ import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
 import {
     DATA_BUCKET,
     deleteImageFromBucket,
+    getImagesDoc,
+    reformatAndSortObjectValuesToArray,
     reformatArrayToObject,
+    rewriteImagesDoc,
+    updateFiltersData,
     updateSectionData,
     uploadImageToBucket,
 } from "shared/const/firebaseVariables"
 import { isStringUrlFriendly } from "shared/lib/isStringUrlFriendly/isStringUrlFriendly"
 import { Alert } from "shared/ui/CustomNotifications"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
-import { IOtherData, ITranslatedOtherData } from "features/portfolioFilters/types/types"
+import { IFiltersData } from "features/portfolioFilters/types/types"
+import { ITattooImage } from "pages/PortfolioPage/types/types"
 
 export function EditParagraph({
     id,
     data,
-    otherData,
+    filtersData,
     triggerRefetch,
 }: {
     data: ITranslatedArtistsData | null
     id: number
-    otherData: ITranslatedOtherData | null
+    filtersData: IFiltersData | null
     triggerRefetch?: () => void
 }) {
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>(defaultLanguage)
@@ -111,42 +116,50 @@ export function EditParagraph({
                 const objectData = reformatArrayToObject(documentData)
                 await updateSectionData(currentLanguage, "artists", objectData)
 
-                const updatedOtherData = otherData ? { ...otherData } : null
+                if (filtersData) {
+                    const updatedFiltersData = JSON.parse(
+                        JSON.stringify(filtersData)
+                    ) as IFiltersData
 
-                if (updatedOtherData?.[currentLanguage]?.filtersData) {
-                    const oldArtists = updatedOtherData[
-                        currentLanguage
-                    ].filtersData.filters.artists.filter(
-                        item => item.key !== data[defaultLanguage][id].name
-                    )
-
-                    if (currentLanguage === defaultLanguage) {
-                        for (const lang of allLanguages) {
-                            if (lang === defaultLanguage) {
-                                updatedOtherData[defaultLanguage].filtersData.filters.artists = [
-                                    ...oldArtists,
-                                    { label: newData.name, key: newData.name },
-                                ]
-                            } else {
-                                updatedOtherData[lang].filtersData.filters.artists = [
-                                    ...oldArtists,
-                                    { label: data[lang][id].name, key: newData.name },
-                                ]
+                    const filterItems = filtersData.filters[0].items.map(item => {
+                        if (item.label[currentLanguage] === data[currentLanguage][id].name) {
+                            const newFilter = {
+                                ...item,
+                                label: { ...item.label, [currentLanguage]: newData.name },
                             }
-
-                            await updateSectionData(lang, "other", updatedOtherData[lang])
+                            if (currentLanguage === defaultLanguage) {
+                                newFilter.key = newData.name
+                            }
+                            return newFilter
                         }
-                    } else {
-                        updatedOtherData[currentLanguage].filtersData.filters.artists = [
-                            ...oldArtists,
-                            { label: newData.name, key: data[defaultLanguage][id].name },
-                        ]
+                        return item
+                    })
 
-                        await updateSectionData(
-                            currentLanguage,
-                            "other",
-                            updatedOtherData[currentLanguage]
-                        )
+                    updatedFiltersData.filters[0].items = filterItems
+                    await updateFiltersData(updatedFiltersData)
+
+                    const currentImagesDoc = await getImagesDoc()
+
+                    if (currentImagesDoc && currentLanguage === defaultLanguage) {
+                        const currentImagesData = currentImagesDoc.data()
+                        const imagesArray = reformatAndSortObjectValuesToArray(
+                            currentImagesData
+                        ) as ITattooImage[]
+
+                        const newImagesArray = imagesArray.map(item => {
+                            if (
+                                item.filters["artists"] &&
+                                item.filters["artists"] === data[defaultLanguage][id].name
+                            ) {
+                                const newItem = JSON.parse(JSON.stringify(item)) as ITattooImage
+                                newItem.filters["artists"] = newData.name
+                                return newItem
+                            }
+                            return item
+                        })
+
+                        const dataToUpload = reformatArrayToObject(newImagesArray)
+                        await rewriteImagesDoc(dataToUpload)
                     }
                 }
             }

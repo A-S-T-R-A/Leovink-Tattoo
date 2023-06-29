@@ -10,11 +10,12 @@ import {
     getDoc,
     getDocs,
     query,
+    updateDoc,
     where,
 } from "firebase/firestore"
 import { Alert } from "shared/ui/CustomNotifications"
 import { allLanguages } from "./languages"
-import { IOtherData } from "features/portfolioFilters/types/types"
+import { IFiltersData, IOtherData } from "features/portfolioFilters/types/types"
 
 const IS_DEV = import.meta.env.MODE === "development"
 
@@ -32,6 +33,8 @@ const LANGUAGE_DOCUMENT = {
     ro: "romanian",
     ru: "russian",
 }
+
+export const GLOBAL_DATA = "global"
 
 const SECTION_COLLECTION = {
     steps: "steps",
@@ -230,8 +233,13 @@ export async function deleteImageFromBucket(oldImgUrl: string, path: string) {
 }
 
 export async function fetchGlobalData(): Promise<IOtherData> {
-    const ref = doc(db, DATA_COLLECTION, "global")
+    const ref = doc(db, DATA_COLLECTION, GLOBAL_DATA)
     const newDoc = await getDoc(ref)
     const newData = newDoc.data()
     return newData as IOtherData
+}
+
+export async function updateFiltersData(filtersData: IFiltersData) {
+    const ref = doc(db, DATA_COLLECTION, GLOBAL_DATA)
+    await updateDoc(ref, { filtersData } as any)
 }

@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom"
-import { fetchSectionData } from "shared/const/firebaseVariables"
+import { fetchGlobalData, fetchSectionData } from "shared/const/firebaseVariables"
 import styles from "./PortfolioFilters.module.scss"
 import { Fragment, useEffect, useMemo, useState } from "react"
-import { IFilters, IFiltersData, IOtherData, ITranslatedOtherData } from "../types/types"
+import { IFiltersData, IOtherData } from "../types/types"
 import { Confirm } from "shared/ui/CustomNotifications"
 import { AddNewFilter } from "./AddNewFilter/AddNewFilter"
 import { AddNewItem } from "./AddNewItem/AddNewItem"
@@ -19,15 +19,13 @@ export function PortfolioFilters({
     isExpanded: boolean
     onOpen: () => void
 }) {
-    const [data, setData] = useState<ITranslatedOtherData | null>(null)
+    const [data, setData] = useState<IOtherData | null>(null)
 
     const navigate = useNavigate()
 
     async function fetch() {
-        const en = (await fetchSectionData(defaultLanguage, "other", true)) as IOtherData
-        const ro = (await fetchSectionData(defaultLanguage, "other", true)) as IOtherData
-        const ru = (await fetchSectionData(defaultLanguage, "other", true)) as IOtherData
-        setData({ en, ro, ru })
+        const d = await fetchGlobalData()
+        setData(d)
     }
 
     function triggerRefetch() {
@@ -44,7 +42,7 @@ export function PortfolioFilters({
         }
     }
 
-    const filters = data?.[defaultLanguage].filtersData.filters
+    const filters = data?.filtersData.filters
 
     return (
         <>
@@ -57,9 +55,9 @@ export function PortfolioFilters({
                     <div className={styles.titleContainer}>
                         Artists <button onClick={artistEditClickHandler}>Edit</button>
                     </div>
-                    {filters?.artists.map(item => (
+                    {filters?.[0].items.map(item => (
                         <div className={styles.infoContainer}>
-                            <p>artist: {item.label}</p>
+                            <p>artist: {item.label[defaultLanguage]}</p>
                             <button onClick={artistEditClickHandler}>edit</button>
                         </div>
                     ))}
@@ -67,37 +65,29 @@ export function PortfolioFilters({
                         <button onClick={artistEditClickHandler}>Add New</button>
                     </div>
 
-                    {filters &&
-                        Object.entries(filters)
-                            .filter(([key]) => key !== "artist")
-                            .map(([key, value], index) => {
-                                const parentKey = { en: key, ro: key, ru: key }
-
-                                return (
-                                    <Fragment key={index}>
-                                        <div className={styles.titleContainer}>
-                                            {key} <EditFilter />
-                                            <DeleteFilter />
-                                        </div>
-                                        {value.map(item => (
-                                            <div className={styles.infoContainer}>
-                                                <p>
-                                                    {key}: {item.label}
-                                                </p>
-                                                <EditItem />
-                                                <DeleteItem />
-                                            </div>
-                                        ))}
-                                        <div className={styles.infoContainer}>
-                                            <AddNewItem
-                                                parentKey={parentKey}
-                                                data={data}
-                                                triggerRefetch={triggerRefetch}
-                                            />
-                                        </div>
-                                    </Fragment>
-                                )
-                            })}
+                    {filters?.slice(1).map((item, index) => {
+                        return (
+                            <Fragment key={index}>
+                                <div className={styles.titleContainer}>
+                                    {item.title[defaultLanguage]} <EditFilter />
+                                    <DeleteFilter />
+                                </div>
+                                {item.items.map(innerItem => (
+                                    <div className={styles.infoContainer}>
+                                        <p>
+                                            {item.title[defaultLanguage]}:{" "}
+                                            {innerItem.label[defaultLanguage]}
+                                        </p>
+                                        <EditItem />
+                                        <DeleteItem />
+                                    </div>
+                                ))}
+                                <div className={styles.infoContainer}>
+                                    {/*  <AddNewItem data={data} triggerRefetch={triggerRefetch} /> */}
+                                </div>
+                            </Fragment>
+                        )
+                    })}
                 </div>
             )}
         </>

@@ -1,19 +1,19 @@
 import { useState } from "react"
-import { IFilters, INewFilter, IOtherData, ITranslatedOtherData } from "../../types/types"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
 import { Input } from "shared/ui/Input/Input"
 import { allLanguages, defaultLanguage } from "shared/const/languages"
 import { LanguageType } from "shared/types/types"
 import { Alert } from "shared/ui/CustomNotifications"
 import { defaultNewFilter } from "../../const/const"
-import { updateSectionData } from "shared/const/firebaseVariables"
+import { updateFiltersData, updateSectionData } from "shared/const/firebaseVariables"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
+import { IFiltersData, INewFilter, IOtherData } from "../../types/types"
 
 export function AddNewFilter({
     data,
     triggerRefetch,
 }: {
-    data: ITranslatedOtherData | null
+    data: IOtherData | null
     triggerRefetch: () => void
 }) {
     const [newFilter, setNewFilter] = useState<INewFilter>(defaultNewFilter)
@@ -33,13 +33,15 @@ export function AddNewFilter({
         }
         setIsLoading(true)
 
-        const newData = JSON.parse(JSON.stringify(data)) as ITranslatedOtherData
+        const newFiltersData = JSON.parse(JSON.stringify(data.filtersData)) as IFiltersData
         try {
-            for (const lang of allLanguages) {
-                newData[lang].filtersData.filters[newFilter[lang]] = []
-
-                await updateSectionData(lang, "other", newData[lang])
+            const filterToUpload = {
+                id: newFiltersData.filters.length,
+                title: newFilter,
+                items: [],
             }
+            newFiltersData.filters.push(filterToUpload)
+            await updateFiltersData(newFiltersData)
             Alert.success("Success")
         } catch (error) {
             Alert.error("Error")
@@ -71,7 +73,7 @@ export function AddNewFilter({
                 <Input
                     value={newFilter[currentLanguage]}
                     onChange={value =>
-                        setNewFilter(prev => ({ ...prev, [currentLanguage]: value }))
+                        setNewFilter((prev: any) => ({ ...prev, [currentLanguage]: value }))
                     }
                 />
             </ModalEditorWithTranslation>
