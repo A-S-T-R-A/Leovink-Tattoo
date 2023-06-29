@@ -5,19 +5,19 @@ import { PortfolioPageFilters } from "./PortfolioPageFilters/PortfolioPageFilter
 import { PortfolioPageList } from "./PortfolioPageList/PortfolioPageList"
 import styles from "./PortfolioPage.module.scss"
 import {
-    fetchSectionData,
+    fetchGlobalData,
     getImagesDoc,
     reformatAndSortObjectValuesToArray,
 } from "shared/const/firebaseVariables"
 import { localStorageView } from "../lib/localStorageLib"
-import { IFilters, IFiltersData, IOtherData } from "features/portfolioFilters/types/types"
+import { IFilter } from "features/portfolioFilters/types/types"
 import { defaultLanguage } from "shared/const/languages"
 
 export function PortfolioPage() {
     const [data, setData] = useState<ITattooImage[]>([])
     const [view, setView] = useState<ViewType>(localStorageView.get() || "icons")
     const [filters, setFilters] = useState<{ [key: string]: string } | null>(null)
-    const [filtersData, setFiltersData] = useState<IFilters | null>(null)
+    const [filtersData, setFiltersData] = useState<IFilter[]>([])
 
     async function fetch() {
         const currentDoc = await getImagesDoc()
@@ -25,13 +25,13 @@ export function PortfolioPage() {
         const currentData = currentDoc.data()
         const dataArray = reformatAndSortObjectValuesToArray(currentData)
         setData(dataArray)
-        const data = (await fetchSectionData(defaultLanguage, "other", true)) as IOtherData
-        if (data) {
-            setFiltersData(data.filtersData.filters)
-            const f: { [key: string]: string } = { isLive: "" }
-            Object.keys(data.filtersData.filters).forEach(item => (f[item] = ""))
-            setFilters(f)
-        }
+
+        const data = await fetchGlobalData()
+
+        setFiltersData(data.filtersData.filters)
+        const f: { [key: string]: string } = { isLive: "" }
+        data.filtersData.filters.forEach(item => (f[item.title[defaultLanguage]] = ""))
+        setFilters(f)
     }
 
     useEffect(() => {
@@ -50,7 +50,6 @@ export function PortfolioPage() {
         }
 
         const newData = data.filter(item => {
-            console.log(item)
             return filters[keys[0]] === ""
                 ? true
                 : filters[keys[0]] === ("Unassigned" as any)
@@ -61,7 +60,7 @@ export function PortfolioPage() {
         return filter(newData, keys.slice(1))
     }
 
-    const keys = filtersData ? Object.keys(filtersData).sort() : []
+    const keys = filtersData.map(item => item.title[defaultLanguage])
     const filteredData = useMemo(() => {
         return filter(data, keys)
     }, [data, filters])
@@ -70,9 +69,7 @@ export function PortfolioPage() {
         if (!filtersData) return
         const initialFilters: { [key: string]: string } = { isLive: "" }
 
-        for (const key in filtersData) {
-            initialFilters[key] = ""
-        }
+        filtersData.forEach(item => (initialFilters[item.title[defaultLanguage]] = ""))
         setFilters(initialFilters)
     }
 

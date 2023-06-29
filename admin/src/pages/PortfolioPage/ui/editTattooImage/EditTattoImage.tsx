@@ -4,9 +4,9 @@ import { reformatArrayToObject, rewriteImagesDoc } from "shared/const/firebaseVa
 import styles from "./EditTattooImage.module.scss"
 import { Alert } from "shared/ui/CustomNotifications"
 import { defaultNewData } from "../../const/const"
-import { IFilters } from "features/portfolioFilters/types/types"
 import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
 import { ITattooImage } from "../../types/types"
+import { IFilter } from "features/portfolioFilters/types/types"
 
 export function EditTattooImage({
     id,
@@ -17,7 +17,7 @@ export function EditTattooImage({
 }: {
     id: number
     data: ITattooImage[]
-    filtersData: IFilters | null
+    filtersData: IFilter[]
     triggerRefetch: () => void
     unselectAllHandler: () => void
 }) {

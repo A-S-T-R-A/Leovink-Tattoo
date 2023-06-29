@@ -6,7 +6,8 @@ import { EditTattooImage } from "../editTattooImage/EditTattoImage"
 import { DeleteTattooImage } from "../deleteTattooImage/DeleteTattooImage"
 import { EditBulkTattooImages } from "../editBulkTattooImages/EditBulkTattooImages"
 import { DeleteBulkTattooImages } from "../deleteBulkTattooImages/DeleteBulkTattooImages"
-import { IFilters } from "features/portfolioFilters/types/types"
+import { IFilter } from "features/portfolioFilters/types/types"
+import { defaultLanguage } from "shared/const/languages"
 
 export function PortfolioPageList({
     data,
@@ -18,7 +19,7 @@ export function PortfolioPageList({
     data: ITattooImage[]
     filteredData: ITattooImage[]
     view: ViewType
-    filtersData: IFilters | null
+    filtersData: IFilter[]
     triggerRefetch: () => void
 }) {
     const [selected, setSelected] = useState<number[]>([])
@@ -43,7 +44,7 @@ export function PortfolioPageList({
         setSelected([])
     }
 
-    const filterKeys = filtersData ? Object.keys(filtersData).sort() : []
+    const filterKeys = filtersData.map(item => item.title[defaultLanguage])
 
     return view === "icons" ? (
         <div className={styles.icons}>

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { IFilters, INewFilter, IOtherData } from "../../types/types"
+import { IFilters, INewFilter, IOtherData, ITranslatedOtherData } from "../../types/types"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
 import { Input } from "shared/ui/Input/Input"
 import { allLanguages, defaultLanguage } from "shared/const/languages"
@@ -7,12 +7,13 @@ import { LanguageType } from "shared/types/types"
 import { Alert } from "shared/ui/CustomNotifications"
 import { defaultNewFilter } from "../../const/const"
 import { updateSectionData } from "shared/const/firebaseVariables"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function AddNewFilter({
     data,
     triggerRefetch,
 }: {
-    data: IOtherData | null
+    data: ITranslatedOtherData | null
     triggerRefetch: () => void
 }) {
     const [newFilter, setNewFilter] = useState<INewFilter>(defaultNewFilter)
@@ -32,13 +33,12 @@ export function AddNewFilter({
         }
         setIsLoading(true)
 
-        const newData = { ...data }
-
+        const newData = JSON.parse(JSON.stringify(data)) as ITranslatedOtherData
         try {
             for (const lang of allLanguages) {
-                newData.filtersData.filters[newFilter[lang]] = []
+                newData[lang].filtersData.filters[newFilter[lang]] = []
 
-                await updateSectionData(lang, "other", newData)
+                await updateSectionData(lang, "other", newData[lang])
             }
             Alert.success("Success")
         } catch (error) {
@@ -59,6 +59,7 @@ export function AddNewFilter({
 
     return (
         <>
+            <LoadingModal isLoading={isLoading} />
             <ModalEditorWithTranslation
                 isOpen={isOpen}
                 onClose={() => setIsOpen(true)}

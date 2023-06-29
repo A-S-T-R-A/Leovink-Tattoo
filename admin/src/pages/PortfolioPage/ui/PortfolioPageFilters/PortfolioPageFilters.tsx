@@ -1,13 +1,14 @@
 import { useMemo } from "react"
 import { Dropdown } from "shared/ui/Dropdown"
 import styles from "./PortfolioPageFilters.module.scss"
-import { IFilters, IFiltersData } from "features/portfolioFilters/types/types"
 import { tattooLiveDropdownOptions } from "../../const/const"
+import { IFilter, IFiltersData } from "features/portfolioFilters/types/types"
+import { defaultLanguage } from "shared/const/languages"
 
 interface IPortfolioPageFilters {
     filters: { [key: string]: string } | null
     setFilters: (val: any) => void
-    filtersData: IFilters | null
+    filtersData: IFilter[]
     resetFilters: () => void
 }
 
@@ -18,19 +19,13 @@ export function PortfolioPageFilters({
     resetFilters,
 }: IPortfolioPageFilters) {
     const dropdownOptions = useMemo(() => {
-        const options = []
-        for (const key in filtersData) {
-            const otherOptions = filtersData[key].map(item => ({
-                label: item.label,
-                value: item.key,
-            }))
-            const option = {
-                name: key,
-                options: [{ label: `No ${key}`, value: "Unassigned" }, ...otherOptions],
-            }
-            options.push(option)
-        }
-        return options
+        return filtersData?.map(item => ({
+            name: item.title[defaultLanguage],
+            options: item.items.map(innerItem => ({
+                label: innerItem.label[defaultLanguage],
+                value: innerItem.key,
+            })),
+        }))
     }, [filtersData])
 
     if (!filters) return null
@@ -41,9 +36,9 @@ export function PortfolioPageFilters({
                 options={tattooLiveDropdownOptions}
                 firstOptionText="Published and Unpublished"
                 value={filters.isLive}
-                onChange={value => setFilters((prev: IFiltersData) => ({ ...prev, isLive: value }))}
+                onChange={value => setFilters((prev: any) => ({ ...prev, isLive: value }))}
             />
-            {dropdownOptions.map((item, index) => {
+            {dropdownOptions?.map((item, index) => {
                 const { name, options } = item
 
                 return (
@@ -52,9 +47,7 @@ export function PortfolioPageFilters({
                         options={options}
                         firstOptionText={`All ${name}`}
                         value={filters[name] as string}
-                        onChange={value =>
-                            setFilters((prev: IFiltersData) => ({ ...prev, [name]: value }))
-                        }
+                        onChange={value => setFilters((prev: any) => ({ ...prev, [name]: value }))}
                     />
                 )
             })}

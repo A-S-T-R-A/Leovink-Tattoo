@@ -3,13 +3,14 @@ import { Dropdown } from "shared/ui/Dropdown"
 import { Modal } from "shared/ui/Modal"
 import styles from "./EditModal.module.scss"
 import { useMemo } from "react"
-import { IFilters } from "features/portfolioFilters/types/types"
 import { ITattooImage } from "../../../types/types"
+import { IFilter } from "features/portfolioFilters/types/types"
+import { defaultLanguage } from "shared/const/languages"
 
 interface IEditModalProps {
     length: number
     newData: ITattooImage
-    filtersData: IFilters | null
+    filtersData: IFilter[]
     isOpen: boolean
     isLoading: boolean
     onClose: () => void
@@ -39,19 +40,16 @@ export function EditModal(props: IEditModalProps) {
         })
 
     const dropdownOptions = useMemo(() => {
-        const options = []
-        for (const key in filtersData) {
-            const otherOptions = filtersData[key].map(item => ({
-                label: item.label,
-                value: item.key,
-            }))
-            const option = {
-                name: key,
-                options: [{ label: `No ${key}`, value: "Unassigned" }, ...otherOptions],
-            }
-            options.push(option)
-        }
-        return options
+        return filtersData.map(item => ({
+            name: item.title[defaultLanguage],
+            options: [
+                ...item.items.map(innerItem => ({
+                    label: innerItem.label[defaultLanguage],
+                    value: innerItem.key,
+                })),
+                { label: `No ${item.title[defaultLanguage]}`, value: "Unassigned" },
+            ],
+        }))
     }, [filtersData])
 
     return (

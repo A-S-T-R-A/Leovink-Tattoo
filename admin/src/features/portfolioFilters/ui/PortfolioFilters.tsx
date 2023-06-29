@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { fetchSectionData } from "shared/const/firebaseVariables"
 import styles from "./PortfolioFilters.module.scss"
 import { Fragment, useEffect, useMemo, useState } from "react"
-import { IFilters, IFiltersData, IOtherData } from "../types/types"
+import { IFilters, IFiltersData, IOtherData, ITranslatedOtherData } from "../types/types"
 import { Confirm } from "shared/ui/CustomNotifications"
 import { AddNewFilter } from "./AddNewFilter/AddNewFilter"
 import { AddNewItem } from "./AddNewItem/AddNewItem"
@@ -19,13 +19,15 @@ export function PortfolioFilters({
     isExpanded: boolean
     onOpen: () => void
 }) {
-    const [data, setData] = useState<IOtherData | null>(null)
+    const [data, setData] = useState<ITranslatedOtherData | null>(null)
 
     const navigate = useNavigate()
 
     async function fetch() {
-        const data = (await fetchSectionData(defaultLanguage, "other", true)) as IOtherData
-        setData(data)
+        const en = (await fetchSectionData(defaultLanguage, "other", true)) as IOtherData
+        const ro = (await fetchSectionData(defaultLanguage, "other", true)) as IOtherData
+        const ru = (await fetchSectionData(defaultLanguage, "other", true)) as IOtherData
+        setData({ en, ro, ru })
     }
 
     function triggerRefetch() {
@@ -42,7 +44,7 @@ export function PortfolioFilters({
         }
     }
 
-    const filters = data?.filtersData.filters
+    const filters = data?.[defaultLanguage].filtersData.filters
 
     return (
         <>
@@ -69,6 +71,8 @@ export function PortfolioFilters({
                         Object.entries(filters)
                             .filter(([key]) => key !== "artist")
                             .map(([key, value], index) => {
+                                const parentKey = { en: key, ro: key, ru: key }
+
                                 return (
                                     <Fragment key={index}>
                                         <div className={styles.titleContainer}>
@@ -85,7 +89,11 @@ export function PortfolioFilters({
                                             </div>
                                         ))}
                                         <div className={styles.infoContainer}>
-                                            <AddNewItem />
+                                            <AddNewItem
+                                                parentKey={parentKey}
+                                                data={data}
+                                                triggerRefetch={triggerRefetch}
+                                            />
                                         </div>
                                     </Fragment>
                                 )
