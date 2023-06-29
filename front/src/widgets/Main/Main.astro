@@ -3,7 +3,7 @@ import styles from "./Main.module.scss"
 import leovinkTitle from "./const/leovinkLogo.png"
 import leovinkCaption from "./const/leovCaption.png"
 import leovinkHorns from "./const/leovinkHorns.png"
-import layerBaseImg from "./const/layer-base.png"
+import layerBaseImg from "./const/old/layer-base.png"
 import layerMiddleImg from "./const/layer-middle.png"
 import layerFrontImg from "./const/layer-front.png"
 import dungeonImg from "./const/dungeon.jpg"
@@ -37,10 +37,33 @@ import { ScrollIcon } from "shared/ui/ScrollIcon/ScrollIcon"
 <script is:inline>
     const dungeon = document.getElementById("dungeon")
     const height = window.innerHeight
-
-    window.addEventListener('scroll', () => {
+    const onScroll = throttle(() => {
         const scroll = window.scrollY
         document.documentElement.style.setProperty('--scrollTop', `${scroll}px`)
-       dungeon.style.top = height-scroll > 0 ? `${height - scroll}px`: `0`
+    }, 50)
+
+    window.addEventListener('scroll', () => {
+    onScroll()
     })
+
+    function throttle(func, delay) {
+    let timeoutId;
+    let lastExecutedTime = 0;
+
+  return function (...args) {
+    const currentTime = new Date().getTime();
+
+    if (currentTime - lastExecutedTime < delay) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        lastExecutedTime = currentTime;
+        func(...args);
+      }, delay);
+    } else {
+      lastExecutedTime = currentTime;
+      func(...args);
+    }
+  };
+}
+
 </script>

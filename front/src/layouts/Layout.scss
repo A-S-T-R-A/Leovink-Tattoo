@@ -77,6 +77,6 @@ a:active {
     --index: calc(1vw + 1vh);
 
     --header-height: 60px;
-    --transition: transform 0.75s cubic-bezier(0.075, 0.5, 0, 1);
-    --transition-desktop: transform 0.3 ease;
+    --transition: transform 2s cubic-bezier(0.075, 0.5, 0, 1);
+    --transition-desktop: transform 0.3s ease-out;
 }
