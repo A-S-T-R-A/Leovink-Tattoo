@@ -6,7 +6,7 @@ import { TestimonialPage } from "pageComponents/TestimonialsPage/TestimonialsPag
 import Layout from "layouts/Layout.astro";
 import { ILayoutData, IOtherData, ITestimonialsData, fetchSectionData } from "shared/const/firebaseVariables";
 import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl";
-
+import cave from "widgets/Main/const/dungeon.webp"
 
 const language = getLangFromUrl(Astro.url)
 const testimonialsData = await fetchSectionData(language, "testimonials") as ITestimonialsData[];
@@ -16,7 +16,7 @@ const { sectionNames, formData, buttons } = otherData;
 const { cta } = buttons;
 ---
 
-<Layout>
+<Layout image={cave}>
     <PageWrapper title={layoutData.navlist[4].text} main={layoutData.navlist[0].text}>
         <Section>
             <TestimonialPage client:load cta={cta} data={testimonialsData}/>

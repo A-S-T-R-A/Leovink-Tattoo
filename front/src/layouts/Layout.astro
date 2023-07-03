@@ -7,11 +7,12 @@ import {LogoLink} from "shared/components/LogoLink/LogoLink"
 import type { LanguageType } from "shared/types/types";
 import {getLangFromUrl} from 'shared/lib/i18n/getLangFromUrl'
 
-
 const language: LanguageType =  getLangFromUrl(Astro.url)
 const otherData = await fetchSectionData(language, "other", true) as IOtherData;
 const {defaultLanguage} = otherData;
 const layoutData = await fetchSectionData(language, "layout",true) as ILayoutData;
+
+const { image } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -30,7 +31,7 @@ const layoutData = await fetchSectionData(language, "layout",true) as ILayoutDat
         <meta name="generator" content={Astro.generator} />
         <title>Leovink Tattoo</title>
     </head>
-    <body>
+    <body style={{backgroundImage: `url(${image})`}}>
         <Header client:load language={language} defaultLanguage={defaultLanguage} data={layoutData.navlist}>
             <LogoLink language={language} defaultLanguage={defaultLanguage}/>
         </Header>

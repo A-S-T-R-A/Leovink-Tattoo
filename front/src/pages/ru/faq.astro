@@ -6,7 +6,7 @@ import { FAQPage } from "pageComponents/FAQPage/FAQPage";
 import { FormSection } from "widgets/FormSection/FormSection";
 import { IFaqData, ILayoutData, IOtherData, fetchSectionData } from "shared/const/firebaseVariables";
 import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl";
-
+import cave from "widgets/Main/const/dungeon.webp"
 
 const language = getLangFromUrl(Astro.url)
 const faqData = await fetchSectionData(language, "faq") as IFaqData[];
@@ -16,7 +16,7 @@ const { sectionNames, formData, buttons } = otherData;
 const { cta } = buttons;
 ---
 
-<Layout>
+<Layout image={cave}>
     <PageWrapper title={layoutData.navlist[2].text} main={layoutData.navlist[0].text}>
         <Section>
             <FAQPage client:load data={faqData.filter(item=>item.title!=='index')}/>

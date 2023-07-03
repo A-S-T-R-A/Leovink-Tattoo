@@ -6,20 +6,23 @@ import leovinkHorns from "./const/leovinkHorns.png"
 import layerBaseImg from "./const/base-bg.png"
 import layerMiddleImg from "./const/layer-middle.png"
 import layerFrontImg from "./const/layer-front.png"
-import dungeonImg from "./const/dungeon.jpg"
+import dungeonImg from "./const/dungeon.webp"
+import established from "./const/est.webp"
 import { ScrollIcon } from "shared/ui/ScrollIcon/ScrollIcon"
 ---
         <header class={styles.mainWrapper}>
            <div id="main-container" class={styles.mainContainer}>
-                <div class={styles.textContainer}>
-                    <div style={{backgroundImage: `url(${leovinkHorns})`}} class={styles.horns} />
+            <div class={styles.textContainer}>
+                    <img src={leovinkHorns} class={styles.horns} />
                     <img src={leovinkTitle} alt="" class={styles.title} />
                     <img src={leovinkCaption} alt="" class={styles.caption} />
+                    <img class={styles.est} src={established} alt="">
                 </div>
                 <div
                 class={`${styles.layerBase} ${styles.layer}`}
-                    style={{ backgroundImage: `url(${layerBaseImg})` }}
-                ></div>
+                >
+              <img src={layerBaseImg} alt="">
+              </div>
                 <div
                 class={`${styles.layerMiddle} ${styles.layer}`}
                     style={{ backgroundImage: `url(${layerMiddleImg})` }}
@@ -28,6 +31,7 @@ import { ScrollIcon } from "shared/ui/ScrollIcon/ScrollIcon"
                 class={`${styles.layerFront} ${styles.layer}`}
                     style={{ backgroundImage: `url(${layerFrontImg})` }}
                 ></div>
+          
                 <ScrollIcon client:load className={styles.scroll} />
             </div>
         </header>
@@ -67,3 +71,5 @@ import { ScrollIcon } from "shared/ui/ScrollIcon/ScrollIcon"
 }
 
 </script>
+
+<!-- style={{ backgroundImage: `url(${layerBaseImg})` }} -->
