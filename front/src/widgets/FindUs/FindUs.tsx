@@ -7,7 +7,7 @@ export function FindUs() {
     return (
         <Section>
             <div className={styles.container}>
-                <Typography className={styles.text} component="l">
+                <Typography tag="p" className={styles.text} size="l">
                     The studio is located approximately a 7-minute walk from the exit of the
                     underground passage at the intersection of{" "}
                     <strong>Stefan cel Mare Boulevard and Izmail Street</strong>. The landmark is

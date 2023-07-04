@@ -18,6 +18,8 @@
     grid-template-columns: 1fr;
     gap: 30px;
     width: 100%;
+    justify-content: center;
+    align-items: end;
 
     .input {
         width: 100%;
@@ -27,16 +29,14 @@
 
 .vertical {
     width: fit-content;
-    .title {
-        font-size: 22px;
-    }
+
     .formContent {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        gap: 30px;
+        gap: 40px;
     }
 }
 
@@ -55,7 +55,7 @@
 @media (min-width: 869px) {
     .form {
         .formContent {
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: minmax(200px, 400px) minmax(200px, 400px) max-content;
         }
 
         .btn {

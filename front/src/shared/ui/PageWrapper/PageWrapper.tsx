@@ -16,12 +16,7 @@ export function PageWrapper({
     return (
         <div className={styles.wrapper}>
             <div className={styles.header}>
-                <Typography
-                    variant="h1"
-                    component="xxxxl"
-                    color="darkgray"
-                    className={styles.title}
-                >
+                <Typography tag="h1" size="xxxxl" color="darkgray" className={styles.title}>
                     {title}
                 </Typography>
                 <AppLink className={styles.back} to="/">

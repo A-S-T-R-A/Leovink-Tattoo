@@ -25,7 +25,9 @@ export function Form({
             id="formSection"
             className={classNames(styles.form, { [styles.vertical]: isVertical }, [className])}
         >
-            <Typography className={styles.title}>{title}</Typography>
+            <Typography tag="h2" size="xxl" className={styles.title}>
+                {title}
+            </Typography>
             <div className={styles.formContent}>
                 <Input
                     placeholder={placeholdersData.name}

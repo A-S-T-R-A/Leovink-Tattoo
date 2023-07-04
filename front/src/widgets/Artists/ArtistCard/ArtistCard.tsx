@@ -27,13 +27,13 @@ export function ArtistCard({
     return (
         <div className={styles.container}>
             <img src={img} alt="" className={styles.img} />
-            <Typography variant="h2" component="xxxl" className={styles.name}>
+            <Typography tag="h3" size="xxl" className={styles.name}>
                 {name}
             </Typography>
-            <Typography variant="h5" component="s" className={styles.specialization}>
+            <Typography tag="p" size="m" color="lightgray" className={styles.specialization}>
                 {specialization}
             </Typography>
-            <Typography variant="h5" component="s" className={styles.description}>
+            <Typography tag="p" size="m" color="lightgray" className={styles.description}>
                 {description}
             </Typography>
             <AppLink to={getLocalizedLink(slug)} className={styles.view}>
