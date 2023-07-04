@@ -4,7 +4,7 @@ import { PortfolioPage } from "pageComponents/PortfolioPage/PortfolioPage";
 import { fetchImagesData, fetchSectionData, IImagesData, ILayoutData, type IOtherData } from "shared/const/firebaseVariables";
 import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl";
 import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
-import cave from "widgets/Main/const/dungeon.jpg"
+import cave from "widgets/Main/const/dungeon.webp"
 
 const imagesData = await fetchImagesData() as IImagesData[];
 const language = getLangFromUrl(Astro.url)

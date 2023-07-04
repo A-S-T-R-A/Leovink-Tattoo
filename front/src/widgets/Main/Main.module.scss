@@ -10,7 +10,7 @@
         z-index: 10;
         width: 100%;
         height: calc(var(--index) * 10);
-        background-image: url(./const/ground.png);
+        background-image: url(./const/ground.webp);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -72,8 +72,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: -40px 10px 0;
-    z-index: 300;
+    margin: 0 10px;
+    z-index: 3;
     padding-bottom: 20px;
 }
 
@@ -82,9 +82,64 @@
     margin-bottom: 20px;
 }
 
-.caption,
+.caption {
+    width: 100%;
+    min-width: 320px;
+    font-size: 26px;
+    white-space: nowrap;
+    font-weight: 500;
+    color: #dbc0a2;
+    letter-spacing: 1px;
+}
+
 .est {
     width: 320px;
+    position: relative;
+    color: #dbc0a2;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+
+    &::after,
+    &::before {
+        position: absolute;
+        top: 50%;
+        content: "";
+        min-width: 30%;
+        border: 1px solid #dbc0a2;
+    }
+
+    &::after {
+        left: 0;
+    }
+
+    &::before {
+        right: 0;
+    }
+}
+
+@media (min-width: 481px) {
+    .caption {
+        font-size: 28px;
+    }
+    .est {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 768px) {
+    .caption {
+        font-size: 30px;
+    }
+    .est {
+        font-size: 22px;
+    }
+}
+
+@media (min-width: 961px) {
+    .caption {
+        font-size: 32px;
+    }
 }
 
 .horns {

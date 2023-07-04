@@ -8,6 +8,7 @@ import { ILayoutData, IOtherData, ITestimonialsData, fetchSectionData } from "sh
 import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl";
 import cave from "widgets/Main/const/dungeon.webp"
 
+
 const language = getLangFromUrl(Astro.url)
 const testimonialsData = await fetchSectionData(language, "testimonials") as ITestimonialsData[];
 const layoutData = await fetchSectionData(language, "layout", true) as ILayoutData;
