@@ -6,14 +6,12 @@
 
 body {
     font-family: "Montserrat", sans-serif;
-    background: var(--color-bg);
     color: var(--color-base);
     overflow-y: auto;
     overflow-x: hidden;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-color: rgb(75, 75, 75);
-    background-blend-mode: multiply;
+    background-color: var(--color-bg);
 }
 
 body::-webkit-scrollbar-track {
