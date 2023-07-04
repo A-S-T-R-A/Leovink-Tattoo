@@ -1,10 +1,10 @@
 .artistPagination {
     .swiper-pagination {
-        margin-bottom: -10px;
+        margin-bottom: -10px !important;
 
         .swiper-pagination-bullet {
             background-color: var(--color-lightgray);
-            margin: 0 6px;
+            margin: 0 6px !important;
         }
 
         .swiper-pagination-bullet-active {
