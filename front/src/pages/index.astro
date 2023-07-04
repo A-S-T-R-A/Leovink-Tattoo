@@ -1,6 +1,5 @@
 ---
 import Layout from "layouts/Layout.astro";
-import { Main } from "widgets/Main/Main";
 import { Portfolio } from "widgets/Portfolio/Portfolio";
 import { Steps } from "widgets/Steps/Steps";
 import { Services } from "widgets/Services/Services";
@@ -10,6 +9,7 @@ import { Faq } from "widgets/Faq/Faq";
 import { FormSection } from "widgets/FormSection/FormSection";
 import { fetchSectionData, IStepData, fetchImagesData, IServicesData, IArtistsData, IFaqData, ITestimonialsData, IOtherData, IImagesData } from "shared/const/firebaseVariables";
 import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl";
+import Main from "widgets/Main/Main.astro";
 
 
 const imagesData = await fetchImagesData() as IImagesData[];
@@ -25,14 +25,14 @@ const { portfolio, steps, services, artists, testimonials, faq, form } = section
 const { cta, showMore, viewGallery } = buttons;
 ---
 
-
 <Layout>
-    <Main client:load />
-    <Portfolio client:idle title={portfolio} button={showMore} fetchedData={imagesData} language={language} defaultLanguage={defaultLanguage}/>
-    <Steps client:load data={stepsData} title={steps} button={cta}/>
-    <Services client:idle data={servicesData} title={services} button={cta}/>
-    <Artists client:idle data={artistsData} title={artists} button={viewGallery} language={language} defaultLanguage={defaultLanguage}/>
-    <Testimonials data={testimonialsData.slice(0,2)} title={testimonials} showMore={showMore} cta={cta} language={language} defaultLanguage={defaultLanguage}/>
-    <Faq client:idle data={faqData} title={faq} button={showMore} language={language} defaultLanguage={defaultLanguage}/>
-    <FormSection data={formData} title={form} button={cta}/>
+    <Main >
+        <Portfolio client:idle title={portfolio} button={showMore} fetchedData={imagesData} language={language} defaultLanguage={defaultLanguage}/>
+        <Steps client:load data={stepsData} title={steps} button={cta}/>
+        <Services client:idle data={servicesData} title={services} button={cta}/>
+        <Artists client:idle data={artistsData} title={artists} button={viewGallery} language={language} defaultLanguage={defaultLanguage}/>
+        <Testimonials data={testimonialsData.slice(0,2)} title={testimonials} showMore={showMore} cta={cta} language={language} defaultLanguage={defaultLanguage}/>
+        <Faq client:idle data={faqData} title={faq} button={showMore} language={language} defaultLanguage={defaultLanguage}/>
+        <FormSection data={formData} title={form} button={cta}/>
+    </Main>
 </Layout>

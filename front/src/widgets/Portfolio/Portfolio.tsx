@@ -32,7 +32,7 @@ export function Portfolio({
     }
     const link = language === defaultLanguage ? "/portfolio" : `/${language}/portfolio`
     return (
-        <Section title={title}>
+        <Section title={title} wrapperClassName={styles.wrapper}>
             <ModalGallery
                 isOpen={isOpen}
                 onClose={() => setIsOpen(false)}

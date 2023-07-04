@@ -4,7 +4,7 @@ import Layout from "layouts/Layout.astro";
 import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
 import { ArtistPage } from "pageComponents/ArtistPage/ArtistPage";
 import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl";
-
+import cave from "widgets/Main/const/dungeon.webp"
 
 const language = getLangFromUrl(Astro.url)
 const {artistSlug} = Astro.params
@@ -19,7 +19,7 @@ const { sectionNames, formData, buttons } = otherData;
 const { cta } = buttons;
 ---
 
-<Layout>
+<Layout image={cave}>
     <PageWrapper title={sectionNames.artists} main={layoutData.navlist[0].text}>
         <ArtistPage 
         client:load 
