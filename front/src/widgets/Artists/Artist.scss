@@ -1,0 +1,14 @@
+.artistPagination {
+    .swiper-pagination {
+        margin-bottom: -10px;
+
+        .swiper-pagination-bullet {
+            background-color: var(--color-lightgray);
+            margin: 0 6px;
+        }
+
+        .swiper-pagination-bullet-active {
+            background-color: var(--color-accent);
+        }
+    }
+}
