@@ -11,6 +11,11 @@
 
 .logoContainer {
     width: 100%;
+
+    & > a {
+        margin: 0;
+    }
+
     img {
         width: 100px;
     }
@@ -59,10 +64,19 @@
 
 @media (min-width: 769px) {
     .container {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+
+        .locationContainer,
+        .contactsContainer,
+        .followContainer {
+            width: auto;
+        }
 
         .logoContainer {
-            grid-column: 1;
+            width: auto;
+            padding-top: 5px;
         }
 
         .socials {

@@ -27,7 +27,11 @@ export function FaqBlock({ data, isWithoutTitle }: { data: IFaqData; isWithoutTi
 
     return (
         <div className={styles.container}>
-            {!isWithoutTitle && <Typography className={styles.title}>{title}</Typography>}
+            {!isWithoutTitle && (
+                <Typography tag="h2" size="xxxl" weight="five" className={styles.title}>
+                    {title}
+                </Typography>
+            )}
             <div className={styles.list}>
                 {questions.map((item, index) => {
                     const { question, answer } = item
@@ -38,11 +42,7 @@ export function FaqBlock({ data, isWithoutTitle }: { data: IFaqData; isWithoutTi
                                 className={styles.question}
                                 onClick={() => questionClickHandler(index)}
                             >
-                                <Typography
-                                    variant="h3"
-                                    component="xl"
-                                    className={styles.questionTitle}
-                                >
+                                <Typography tag="h3" size="xl" className={styles.questionTitle}>
                                     {question}
                                 </Typography>
 
@@ -63,7 +63,7 @@ export function FaqBlock({ data, isWithoutTitle }: { data: IFaqData; isWithoutTi
                                 )}
                             >
                                 <div>
-                                    <Typography color="lightgray" className={styles.answer}>
+                                    <Typography tag="p" color="lightgray" className={styles.answer}>
                                         {answer}
                                     </Typography>
                                 </div>

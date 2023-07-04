@@ -29,18 +29,13 @@ export function Steps({
                             style={{ flex: index === selected ? "3" : "2" }}
                         >
                             <img src={img} alt="step" className={styles.img} />
-                            <Typography
-                                className={styles.index}
-                                variant="h4"
-                                component="xxxl"
-                                color="base"
-                            >
+                            <Typography className={styles.index} tag="p" size="xxxl" color="base">
                                 {"0" + (index + 1)}
                             </Typography>
                             <div className={styles.readMoreBtn} onClick={() => setSelected(index)}>
                                 <Typography
-                                    variant="h4"
-                                    component="m"
+                                    tag="p"
+                                    size="m"
                                     color="accent"
                                     className={classNames(styles.readMore, {
                                         [styles.selectedReadMore]: selected === index,
@@ -57,9 +52,10 @@ export function Steps({
                             <div className={styles.textContainer}>
                                 <Typography
                                     className={styles.title}
-                                    variant="h4"
-                                    component="xxl"
+                                    tag="h3"
+                                    size="xxl"
                                     color="base"
+                                    weight="five"
                                 >
                                     {title}
                                 </Typography>
@@ -67,8 +63,9 @@ export function Steps({
                                     className={classNames(styles.description, {
                                         [styles.selectedDescription]: selected === index,
                                     })}
+                                    tag="p"
                                     color="base"
-                                    component="m"
+                                    size="m"
                                 >
                                     {description}
                                 </Typography>
