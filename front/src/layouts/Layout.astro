@@ -31,7 +31,8 @@ const { image } = Astro.props;
         <meta name="generator" content={Astro.generator} />
         <title>Leovink Tattoo</title>
     </head>
-    <body style={{backgroundImage: `url(${image})`}}>
+    <body>
+        {image && <div class='layout__dungeon-background' style={{backgroundImage: `url(${image})`}} />}
         <Header client:load language={language} defaultLanguage={defaultLanguage} data={layoutData.navlist}>
             <LogoLink language={language} defaultLanguage={defaultLanguage}/>
         </Header>

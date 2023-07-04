@@ -9,9 +9,15 @@ body {
     color: var(--color-base);
     overflow-y: auto;
     overflow-x: hidden;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     background-color: var(--color-bg);
+}
+
+.layout__dungeon-background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 
 body::-webkit-scrollbar-track {
