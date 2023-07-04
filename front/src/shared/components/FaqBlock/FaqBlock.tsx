@@ -28,7 +28,7 @@ export function FaqBlock({ data, isWithoutTitle }: { data: IFaqData; isWithoutTi
     return (
         <div className={styles.container}>
             {!isWithoutTitle && (
-                <Typography tag="h2" size="xxl" className={styles.title}>
+                <Typography tag="h2" size="xxxl" weight="five" className={styles.title}>
                     {title}
                 </Typography>
             )}

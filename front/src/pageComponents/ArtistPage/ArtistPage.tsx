@@ -48,10 +48,12 @@ export function ArtistPage({
                         <Typography tag="h2" size="xxxl" className={styles.name}>
                             {name}
                         </Typography>
-                        <Typography tag="p" className={styles.specialization}>
+                        <Typography tag="p" color="lightgray" className={styles.specialization}>
                             {specialization}
                         </Typography>
-                        <Typography tag="p">{description}</Typography>
+                        <Typography tag="p" color="lightgray">
+                            {description}
+                        </Typography>
                     </div>
                 </div>
                 <Form isVertical placeholdersData={formData} title={formTitle} cta={cta} />
