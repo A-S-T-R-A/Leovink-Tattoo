@@ -1,24 +1,24 @@
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
-import {
-    tattooArtistsDropdownOptions,
-    tattooColorsDropdownOptions,
-    tattooStylesDropdownOptions,
-} from "shared/const/filters"
-import { ITattooImage, LanguageType } from "shared/types/types"
 import { Dropdown } from "shared/ui/Dropdown"
 import { Modal } from "shared/ui/Modal"
 import styles from "./EditModal.module.scss"
+import { useMemo } from "react"
+import { ITattooImage } from "../../../types/types"
+import { IFilter } from "features/portfolioFilters/types/types"
+import { defaultLanguage } from "shared/const/languages"
+import { LanguageType } from "shared/types/types"
 import { Textarea } from "shared/ui/Textarea/Textarea"
 import { Languages } from "shared/components/Languages/Languages"
 
 interface IEditModalProps {
     length: number
-    data: ITattooImage
+    newData: ITattooImage
+    filtersData: IFilter[]
     isOpen: boolean
     isLoading: boolean
     currentLanguage: LanguageType
     onClose: () => void
-    setData: (data: any) => void
+    setNewData: (data: any) => void
     saveClickHandler: () => void
     discardClickHandler: () => void
     onChangeLanguage: (language: LanguageType) => void
@@ -28,11 +28,12 @@ export function EditModal(props: IEditModalProps) {
     const {
         currentLanguage,
         length,
-        data,
+        newData,
+        filtersData,
         isOpen,
         isLoading,
         onClose,
-        setData,
+        setNewData,
         saveClickHandler,
         discardClickHandler,
         onChangeLanguage,
@@ -45,6 +46,19 @@ export function EditModal(props: IEditModalProps) {
             return { label: v, value: v }
         })
 
+    const dropdownOptions = useMemo(() => {
+        return filtersData.map(item => ({
+            name: item.title[defaultLanguage],
+            options: [
+                ...item.items.map(innerItem => ({
+                    label: innerItem.label[defaultLanguage],
+                    value: innerItem.key,
+                })),
+                { label: `No ${item.title[defaultLanguage]}`, value: "Unassigned" },
+            ],
+        }))
+    }, [filtersData])
+
     return (
         <Modal isOpen={isOpen || isLoading} onClose={onClose}>
             {isLoading ? (
@@ -55,51 +69,40 @@ export function EditModal(props: IEditModalProps) {
                         id:
                         <Dropdown
                             options={dropdownNumbers}
-                            value={data.id?.toString()}
-                            onChange={id => setData((prev: ITattooImage) => ({ ...prev, id: +id }))}
+                            value={newData.id?.toString()}
+                            onChange={id =>
+                                setNewData((prev: ITattooImage) => ({ ...prev, id: +id }))
+                            }
                         />
                     </div>
                     <div>
                         img:
-                        <ModalImage url={data.img} className={styles.img} />
+                        <ModalImage url={newData.img} className={styles.img} />
                     </div>
-                    <div>
-                        artist:
-                        <Dropdown
-                            options={tattooArtistsDropdownOptions}
-                            value={data.artist}
-                            onChange={artist =>
-                                setData((prev: ITattooImage) => ({ ...prev, artist }))
-                            }
-                        />
-                    </div>
-                    <div>
-                        style:{" "}
-                        <Dropdown
-                            options={tattooStylesDropdownOptions}
-                            value={data.style}
-                            onChange={style =>
-                                setData((prev: ITattooImage) => ({ ...prev, style }))
-                            }
-                        />
-                    </div>
-                    <div>
-                        color:{" "}
-                        <Dropdown
-                            options={tattooColorsDropdownOptions}
-                            value={data.color}
-                            onChange={color =>
-                                setData((prev: ITattooImage) => ({ ...prev, color }))
-                            }
-                        />
-                    </div>
+                    {dropdownOptions.map(item => {
+                        return (
+                            <div>
+                                {item.name}:
+                                <Dropdown
+                                    options={item.options}
+                                    value={newData.filters[item.name] as string}
+                                    onChange={value =>
+                                        setNewData((prev: ITattooImage) => ({
+                                            ...prev,
+                                            filters: { ...prev.filters, [item.name]: value },
+                                        }))
+                                    }
+                                />
+                            </div>
+                        )
+                    })}
                     <div className={styles.description}>
                         <p>description:</p>
                         <div>
                             <Textarea
-                                value={data.alt[currentLanguage]}
+                                value={newData.alt[currentLanguage]}
                                 onChange={alt =>
-                                    setData((prev: ITattooImage) => ({
+                                    setNewData((prev: ITattooImage) => ({
                                         ...prev,
                                         alt: { ...prev.alt, [currentLanguage]: alt },
                                     }))
@@ -115,11 +118,11 @@ export function EditModal(props: IEditModalProps) {
                         published:
                         <input
                             type="checkbox"
-                            checked={data.isLive}
+                            checked={newData.filters.isLive}
                             onChange={e =>
-                                setData((prev: ITattooImage) => ({
+                                setNewData((prev: ITattooImage) => ({
                                     ...prev,
-                                    isLive: e.target.checked,
+                                    filters: { ...prev.filters, isLive: e.target.checked },
                                 }))
                             }
                         />

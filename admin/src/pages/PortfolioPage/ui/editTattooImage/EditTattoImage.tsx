@@ -1,67 +1,56 @@
 import { useState } from "react"
-import { ArtistType, ColorType, ITattooImage, LanguageType, StyleType } from "shared/types/types"
+import { ArtistType, ColorType, LanguageType, StyleType } from "shared/types/types"
 import { EditModal } from "./EditModal/EditModal"
-import { getImagesDoc, rewriteImagesDoc } from "shared/const/firebaseVariables"
+import { reformatArrayToObject, rewriteImagesDoc } from "shared/const/firebaseVariables"
 import styles from "./EditTattooImage.module.scss"
-import { isShallowEqual } from "shared/lib/isShallowEqual/isShallowEqual"
 import { Alert } from "shared/ui/CustomNotifications"
-import { defaultLanguage } from "shared/const/languages"
+import { defaultNewData } from "../../const/const"
 import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
+import { ITattooImage } from "../../types/types"
+import { IFilter } from "features/portfolioFilters/types/types"
+import { defaultLanguage } from "shared/const/languages"
 
 export function EditTattooImage({
     id,
+    data,
+    filtersData,
     triggerRefetch,
     unselectAllHandler,
 }: {
     id: number
+    data: ITattooImage[]
+    filtersData: IFilter[]
     triggerRefetch: () => void
     unselectAllHandler: () => void
 }) {
     const [isOpen, setIsOpen] = useState(false)
-    const defaultData = {
-        id: -1,
-        img: "",
-        artist: "" as ArtistType,
-        style: "" as StyleType,
-        color: "" as ColorType,
-        alt: { en: "", ru: "", ro: "" },
-    }
+    const [newData, setNewData] = useState<ITattooImage>(defaultNewData)
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>(defaultLanguage)
-    const [newData, setNewData] = useState<ITattooImage>(defaultData)
     const [allImagesData, setAllImagesData] = useState<any>([])
     const [isLoading, setIsLoading] = useState(false)
 
-    const length = Object.keys(allImagesData).length
+    const length = data.length
 
     function onChangeLanguage(lang: LanguageType) {
         setCurrentLanguage(lang)
     }
 
     async function openClickHandler() {
-        try {
-            const currentDoc = await getImagesDoc()
-            if (!currentDoc) return
-            const currentData = currentDoc.data()
-            const currentImg = { id: id, ...currentData[id] }
-            setAllImagesData(currentData)
-            setNewData(currentImg)
-            setIsOpen(true)
-        } catch (error) {
-            Alert.error("Unexpected Error")
-            setIsOpen(false)
-        }
+        const currentImg = { ...data[id], id: id }
+        setNewData(currentImg)
+        setIsOpen(true)
     }
 
     async function saveClickHandler() {
         if (!newData) return
         const { id: _, ...restNewData } = newData
-        if (isDeepEqual(allImagesData[id], restNewData) && id === newData.id) {
+        if (isDeepEqual(data[id], newData) && id === newData.id) {
             Alert.info("Nothing to Save")
             return
         }
 
         setIsLoading(true)
-        const dataToUpload = { ...allImagesData }
+        const dataToUpload = reformatArrayToObject(data)
         dataToUpload[id] = restNewData
         try {
             if (id === newData.id) {
@@ -73,7 +62,7 @@ export function EditTattooImage({
                 const minId = Math.min(from, to)
                 const maxId = Math.max(from, to)
 
-                const queue = Object.keys(allImagesData)
+                const queue = Object.keys(data)
                     .sort((a, b) => +a - +b)
                     .slice(minId, maxId + 1)
 
@@ -81,7 +70,7 @@ export function EditTattooImage({
                 const itemsToPut = queue.filter(item => +item != from)
 
                 for (let i = 0; i < slots.length; i++) {
-                    dataToUpload[slots[i]] = allImagesData[itemsToPut[i]]
+                    dataToUpload[slots[i]] = dataToUpload[itemsToPut[i]]
                 }
 
                 dataToUpload[to] = restNewData
@@ -100,8 +89,9 @@ export function EditTattooImage({
     }
 
     function discardClickHandler() {
-        setNewData(defaultData)
+        setNewData(defaultNewData)
         setIsOpen(false)
+        setIsLoading(false)
     }
 
     function onClose() {
@@ -112,11 +102,12 @@ export function EditTattooImage({
         <>
             <EditModal
                 length={length}
-                data={newData}
+                newData={newData}
                 isOpen={isOpen}
                 isLoading={isLoading}
                 onClose={onClose}
-                setData={setNewData}
+                setNewData={setNewData}
+                filtersData={filtersData}
                 currentLanguage={currentLanguage}
                 onChangeLanguage={onChangeLanguage}
                 saveClickHandler={saveClickHandler}

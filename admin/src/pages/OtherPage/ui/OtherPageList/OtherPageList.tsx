@@ -5,6 +5,7 @@ import styles from "./OtherPageList.module.scss"
 import { IOtherData } from "../../types/type"
 import { AddBtn } from "../AddBtn/AddBtn"
 import { useNavigate } from "react-router-dom"
+import { PortfolioFilters } from "features/portfolioFilters"
 
 export function OtherPageList({ otherData }: { otherData: IOtherData }) {
     const sectionsName = Object.values(otherData.sectionNames)
@@ -19,7 +20,7 @@ export function OtherPageList({ otherData }: { otherData: IOtherData }) {
 
     return (
         <div className={styles.table}>
-            <div>
+            {/*   <div>
                 <div
                     className={styles.titleContainer}
                     onClick={() => setSectionOpen("sectionsName")}
@@ -59,59 +60,19 @@ export function OtherPageList({ otherData }: { otherData: IOtherData }) {
                         })}
                     </div>
                 )}
-            </div>
+            </div> */}
             <div>
-                <div className={styles.titleContainer} onClick={() => setSectionOpen("filters")}>
-                    <div className={styles.title}>filters 🡇</div>
-                </div>
-                {sectionOpen === "filters" && (
-                    <div>
-                        <div className={styles.listContainer}>
-                            <div className={styles.titleContainer}>Tattoo Artists</div>
-                            {otherData.filters.artist.map(item => {
-                                return (
-                                    <div className={styles.infoContainer}>
-                                        <p>Tattoo Artist: {item}</p>
-                                        <button onClick={redirectToPage}>edit</button>
-                                    </div>
-                                )
-                            })}
-                            {/*  <a href="/artist">Add New Artist</a> */}
-                            <button onClick={redirectToPage}>add new artist</button>
-                        </div>
-                        <div className={styles.listContainer}>
-                            <div className={styles.titleContainer}>Tattoo Styles</div>
-                            {otherData.filters.style.map(item => {
-                                return (
-                                    <div className={styles.infoContainer}>
-                                        <p>Tattoo Style: {item}</p>
-                                        <EditBtn label="Tattoo style" sectionName={item} />
-                                    </div>
-                                )
-                            })}
-                            <AddBtn label="New Tattoo Color" />
-                        </div>
-                        <div className={styles.listContainer}>
-                            <div className={styles.titleContainer}>Tattoo Colors</div>
-                            {otherData.filters.color.map(item => {
-                                return (
-                                    <div className={styles.infoContainer}>
-                                        <p>Tattoo color: {item}</p>
-                                        <EditBtn label="Tattoo color" sectionName={item} />
-                                    </div>
-                                )
-                            })}
-                            <AddBtn label="New Tattoo Color" />
-                        </div>
-                    </div>
-                )}
+                <PortfolioFilters
+                    isExpanded={sectionOpen === "filters"}
+                    onOpen={() => setSectionOpen("filters")}
+                />
             </div>
-            <div className={styles.languageContainer}>
+            {/* <div className={styles.languageContainer}>
                 <div className={styles.title}>Default language: {otherData.defaultLanguage}</div>
                 <div className={styles.buttons}>
                     <ChangeDefaultLanguageBtn />
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

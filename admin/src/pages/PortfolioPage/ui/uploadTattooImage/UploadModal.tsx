@@ -12,18 +12,14 @@ import {
     TATTOO_IMAGES_BUCKET,
     getImagesDoc,
 } from "shared/const/firebaseVariables"
-import { disableUi } from "shared/lib/disableUi/disableUi"
 import { Alert } from "shared/ui/CustomNotifications"
+import { UploadTattooImageType } from "../../types/types"
 
 export function UploadModal({ triggerRefetch }: { triggerRefetch: () => void }) {
     const [isOpen, setIsOpen] = useState(false)
     const [files, setFiles] = useState<FilePondFile[]>([])
     const [progress, setProgress] = useState<string[]>([])
     const [isLoading, setIsLoading] = useState(false)
-
-    useEffect(() => {
-        isLoading ? disableUi.disable() : disableUi.enable()
-    }, [isLoading])
 
     async function uploadImagesToBucket(files: FilePondFile[]): Promise<string[]> {
         const uploadPromises = files.map((item, index) => {
@@ -85,14 +81,13 @@ export function UploadModal({ triggerRefetch }: { triggerRefetch: () => void }) 
             const newId = docLength + index
 
             return new Promise((res, rej) => {
-                const newData = {
+                const newData: UploadTattooImageType = {
                     [newId]: {
                         img: item,
                         alt: { en: "", ro: "", ru: "" },
-                        artist: "",
-                        style: "",
-                        color: "",
-                        isLive: false,
+                        filters: {
+                            isLive: false,
+                        },
                     },
                 }
 

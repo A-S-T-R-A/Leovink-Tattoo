@@ -7,11 +7,15 @@ import {
     collection,
     deleteDoc,
     doc,
+    getDoc,
     getDocs,
     query,
+    updateDoc,
     where,
 } from "firebase/firestore"
 import { Alert } from "shared/ui/CustomNotifications"
+import { allLanguages } from "./languages"
+import { IFiltersData, IOtherData } from "features/portfolioFilters/types/types"
 
 const IS_DEV = import.meta.env.MODE === "development"
 
@@ -29,6 +33,8 @@ const LANGUAGE_DOCUMENT = {
     ro: "romanian",
     ru: "russian",
 }
+
+export const GLOBAL_DATA = "global"
 
 const SECTION_COLLECTION = {
     steps: "steps",
@@ -131,6 +137,41 @@ export async function fetchSectionData(
     }
 } */
 
+/* const newFiltersData = {
+    filtersData: {
+        reset: "Reset filters",
+        filters: {
+            artist: [
+                { key: "Dinu", label: "Dinu" },
+                { key: "Katia", label: "Katia" },
+                { key: "Nastia", label: "Nastia" },
+            ],
+            color: [{ key: "Black", label: "Black" }],
+            style: [{ key: "Realism", label: "Realism" }],
+            pussies: [
+                { key: "Felicia", label: "Felicia" },
+                { key: "Bob", label: "Bob" },
+            ],
+        },
+    },
+} */
+
+/* export async function uploadOtherData() {
+    for (const lang of allLanguages) {
+        const ref = collection(
+            db,
+            DATA_COLLECTION,
+            LANGUAGE_DOCUMENT[lang],
+            SECTION_COLLECTION.other
+        )
+        const docs = await getDocs(ref)
+        if (docs.empty) return
+        const d = docs.docs[0]
+        await addDoc(ref, newFiltersData)
+        deleteDoc(doc(ref, d.id))
+    }
+} */
+
 export async function updateSectionData(
     language: keyof typeof LANGUAGE_DOCUMENT,
     section: keyof typeof SECTION_COLLECTION,
@@ -189,4 +230,16 @@ export async function deleteImageFromBucket(oldImgUrl: string, path: string) {
     const imgName = getImageNameByUrl(oldImgUrl)
     const imgRef = ref(storage, `${path}/${imgName}`)
     await deleteObject(imgRef)
+}
+
+export async function fetchGlobalData(): Promise<IOtherData> {
+    const ref = doc(db, DATA_COLLECTION, GLOBAL_DATA)
+    const newDoc = await getDoc(ref)
+    const newData = newDoc.data()
+    return newData as IOtherData
+}
+
+export async function updateFiltersData(filtersData: IFiltersData) {
+    const ref = doc(db, DATA_COLLECTION, GLOBAL_DATA)
+    await updateDoc(ref, { filtersData } as any)
 }

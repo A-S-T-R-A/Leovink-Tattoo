@@ -1,23 +1,24 @@
 import { useEffect, useState, useMemo } from "react"
-import { IFiltersData, ViewType } from "../types/types"
+import { ITattooImage, ViewType } from "../types/types"
 import { PortfolioPageHeader } from "./PortfolioPageHeader/PortfolioPageHeader"
 import { PortfolioPageFilters } from "./PortfolioPageFilters/PortfolioPageFilters"
 import { PortfolioPageList } from "./PortfolioPageList/PortfolioPageList"
-import { ITattooImage } from "shared/types/types"
 import styles from "./PortfolioPage.module.scss"
-import { getImagesDoc, reformatAndSortObjectValuesToArray } from "shared/const/firebaseVariables"
+import {
+    fetchGlobalData,
+    getImagesDoc,
+    reformatAndSortObjectValuesToArray,
+} from "shared/const/firebaseVariables"
 import { localStorageView } from "../lib/localStorageLib"
+import { IFilter } from "features/portfolioFilters/types/types"
+import { defaultLanguage } from "shared/const/languages"
 
 export function PortfolioPage() {
     const [data, setData] = useState<ITattooImage[]>([])
     const [isDataLoading, setIsDataLoading] = useState(false)
     const [view, setView] = useState<ViewType>(localStorageView.get() || "icons")
-    const [filters, setFilters] = useState<IFiltersData>({
-        artist: "",
-        style: "",
-        color: "",
-        isLive: "",
-    })
+    const [filters, setFilters] = useState<{ [key: string]: string } | null>(null)
+    const [filtersData, setFiltersData] = useState<IFilter[]>([])
 
     async function fetch() {
         setIsDataLoading(true)
@@ -27,6 +28,13 @@ export function PortfolioPage() {
         const currentData = currentDoc.data()
         const dataArray = reformatAndSortObjectValuesToArray(currentData)
         setData(dataArray)
+
+        const d = await fetchGlobalData()
+
+        setFiltersData(d.filtersData.filters)
+        const f: { [key: string]: string } = { isLive: "" }
+        d.filtersData.filters.forEach((item: any) => (f[item.title[defaultLanguage]] = ""))
+        setFilters(f)
     }
 
     function triggerRefetch() {
@@ -38,36 +46,40 @@ export function PortfolioPage() {
         fetch()
     }, [])
 
-    const filteredData = useMemo(() => {
-        return data
-            .filter(item =>
-                filters.artist === ""
-                    ? true
-                    : filters.artist === ("Unassigned" as any)
-                    ? item.artist === ""
-                    : item.artist === (filters.artist as any)
-            )
-            .filter(item =>
-                filters.style === ""
-                    ? true
-                    : filters.style === ("Unassigned" as any)
-                    ? item.style === ""
-                    : item.style === (filters.style as any)
-            )
-            .filter(item =>
-                filters.color === ""
-                    ? true
-                    : filters.color === ("Unassigned" as any)
-                    ? item.color === ""
-                    : item.color === (filters.color as any)
-            )
-            .filter(
+    function filter(data: ITattooImage[], keys: string[] = []) {
+        if (!filters) return []
+        if (keys.length === 0) {
+            return data.filter(
                 item =>
                     filters.isLive === "" ||
-                    (item.isLive && filters.isLive === "live") ||
-                    (!item.isLive && filters.isLive === "not_live")
+                    (item.filters.isLive && filters.isLive === "live") ||
+                    (!item.filters.isLive && filters.isLive === "not_live")
             )
-    }, [filters, data])
+        }
+
+        const newData = data.filter(item => {
+            return filters[keys[0]] === ""
+                ? true
+                : filters[keys[0]] === ("Unassigned" as any)
+                ? item.filters[keys[0]] === ""
+                : item.filters[keys[0]] === (filters[keys[0]] as any)
+        })
+
+        return filter(newData, keys.slice(1))
+    }
+
+    const keys = filtersData.map(item => item.title[defaultLanguage])
+    const filteredData = useMemo(() => {
+        return filter(data, keys)
+    }, [data, filters])
+
+    function resetFilters() {
+        if (!filtersData) return
+        const initialFilters: { [key: string]: string } = { isLive: "" }
+
+        filtersData.forEach(item => (initialFilters[item.title[defaultLanguage]] = ""))
+        setFilters(initialFilters)
+    }
 
     if (isDataLoading) {
         return (
@@ -75,21 +87,24 @@ export function PortfolioPage() {
                 <h2>Loading...</h2>
             </div>
         )
-    } else {
-        return (
-            <div className={styles.wrapper}>
-                <PortfolioPageHeader
-                    view={view}
-                    setView={setView}
-                    triggerRefetch={triggerRefetch}
-                />
-                <PortfolioPageFilters filters={filters} setFilters={setFilters} />
-                <PortfolioPageList
-                    data={filteredData}
-                    view={view}
-                    triggerRefetch={triggerRefetch}
-                />
-            </div>
-        )
     }
+
+    return (
+        <div className={styles.wrapper}>
+            <PortfolioPageHeader view={view} setView={setView} triggerRefetch={triggerRefetch} />
+            <PortfolioPageFilters
+                filtersData={filtersData}
+                filters={filters}
+                setFilters={setFilters}
+                resetFilters={resetFilters}
+            />
+            <PortfolioPageList
+                data={data}
+                filteredData={filteredData}
+                view={view}
+                triggerRefetch={triggerRefetch}
+                filtersData={filtersData}
+            />
+        </div>
+    )
 }
