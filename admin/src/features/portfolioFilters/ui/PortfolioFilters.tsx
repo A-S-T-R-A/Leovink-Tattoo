@@ -110,7 +110,13 @@ export function PortfolioFilters({
                                             </p>
                                         </Typography>
                                         <EditItem />
-                                        <DeleteItem />
+                                        <DeleteItem
+                                            data={data}
+                                            triggerRefetch={triggerRefetch}
+                                            parentId={item.id}
+                                            parentTitle={item.title[defaultLanguage]}
+                                            filterKey={innerItem.key}
+                                        />
                                     </div>
                                 ))}
                                 <div className={styles.infoContainer}>
