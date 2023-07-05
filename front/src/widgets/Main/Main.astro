@@ -33,7 +33,7 @@ import {LazyLoadingImage} from "./LazyLoadingImage/LazyLoadingImage"
                     src={layerMiddleImg}
                     backgroundImage={layerMiddleImgLowRes}
                     className={`${styles.layerMiddle} ${styles.layer}`}
-                    imgClassName={styles.baseImg}
+                    imgClassName={styles.middleImg}
                 />
 
                 <LazyLoadingImage
@@ -41,7 +41,7 @@ import {LazyLoadingImage} from "./LazyLoadingImage/LazyLoadingImage"
                     src={layerFrontImg}
                     backgroundImage={layerFrontImgLowRes}
                     className={`${styles.layerFront} ${styles.layer}`}
-                    imgClassName={styles.baseImg}
+                    imgClassName={styles.frontImg}
                 />
           
                 <ScrollIcon client:load className={styles.scroll} />

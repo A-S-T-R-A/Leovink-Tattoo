@@ -2,7 +2,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: bottom;
-    transition: all 1s ease;
+    transition: filter 1s ease, opacity 1s ease, var(--transition);
+
     filter: blur(20px);
 
     .image {
