@@ -13,6 +13,7 @@ export interface ITattooImage {
     img: string
     isLive?: boolean
     [key: string]: unknown
+    alt: { en: string; ro: string; ru: string }
 }
 
 interface IFaqQuestion {

@@ -10,6 +10,7 @@ import { ArtistCard } from "./ArtistCard/ArtistCard"
 import { classNames } from "shared/lib/classNames/classNames"
 import type { IArtistsData } from "shared/const/firebaseVariables"
 import type { LanguageType } from "shared/types/types"
+import "./Artist.scss"
 
 export function Artists({
     data,
@@ -30,12 +31,13 @@ export function Artists({
                 spaceBetween={20}
                 slidesPerView={1}
                 modules={[Pagination, Navigation]}
+                pagination={{ clickable: true }}
                 breakpoints={{
                     489: { slidesPerView: 2 },
                     769: { slidesPerView: 3 },
                     1200: { slidesPerView: 4 },
                 }}
-                className={classNames(styles.swiper, {}, ["pagination"])}
+                className={classNames(styles.swiper, {}, ["artistPagination"])}
             >
                 {data.map(item => {
                     return (

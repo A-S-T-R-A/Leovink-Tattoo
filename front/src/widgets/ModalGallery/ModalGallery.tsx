@@ -5,12 +5,11 @@ import "swiper/scss/pagination"
 import "swiper/scss/scrollbar"
 import { Swiper, SwiperSlide } from "swiper/react"
 import type SwiperCore from "swiper"
-import { Swiper as SwiperClass } from "swiper/types"
-import { Pagination, Navigation } from "swiper"
+import { Navigation } from "swiper"
 import styles from "./ModalGallery.module.scss"
 import { useRef } from "preact/hooks"
 import { classNames } from "../../shared/lib/classNames/classNames"
-import type { ITattooImage, LanguageType } from "../../shared/types/types"
+import type { LanguageType } from "../../shared/types/types"
 import { ChevronDownIcon, PlusIcon } from "../../shared/ui/Icons"
 import { Typography } from "shared/ui/Typography/Typography"
 import type { IImagesData } from "shared/const/firebaseVariables"
@@ -41,9 +40,6 @@ export function ModalGallery({ data, isOpen, onClose, language }: IModalGallery)
                 loop
                 modules={[Navigation]}
                 onSwiper={(swiper: any) => (swiperRef.current = swiper)}
-                /*  pagination={{
-                    clickable: true,
-                }} */
                 className={classNames(styles.swiper, {}, ["pagination"])}
             >
                 {data.map((item, index) => {
@@ -53,7 +49,8 @@ export function ModalGallery({ data, isOpen, onClose, language }: IModalGallery)
                             <div className={styles.slideContainer}>
                                 <img src={img} className={styles.img} alt={alt[language]} />
                                 <div className={styles.descriptionContainer}>
-                                    <Typography className={styles.description}>
+                                    <Typography tag="p" className={styles.description}>
+                                        {/*  {alt[language]} */}
                                         Lorem ipsum dolor sit amet.
                                     </Typography>
                                 </div>

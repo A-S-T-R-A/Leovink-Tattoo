@@ -7,7 +7,7 @@ export function FindUs() {
     return (
         <Section>
             <div className={styles.container}>
-                <Typography className={styles.text} component="l">
+                <Typography tag="p" className={styles.text} size="l">
                     The studio is located approximately a 7-minute walk from the exit of the
                     underground passage at the intersection of{" "}
                     <strong>Stefan cel Mare Boulevard and Izmail Street</strong>. The landmark is
@@ -26,8 +26,24 @@ export function FindUs() {
                     , also between <strong>Lev Tolstoy and Izmail</strong>. Both parking lots are
                     within a 3-4 minute walk from the studio.
                 </Typography>
-                <div className={styles.imgContainer}>
-                    <img src={map} alt="" />
+                <div className={styles.mapContainer}>
+                    <a
+                        href="https://yandex.ru/maps/org/leovink_tattoo_studio/184496310101/?utm_medium=mapframe&utm_source=maps"
+                        style="color:#eee;font-size:12px;position:absolute;top:0px;left:10px"
+                    >
+                        Leovink Tattoo Studio
+                    </a>
+                    <a
+                        href="https://yandex.ru/maps/10313/kishinev/category/tattoo_studio/184105820/?utm_medium=mapframe&utm_source=maps"
+                        style="color:#eee;font-size:12px;position:absolute;top:14px;left:10px"
+                    >
+                        Тату-салон в Кишиневе
+                    </a>
+                    <iframe
+                        src="https://yandex.ru/map-widget/v1/?ll=28.842155%2C47.013226&mode=search&oid=184496310101&ol=biz&z=17.03"
+                        frameBorder="1"
+                        className={styles.map}
+                    ></iframe>
                 </div>
             </div>
         </Section>

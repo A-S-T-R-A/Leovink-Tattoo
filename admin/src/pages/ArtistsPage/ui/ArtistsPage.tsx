@@ -8,27 +8,39 @@ import { fetchGlobalData, fetchSectionData } from "shared/const/firebaseVariable
 import { defaultLanguage } from "shared/const/languages"
 import { DeleteParagraph } from "./DeleteParagraph/DeleteParagraph"
 import { IFiltersData } from "features/portfolioFilters/types/types"
+import { TriggerRefetchBtn } from "shared/components/TriggerRefetchBtn/TriggerRefetchBtn"
 
 export function ArtistsPage() {
     const [data, setData] = useState<ITranslatedArtistsData | null>(null)
     const [filtersData, setFiltersData] = useState<IFiltersData | null>(null)
+    const [isDataLoading, setIsDataLoading] = useState(false)
 
     async function fetch() {
+        setIsDataLoading(true)
         const en = (await fetchSectionData("en", "artists")) as IArtistData[]
         const ro = (await fetchSectionData("ro", "artists")) as IArtistData[]
         const ru = (await fetchSectionData("ru", "artists")) as IArtistData[]
         setData({ en, ro, ru })
         const { filtersData } = await fetchGlobalData()
         setFiltersData(filtersData)
+        setIsDataLoading(false)
     }
 
     function triggerRefetch() {
+        setData(null)
         fetch()
     }
 
     useEffect(() => {
         fetch()
     }, [])
+
+    if (isDataLoading)
+        return (
+            <div className={styles.loadingContainer}>
+                <h2>Loading...</h2>
+            </div>
+        )
 
     return (
         <>
@@ -37,6 +49,7 @@ export function ArtistsPage() {
                 filtersData={filtersData}
                 triggerRefetch={triggerRefetch}
             />
+            <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
             <div className={styles.table}>
                 {data?.[defaultLanguage].map((item, index) => (
                     <div className={styles.item} key={index}>

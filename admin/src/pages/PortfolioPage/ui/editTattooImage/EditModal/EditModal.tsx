@@ -6,6 +6,9 @@ import { useMemo } from "react"
 import { ITattooImage } from "../../../types/types"
 import { IFilter } from "features/portfolioFilters/types/types"
 import { defaultLanguage } from "shared/const/languages"
+import { LanguageType } from "shared/types/types"
+import { Textarea } from "shared/ui/Textarea/Textarea"
+import { Languages } from "shared/components/Languages/Languages"
 
 interface IEditModalProps {
     length: number
@@ -13,14 +16,17 @@ interface IEditModalProps {
     filtersData: IFilter[]
     isOpen: boolean
     isLoading: boolean
+    currentLanguage: LanguageType
     onClose: () => void
     setNewData: (data: any) => void
     saveClickHandler: () => void
     discardClickHandler: () => void
+    onChangeLanguage: (language: LanguageType) => void
 }
 
 export function EditModal(props: IEditModalProps) {
     const {
+        currentLanguage,
         length,
         newData,
         filtersData,
@@ -30,6 +36,7 @@ export function EditModal(props: IEditModalProps) {
         setNewData,
         saveClickHandler,
         discardClickHandler,
+        onChangeLanguage,
     } = props
 
     const dropdownNumbers = Array(length)
@@ -53,11 +60,11 @@ export function EditModal(props: IEditModalProps) {
     }, [filtersData])
 
     return (
-        <Modal isOpen={isOpen || isLoading} onClose={onClose} className={styles.container}>
+        <Modal isOpen={isOpen || isLoading} onClose={onClose}>
             {isLoading ? (
                 "Loading..."
             ) : (
-                <>
+                <div className={styles.container}>
                     <div>
                         id:
                         <Dropdown
@@ -89,6 +96,24 @@ export function EditModal(props: IEditModalProps) {
                             </div>
                         )
                     })}
+                    <div className={styles.description}>
+                        <p>description:</p>
+                        <div>
+                            <Textarea
+                                value={newData.alt[currentLanguage]}
+                                onChange={alt =>
+                                    setNewData((prev: ITattooImage) => ({
+                                        ...prev,
+                                        alt: { ...prev.alt, [currentLanguage]: alt },
+                                    }))
+                                }
+                            />
+                            <Languages
+                                currentLanguage={currentLanguage}
+                                onChangeLanguage={onChangeLanguage}
+                            />
+                        </div>
+                    </div>
                     <div>
                         published:
                         <input
@@ -104,7 +129,7 @@ export function EditModal(props: IEditModalProps) {
                     </div>
                     <button onClick={saveClickHandler}>Save</button>
                     <button onClick={discardClickHandler}>Discard</button>
-                </>
+                </div>
             )}
         </Modal>
     )

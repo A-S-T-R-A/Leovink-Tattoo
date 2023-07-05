@@ -15,12 +15,15 @@ import { defaultLanguage } from "shared/const/languages"
 
 export function PortfolioPage() {
     const [data, setData] = useState<ITattooImage[]>([])
+    const [isDataLoading, setIsDataLoading] = useState(false)
     const [view, setView] = useState<ViewType>(localStorageView.get() || "icons")
     const [filters, setFilters] = useState<{ [key: string]: string } | null>(null)
     const [filtersData, setFiltersData] = useState<IFilter[]>([])
 
     async function fetch() {
+        setIsDataLoading(true)
         const currentDoc = await getImagesDoc()
+        setIsDataLoading(false)
         if (!currentDoc) return
         const currentData = currentDoc.data()
         const dataArray = reformatAndSortObjectValuesToArray(currentData)
@@ -32,6 +35,11 @@ export function PortfolioPage() {
         const f: { [key: string]: string } = { isLive: "" }
         d.filtersData.filters.forEach((item: any) => (f[item.title[defaultLanguage]] = ""))
         setFilters(f)
+    }
+
+    function triggerRefetch() {
+        setData([])
+        fetch()
     }
 
     useEffect(() => {
@@ -73,9 +81,17 @@ export function PortfolioPage() {
         setFilters(initialFilters)
     }
 
+    if (isDataLoading) {
+        return (
+            <div className={styles.loadingContainer}>
+                <h2>Loading...</h2>
+            </div>
+        )
+    }
+
     return (
         <div className={styles.wrapper}>
-            <PortfolioPageHeader view={view} setView={setView} triggerRefetch={fetch} />
+            <PortfolioPageHeader view={view} setView={setView} triggerRefetch={triggerRefetch} />
             <PortfolioPageFilters
                 filtersData={filtersData}
                 filters={filters}
@@ -86,7 +102,7 @@ export function PortfolioPage() {
                 data={data}
                 filteredData={filteredData}
                 view={view}
-                triggerRefetch={fetch}
+                triggerRefetch={triggerRefetch}
                 filtersData={filtersData}
             />
         </div>

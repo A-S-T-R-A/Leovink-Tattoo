@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { ArtistType, ColorType, LanguageType, StyleType } from "shared/types/types"
 import { EditModal } from "./EditModal/EditModal"
 import { reformatArrayToObject, rewriteImagesDoc } from "shared/const/firebaseVariables"
 import styles from "./EditTattooImage.module.scss"
@@ -7,6 +8,7 @@ import { defaultNewData } from "../../const/const"
 import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
 import { ITattooImage } from "../../types/types"
 import { IFilter } from "features/portfolioFilters/types/types"
+import { defaultLanguage } from "shared/const/languages"
 
 export function EditTattooImage({
     id,
@@ -23,9 +25,15 @@ export function EditTattooImage({
 }) {
     const [isOpen, setIsOpen] = useState(false)
     const [newData, setNewData] = useState<ITattooImage>(defaultNewData)
+    const [currentLanguage, setCurrentLanguage] = useState<LanguageType>(defaultLanguage)
+    const [allImagesData, setAllImagesData] = useState<any>([])
     const [isLoading, setIsLoading] = useState(false)
 
     const length = data.length
+
+    function onChangeLanguage(lang: LanguageType) {
+        setCurrentLanguage(lang)
+    }
 
     async function openClickHandler() {
         const currentImg = { ...data[id], id: id }
@@ -100,6 +108,8 @@ export function EditTattooImage({
                 onClose={onClose}
                 setNewData={setNewData}
                 filtersData={filtersData}
+                currentLanguage={currentLanguage}
+                onChangeLanguage={onChangeLanguage}
                 saveClickHandler={saveClickHandler}
                 discardClickHandler={discardClickHandler}
             />

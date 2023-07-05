@@ -20,7 +20,6 @@ export function Testimonial({
         <div
             className={styles.container}
             style={{
-                //flexDirection: isReversed ? "row-reverse" : "row",
                 borderBottom: isWithBorder ? "1px solid var(--color-darkgray)" : "",
             }}
         >
@@ -28,15 +27,17 @@ export function Testimonial({
                 <video src={video} poster={preview} controls />
             </div>
             <div className={styles.infoContainer}>
-                <Typography isBold className={styles.title}>
+                <Typography tag="h3" size="xxl" weight="five" className={styles.title}>
                     {title}
                 </Typography>
-                <Typography className={styles.description}>{description}</Typography>
+                <Typography tag="p" color="lightgray" className={styles.description}>
+                    {description}
+                </Typography>
                 <div className={styles.info}>
-                    <Typography>
+                    <Typography tag="h5">
                         <span className={styles.bold}>tattoo artist:</span> {artist}
                     </Typography>
-                    <Typography>
+                    <Typography tag="h5">
                         <span className={styles.bold}>duration:</span> {duration}
                     </Typography>
                 </div>

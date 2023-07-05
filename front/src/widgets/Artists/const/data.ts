@@ -1,10 +1,9 @@
-import type { IArtistData } from "../types/types"
 import a1 from "./a1.jpg"
 import a2 from "./a2.jpg"
 import a3 from "./a3.jpg"
 import a4 from "./a4.jpg"
 
-export const data: IArtistData[] = [
+export const data = [
     {
         id: 1,
         img: a1,

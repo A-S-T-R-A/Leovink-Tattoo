@@ -1,0 +1,67 @@
+---
+import styles from "./Main.module.scss"
+import leovinkTitle from "./const/leovinkLogo.webp"
+import leovinkHorns from "./const/leovinkHorns.png"
+import layerBaseImg from "./const/base-bg.webp"
+import layerMiddleImg from "./const/layer-middle.webp"
+import layerFrontImg from "./const/layer-front.webp"
+import dungeonImg from "./const/dungeon.webp"
+import { ScrollIcon } from "shared/ui/ScrollIcon/ScrollIcon"
+---
+        <header class={styles.mainWrapper}>
+           <div id="main-container" class={styles.mainContainer}>
+            <div class={styles.textContainer}>
+                    <img src={leovinkHorns} class={styles.horns} />
+                    <img src={leovinkTitle} alt="" class={styles.title} />
+                    <p class={styles.caption}>TATTOO & PIERCING</p>
+                    <p class={styles.est}>EST. 2010</p>
+                </div>
+                <div
+                class={`${styles.layerBase} ${styles.layer}`}
+                >
+              <img src={layerBaseImg} alt="">
+              </div>
+                <div
+                class={`${styles.layerMiddle} ${styles.layer}`}
+                    style={{ backgroundImage: `url(${layerMiddleImg})` }}
+                ></div>
+                <div
+                class={`${styles.layerFront} ${styles.layer}`}
+                    style={{ backgroundImage: `url(${layerFrontImg})` }}
+                ></div>
+          
+                <ScrollIcon client:load className={styles.scroll} />
+            </div>
+        </header>
+        <div class={styles.dungeon} id="dungeon" style={{backgroundImage: `url(${dungeonImg})`}} />            
+            <slot/>
+            
+<script is:inline>
+    const onScroll = throttle(() => {
+        const scroll = window.scrollY
+        document.documentElement.style.setProperty('--scrollTop', `${scroll}px`)
+    }, 50)
+
+    window.addEventListener('scroll', onScroll)
+
+    function throttle(func, delay) {
+    let timeoutId;
+    let lastExecutedTime = 0;
+
+  return function (...args) {
+    const currentTime = new Date().getTime();
+
+    if (currentTime - lastExecutedTime < delay) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        lastExecutedTime = currentTime;
+        func(...args);
+      }, delay);
+    } else {
+      lastExecutedTime = currentTime;
+      func(...args);
+    }
+  };
+}
+
+</script>
