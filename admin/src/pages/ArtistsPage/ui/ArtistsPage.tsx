@@ -54,12 +54,13 @@ export function ArtistsPage() {
                                 id={index}
                                 triggerRefetch={triggerRefetch}
                             />
-                            {/*   <DeleteParagraph
+                            <DeleteParagraph
+                                name={item.name}
                                 data={data}
-                                otherData={otherData}
+                                filtersData={filtersData}
                                 id={index}
                                 triggerRefetch={triggerRefetch}
-                            /> */}
+                            />
                         </div>
                     </div>
                 ))}

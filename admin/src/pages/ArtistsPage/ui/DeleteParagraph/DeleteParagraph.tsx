@@ -5,21 +5,24 @@ import {
     DATA_BUCKET,
     deleteImageFromBucket,
     reformatArrayToObject,
+    updateFiltersData,
     updateSectionData,
 } from "shared/const/firebaseVariables"
 import { allLanguages, defaultLanguage } from "shared/const/languages"
 import { Alert, Confirm } from "shared/ui/CustomNotifications"
-import { ITranslatedOtherData } from "features/portfolioFilters/types/types"
+import { IFiltersData } from "features/portfolioFilters/types/types"
 
 export function DeleteParagraph({
+    name,
     id,
     data,
-    otherData,
+    filtersData,
     triggerRefetch,
 }: {
+    name: string
     data: ITranslatedArtistsData | null
     id: number
-    otherData: ITranslatedOtherData | null
+    filtersData: IFiltersData | null
     triggerRefetch?: () => void
 }) {
     const [isLoading, setIsLoading] = useState(false)
@@ -34,8 +37,6 @@ export function DeleteParagraph({
         deleteImageFromBucket(data[defaultLanguage][id].img, DATA_BUCKET.artists)
 
         const allArtistsData = JSON.parse(JSON.stringify(data))
-        const updatedOtherData = otherData ? { ...otherData } : null
-        const filterKeyToDelete = data[defaultLanguage][id].name
 
         try {
             for (const lang of allLanguages) {
@@ -43,13 +44,17 @@ export function DeleteParagraph({
                 const objectData = reformatArrayToObject(allArtistsData[lang])
                 await updateSectionData(lang, "artists", objectData)
 
-                /* if (updatedOtherData) {
-                    updatedOtherData[lang].filtersData.filters.artists = updatedOtherData[
-                        lang
-                    ].filtersData.filters.artists.filter(item => item.key !== filterKeyToDelete)
+                if (filtersData) {
+                    const updatedFiltersData = JSON.parse(
+                        JSON.stringify(filtersData)
+                    ) as IFiltersData
 
-                    await updateSectionData(lang, "other", updatedOtherData[lang])
-                } */
+                    const filterItems = filtersData.filters[0].items.filter(
+                        item => item.key !== name
+                    )
+                    updatedFiltersData.filters[0].items = filterItems
+                    await updateFiltersData(updatedFiltersData)
+                }
             }
             Alert.success("Success")
         } catch (error) {
