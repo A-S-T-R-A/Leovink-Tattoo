@@ -65,8 +65,8 @@ export function PortfolioFilters({
                                 Edit Filter
                             </button>
                         </div>
-                        {filters?.[0].items.map(item => (
-                            <div className={styles.filterContentContainer}>
+                        {filters?.[0].items.map((item, index) => (
+                            <div className={styles.filterContentContainer} key={index}>
                                 <Typography size={TypographySize.BASE}>
                                     <strong>Artist:</strong> {item.key}
                                 </Typography>
@@ -114,7 +114,13 @@ export function PortfolioFilters({
                                                 {innerItem.label[defaultLanguage]}
                                             </p>
                                         </Typography>
-                                        <EditItem />
+                                        <EditItem
+                                            parentId={item.id}
+                                            data={data}
+                                            parentTitle={item.title[defaultLanguage]}
+                                            filterKey={innerItem.key}
+                                            triggerRefetch={triggerRefetch}
+                                        />
                                         <DeleteItem
                                             data={data}
                                             triggerRefetch={triggerRefetch}

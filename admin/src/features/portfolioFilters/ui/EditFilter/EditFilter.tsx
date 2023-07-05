@@ -89,7 +89,6 @@ export function EditFilter({
             })
             newFiltersData.filters = dataToUpload
             await updateFiltersData(newFiltersData)
-            //iterate over all images and change filters as appropriate
             await editFilterForImages()
             Alert.success("Success")
         } catch (error) {
