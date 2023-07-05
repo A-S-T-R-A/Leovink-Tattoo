@@ -1,20 +1,20 @@
 import { useState } from "react"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
 import { Input } from "shared/ui/Input/Input"
-import { allLanguages, defaultLanguage } from "shared/const/languages"
+import { defaultLanguage } from "shared/const/languages"
 import { LanguageType } from "shared/types/types"
 import { Alert } from "shared/ui/CustomNotifications"
 import { defaultNewFilter } from "../../const/const"
-import { updateFiltersData, updateSectionData } from "shared/const/firebaseVariables"
+import { updateFiltersData } from "shared/const/firebaseVariables"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
-import { IFiltersData, INewFilter, IOtherData } from "../../types/types"
+import { IFiltersData, IGlobalData, INewFilter } from "../../types/types"
 import styles from "./AddNewFilter.module.scss"
 
 export function AddNewFilter({
     data,
     triggerRefetch,
 }: {
-    data: IOtherData | null
+    data: IGlobalData | null
     triggerRefetch: () => void
 }) {
     const [newFilter, setNewFilter] = useState<INewFilter>(defaultNewFilter)

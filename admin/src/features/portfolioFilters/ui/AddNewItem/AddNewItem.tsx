@@ -1,9 +1,9 @@
 import { defaultNewFilter } from "../../const/const"
-import { IOtherData } from "../../types/types"
+import { IFilterItem, IFiltersData, IGlobalData } from "../../types/types"
 import { useState } from "react"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
-import { updateSectionData } from "shared/const/firebaseVariables"
-import { allLanguages, defaultLanguage } from "shared/const/languages"
+import { updateFiltersData } from "shared/const/firebaseVariables"
+import { defaultLanguage } from "shared/const/languages"
 import { LanguageType } from "shared/types/types"
 import { Alert } from "shared/ui/CustomNotifications"
 import { Input } from "shared/ui/Input/Input"
@@ -11,11 +11,11 @@ import styles from "./AddNewItem.module.scss"
 
 export function AddNewItem({
     data,
-    parentKey,
+    parentId,
     triggerRefetch,
 }: {
-    data: ITranslatedOtherData | null
-    parentKey: { en: string; ro: string; ru: string }
+    data: IGlobalData | null
+    parentId: number
     triggerRefetch: () => void
 }) {
     const [newAllItem, setNewAllItem] = useState(defaultNewFilter)
@@ -42,17 +42,29 @@ export function AddNewItem({
 
         setIsLoading(true)
 
-        /*  try {
-            for (const lang of allLanguages) {
-                const newData = JSON.parse(JSON.stringify(data)) 
-                newData.filtersData.filters[newFilter[lang]] = []
+        const newFiltersData = JSON.parse(JSON.stringify(data.filtersData)) as IFiltersData
+        console.log(parentId)
 
-                await updateSectionData(lang, "other", newData)
+        try {
+            const filterItemToUpload: IFilterItem = {
+                key: newAllItem[defaultLanguage],
+                label: newAllItem,
             }
+
+            const dataToUpload = newFiltersData.filters.map(item => {
+                if (item.id === parentId) {
+                    return { ...item, items: [...item.items, filterItemToUpload] }
+                }
+                return item
+            })
+
+            newFiltersData.filters = dataToUpload
+
+            await updateFiltersData(newFiltersData)
             Alert.success("Success")
         } catch (error) {
             Alert.error("Error")
-        } */
+        }
 
         setIsOpen(false)
         setIsLoading(false)

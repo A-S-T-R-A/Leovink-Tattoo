@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { fetchGlobalData, fetchSectionData } from "shared/const/firebaseVariables"
 import styles from "./PortfolioFilters.module.scss"
 import { Fragment, useEffect, useMemo, useState } from "react"
-import { IFiltersData, IOtherData } from "../types/types"
+import { IFiltersData, IGlobalData } from "../types/types"
 import { Confirm } from "shared/ui/CustomNotifications"
 import { AddNewFilter } from "./AddNewFilter/AddNewFilter"
 import { AddNewItem } from "./AddNewItem/AddNewItem"
@@ -20,7 +20,7 @@ export function PortfolioFilters({
     isExpanded: boolean
     onOpen: () => void
 }) {
-    const [data, setData] = useState<IOtherData | null>(null)
+    const [data, setData] = useState<IGlobalData | null>(null)
 
     const navigate = useNavigate()
 
@@ -61,19 +61,15 @@ export function PortfolioFilters({
                             <Typography size={TypographySize.H5} isBold className={styles.title}>
                                 Artists
                             </Typography>
+                            <button onClick={artistEditClickHandler} className={styles.editArtist}>
+                                Edit Filter
+                            </button>
                         </div>
-                        {filters?.[0].map(item => (
+                        {filters?.[0].items.map(item => (
                             <div className={styles.filterContentContainer}>
                                 <Typography size={TypographySize.BASE}>
-                                    <strong>Artist:</strong> {item}
+                                    <strong>Artist:</strong> {item.key}
                                 </Typography>
-                                <button
-                                    className={styles.filterEditBtn}
-                                    onClick={artistEditClickHandler}
-                                >
-                                    Edit Artist Name
-                                </button>
-                                <button className={styles.filterDeleteBtn}>Delete Artist</button>
                             </div>
                         ))}
                     </div>
@@ -89,12 +85,16 @@ export function PortfolioFilters({
                                     >
                                         {item.title[defaultLanguage]}
                                     </Typography>
-                                    <AddNewItem />
+                                    <AddNewItem
+                                        data={data}
+                                        parentId={item.id}
+                                        triggerRefetch={triggerRefetch}
+                                    />
                                     <EditFilter />
                                     <DeleteFilter />
                                 </div>
-                                {item.items.map(innerItem => (
-                                    <div className={styles.filterContentContainer}>
+                                {item.items.map((innerItem, index) => (
+                                    <div className={styles.filterContentContainer} key={index}>
                                         <Typography
                                             size={TypographySize.BASE}
                                             className={styles.title}
@@ -110,7 +110,7 @@ export function PortfolioFilters({
                                     </div>
                                 ))}
                                 <div className={styles.infoContainer}>
-                                    {/*  <AddNewItem data={data} triggerRefetch={triggerRefetch} /> */}
+                                    {/* <AddNewItem data={data} triggerRefetch={triggerRefetch} /> */}
                                 </div>
                             </div>
                         )

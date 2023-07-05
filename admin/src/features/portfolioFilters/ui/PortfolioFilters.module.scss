@@ -72,3 +72,19 @@
         }
     }
 }
+
+.editArtist {
+    font-size: 14px;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 5px;
+    border: 1px solid orange;
+    background-color: orange;
+    padding: 2px 10px;
+    margin-left: auto;
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(90%);
+    }
+}
