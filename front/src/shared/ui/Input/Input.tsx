@@ -38,6 +38,7 @@ export function Input(props: InputProps) {
     ])
 
     function changeHandler(e: ChangeEvent) {
+        e.preventDefault()
         const target = e.target as HTMLInputElement
         onChange?.(target.value)
     }
@@ -52,7 +53,7 @@ export function Input(props: InputProps) {
             )}
             <input
                 id={id}
-                onChange={changeHandler}
+                onInput={changeHandler}
                 value={value}
                 type={type}
                 className={styles.input}
