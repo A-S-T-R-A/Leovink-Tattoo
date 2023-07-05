@@ -35,9 +35,10 @@ export function AddNewFilter({
         setIsLoading(true)
 
         const newFiltersData = JSON.parse(JSON.stringify(data.filtersData)) as IFiltersData
+        const newId = Math.max(...newFiltersData.filters.map(item => item.id)) + 1
         try {
             const filterToUpload = {
-                id: newFiltersData.filters.length,
+                id: newId,
                 title: newFilter,
                 items: [],
             }

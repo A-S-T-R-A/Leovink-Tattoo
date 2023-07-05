@@ -91,7 +91,12 @@ export function PortfolioFilters({
                                         triggerRefetch={triggerRefetch}
                                     />
                                     <EditFilter />
-                                    <DeleteFilter />
+                                    <DeleteFilter
+                                        data={data}
+                                        triggerRefetch={triggerRefetch}
+                                        id={item.id}
+                                        title={item.title[defaultLanguage]}
+                                    />
                                 </div>
                                 {item.items.map((innerItem, index) => (
                                     <div className={styles.filterContentContainer} key={index}>
@@ -100,11 +105,10 @@ export function PortfolioFilters({
                                             className={styles.title}
                                         >
                                             <p>
-                                                <strong> {item.title[defaultLanguage]}: </strong>{" "}
+                                                <strong> {item.title[defaultLanguage]}: </strong>
                                                 {innerItem.label[defaultLanguage]}
                                             </p>
                                         </Typography>
-
                                         <EditItem />
                                         <DeleteItem />
                                     </div>

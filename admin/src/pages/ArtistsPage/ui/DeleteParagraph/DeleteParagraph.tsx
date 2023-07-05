@@ -43,18 +43,14 @@ export function DeleteParagraph({
                 delete allArtistsData[lang][id]
                 const objectData = reformatArrayToObject(allArtistsData[lang])
                 await updateSectionData(lang, "artists", objectData)
+            }
 
-                if (filtersData) {
-                    const updatedFiltersData = JSON.parse(
-                        JSON.stringify(filtersData)
-                    ) as IFiltersData
+            if (filtersData) {
+                const updatedFiltersData = JSON.parse(JSON.stringify(filtersData)) as IFiltersData
 
-                    const filterItems = filtersData.filters[0].items.filter(
-                        item => item.key !== name
-                    )
-                    updatedFiltersData.filters[0].items = filterItems
-                    await updateFiltersData(updatedFiltersData)
-                }
+                const filterItems = filtersData.filters[0].items.filter(item => item.key !== name)
+                updatedFiltersData.filters[0].items = filterItems
+                await updateFiltersData(updatedFiltersData)
             }
             Alert.success("Success")
         } catch (error) {

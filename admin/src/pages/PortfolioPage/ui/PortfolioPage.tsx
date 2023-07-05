@@ -30,7 +30,7 @@ export function PortfolioPage() {
 
         setFiltersData(d.filtersData.filters)
         const f: { [key: string]: string } = { isLive: "" }
-        d.filtersData.filters.forEach(item => (f[item.title[defaultLanguage]] = ""))
+        d.filtersData.filters.forEach((item: any) => (f[item.title[defaultLanguage]] = ""))
         setFilters(f)
     }
 
