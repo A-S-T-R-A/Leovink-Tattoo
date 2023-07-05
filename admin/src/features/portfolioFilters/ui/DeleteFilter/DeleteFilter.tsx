@@ -1,3 +1,5 @@
-export function DeleteFilter({ className }: { className: string }) {
-    return <button className={className}>Delete Filter</button>
+import styles from "./DeleteFilter.module.scss"
+
+export function DeleteFilter() {
+    return <button className={styles.btn}>Delete Filter</button>
 }

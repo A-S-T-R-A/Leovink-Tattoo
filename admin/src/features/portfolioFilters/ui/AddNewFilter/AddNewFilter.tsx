@@ -1,3 +1,5 @@
-export function AddNewFilter({ className }: { className?: string }) {
-    return <button className={className}>Add New Filter</button>
+import styles from "./AddNewFilter.module.scss"
+
+export function AddNewFilter() {
+    return <button className={styles.btn}>Add New Filter</button>
 }

@@ -1,3 +1,5 @@
-export function EditFilter({ className }: { className: string }) {
-    return <button className={className}>Edit Filter</button>
+import styles from "./EditFilter.module.scss"
+
+export function EditFilter() {
+    return <button className={styles.btn}>Edit Filter</button>
 }

@@ -21,21 +21,6 @@
             font-size: 24px;
             text-shadow: 0px 1px 1px black;
         }
-
-        .titleAddBtn {
-            width: fit-content;
-            height: fit-content;
-            border-radius: 5px;
-            border: 1px solid orange;
-            background-color: orange;
-            padding: 2px 10px;
-            margin-left: auto;
-            cursor: pointer;
-
-            &:hover {
-                filter: brightness(90%);
-            }
-        }
     }
 
     .filtersContainer {
@@ -61,38 +46,6 @@
                 padding: 0 15px 0 45px;
                 border-bottom: 2px solid gray;
                 border-bottom-left-radius: 5px;
-
-                .titleEditBtn {
-                    font-size: 14px;
-                    width: fit-content;
-                    height: fit-content;
-                    border-radius: 5px;
-                    border: 1px solid orange;
-                    background-color: orange;
-                    padding: 2px 10px;
-                    margin-left: auto;
-                    cursor: pointer;
-
-                    &:hover {
-                        filter: brightness(90%);
-                    }
-                }
-
-                .titleDeletBtn {
-                    font-size: 14px;
-                    width: fit-content;
-                    min-height: fit-content;
-                    border-radius: 5px;
-                    border: 2px solid orangered;
-                    color: orangered;
-                    background-color: transparent;
-                    padding: 2px 10px;
-                    cursor: pointer;
-
-                    &:hover {
-                        filter: brightness(90%);
-                    }
-                }
             }
 
             .filterContentContainer {
@@ -110,53 +63,6 @@
 
                 &:last-child {
                     border-bottom: none;
-                }
-
-                .filterEditBtn {
-                    font-size: 14px;
-                    width: fit-content;
-                    height: fit-content;
-                    border-radius: 5px;
-                    border: 1px solid orange;
-                    background-color: orange;
-                    padding: 2px 6px;
-                    margin-left: auto;
-                    cursor: pointer;
-
-                    &:hover {
-                        filter: brightness(90%);
-                    }
-                }
-
-                .filterDeleteBtn {
-                    font-size: 14px;
-                    width: fit-content;
-                    height: fit-content;
-                    border-radius: 5px;
-                    border: 2px solid orangered;
-                    color: orangered;
-                    background-color: transparent;
-                    padding: 2px 6px;
-                    cursor: pointer;
-
-                    &:hover {
-                        filter: brightness(90%);
-                    }
-                }
-            }
-
-            .addNewFilterBtn {
-                width: fit-content;
-                height: fit-content;
-                border-radius: 5px;
-                border: orange;
-                background-color: orange;
-                padding: 2px 10px;
-                margin: 10px 0;
-                cursor: pointer;
-
-                &:hover {
-                    filter: brightness(90%);
                 }
             }
         }
