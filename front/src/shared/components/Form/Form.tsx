@@ -161,7 +161,7 @@ export function Form({
             ref={formRef}
             onSubmit={submitHandler}
         >
-            <Typography className={styles.title}>{title}</Typography>
+            <Typography tag="h2" size="xxl" className={styles.title}>{title}</Typography>
             {content}
         </form>
     )

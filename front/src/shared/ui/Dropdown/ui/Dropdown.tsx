@@ -1,4 +1,4 @@
-import { useState, useMemo } from "preact/hooks"
+import { useMemo } from "preact/hooks"
 import type { ChangeEvent, HTMLAttributes } from "preact/compat"
 import styles from "./Dropdown.module.scss"
 import { ChevronDownIcon } from "shared/ui/Icons"
@@ -30,7 +30,6 @@ export function Dropdown(props: DropdownProps) {
         onChange,
         options,
         firstOptionText = "Select an option",
-        ...otherProps
     } = props
     const newOptions = useMemo(() => options.map((i, ind) => ({ ...i, id: ind })), [options])
 
@@ -61,10 +60,6 @@ export function Dropdown(props: DropdownProps) {
                     </option>
                 ))}
             </select>
-            {/* <p>
-                Selected option:
-                <span>{selectedValue.toUpperCase()}</span>
-            </p> */}
         </div>
     )
 }

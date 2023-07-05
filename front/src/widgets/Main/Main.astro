@@ -14,9 +14,7 @@ import { ScrollIcon } from "shared/ui/ScrollIcon/ScrollIcon"
                     <img src={leovinkHorns} class={styles.horns} />
                     <img src={leovinkTitle} alt="" class={styles.title} />
                     <p class={styles.caption}>TATTOO & PIERCING</p>
-                    <!-- <img src={leovinkCaption} alt="" class={styles.caption} /> -->
                     <p class={styles.est}>EST. 2010</p>
-                    <!-- <img class={styles.est} src={established} alt=""> -->
                 </div>
                 <div
                 class={`${styles.layerBase} ${styles.layer}`}
@@ -39,16 +37,12 @@ import { ScrollIcon } from "shared/ui/ScrollIcon/ScrollIcon"
             <slot/>
             
 <script is:inline>
-    const dungeon = document.getElementById("dungeon")
-    const height = window.innerHeight
     const onScroll = throttle(() => {
         const scroll = window.scrollY
         document.documentElement.style.setProperty('--scrollTop', `${scroll}px`)
     }, 50)
 
-    window.addEventListener('scroll', () => {
-    onScroll()
-    })
+    window.addEventListener('scroll', onScroll)
 
     function throttle(func, delay) {
     let timeoutId;
@@ -71,4 +65,3 @@ import { ScrollIcon } from "shared/ui/ScrollIcon/ScrollIcon"
 }
 
 </script>
-

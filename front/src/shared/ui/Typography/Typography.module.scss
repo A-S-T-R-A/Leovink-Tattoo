@@ -51,7 +51,19 @@
         color: var(--color-error);
     }
 
-    &.bold {
+    &.four {
+        font-weight: 400;
+    }
+
+    &.five {
+        font-weight: 500;
+    }
+
+    &.six {
+        font-weight: 600;
+    }
+
+    &.seven {
         font-weight: 700;
     }
 }

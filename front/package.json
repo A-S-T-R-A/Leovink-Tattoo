@@ -9,7 +9,9 @@
         "translate": "npx astro-i18next generate",
         "deploy": "npm run translate && npm run build && firebase deploy",
         "preview": "astro preview",
-        "astro": "astro"
+        "astro": "astro",
+        "netlify:deploy": "npx netlify deploy --dir=dist",
+        "netlify:deploy:prod": "npx netlify deploy --dir=dist --prod"
     },
     "dependencies": {
         "@astrojs/netlify": "^2.3.0",

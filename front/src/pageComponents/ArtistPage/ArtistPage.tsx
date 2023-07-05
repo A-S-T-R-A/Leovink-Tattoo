@@ -45,11 +45,15 @@ export function ArtistPage({
                         <img src={img} alt="" />
                     </div>
                     <div className={styles.right}>
-                        <Typography variant="h2" component="xxxl" className={styles.name}>
+                        <Typography tag="h2" size="xxxl" className={styles.name}>
                             {name}
                         </Typography>
-                        <Typography className={styles.specialization}>{specialization}</Typography>
-                        <Typography>{description}</Typography>
+                        <Typography tag="p" color="lightgray" className={styles.specialization}>
+                            {specialization}
+                        </Typography>
+                        <Typography tag="p" color="lightgray">
+                            {description}
+                        </Typography>
                     </div>
                 </div>
                 <Form isVertical placeholdersData={formData} title={formTitle} cta={cta} />

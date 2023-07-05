@@ -107,6 +107,7 @@ export function PortfolioPage({
                     </Button>
                 </div>
                 <GalleryGrid data={filteredData} onClick={clickHandler} language={language} />
+                <div className={styles.marginBottom} />
                 <FormSection title={formTitle} data={placeholdersData} button={button} />
             </Section>
         </>

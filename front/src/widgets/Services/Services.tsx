@@ -42,7 +42,7 @@ export function Services({
                                     className={styles.serviceClick}
                                     onClick={() => clickHandler(index)}
                                 >
-                                    <Typography className={styles.title}>
+                                    <Typography tag="h3" size="xxl" className={styles.title}>
                                         0{index + 1}. {title}
                                         <ArrowDownIcon
                                             className={classNames(
@@ -65,8 +65,10 @@ export function Services({
                                 >
                                     <div>
                                         <Typography
+                                            tag="p"
                                             className={styles.description}
                                             color="lightgray"
+                                            size="m"
                                         >
                                             {description}
                                         </Typography>
