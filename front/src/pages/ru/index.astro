@@ -33,6 +33,6 @@ const { cta, showMore, viewGallery } = buttons;
         <Artists client:idle data={artistsData} title={artists} button={viewGallery} language={language} defaultLanguage={defaultLanguage}/>
         <Testimonials data={testimonialsData.slice(0,2)} title={testimonials} showMore={showMore} cta={cta} language={language} defaultLanguage={defaultLanguage}/>
         <Faq client:idle data={faqData} title={faq} button={showMore} language={language} defaultLanguage={defaultLanguage}/>
-        <FormSection data={formData} title={form} button={cta}/>
+        <FormSection client:load data={formData} title={form} button={cta}/>
     </Main>
 </Layout>

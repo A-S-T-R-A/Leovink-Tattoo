@@ -64,38 +64,34 @@
     }
 }
 
-/* .form {
+.btn {
     display: flex;
-    flex-direction: column;
-    width: 1000px;
     align-items: center;
-    margin: 0 auto;
-}
+    gap: 5px;
 
-.title {
-    margin-bottom: 30px;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-}
+    .icon {
+        width: 14px;
 
-.formContent {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-
-    .input {
-        width: 100%;
+        path {
+            stroke: var(--color-accent);
+        }
     }
 }
 
-.vertical {
-    width: fit-content;
-    .title {
-        font-size: 22px;
-    }
-    .formContent {
-        flex-direction: column;
-        gap: 30px;
-    }
-} */
+.loadingIcon {
+    color: var(--color-base);
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+
+.successIcon {
+    color: var(--color-accent);
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+
+.failIcon {
+    color: var(--color-error);
+    font-size: 60px;
+    margin-bottom: 10px;
+}
