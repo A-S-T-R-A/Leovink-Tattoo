@@ -32,26 +32,24 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    background-size: cover;
-    background-position: center;
     will-change: transform;
     transition: var(--transition);
     z-index: 2;
 }
 
+.baseImg {
+    position: absolute;
+    min-height: 100vh;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    object-fit: cover;
+    object-position: bottom;
+}
+
 .layerBase {
     transform: translate3d(0, calc(var(--scrollTop) / 1.6), 0);
     z-index: 0;
-
-    img {
-        position: absolute;
-        min-height: 100vh;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        object-fit: cover;
-        object-position: bottom;
-    }
 }
 
 .layerMiddle {
