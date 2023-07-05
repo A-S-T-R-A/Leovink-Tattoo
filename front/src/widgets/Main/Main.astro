@@ -3,10 +3,14 @@ import styles from "./Main.module.scss"
 import leovinkTitle from "./const/leovinkLogo.webp"
 import leovinkHorns from "./const/leovinkHorns.png"
 import layerBaseImg from "./const/base-bg.webp"
+import layerBaseImgLowRes from "./const/base-bg-low-res.webp"
 import layerMiddleImg from "./const/layer-middle.webp"
+import layerMiddleImgLowRes from "./const/layer-middle-low-res.webp"
 import layerFrontImg from "./const/layer-front.webp"
-import dungeonImg from "./const/dungeon.webp"
+import layerFrontImgLowRes from "./const/layer-front-low-res.webp"
+import dungeonImg from "./const/dungeon2.webp"
 import { ScrollIcon } from "shared/ui/ScrollIcon/ScrollIcon"
+import {LazyLoadingImage} from "./LazyLoadingImage/LazyLoadingImage"
 ---
         <header class={styles.mainWrapper}>
            <div id="main-container" class={styles.mainContainer}>
@@ -16,19 +20,29 @@ import { ScrollIcon } from "shared/ui/ScrollIcon/ScrollIcon"
                     <p class={styles.caption}>TATTOO & PIERCING</p>
                     <p class={styles.est}>EST. 2010</p>
                 </div>
-                <div
-                class={`${styles.layerBase} ${styles.layer}`}
-                >
-              <img src={layerBaseImg} alt="">
-              </div>
-                <div
-                class={`${styles.layerMiddle} ${styles.layer}`}
-                    style={{ backgroundImage: `url(${layerMiddleImg})` }}
-                ></div>
-                <div
-                class={`${styles.layerFront} ${styles.layer}`}
-                    style={{ backgroundImage: `url(${layerFrontImg})` }}
-                ></div>
+                <LazyLoadingImage 
+                    client:only 
+                    src={layerBaseImg} 
+                    backgroundImage={layerBaseImgLowRes} 
+                    className={`${styles.layerBase} ${styles.layer}`}
+                    imgClassName={styles.baseImg}
+                 />
+       
+                <LazyLoadingImage
+                    client:only
+                    src={layerMiddleImg}
+                    backgroundImage={layerMiddleImgLowRes}
+                    className={`${styles.layerMiddle} ${styles.layer}`}
+                    imgClassName={styles.baseImg}
+                />
+
+                <LazyLoadingImage
+                    client:only
+                    src={layerFrontImg}
+                    backgroundImage={layerFrontImgLowRes}
+                    className={`${styles.layerFront} ${styles.layer}`}
+                    imgClassName={styles.baseImg}
+                />
           
                 <ScrollIcon client:load className={styles.scroll} />
             </div>
@@ -63,5 +77,4 @@ import { ScrollIcon } from "shared/ui/ScrollIcon/ScrollIcon"
     }
   };
 }
-
 </script>
