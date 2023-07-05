@@ -5,6 +5,7 @@ import { Alert, Confirm } from "shared/ui/CustomNotifications"
 import { updateFiltersData } from "shared/const/firebaseVariables"
 import { fetchAllImages } from "features/portfolioFilters/lib/fetchTattooImages"
 import { uploadTattooImages } from "features/portfolioFilters/lib/uploadTattooImages"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function DeleteItem({
     data,
@@ -67,8 +68,11 @@ export function DeleteItem({
     }
 
     return (
-        <button className={styles.btn} onClick={deleteClickHandler}>
-            Delete Item
-        </button>
+        <>
+            <LoadingModal isLoading={isLoading} />
+            <button className={styles.btn} onClick={deleteClickHandler}>
+                Delete Item
+            </button>
+        </>
     )
 }

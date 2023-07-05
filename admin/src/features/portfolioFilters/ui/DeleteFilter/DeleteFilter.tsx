@@ -5,6 +5,7 @@ import { useState } from "react"
 import { Alert, Confirm } from "shared/ui/CustomNotifications"
 import { fetchAllImages } from "../../lib/fetchTattooImages"
 import { uploadTattooImages } from "features/portfolioFilters/lib/uploadTattooImages"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function DeleteFilter({
     data,
@@ -56,8 +57,11 @@ export function DeleteFilter({
     }
 
     return (
-        <button className={styles.btn} onClick={deleteClickHandler}>
-            Delete Filter
-        </button>
+        <>
+            <LoadingModal isLoading={isLoading} />
+            <button className={styles.btn} onClick={deleteClickHandler}>
+                Delete Filter
+            </button>
+        </>
     )
 }

@@ -90,7 +90,12 @@ export function PortfolioFilters({
                                         parentId={item.id}
                                         triggerRefetch={triggerRefetch}
                                     />
-                                    <EditFilter />
+                                    <EditFilter
+                                        data={data}
+                                        id={item.id}
+                                        triggerRefetch={triggerRefetch}
+                                        title={item.title[defaultLanguage]}
+                                    />
                                     <DeleteFilter
                                         data={data}
                                         triggerRefetch={triggerRefetch}
@@ -119,9 +124,6 @@ export function PortfolioFilters({
                                         />
                                     </div>
                                 ))}
-                                <div className={styles.infoContainer}>
-                                    {/* <AddNewItem data={data} triggerRefetch={triggerRefetch} /> */}
-                                </div>
                             </div>
                         )
                     })}
