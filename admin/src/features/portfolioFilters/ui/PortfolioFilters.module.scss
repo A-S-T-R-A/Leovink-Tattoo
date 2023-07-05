@@ -1,56 +1,74 @@
-.table {
+.filterTableContainer {
     display: flex;
     flex-direction: column;
+    border-bottom: none;
     width: 100%;
-    max-height: 800px;
-    margin: 10px;
-    gap: 20px;
+    border-radius: 5px;
 
     .titleContainer {
         display: flex;
-        justify-content: center;
         align-items: center;
-        border: 2px solid var(--color-base);
-        padding: 5px;
+        width: 100%;
+        min-height: 50px;
+        gap: 10px;
+        border: 3px solid black;
+        border-radius: 5px 5px 0 5px;
+        padding: 0 15px;
         cursor: pointer;
 
-        .buttons {
-            display: flex;
-            gap: 4px;
+        .arrow {
+            color: orange;
+            font-size: 24px;
+            text-shadow: 0px 1px 1px black;
         }
     }
 
-    .listContainer {
-        border: 1px solid var(--color-base);
-        margin-bottom: 10px;
+    .filtersContainer {
+        border-top: none;
+        border-radius: 5px;
+        padding-left: 27px;
 
-        .addBtn {
-            margin: 10px;
-        }
+        .filterContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            border: 2px solid black;
+            margin-top: -2px;
+            border-radius: 0 0 5px 5px;
+            border-top: none;
 
-        .infoContainer {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            justify-items: center;
-            align-items: center;
-            border-bottom: 1px solid var(--color-base);
-            padding: 5px;
-
-            .buttons {
+            .filterTitleContainer {
                 display: flex;
-                gap: 4px;
+                align-items: center;
+                gap: 10px;
+                width: 100%;
+                min-height: 40px;
+                padding: 0 15px 0 45px;
+                border-bottom: 2px solid gray;
+                border-bottom-left-radius: 5px;
+            }
+
+            .filterContentContainer {
+                display: flex;
+                align-items: center;
+                width: 95%;
+                min-height: 40px;
+                gap: 10px;
+                margin-top: -2px;
+                padding: 0 15px 0 150px;
+                border: 1px solid darkgray;
+                border-top: none;
+                border-right: none;
+                border-radius: 0 0 5px 5px;
+
+                &:last-child {
+                    border-bottom: none;
+                }
             }
         }
-    }
 
-    .languageContainer {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        justify-items: center;
-        align-items: center;
-        padding: 5px;
-        border: 2px solid var(--color-base);
+        .title {
+            text-transform: capitalize;
+        }
     }
 }

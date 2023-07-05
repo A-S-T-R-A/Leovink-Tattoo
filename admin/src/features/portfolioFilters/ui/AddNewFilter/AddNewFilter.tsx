@@ -8,6 +8,7 @@ import { defaultNewFilter } from "../../const/const"
 import { updateFiltersData, updateSectionData } from "shared/const/firebaseVariables"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 import { IFiltersData, INewFilter, IOtherData } from "../../types/types"
+import styles from "./AddNewFilter.module.scss"
 
 export function AddNewFilter({
     data,
@@ -77,7 +78,9 @@ export function AddNewFilter({
                     }
                 />
             </ModalEditorWithTranslation>
-            <button onClick={() => setIsOpen(true)}>Add New Filter</button>
+            <button className={styles.btn} onClick={() => setIsOpen(true)}>
+                Add New Filter
+            </button>
         </>
     )
 }

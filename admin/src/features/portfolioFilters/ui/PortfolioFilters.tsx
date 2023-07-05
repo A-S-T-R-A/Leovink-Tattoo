@@ -11,6 +11,7 @@ import { EditItem } from "./EditItem/EditItem"
 import { DeleteFilter } from "./DeleteFilter/DeleteFilter"
 import { DeleteItem } from "./DeleteItem/DeleteItem"
 import { defaultLanguage } from "shared/const/languages"
+import { Typography, TypographySize } from "shared/ui/Typography/Typography"
 
 export function PortfolioFilters({
     isExpanded,
@@ -45,39 +46,65 @@ export function PortfolioFilters({
     const filters = data?.filtersData.filters
 
     return (
-        <>
+        <div className={styles.filterTableContainer}>
             <div className={styles.titleContainer} onClick={onOpen}>
-                <div className={styles.title}>filters 🡇</div>
+                <span className={styles.arrow}>🡇</span>
+                <Typography size={TypographySize.H4} className={styles.title}>
+                    Filters
+                </Typography>
                 <AddNewFilter data={data} triggerRefetch={triggerRefetch} />
             </div>
             {isExpanded && (
-                <div className={styles.listContainer}>
-                    <div className={styles.titleContainer}>
-                        Artists <button onClick={artistEditClickHandler}>Edit</button>
-                    </div>
-                    {filters?.[0].items.map(item => (
-                        <div className={styles.infoContainer}>
-                            <p>artist: {item.label[defaultLanguage]}</p>
-                            <button onClick={artistEditClickHandler}>edit</button>
+                <div className={styles.filtersContainer}>
+                    <div className={styles.filterContainer}>
+                        <div className={styles.filterTitleContainer}>
+                            <Typography size={TypographySize.H5} isBold className={styles.title}>
+                                Artists
+                            </Typography>
                         </div>
-                    ))}
-                    <div className={styles.infoContainer}>
-                        <button onClick={artistEditClickHandler}>Add New</button>
+                        {filters?.[0].map(item => (
+                            <div className={styles.filterContentContainer}>
+                                <Typography size={TypographySize.BASE}>
+                                    <strong>Artist:</strong> {item}
+                                </Typography>
+                                <button
+                                    className={styles.filterEditBtn}
+                                    onClick={artistEditClickHandler}
+                                >
+                                    Edit Artist Name
+                                </button>
+                                <button className={styles.filterDeleteBtn}>Delete Artist</button>
+                            </div>
+                        ))}
                     </div>
 
                     {filters?.slice(1).map((item, index) => {
                         return (
-                            <Fragment key={index}>
-                                <div className={styles.titleContainer}>
-                                    {item.title[defaultLanguage]} <EditFilter />
+                            <div className={styles.filterContainer} key={index}>
+                                <div className={styles.filterTitleContainer}>
+                                    <Typography
+                                        size={TypographySize.H5}
+                                        className={styles.title}
+                                        isBold
+                                    >
+                                        {item.title[defaultLanguage]}
+                                    </Typography>
+                                    <AddNewItem />
+                                    <EditFilter />
                                     <DeleteFilter />
                                 </div>
                                 {item.items.map(innerItem => (
-                                    <div className={styles.infoContainer}>
-                                        <p>
-                                            {item.title[defaultLanguage]}:{" "}
-                                            {innerItem.label[defaultLanguage]}
-                                        </p>
+                                    <div className={styles.filterContentContainer}>
+                                        <Typography
+                                            size={TypographySize.BASE}
+                                            className={styles.title}
+                                        >
+                                            <p>
+                                                <strong> {item.title[defaultLanguage]}: </strong>{" "}
+                                                {innerItem.label[defaultLanguage]}
+                                            </p>
+                                        </Typography>
+
                                         <EditItem />
                                         <DeleteItem />
                                     </div>
@@ -85,11 +112,11 @@ export function PortfolioFilters({
                                 <div className={styles.infoContainer}>
                                     {/*  <AddNewItem data={data} triggerRefetch={triggerRefetch} /> */}
                                 </div>
-                            </Fragment>
+                            </div>
                         )
                     })}
                 </div>
             )}
-        </>
+        </div>
     )
 }

@@ -1,3 +1,5 @@
+import styles from "./DeleteItem.module.scss"
+
 export function DeleteItem() {
-    return <button>Delete Item</button>
+    return <button className={styles.btn}>Delete Item</button>
 }
