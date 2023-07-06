@@ -50,11 +50,11 @@ export function EditModal(props: IEditModalProps) {
         return filtersData.map(item => ({
             name: item.title[defaultLanguage],
             options: [
+                { label: `No ${item.title[defaultLanguage]}`, value: "Unassigned" },
                 ...item.items.map(innerItem => ({
                     label: innerItem.label[defaultLanguage],
                     value: innerItem.key,
                 })),
-                { label: `No ${item.title[defaultLanguage]}`, value: "Unassigned" },
             ],
         }))
     }, [filtersData])

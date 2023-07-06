@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ArtistType, ColorType, LanguageType, StyleType } from "shared/types/types"
+import { LanguageType } from "shared/types/types"
 import { EditModal } from "./EditModal/EditModal"
 import { reformatArrayToObject, rewriteImagesDoc } from "shared/const/firebaseVariables"
 import styles from "./EditTattooImage.module.scss"
@@ -26,7 +26,6 @@ export function EditTattooImage({
     const [isOpen, setIsOpen] = useState(false)
     const [newData, setNewData] = useState<ITattooImage>(defaultNewData)
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>(defaultLanguage)
-    const [allImagesData, setAllImagesData] = useState<any>([])
     const [isLoading, setIsLoading] = useState(false)
 
     const length = data.length
@@ -40,7 +39,7 @@ export function EditTattooImage({
         setNewData(currentImg)
         setIsOpen(true)
     }
-
+    console.log(newData)
     async function saveClickHandler() {
         if (!newData) return
         const { id: _, ...restNewData } = newData
@@ -51,7 +50,15 @@ export function EditTattooImage({
 
         setIsLoading(true)
         const dataToUpload = reformatArrayToObject(data)
-        dataToUpload[id] = restNewData
+        const updatedRestData = JSON.parse(JSON.stringify(restNewData)) as typeof restNewData
+
+        for (const key in updatedRestData.filters) {
+            if (updatedRestData.filters[key] === "Unassigned") {
+                updatedRestData.filters[key] = ""
+            }
+        }
+
+        dataToUpload[id] = updatedRestData
         try {
             if (id === newData.id) {
                 await rewriteImagesDoc(dataToUpload)
@@ -73,7 +80,7 @@ export function EditTattooImage({
                     dataToUpload[slots[i]] = dataToUpload[itemsToPut[i]]
                 }
 
-                dataToUpload[to] = restNewData
+                dataToUpload[to] = updatedRestData
 
                 await rewriteImagesDoc(dataToUpload)
                 Alert.success("Reorder Success")
