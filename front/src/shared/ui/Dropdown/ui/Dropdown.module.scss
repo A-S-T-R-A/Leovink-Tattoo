@@ -4,7 +4,7 @@
 }
 
 select {
-    padding: 8px;
+    padding: 8px 30px 8px 8px;
     border: 0;
     color: var(--color-base);
     appearance: none;
@@ -12,7 +12,7 @@ select {
     background-repeat: no-repeat;
     background-position: right 8px center;
     cursor: pointer;
-    width: 200px;
+    min-width: fit-content;
     outline: none;
     font-size: var(--font-size-h4);
 }
