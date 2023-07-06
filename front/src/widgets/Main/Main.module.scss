@@ -29,34 +29,31 @@
 }
 
 .layer {
-    height: 140vh;
+    height: 100%;
     width: 100%;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 2;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: bottom;
-    transition: var(--transition);
-    overflow: visible;
     filter: blur(20px);
 }
 
 .layerBase {
     transform: translate3d(0, calc(var(--scrollTop) / 1.6), 0);
     z-index: 0;
+    height: 140vh;
 }
 
 .layerMiddle {
     transform: translate3d(0, calc(var(--scrollTop) / 2.5), 0);
-    background-position: bottom;
+    z-index: 2;
 }
 
 .layerFront {
     transform: translate3d(0, calc(var(--scrollTop) / 5.7), 0);
-    background-position: bottom;
     z-index: 10;
 }
 

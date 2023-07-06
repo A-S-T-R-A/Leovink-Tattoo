@@ -1,13 +1,16 @@
 .loaded {
     transition:
+        var(--transition),
         filter 1s ease,
-        opacity 1s ease,
-        var(--transition);
+        opacity 1s ease;
     filter: unset;
 }
 
 @media (min-width: 1000px) {
     .loaded {
-        transition: var(--transition-desktop);
+        transition:
+            var(--transition-desktop),
+            filter 1s ease,
+            opacity 1s ease;
     }
 }
