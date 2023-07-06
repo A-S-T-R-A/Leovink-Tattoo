@@ -71,6 +71,24 @@ a:active {
     --header-height: 60px;
     --sidebar-width: 300px;
     /*  --transition: transform 0.2 ease-in; */
+    --color-white: #fff;
+    --color-sidebar: #003153;
+    --color-base-accent: #007bd3;
+    --color-moderate-accent: #aedafe;
+    --color-navbar: #002743;
+    --color-black: #000;
+    --color-dark-accent: #004373;
+    --color-light-accent: #edf7ff;
+    --color-table-initial: #6e6e6e;
+    --color-table-second: #d3d3d3;
+    --color-status-dropdown: #6a6a6a;
+    --color-table-initial-block: #797979;
+    //
+    --margin-sidebar: 300px;
+    --margin-navbar: 60px;
+    //
+    --font-size-blockTable: 14px;
+    --font-size-rowTable: 14px;
 }
 
 .app {
