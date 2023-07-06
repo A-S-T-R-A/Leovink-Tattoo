@@ -50,31 +50,52 @@ import "./Main.scss"
 <slot />
 
 <script is:inline>
-const onScroll = throttle(() => {
+const onScrollMobile = throttleMobile(() => {
   const scroll = window.scrollY
   document.documentElement.style.setProperty("--scrollTop", `${scroll}px`)
-}, 50)
+})
+const onScrollDesktop = throttleDesktop(() => {
+  const scroll = window.scrollY
+  document.documentElement.style.setProperty("--scrollTop", `${scroll}px`)
+})
 
-window.addEventListener("scroll", onScroll)
+if (window.innerWidth < 961) {
+  window.addEventListener("scroll", onScrollMobile, { passive: true })
+} else {
+  window.addEventListener("scroll", onScrollDesktop, { passive: true })
+}
 
-function throttle(func, delay) {
-  let timeoutId
-  let lastExecutedTime = 0
+function throttleDesktop(fn, delay = 50) {
+  let timeoutId;
+  return function (...args) {
+    if (timeoutId) {
+      return;
+    }
+    timeoutId = setTimeout(() => {
+      fn(...args);
+      timeoutId = null;
+    }, delay);
+  }
+}
+
+function throttleMobile(func, delay = 50) {
+  let timeoutId;
+  let lastExecutedTime = 0;
 
   return function (...args) {
-    const currentTime = new Date().getTime()
+    const currentTime = new Date().getTime();
 
     if (currentTime - lastExecutedTime < delay) {
-      clearTimeout(timeoutId)
+      clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
-        lastExecutedTime = currentTime
-        func(...args)
-      }, delay)
+        lastExecutedTime = currentTime;
+        func(...args);
+      }, delay);
     } else {
-      lastExecutedTime = currentTime
-      func(...args)
+      lastExecutedTime = currentTime;
+      func(...args);
     }
-  }
+  };
 }
 
 function applyDataSrc(id) {
