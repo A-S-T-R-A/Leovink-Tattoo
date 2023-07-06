@@ -32,6 +32,8 @@ export interface ISocialMedia {
     link: string
 }
 
+export type AddressType = "location" | "phone" | "mail"
+
 export interface IAddressData {
     location: { en: string; ro: string; ru: string }
     phone: string[]

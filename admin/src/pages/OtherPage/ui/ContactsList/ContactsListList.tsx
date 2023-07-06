@@ -27,7 +27,7 @@ export function ContactsList({ contactData }: { contactData: IContactData }) {
                     <EditDescription description={contactData.description} />
                 </div>
             </div>
-            <div className={styles.socials}>
+            {/* <div className={styles.socials}>
                 <p className={styles.title}>Social Media</p>
                 {contactData.socials.map(item => {
                     const { icon, link } = item
@@ -43,7 +43,7 @@ export function ContactsList({ contactData }: { contactData: IContactData }) {
                         </div>
                     )
                 })}
-            </div>
+            </div> */}
         </div>
     )
 }
