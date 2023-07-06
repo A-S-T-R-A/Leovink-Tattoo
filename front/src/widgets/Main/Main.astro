@@ -13,7 +13,7 @@ import { ScrollIcon } from "shared/ui/ScrollIcon/ScrollIcon"
 import "./Main.scss"
 ---
 
-<header class={styles.mainWrapper}>
+<header id="wrapperMainSection" class={styles.mainWrapper}>
   <div id="main-container" class={styles.mainContainer}>
     <div class={styles.textContainer}>
       <img src={leovinkHorns} class={styles.horns} />
@@ -50,19 +50,16 @@ import "./Main.scss"
 <slot />
 
 <script is:inline>
-const onScrollMobile = throttleMobile(() => {
-  const scroll = window.scrollY
-  document.documentElement.style.setProperty("--scrollTop", `${scroll}px`)
-})
-const onScrollDesktop = throttleDesktop(() => {
-  const scroll = window.scrollY
-  document.documentElement.style.setProperty("--scrollTop", `${scroll}px`)
-})
+function onScrollMobile() {
+  throttleMobile(() => {
+    document.documentElement.style.setProperty("--scrollTop", `${window.scrollY}px`)
+  })()
+}
 
-if (window.innerWidth < 961) {
-  window.addEventListener("scroll", onScrollMobile, { passive: true })
-} else {
-  window.addEventListener("scroll", onScrollDesktop, { passive: true })
+function onScrollDesktop() {
+  throttleDesktop(() => {
+    document.documentElement.style.setProperty("--scrollTop", `${window.scrollY}px`)
+  })()
 }
 
 function throttleDesktop(fn, delay = 50) {
@@ -118,4 +115,21 @@ function applyDataSrc(id) {
 applyDataSrc("baseImg")
 applyDataSrc("middleImg")
 applyDataSrc("frontImg")
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      if (window.innerWidth < 961) {
+        window.addEventListener("scroll", onScrollMobile, { passive: true })
+      } else {
+        window.addEventListener("scroll", onScrollDesktop, { passive: true })
+      }
+    } else {
+      window.removeEventListener("scroll", onScrollMobile)
+      window.removeEventListener("scroll", onScrollDesktop)
+    }
+  })
+}, { rootMargin: "150px 0px 0px 0px" })
+
+observer.observe(document.getElementById("wrapperMainSection"))
 </script>

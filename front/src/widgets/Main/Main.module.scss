@@ -29,7 +29,7 @@
 }
 
 .layer {
-    height: 100%;
+    height: 140vh;
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -44,7 +44,6 @@
 .layerBase {
     transform: translate3d(0, calc(var(--scrollTop) / 1.6), 0);
     z-index: 0;
-    height: 140vh;
 }
 
 .layerMiddle {
