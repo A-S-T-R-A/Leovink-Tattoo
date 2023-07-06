@@ -10,12 +10,13 @@ export function alertConstructor(
 ) {
     const alertContainerEl = document.createElement("div")
     const messageEl = document.createElement("p")
-    const strongTextEl = document.createElement("strong")
+    const strongTitleEl = document.createElement("strong")
     const closeIconEl = crossIcon(styles.cross)
     const iconEl = icon(styles.icon)
 
-    strongTextEl.textContent = text
-    messageEl.textContent = message
+    strongTitleEl.textContent = text + " "
+    messageEl.append(strongTitleEl)
+    messageEl.textContent += message
 
     alertContainerEl.classList.add(styles.container)
     alertContainerEl.classList.add(styles[variant])
@@ -24,7 +25,7 @@ export function alertConstructor(
     alertContainerEl.style.transition = `transform ${TRANSITION_TIME}ms ease`
 
     alertContainerEl.append(iconEl)
-    alertContainerEl.append(strongTextEl)
+    //alertContainerEl.append(strongTitleEl)
     alertContainerEl.append(messageEl)
     alertContainerEl.append(closeIconEl)
 
@@ -44,7 +45,7 @@ export function alertConstructor(
         alertContainerEl.classList.add(styles.appended)
     })
 
-    cleanup(DISAPPEARING_DELAY)
+    //cleanup(DISAPPEARING_DELAY)
 
     closeIconEl.onclick = () => cleanup()
 }
