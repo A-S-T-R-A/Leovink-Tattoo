@@ -10,71 +10,99 @@ import layerFrontImg from "./const/layer-front.webp"
 import layerFrontImgLowRes from "./const/layer-front-low-res.webp"
 import dungeonImg from "./const/dungeon2.webp"
 import { ScrollIcon } from "shared/ui/ScrollIcon/ScrollIcon"
-import {LazyLoadingImage} from "./LazyLoadingImage/LazyLoadingImage"
+import "./Main.scss"
 ---
-        <header class={styles.mainWrapper}>
-           <div id="main-container" class={styles.mainContainer}>
-            <div class={styles.textContainer}>
-                    <img src={leovinkHorns} class={styles.horns} />
-                    <img src={leovinkTitle} alt="" class={styles.title} />
-                    <p class={styles.caption}>TATTOO & PIERCING</p>
-                    <p class={styles.est}>EST. 2010</p>
-                </div>
-                <LazyLoadingImage 
-                    client:only 
-                    src={layerBaseImg} 
-                    backgroundImage={layerBaseImgLowRes} 
-                    className={`${styles.layerBase} ${styles.layer}`}
-                    imgClassName={styles.baseImg}
-                 />
-       
-                <LazyLoadingImage
-                    client:only
-                    src={layerMiddleImg}
-                    backgroundImage={layerMiddleImgLowRes}
-                    className={`${styles.layerMiddle} ${styles.layer}`}
-                    imgClassName={styles.middleImg}
-                />
 
-                <LazyLoadingImage
-                    client:only
-                    src={layerFrontImg}
-                    backgroundImage={layerFrontImgLowRes}
-                    className={`${styles.layerFront} ${styles.layer}`}
-                    imgClassName={styles.frontImg}
-                />
-          
-                <ScrollIcon client:load className={styles.scroll} />
-            </div>
-        </header>
-        <div class={styles.dungeon} id="dungeon" style={{backgroundImage: `url(${dungeonImg})`}} />            
-            <slot/>
-            
+<header class={styles.mainWrapper}>
+  <div id="main-container" class={styles.mainContainer}>
+    <div class={styles.textContainer}>
+      <img src={leovinkHorns} class={styles.horns} />
+      <img src={leovinkTitle} alt="" class={styles.title} />
+      <p class={styles.caption}>TATTOO & PIERCING</p>
+      <p class={styles.est}>EST. 2010</p>
+    </div>
+
+    <div
+      id="baseImg"
+      class={`${styles.layerBase} ${styles.layer}`}
+      style={{ backgroundImage: `url(${layerBaseImgLowRes})` }}
+      data-src = {layerBaseImg}
+    />
+    
+    <div
+      id="middleImg"
+      class={`${styles.layerMiddle} ${styles.layer}`}
+      style={{ backgroundImage: `url(${layerMiddleImgLowRes})` }}
+      data-src = {layerMiddleImg}
+    />
+    
+    <div
+      id="frontImg"
+      class={`${styles.layerFront} ${styles.layer}`}
+      style={{ backgroundImage: `url(${layerFrontImgLowRes})` }}
+      data-src = {layerFrontImg}
+    />
+
+    <ScrollIcon client:load className={styles.scroll} />
+  </div>
+</header>
+<div class={styles.dungeon} id="dungeon" style={{ backgroundImage: `url(${dungeonImg})` }}></div>
+<slot />
+
 <script is:inline>
-    const onScroll = throttle(() => {
-        const scroll = window.scrollY
-        document.documentElement.style.setProperty('--scrollTop', `${scroll}px`)
-    }, 50)
+const onScroll = throttle(() => {
+  const scroll = window.scrollY
+  document.documentElement.style.setProperty("--scrollTop", `${scroll}px`)
+}, 50)
 
-    window.addEventListener('scroll', onScroll)
+window.addEventListener("scroll", onScroll)
 
-    function throttle(func, delay) {
-    let timeoutId;
-    let lastExecutedTime = 0;
+function throttle(func, delay) {
+  let timeoutId
+  let lastExecutedTime = 0
 
   return function (...args) {
-    const currentTime = new Date().getTime();
+    const currentTime = new Date().getTime()
 
     if (currentTime - lastExecutedTime < delay) {
-      clearTimeout(timeoutId);
+      clearTimeout(timeoutId)
       timeoutId = setTimeout(() => {
-        lastExecutedTime = currentTime;
-        func(...args);
-      }, delay);
+        lastExecutedTime = currentTime
+        func(...args)
+      }, delay)
     } else {
-      lastExecutedTime = currentTime;
-      func(...args);
+      lastExecutedTime = currentTime
+      func(...args)
     }
-  };
+  }
 }
+</script>
+
+<script is:inline>
+
+function applyDataSrc(id) {
+  const base = document.getElementById(id)
+  const imgEl = new Image()
+  imgEl.src = base.getAttribute("data-src")
+
+  if (imgEl.complete) {
+    base.style.backgroundImage = `url(${imgEl.src})`
+  } else {
+    imgEl.onload = () => {
+      base.style.opacity = 0.1
+      base.style.backgroundImage = `url(${imgEl.src})`
+      base.style.opacity = 1
+      base.classList.add("loaded")
+    }
+  }
+
+
+}
+
+applyDataSrc("baseImg")
+
+applyDataSrc("middleImg")
+
+applyDataSrc("frontImg")
+
 </script>
