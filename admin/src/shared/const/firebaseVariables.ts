@@ -15,7 +15,8 @@ import {
 } from "firebase/firestore"
 import { Alert } from "shared/ui/CustomNotifications"
 import { allLanguages } from "./languages"
-import { IFiltersData, IOtherData } from "features/portfolioFilters/types/types"
+import { IFiltersData } from "features/portfolioFilters/types/types"
+import { ISocialMedia } from "pages/OtherPage/types/type"
 
 const IS_DEV = import.meta.env.MODE === "development"
 
@@ -27,6 +28,7 @@ export const DATA_BUCKET = {
     services: "data/services",
     testimonials: "data/testimonials",
     artists: "data/artists",
+    global: "data/global",
 }
 const LANGUAGE_DOCUMENT = {
     en: "english",
@@ -232,14 +234,19 @@ export async function deleteImageFromBucket(oldImgUrl: string, path: string) {
     await deleteObject(imgRef)
 }
 
-export async function fetchGlobalData(): Promise<IOtherData> {
+export async function fetchGlobalData() {
     const ref = doc(db, DATA_COLLECTION, GLOBAL_DATA)
     const newDoc = await getDoc(ref)
     const newData = newDoc.data()
-    return newData as IOtherData
+    return newData
 }
 
 export async function updateFiltersData(filtersData: IFiltersData) {
     const ref = doc(db, DATA_COLLECTION, GLOBAL_DATA)
     await updateDoc(ref, { filtersData } as any)
+}
+
+export async function updateSocialsData(socialsData: ISocialMedia[]) {
+    const ref = doc(db, DATA_COLLECTION, GLOBAL_DATA)
+    await updateDoc(ref, { socialsData } as any)
 }

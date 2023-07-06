@@ -18,10 +18,6 @@ export interface IFiltersData {
     reset: { en: string; ro: string; ru: string }
 }
 
-export interface IGlobalData {
-    filtersData: IFiltersData
-}
-
 export interface INewFilter {
     en: string
     ro: string

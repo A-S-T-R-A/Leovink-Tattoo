@@ -7,7 +7,7 @@ import { IArtistData, ITranslatedArtistsData } from "../types/types"
 import { fetchGlobalData, fetchSectionData } from "shared/const/firebaseVariables"
 import { defaultLanguage } from "shared/const/languages"
 import { DeleteParagraph } from "./DeleteParagraph/DeleteParagraph"
-import { IFiltersData } from "features/portfolioFilters/types/types"
+import { IFiltersData } from "features/portfolioFilters"
 import { TriggerRefetchBtn } from "shared/components/TriggerRefetchBtn/TriggerRefetchBtn"
 
 export function ArtistsPage() {

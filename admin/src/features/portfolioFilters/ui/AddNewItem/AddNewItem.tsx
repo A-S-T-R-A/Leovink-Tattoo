@@ -1,6 +1,6 @@
-import { defaultNewFilter } from "../../const/const"
-import { IFilterItem, IFiltersData, IGlobalData } from "../../types/types"
 import { useState } from "react"
+import { defaultNewFilter } from "../../const/const"
+import { IFilterItem, IFiltersData } from "../../types/types"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
 import { updateFiltersData } from "shared/const/firebaseVariables"
 import { defaultLanguage } from "shared/const/languages"
@@ -8,6 +8,8 @@ import { LanguageType } from "shared/types/types"
 import { Alert } from "shared/ui/CustomNotifications"
 import { Input } from "shared/ui/Input/Input"
 import styles from "./AddNewItem.module.scss"
+import { IGlobalData } from "pages/OtherPage"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function AddNewItem({
     data,
@@ -74,6 +76,7 @@ export function AddNewItem({
 
     return (
         <>
+            <LoadingModal isLoading={isLoading} />
             <ModalEditorWithTranslation
                 isOpen={isOpen}
                 onClose={() => setIsOpen(true)}

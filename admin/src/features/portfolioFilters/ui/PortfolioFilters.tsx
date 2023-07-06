@@ -1,8 +1,4 @@
 import { useNavigate } from "react-router-dom"
-import { fetchGlobalData, fetchSectionData } from "shared/const/firebaseVariables"
-import styles from "./PortfolioFilters.module.scss"
-import { Fragment, useEffect, useMemo, useState } from "react"
-import { IFiltersData, IGlobalData } from "../types/types"
 import { Confirm } from "shared/ui/CustomNotifications"
 import { AddNewFilter } from "./AddNewFilter/AddNewFilter"
 import { AddNewItem } from "./AddNewItem/AddNewItem"
@@ -12,30 +8,21 @@ import { DeleteFilter } from "./DeleteFilter/DeleteFilter"
 import { DeleteItem } from "./DeleteItem/DeleteItem"
 import { defaultLanguage } from "shared/const/languages"
 import { Typography, TypographySize } from "shared/ui/Typography/Typography"
+import { IGlobalData } from "pages/OtherPage"
+import styles from "./PortfolioFilters.module.scss"
 
 export function PortfolioFilters({
+    data,
     isExpanded,
     onOpen,
+    triggerRefetch,
 }: {
+    data: IGlobalData | null
     isExpanded: boolean
     onOpen: () => void
+    triggerRefetch: () => void
 }) {
-    const [data, setData] = useState<IGlobalData | null>(null)
-
     const navigate = useNavigate()
-
-    async function fetch() {
-        const d = await fetchGlobalData()
-        setData(d)
-    }
-
-    function triggerRefetch() {
-        fetch()
-    }
-
-    useEffect(() => {
-        fetch()
-    }, [])
 
     async function artistEditClickHandler() {
         if (await Confirm("You can edit artists only on Artists Page. Redirect?")) {

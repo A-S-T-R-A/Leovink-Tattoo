@@ -2,7 +2,7 @@ import { useMemo } from "react"
 import { Dropdown } from "shared/ui/Dropdown"
 import styles from "./PortfolioPageFilters.module.scss"
 import { tattooLiveDropdownOptions } from "../../const/const"
-import { IFilter, IFiltersData } from "features/portfolioFilters/types/types"
+import { IFilter } from "features/portfolioFilters/types/types"
 import { defaultLanguage } from "shared/const/languages"
 
 interface IPortfolioPageFilters {

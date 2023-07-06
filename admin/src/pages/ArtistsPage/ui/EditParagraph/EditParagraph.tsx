@@ -25,7 +25,7 @@ import {
 import { isStringUrlFriendly } from "shared/lib/isStringUrlFriendly/isStringUrlFriendly"
 import { Alert } from "shared/ui/CustomNotifications"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
-import { IFiltersData } from "features/portfolioFilters/types/types"
+import { IFiltersData } from "features/portfolioFilters"
 import { ITattooImage } from "pages/PortfolioPage/types/types"
 
 export function EditParagraph({

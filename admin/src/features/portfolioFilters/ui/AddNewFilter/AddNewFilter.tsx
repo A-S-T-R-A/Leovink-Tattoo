@@ -7,8 +7,9 @@ import { Alert } from "shared/ui/CustomNotifications"
 import { defaultNewFilter } from "../../const/const"
 import { updateFiltersData } from "shared/const/firebaseVariables"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
-import { IFiltersData, IGlobalData, INewFilter } from "../../types/types"
+import { IFiltersData, INewFilter } from "../../types/types"
 import styles from "./AddNewFilter.module.scss"
+import { IGlobalData } from "pages/OtherPage"
 
 export function AddNewFilter({
     data,

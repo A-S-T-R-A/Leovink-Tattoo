@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import styles from "./EditItem.module.scss"
-import { IFiltersData, IGlobalData, INewFilter } from "../../types/types"
+import { IFiltersData, INewFilter } from "../../types/types"
 import { defaultNewFilter } from "../../const/const"
 import { defaultLanguage } from "shared/const/languages"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
@@ -12,6 +12,7 @@ import { Alert } from "shared/ui/CustomNotifications"
 import { updateFiltersData } from "shared/const/firebaseVariables"
 import { fetchAllImages } from "../../lib/fetchTattooImages"
 import { uploadTattooImages } from "features/portfolioFilters/lib/uploadTattooImages"
+import { IGlobalData } from "pages/OtherPage"
 
 export function EditItem({
     parentId,

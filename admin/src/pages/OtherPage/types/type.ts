@@ -1,6 +1,7 @@
+import { IFiltersData } from "features/portfolioFilters"
 import { LanguageType } from "shared/types/types"
 
-export interface IOtherData {
+/* export interface IOtherData {
     sectionNames: {
         portfolio: string
         steps: string
@@ -23,4 +24,27 @@ export interface IOtherData {
     }
 
     defaultLanguage: LanguageType
+} */
+
+export interface ISocialMedia {
+    id: number
+    icon: string
+    link: string
+}
+
+export interface IAddressData {
+    location: { en: string; ro: string; ru: string }
+    phone: string[]
+    mail: string[]
+}
+
+export interface IGlobalData {
+    filtersData: IFiltersData
+    socialsData: ISocialMedia[]
+    addressData: IAddressData
+}
+
+export interface IPreviewImage {
+    blob: string
+    url: string
 }

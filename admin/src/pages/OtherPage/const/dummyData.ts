@@ -1,4 +1,4 @@
-import { IOtherData } from "../types/type"
+/* import { IOtherData } from "../types/type"
 
 export const otherData: IOtherData = {
     sectionNames: {
@@ -24,3 +24,4 @@ export const otherData: IOtherData = {
 
     defaultLanguage: "en",
 }
+ */
