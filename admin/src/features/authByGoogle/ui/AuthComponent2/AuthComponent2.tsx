@@ -1,6 +1,6 @@
 import { app } from "../../../../../firebase"
 import { GoogleAuthProvider, getAuth, signInWithPopup, signOut } from "firebase/auth"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { AuthContext } from "../../context/AuthContext"
 import styles from "./AuthComponent2.module.scss"
 import { checkIsEmailWhitelisted } from "../../lib/checkIsEmailWhitelisted"
@@ -11,6 +11,7 @@ const auth = getAuth(app)
 const provider = new GoogleAuthProvider()
 
 export function AuthComponent2() {
+    const [dropdownCheckbox, setDropdownCheckbox] = useState(false)
     const { user, updateUser } = useContext(AuthContext)
     function logOutWithGoogle() {
         updateUser(null)
@@ -34,7 +35,23 @@ export function AuthComponent2() {
             })
     }
 
-    const [dropdownCheckbox, setDropdownCheckbox] = useState(false)
+    const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+    function dropdownSwitcher() {
+        setDropdownCheckbox(prev => {
+            if (!prev) {
+                if (dropdownTimeout.current) {
+                    clearTimeout(dropdownTimeout.current)
+                }
+                dropdownTimeout.current = setTimeout(() => setDropdownCheckbox(false), 5000)
+                return true
+            } else {
+                return false
+            }
+        })
+    }
+
+    console.log(dropdownCheckbox)
 
     useEffect(() => {
         auth.onAuthStateChanged(user => {
@@ -69,7 +86,7 @@ export function AuthComponent2() {
                                 type="checkbox"
                                 id="dropdowncheckbox"
                                 checked={dropdownCheckbox}
-                                onChange={() => setDropdownCheckbox(prev => !prev)}
+                                onChange={() => dropdownSwitcher()}
                                 className={styles.dropdownCheckbox}
                             />
                         </div>

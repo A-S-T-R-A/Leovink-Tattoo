@@ -12,6 +12,8 @@ import { GalleryRowIcon } from "./galleryRow"
 import { EditIcon } from "./edit"
 import { DeleteIcon } from "./delete"
 import { FilterIcon } from "./filter"
+import { HomeIcon } from "./home"
+import { StairsIcon } from "./stairs"
 
 export {
     ArtistsIcon,
@@ -28,4 +30,6 @@ export {
     EditIcon,
     DeleteIcon,
     FilterIcon,
+    HomeIcon,
+    StairsIcon,
 }

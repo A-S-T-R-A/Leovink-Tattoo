@@ -20,7 +20,7 @@
     align-content: center;
 }
 
-.portfolioContainer {
+.sectionContainer {
     position: absolute;
     left: calc(var(--margin-sidebar) + 20px);
     top: auto;
@@ -28,79 +28,18 @@
     display: flex;
     gap: 10px;
     cursor: pointer;
+    margin: auto 0;
 }
 
-.portfolioContainer:active {
-    color: var(--color-light-accent);
-    text-decoration: none;
+.icon path {
+    fill: var(--color-moderate-accent);
+    margin: auto 0;
 }
 
-.portfolioIcon {
-    fill: var(--color-dark-accent);
-}
-
-.sliderContainer {
-    display: flex;
-    flex-direction: column;
-}
-
-.slider {
-    width: 100px;
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
-    height: 60px;
-}
-
-.avatar {
-    width: 30px;
-    height: 30px;
-    border-radius: 50px;
-    margin-right: 5px;
-}
-
-.name {
+.icon {
     margin-right: 10px;
 }
 
-.downarrow {
-    margin: 0;
-    padding: 0;
-    width: 10px;
-}
-
-.downarrow path {
-    fill: white;
-}
-
-.dropdown {
-    position: absolute;
-    width: 100px;
-    top: 30px;
-    display: none;
-    background-color: var(--color-dark-accent);
-    border-bottom: 1px solid var(--color-base-accent);
-    margin-top: 30px;
-    height: 100%;
-    cursor: pointer;
-}
-
-.sliderContainer:hover .dropdown {
-    display: block;
-    color: var(--color-white);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    border-bottom-left-radius: 10px;
-}
-
-.exitIcon {
-    margin-left: 5px;
-    width: 20px;
-    fill: var(--color-white);
-}
-
-.dropdown:active {
-    background-color: var(--color-base-accent);
+.section {
+    margin: auto 0;
 }

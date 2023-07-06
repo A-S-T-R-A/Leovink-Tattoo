@@ -7,6 +7,8 @@ import {
     PortfolioIcon,
     ServicesIcon,
     TestimonialsIcon,
+    HomeIcon,
+    StairsIcon,
 } from "shared/assets/icons"
 
 interface IRoute {
@@ -18,9 +20,9 @@ interface IRoute {
 }
 
 export const routes: IRoute[] = [
-    { Svg: PortfolioIcon, path: "/", name: "Home" },
+    { Svg: HomeIcon, path: "/", name: "Home" },
     { Svg: PortfolioIcon, path: "/portfolio", name: "Portfolio", private: true },
-    { Svg: ServicesIcon, path: "/steps", name: "Steps", private: true },
+    { Svg: StairsIcon, path: "/steps", name: "Steps", private: true },
     { Svg: ServicesIcon, path: "/services", name: "Services", private: true },
     { Svg: TestimonialsIcon, path: "/reviews", name: "Reviews", private: true },
     { Svg: ArtistsIcon, path: "/artists", name: "Artists", private: true },
