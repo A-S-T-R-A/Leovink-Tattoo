@@ -52,9 +52,9 @@ export function PortfolioPageList({
                 <div className={styles.item} key={index}>
                     <ModalImage className={styles.img} url={item.img} />
                     <div>id: {item.id}</div>
-                    {filterKeys.map(key => {
+                    {filterKeys.map((key, index) => {
                         return (
-                            <div>
+                            <div key={key + index}>
                                 {key}: {item.filters[key] || ""}
                             </div>
                         )
@@ -125,9 +125,9 @@ export function PortfolioPageList({
                         <div>id: {item.id}</div>
                         <ModalImage className={styles.img} url={item.img} />
 
-                        {filterKeys.map(key => {
+                        {filterKeys.map((key, index) => {
                             return (
-                                <div>
+                                <div key={key + index}>
                                     {key}: {item.filters[key] || ""}
                                 </div>
                             )

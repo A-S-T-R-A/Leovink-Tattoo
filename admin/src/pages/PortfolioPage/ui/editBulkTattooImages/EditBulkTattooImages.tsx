@@ -4,8 +4,9 @@ import { Dropdown } from "shared/ui/Dropdown"
 import { getImagesDoc, rewriteImagesDoc } from "shared/const/firebaseVariables"
 import { Alert } from "shared/ui/CustomNotifications"
 import { tattooLiveDropdownOptions } from "../../const/const"
-import { IFilters } from "features/portfolioFilters/types/types"
 import styles from "./EditBulkTattooImages.module.scss"
+import { IFilter } from "features/portfolioFilters/types/types"
+import { defaultLanguage } from "shared/const/languages"
 
 export function EditBulkTattooImages({
     imagesId,
@@ -13,7 +14,7 @@ export function EditBulkTattooImages({
     triggerRefetch,
 }: {
     imagesId: number[]
-    filtersData: IFilters | null
+    filtersData: IFilter[]
     triggerRefetch: () => void
 }) {
     const [isOpen, setIsOpen] = useState(false)
@@ -90,18 +91,19 @@ export function EditBulkTattooImages({
     }
 
     const dropdownOptions = useMemo(() => {
-        const options = []
-        for (const key in filtersData) {
-            const otherOptions = filtersData[key].map(item => ({
-                label: item.label,
-                value: item.key,
+        const options = filtersData.map(item => {
+            const otherOptions = item.items.map(innerItem => ({
+                label: innerItem.label[defaultLanguage],
+                value: innerItem.key,
             }))
-            const option = {
-                name: key,
-                options: [{ label: `No ${key}`, value: "Unassigned" }, ...otherOptions],
+            return {
+                name: item.title[defaultLanguage],
+                options: [
+                    { label: `No ${item.title[defaultLanguage]}`, value: "Unassigned" },
+                    ...otherOptions,
+                ],
             }
-            options.push(option)
-        }
+        })
         return options
     }, [filtersData])
 

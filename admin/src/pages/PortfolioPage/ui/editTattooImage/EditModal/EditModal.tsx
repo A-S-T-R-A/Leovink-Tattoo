@@ -79,9 +79,9 @@ export function EditModal(props: IEditModalProps) {
                         img:
                         <ModalImage url={newData.img} className={styles.img} />
                     </div>
-                    {dropdownOptions.map(item => {
+                    {dropdownOptions.map((item, index) => {
                         return (
-                            <div>
+                            <div key={item.name + index}>
                                 {item.name}:
                                 <Dropdown
                                     options={item.options}
