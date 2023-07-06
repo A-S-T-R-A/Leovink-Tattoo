@@ -1,3 +1,3 @@
-export { AuthComponent2 } from "./ui/AuthComponent2/AuthComponent2"
+export { AuthComponent } from "./ui/AuthComponent/AuthComponent"
 export { AuthContextProvider, useUserRole, type UserRoleType } from "./context/AuthContext"
 export { RequireAuth } from "./ui/RequireAuth/RequireAuth"

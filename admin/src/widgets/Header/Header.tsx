@@ -1,4 +1,4 @@
-import { AuthComponent2 } from "features/authByGoogle"
+import { AuthComponent } from "features/authByGoogle"
 import styles from "./Header.module.scss"
 import { useLocation } from "react-router-dom"
 import { routes } from "shared/config/routes"
@@ -16,7 +16,7 @@ export function Header() {
                     <h3 className={styles.section}>{section}</h3>
                 </div>
                 <div className={styles.dropdownContainer}>
-                    <AuthComponent2 />
+                    <AuthComponent />
                 </div>
             </div>
         </div>
