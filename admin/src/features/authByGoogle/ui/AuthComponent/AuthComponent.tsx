@@ -17,6 +17,7 @@ export function AuthComponent() {
     function logOutWithGoogle() {
         updateUser(null)
         signOut(auth)
+        setDropdownCheckbox(false)
     }
 
     function signInWithGoogle() {
