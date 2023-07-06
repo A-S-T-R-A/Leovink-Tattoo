@@ -1,0 +1,20 @@
+.blurImg {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    transition: filter 1s ease, opacity 1s ease, var(--transition);
+
+    filter: blur(20px);
+
+    .image {
+        opacity: 0;
+    }
+
+    &.unBlur {
+        filter: unset;
+    }
+
+    .loaded {
+        opacity: 1;
+    }
+}
