@@ -1,33 +1,59 @@
 .wrapper {
-    width: var(--sidebar-width);
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    padding: 30px 20px;
-    background: var(--color-accent);
+    height: 100%;
+    background-color: var(--color-light-accent);
+    width: 300px;
+    position: fixed;
+    box-shadow: 0 0 1px 0 var(--color-base-accent);
+    z-index: 200;
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+    gap: 10px;
+    margin: 30px auto 0 auto;
+    color: var(--color-dark-accent);
 
     .link {
+        color: var(--color-base-accent);
         display: flex;
-        justify-content: center;
-        width: 150px;
-        padding: 5px 10px;
-        transition: all 0.2s ease;
+        gap: 30px;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 30px;
+        width: 240px;
+        height: 40px;
+        font-size: 18px;
+        box-shadow: 1px 1px 0 0 var(--color-moderate-accent);
+        text-decoration: none;
 
         &.currentLink {
             display: flex;
-            justify-content: center;
-            width: 150px;
-            padding: 5px 0;
-            background-color: orangered;
+            width: 240px;
+            padding: 30px;
             color: white;
             border-radius: 10px;
+            background-color: var(--color-moderate-accent);
+            box-shadow: 0 1px 0 0 var(--color-base-accent);
+            border-right: 1px solid var(--color-base-accent);
+            transform: translateX(10%);
         }
+    }
+    .link:hover {
+        transform: translateX(10%);
+        transition: ease 0.3s;
+        cursor: pointer;
+        color: var(--color-white);
+        background-color: var(--color-moderate-accent);
+        border-right: 1px solid var(--color-base-accent);
+        box-shadow: 0 1px 0 0 var(--color-base-accent);
+    }
+
+    .svg path {
+        width: 30px;
+        fill: var(--color-dark-accent);
     }
 }

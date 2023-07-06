@@ -6,12 +6,19 @@ import { routes } from "shared/config/routes"
 export function Header() {
     const { pathname } = useLocation()
 
-    const section = routes.filter(item => pathname === item.path)[0].name
+    const { name: section, Svg: SvgComponent } = routes.filter(item => pathname === item.path)[0]
 
     return (
         <div className={styles.wrapper}>
-            <h3>{section}</h3>
-            <AuthComponent />
+            <div className={styles.container}>
+                <div className={styles.sectionContainer}>
+                    {SvgComponent && <SvgComponent className={styles.icon} />}
+                    <h3 className={styles.section}>{section}</h3>
+                </div>
+                <div className={styles.dropdownContainer}>
+                    <AuthComponent />
+                </div>
+            </div>
         </div>
     )
 }

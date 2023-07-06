@@ -1,16 +1,89 @@
-.logOut {
+.sliderContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.slider {
+    background-color: var(--color-navbar);
+    width: 200px;
+    height: 60px;
+    gap: 10px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    cursor: pointer;
+}
 
-    > div {
-        display: flex;
-        align-items: center;
-        gap: 10px;
+.avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+}
 
-        > img {
-            border-radius: 50%;
-            width: 40px;
-        }
-    }
+.name {
+}
+
+.downarrow {
+    width: 10px;
+    height: 10px;
+}
+
+.downarrow path {
+    fill: white;
+}
+
+.logOutBtn {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 110px;
+    height: 40px;
+    cursor: pointer;
+    border: none;
+    margin-left: 70px;
+    opacity: 0.92;
+    box-shadow: 0 0 3px 0 var(--color-moderate-accent);
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin-top: 10px;
+    background-color: var(--color-dark-accent);
+    color: white;
+    fill: white;
+    transform: translateY(-150%);
+    z-index: -1;
+}
+
+.logOutBtn:hover {
+    background-color: var(--color-light-accent);
+    color: var(--color-dark-accent);
+    fill: var(--color-dark-accent);
+    box-shadow: 0 0 1px 0 var(--color-dark-accent);
+}
+
+.dropdownVisible .logOutBtn {
+    transition: 0.5s ease;
+    transform: translateY(0);
+}
+
+.dropdownInvisible .logOutBtn {
+    transition: 0.5s ease;
+    transform: translateY(-150%);
+    z-index: -1;
+}
+
+.dropdownCheckbox {
+    display: none;
+}
+
+.exitIcon {
+    margin-left: 5px;
+    width: 20px;
+    height: 20px;
+}
+
+.dropdown:active {
+    background-color: var(--color-base-accent);
 }

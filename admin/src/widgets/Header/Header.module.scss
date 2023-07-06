@@ -1,12 +1,45 @@
 .wrapper {
-    background: rgb(213, 151, 35);
-    height: var(--header-height);
-    left: var(--sidebar-width);
     top: 0;
-    right: 0;
-    position: absolute;
-    display: flex;
-    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    display: grid;
     align-items: center;
-    padding: 0 20px;
+    text-align: center;
+    justify-content: end;
+    padding: 0 10px;
+    background-color: var(--color-navbar);
+    height: 60px;
+    color: var(--color-white);
+    z-index: 100;
+}
+
+.container {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+}
+
+.sectionContainer {
+    position: absolute;
+    left: calc(var(--sidebar-width) + 20px);
+    top: auto;
+    bottom: auto;
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+    margin: auto 0;
+}
+
+.icon path {
+    fill: var(--color-moderate-accent);
+    margin: auto 0;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+.section {
+    margin: auto 0;
 }
