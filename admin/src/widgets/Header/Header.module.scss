@@ -22,7 +22,7 @@
 
 .sectionContainer {
     position: absolute;
-    left: calc(var(--margin-sidebar) + 20px);
+    left: calc(var(--sidebar-width) + 20px);
     top: auto;
     bottom: auto;
     display: flex;

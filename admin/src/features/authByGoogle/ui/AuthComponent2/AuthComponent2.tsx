@@ -6,6 +6,7 @@ import styles from "./AuthComponent2.module.scss"
 import { checkIsEmailWhitelisted } from "../../lib/checkIsEmailWhitelisted"
 import { Alert } from "shared/ui/CustomNotifications"
 import { DownArrowIcon, ExitIcon } from "shared/assets/icons"
+import { DELAY } from "../../const/delay"
 
 const auth = getAuth(app)
 const provider = new GoogleAuthProvider()
@@ -43,7 +44,7 @@ export function AuthComponent2() {
                 if (dropdownTimeout.current) {
                     clearTimeout(dropdownTimeout.current)
                 }
-                dropdownTimeout.current = setTimeout(() => setDropdownCheckbox(false), 5000)
+                dropdownTimeout.current = setTimeout(() => setDropdownCheckbox(false), DELAY)
                 return true
             } else {
                 return false
@@ -51,7 +52,13 @@ export function AuthComponent2() {
         })
     }
 
-    console.log(dropdownCheckbox)
+    function mouseEnterHandler() {
+        clearTimeout(dropdownTimeout.current as any)
+    }
+
+    function mouseLeaveHandler() {
+        dropdownTimeout.current = setTimeout(() => setDropdownCheckbox(false), DELAY)
+    }
 
     useEffect(() => {
         auth.onAuthStateChanged(user => {
@@ -86,7 +93,7 @@ export function AuthComponent2() {
                                 type="checkbox"
                                 id="dropdowncheckbox"
                                 checked={dropdownCheckbox}
-                                onChange={() => dropdownSwitcher()}
+                                onChange={dropdownSwitcher}
                                 className={styles.dropdownCheckbox}
                             />
                         </div>
@@ -95,7 +102,12 @@ export function AuthComponent2() {
                                 dropdownCheckbox ? styles.dropdownVisible : styles.dropdownInvisible
                             }`}
                         >
-                            <button className={styles.logOutBtn} onClick={logOutWithGoogle}>
+                            <button
+                                className={styles.logOutBtn}
+                                onClick={logOutWithGoogle}
+                                onMouseEnter={mouseEnterHandler}
+                                onMouseLeave={mouseLeaveHandler}
+                            >
                                 Log Out
                                 <ExitIcon className={styles.exitIcon} />
                             </button>
