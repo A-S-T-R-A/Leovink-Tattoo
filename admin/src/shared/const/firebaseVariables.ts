@@ -16,7 +16,13 @@ import {
 import { Alert } from "shared/ui/CustomNotifications"
 import { allLanguages } from "./languages"
 import { IFiltersData } from "features/portfolioFilters/types/types"
-import { IAddressData, IContactsGuide, IFormData, ISocialMedia } from "pages/OtherPage/types/type"
+import {
+    IAddressData,
+    IContactsGuide,
+    IFormData,
+    ISectionNames,
+    ISocialMedia,
+} from "pages/OtherPage/types/type"
 
 const IS_DEV = import.meta.env.MODE === "development"
 
@@ -264,4 +270,9 @@ export async function updateContactsGuideData(contactsGuide: IContactsGuide) {
 export async function updateFormData(formData: IFormData) {
     const ref = doc(db, DATA_COLLECTION, GLOBAL_DATA)
     await updateDoc(ref, { formData } as any)
+}
+
+export async function updateSectionNames(sectionNames: ISectionNames) {
+    const ref = doc(db, DATA_COLLECTION, GLOBAL_DATA)
+    await updateDoc(ref, { sectionNames: sectionNames } as any)
 }

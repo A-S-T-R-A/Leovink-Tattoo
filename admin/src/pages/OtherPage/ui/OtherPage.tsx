@@ -7,6 +7,7 @@ import { Socials } from "./Socials/Socials"
 import { Contacts } from "./Contacts/Contacts"
 import { ContactsGuide } from "./ContactsGuide/ContactsGuide"
 import { FormData } from "./FormData/FormData"
+import { SectionNames } from "./SectionNames/SectionNames"
 
 export function OtherPage() {
     const [data, setData] = useState<IGlobalData | null>(null)
@@ -32,10 +33,13 @@ export function OtherPage() {
                 isExpanded={true /* sectionOpen === "filters" */}
                 onOpen={() => null /* setSectionOpen("filters") */}
             />
-            <Socials data={data} triggerRefetch={triggerRefetch} />
+            {/* <Socials data={data} triggerRefetch={triggerRefetch} />
             <Contacts data={data} triggerRefetch={triggerRefetch} />
             <ContactsGuide data={data} triggerRefetch={triggerRefetch} />
-            <FormData data={data} triggerRefetch={triggerRefetch} />
+            <FormData data={data} triggerRefetch={triggerRefetch} /> */}
+            {/* <SectionNames data={data} triggerRefetch={triggerRefetch} /> */}
+            {/* 
+            <Buttons /> */}
             {/*   <div>
                 <div
                     className={styles.titleContainer}
