@@ -22,13 +22,12 @@
 
 .sectionContainer {
     position: absolute;
+    display: flex;
     left: calc(var(--sidebar-width) + 20px);
+    align-items: center;
     top: auto;
     bottom: auto;
-    display: flex;
-    gap: 10px;
     cursor: pointer;
-    margin: auto 0;
 }
 
 .icon path {
@@ -41,5 +40,5 @@
 }
 
 .section {
-    margin: auto 0;
+    line-height: 1;
 }
