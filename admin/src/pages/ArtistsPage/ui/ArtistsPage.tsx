@@ -9,6 +9,7 @@ import { defaultLanguage } from "shared/const/languages"
 import { DeleteParagraph } from "./DeleteParagraph/DeleteParagraph"
 import { IFiltersData } from "features/portfolioFilters"
 import { TriggerRefetchBtn } from "shared/components/TriggerRefetchBtn/TriggerRefetchBtn"
+import { IGlobalData } from "pages/OtherPage"
 
 export function ArtistsPage() {
     const [data, setData] = useState<ITranslatedArtistsData | null>(null)
@@ -21,7 +22,7 @@ export function ArtistsPage() {
         const ro = (await fetchSectionData("ro", "artists")) as IArtistData[]
         const ru = (await fetchSectionData("ru", "artists")) as IArtistData[]
         setData({ en, ro, ru })
-        const { filtersData } = await fetchGlobalData()
+        const { filtersData } = (await fetchGlobalData()) as IGlobalData
         setFiltersData(filtersData)
         setIsDataLoading(false)
     }
