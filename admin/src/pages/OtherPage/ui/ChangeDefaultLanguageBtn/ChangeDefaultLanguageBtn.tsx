@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 import { LanguageType } from "shared/types/types"
 import styles from "./EditName.module.scss"
 import { Dropdown } from "shared/ui/Dropdown"
@@ -25,7 +25,7 @@ export function ChangeDefaultLanguageBtn() {
 
     return (
         <>
-            <ModalEditorWithTranslation
+            <ModalEditor
                 isOpen={isOpen}
                 onClose={onClose}
                 onChangeLanguage={onChangeLanguage}
@@ -41,7 +41,7 @@ export function ChangeDefaultLanguageBtn() {
                         onChange={language => setLang(language)}
                     />
                 </div>
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <button onClick={() => setIsOpen(true)}>Edit</button>
         </>
     )

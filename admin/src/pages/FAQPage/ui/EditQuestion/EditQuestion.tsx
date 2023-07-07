@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 import { Textarea } from "shared/ui/Textarea/Textarea"
-import { Dropdown } from "shared/ui/Dropdown"
 import { LanguageType } from "shared/types/types"
 import styles from "./EditQuestion.module.scss"
 import { ITranslatedFaqData } from "../../types/types"
@@ -80,7 +79,8 @@ export function EditQuestion({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <ModalEditorWithTranslation
+            <ModalEditor
+                withTranslation
                 isOpen={isOpen}
                 onClose={onClose}
                 onChangeLanguage={onChangeLanguage}
@@ -103,7 +103,7 @@ export function EditQuestion({
                         onChange={value => setNewQuestion(prev => ({ ...prev, answer: value }))}
                     />
                 </div>
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <button onClick={() => setIsOpen(true)}>Edit</button>
         </>
     )

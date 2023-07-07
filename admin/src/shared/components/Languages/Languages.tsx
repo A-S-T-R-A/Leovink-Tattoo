@@ -11,8 +11,8 @@ export function Languages({
     onChangeLanguage,
 }: {
     className?: string
-    currentLanguage: LanguageType
-    onChangeLanguage: (language: LanguageType) => void
+    currentLanguage?: LanguageType
+    onChangeLanguage?: (language: LanguageType) => void
 }) {
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const timeoutRef = useRef<NodeJS.Timeout | null>(null)
@@ -20,7 +20,7 @@ export function Languages({
     function clickHandler(e: React.MouseEvent, language: LanguageType) {
         e.stopPropagation()
         setDropdownOpen(false)
-        onChangeLanguage(language)
+        onChangeLanguage?.(language)
     }
 
     function onMouseEnterHandler() {
