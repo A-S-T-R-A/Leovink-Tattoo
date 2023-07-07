@@ -1,45 +1,36 @@
-import { useEffect, useState } from "react"
+import { LanguageType } from "shared/types/types"
 import { IGlobalData } from "../../types/type"
+import { useEffect, useState } from "react"
 import { defaultLanguage } from "shared/const/languages"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
-import { LanguageType } from "shared/types/types"
 import { Input } from "shared/ui/Input/Input"
 import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
 import { Alert } from "shared/ui/CustomNotifications"
-import { updateSectionNames } from "shared/const/firebaseVariables"
+import { updateButtons } from "shared/const/firebaseVariables"
 
 const defaultNewAllData = {
     en: {
-        portfolio: "",
-        steps: "",
-        services: "",
-        artists: "",
-        testimonials: "",
-        faq: "",
-        form: "",
+        cta: "",
+        showMore: "",
+        viewGallery: "",
+        resetFilters: "",
     },
     ro: {
-        portfolio: "",
-        steps: "",
-        services: "",
-        artists: "",
-        testimonials: "",
-        faq: "",
-        form: "",
+        cta: "",
+        showMore: "",
+        viewGallery: "",
+        resetFilters: "",
     },
     ru: {
-        portfolio: "",
-        steps: "",
-        services: "",
-        artists: "",
-        testimonials: "",
-        faq: "",
-        form: "",
+        cta: "",
+        showMore: "",
+        viewGallery: "",
+        resetFilters: "",
     },
 }
 
-export function SectionNames({
+export function Buttons({
     data,
     triggerRefetch,
 }: {
@@ -57,7 +48,7 @@ export function SectionNames({
 
     function refreshNewData() {
         if (data) {
-            setNewAllData(data.sectionNames)
+            setNewAllData(data.buttons)
         }
     }
 
@@ -73,7 +64,7 @@ export function SectionNames({
 
     async function saveClickHandler() {
         if (!data) return
-        if (isDeepEqual(newAllData, data.sectionNames)) {
+        if (isDeepEqual(newAllData, data.buttons)) {
             Alert.info("Nothing to save")
             return
         }
@@ -81,7 +72,7 @@ export function SectionNames({
         setIsLoading(true)
 
         try {
-            await updateSectionNames(newAllData)
+            await updateButtons(newAllData)
             Alert.success("Success")
         } catch (error) {
             Alert.error("Error")
@@ -104,25 +95,31 @@ export function SectionNames({
             >
                 {Object.keys(newAllData[defaultLanguage])
                     .sort()
-                    .map((key, index) => (
-                        <Input
-                            key={index}
-                            label={key}
-                            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                            /* @ts-ignore */
-                            value={newAllData[currentLanguage][key]}
-                            onChange={value => {
-                                setNewAllData(prev => ({
-                                    ...prev,
-                                    [currentLanguage]: { ...prev[currentLanguage], [key]: value },
-                                }))
-                            }}
-                        />
-                    ))}
+                    .map((key: string, index) => {
+                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                        /* @ts-ignore */
+                        const value = newAllData[currentLanguage][key]
+                        return (
+                            <Input
+                                key={index}
+                                label={key}
+                                value={value}
+                                onChange={value => {
+                                    setNewAllData(prev => ({
+                                        ...prev,
+                                        [currentLanguage]: {
+                                            ...prev[currentLanguage],
+                                            [key]: value,
+                                        },
+                                    }))
+                                }}
+                            />
+                        )
+                    })}
             </ModalEditorWithTranslation>
             <div>
                 {!!data &&
-                    Object.entries(data.sectionNames[defaultLanguage])
+                    Object.entries(data.buttons[defaultLanguage])
                         .sort()
                         .map(([key, value], index) => (
                             <p key={index}>

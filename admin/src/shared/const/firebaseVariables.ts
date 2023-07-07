@@ -18,6 +18,7 @@ import { allLanguages } from "./languages"
 import { IFiltersData } from "features/portfolioFilters/types/types"
 import {
     IAddressData,
+    IButtonsData,
     IContactsGuide,
     IFormData,
     ISectionNames,
@@ -275,4 +276,9 @@ export async function updateFormData(formData: IFormData) {
 export async function updateSectionNames(sectionNames: ISectionNames) {
     const ref = doc(db, DATA_COLLECTION, GLOBAL_DATA)
     await updateDoc(ref, { sectionNames: sectionNames } as any)
+}
+
+export async function updateButtons(buttons: IButtonsData) {
+    const ref = doc(db, DATA_COLLECTION, GLOBAL_DATA)
+    await updateDoc(ref, { buttons: buttons } as any)
 }
