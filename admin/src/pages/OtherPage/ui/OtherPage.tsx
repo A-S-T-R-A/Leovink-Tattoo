@@ -5,6 +5,7 @@ import { IGlobalData } from "../types/type"
 import { fetchGlobalData } from "shared/const/firebaseVariables"
 import { Socials } from "./Socials/Socials"
 import { Contacts } from "./Contacts/Contacts"
+import { ContactsGuide } from "./ContactsGuide/ContactsGuide"
 
 export function OtherPage() {
     const [data, setData] = useState<IGlobalData | null>(null)
@@ -32,6 +33,7 @@ export function OtherPage() {
             />
             <Socials data={data} triggerRefetch={triggerRefetch} />
             <Contacts data={data} triggerRefetch={triggerRefetch} />
+            <ContactsGuide data={data} triggerRefetch={triggerRefetch} />
             {/*   <div>
                 <div
                     className={styles.titleContainer}

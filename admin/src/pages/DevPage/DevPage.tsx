@@ -18,7 +18,6 @@ export function DevPage() {
             <button onClick={() => Alert.info("some information")}>click info</button>
             <button onClick={saveClickHandler}>click info</button>
             <div style={{ marginBottom: "50px" }}></div>
-            <MarkdownTextarea onSaveData={() => null} />
         </div>
     )
 }

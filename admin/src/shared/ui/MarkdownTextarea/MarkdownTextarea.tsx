@@ -109,7 +109,7 @@ export function MarkdownTextarea({
                 onClick={cursorPositionHandler}
                 className={styles.textarea}
             ></textarea>
-            <button onClick={() => onSaveData(data)}>Save</button>
+            <button onClick={() => onSaveData(data)}>Save changes</button>
         </div>
     )
 }

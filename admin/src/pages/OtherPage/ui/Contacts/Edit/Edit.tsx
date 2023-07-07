@@ -27,8 +27,6 @@ export function Edit({
         refreshNewData()
     }, [data])
 
-    console.log(newAllData)
-
     function refreshNewData() {
         if (data) {
             setNewAllData(data.addressData)

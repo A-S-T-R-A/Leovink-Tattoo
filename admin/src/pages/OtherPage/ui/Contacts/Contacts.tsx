@@ -1,7 +1,6 @@
 import { IGlobalData } from "pages/OtherPage"
 import styles from "./Contacts.module.scss"
 import { defaultLanguage } from "shared/const/languages"
-import { Fragment, useState } from "react"
 import { Edit } from "./Edit/Edit"
 import { Typography } from "shared/ui/Typography/Typography"
 
