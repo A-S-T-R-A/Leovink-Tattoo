@@ -14,6 +14,11 @@
     border-radius: 10px;
     transform: translateX(150%);
 
+    .message {
+        display: flex;
+        gap: 5px;
+    }
+
     &.appended {
         transform: translateX(0);
     }
