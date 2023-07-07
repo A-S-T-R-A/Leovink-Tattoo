@@ -17,15 +17,17 @@ export function Sidebar() {
                     if (item.allowedRoles && !item.allowedRoles?.includes(user)) return null
 
                     return (
-                        <Link
-                            className={classNames(styles.link, {
-                                [styles.currentLink]: pathname === item.path,
-                            })}
-                            to={item.path}
-                        >
-                            <Svg className={styles.svg} />
-                            {item.name}
-                        </Link>
+                        <div className={styles.linkBlock}>
+                            <Link
+                                className={classNames(styles.link, {
+                                    [styles.currentLink]: pathname === item.path,
+                                })}
+                                to={item.path}
+                            >
+                                <Svg className={styles.svg} />
+                                {item.name}
+                            </Link>
+                        </div>
                     )
                 })}
             </div>

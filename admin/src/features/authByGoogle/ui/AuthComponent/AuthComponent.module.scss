@@ -63,6 +63,25 @@
     box-shadow: 0 0 1px 0 var(--color-dark-accent);
 }
 
+.loginBtn {
+    width: 80px;
+    height: 30px;
+    color: var(--color-base-accent);
+    background-color: var(--color-light-accent);
+    transition: 0.1s ease;
+    box-shadow: 0 1px 0 0 var(--color-dark-accent);
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    margin-right: 20px;
+
+    &:hover {
+        background-color: var(--color-base-accent);
+        color: var(--color-white);
+    }
+}
+
 .dropdownVisible .logOutBtn {
     transition: 0.5s ease;
     transform: translateY(0);

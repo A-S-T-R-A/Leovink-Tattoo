@@ -116,7 +116,9 @@ export function AuthComponent() {
                     </div>
                 </div>
             ) : (
-                <button onClick={signInWithGoogle}>Sign in</button>
+                <button onClick={signInWithGoogle} className={styles.loginBtn}>
+                    Sign in
+                </button>
             )}
         </>
     )
