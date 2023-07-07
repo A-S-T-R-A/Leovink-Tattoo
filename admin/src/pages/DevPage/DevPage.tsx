@@ -1,5 +1,3 @@
-import { useEffect } from "react"
-import { uploadOtherData } from "shared/const/firebaseVariables"
 import { Alert, Confirm } from "shared/ui/CustomNotifications"
 
 export function DevPage() {

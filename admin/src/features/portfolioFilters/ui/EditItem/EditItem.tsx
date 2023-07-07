@@ -3,7 +3,7 @@ import styles from "./EditItem.module.scss"
 import { IFiltersData, IGlobalData, INewFilter } from "../../types/types"
 import { defaultNewFilter } from "../../const/const"
 import { defaultLanguage } from "shared/const/languages"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 import { Input } from "shared/ui/Input/Input"
 import { LanguageType } from "shared/types/types"
@@ -124,9 +124,10 @@ export function EditItem({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <ModalEditorWithTranslation
+            <ModalEditor
+                withTranslation
                 isOpen={isOpen}
-                onClose={() => setIsOpen(true)}
+                onClose={() => setIsOpen(false)}
                 currentLanguage={currentLanguage}
                 onChangeLanguage={onChangeLanguage}
                 onSaveClick={saveClickHandler}
@@ -138,7 +139,7 @@ export function EditItem({
                         setNewAllItem((prev: any) => ({ ...prev, [currentLanguage]: value }))
                     }
                 />
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <button className={styles.btn} onClick={() => setIsOpen(true)}>
                 Edit Item
             </button>

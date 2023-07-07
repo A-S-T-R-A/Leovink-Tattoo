@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 import { Textarea } from "shared/ui/Textarea/Textarea"
 import { LanguageType } from "shared/types/types"
 import styles from "./AddQuestion.module.scss"
@@ -72,7 +72,8 @@ export function AddQuestion({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <ModalEditorWithTranslation
+            <ModalEditor
+                withTranslation
                 isOpen={isOpen}
                 onClose={onClose}
                 onChangeLanguage={onChangeLanguage}
@@ -104,7 +105,7 @@ export function AddQuestion({
                         }
                     />
                 </div>
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <button onClick={() => setIsOpen(true)} className={styles.btn}>
                 add new question
             </button>

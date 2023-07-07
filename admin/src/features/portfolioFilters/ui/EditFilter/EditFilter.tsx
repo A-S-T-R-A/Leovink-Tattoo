@@ -4,7 +4,7 @@ import styles from "./EditFilter.module.scss"
 import { defaultLanguage } from "shared/const/languages"
 import { useEffect, useState } from "react"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 import { Input } from "shared/ui/Input/Input"
 import { LanguageType } from "shared/types/types"
 import { Alert } from "shared/ui/CustomNotifications"
@@ -110,9 +110,10 @@ export function EditFilter({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <ModalEditorWithTranslation
+            <ModalEditor
+                withTranslation
                 isOpen={isOpen}
-                onClose={() => setIsOpen(true)}
+                onClose={() => setIsOpen(false)}
                 currentLanguage={currentLanguage}
                 onChangeLanguage={onChangeLanguage}
                 onSaveClick={saveClickHandler}
@@ -124,7 +125,7 @@ export function EditFilter({
                         setNewAllFilter((prev: any) => ({ ...prev, [currentLanguage]: value }))
                     }
                 />
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <button className={styles.btn} onClick={() => setIsOpen(true)}>
                 Edit Filter
             </button>

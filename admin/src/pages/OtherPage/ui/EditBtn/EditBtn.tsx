@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 import { LanguageType } from "shared/types/types"
 import styles from "./EditBtn.module.scss"
 import { Input } from "shared/ui/Input/Input"
@@ -19,7 +19,7 @@ export function EditBtn({ label, sectionName }: { label: string; sectionName: st
 
     return (
         <>
-            <ModalEditorWithTranslation
+            <ModalEditor
                 isOpen={isOpen}
                 onClose={onClose}
                 onChangeLanguage={onChangeLanguage}
@@ -30,7 +30,7 @@ export function EditBtn({ label, sectionName }: { label: string; sectionName: st
                 <div className={styles.container}>
                     <Input label={label} value={sectionName} onChange={value => setName(value)} />
                 </div>
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <button onClick={() => setIsOpen(true)}>Edit</button>
         </>
     )

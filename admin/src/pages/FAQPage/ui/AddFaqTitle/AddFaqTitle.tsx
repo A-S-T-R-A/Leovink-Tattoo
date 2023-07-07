@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 import { Input } from "shared/ui/Input/Input"
 import styles from "./AddFaqTitle.module.scss"
 import { LanguageType } from "shared/types/types"
@@ -69,7 +69,8 @@ export function AddFaqTitle({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <ModalEditorWithTranslation
+            <ModalEditor
+                withTranslation
                 isOpen={isOpen}
                 onClose={onClose}
                 onChangeLanguage={onChangeLanguage}
@@ -86,7 +87,7 @@ export function AddFaqTitle({
                         }
                     />
                 </div>
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <button onClick={() => setIsOpen(true)}>Add new title</button>
         </>
     )

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 import { LanguageType } from "shared/types/types"
 import styles from "./EditDescription.module.scss"
 import { Textarea } from "shared/ui/Textarea/Textarea"
@@ -19,7 +19,8 @@ export function EditDescription({ description }: { description: string }) {
 
     return (
         <>
-            <ModalEditorWithTranslation
+            <ModalEditor
+                withTranslation
                 isOpen={isOpen}
                 onClose={onClose}
                 onChangeLanguage={onChangeLanguage}
@@ -34,7 +35,7 @@ export function EditDescription({ description }: { description: string }) {
                         onChange={value => setInfo(value)}
                     />
                 </div>
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <button onClick={() => setIsOpen(true)}>Edit</button>
         </>
     )
