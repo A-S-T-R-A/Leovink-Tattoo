@@ -1,15 +1,21 @@
 import { defaultLanguage } from "shared/const/languages"
-import { IContactsGuide, IGlobalData } from "../../types/type"
+import { IGlobalData } from "../../types/type"
 import { useEffect, useState } from "react"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
 import { LanguageType } from "shared/types/types"
-import { MarkdownTextarea } from "shared/ui/MarkdownTextarea/MarkdownTextarea"
+import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { Input } from "shared/ui/Input/Input"
+import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
 import { Alert } from "shared/ui/CustomNotifications"
-import { isShallowEqual } from "shared/lib/isShallowEqual/isShallowEqual"
-import { updateContactsGuideData } from "shared/const/firebaseVariables"
+import { updateFormData } from "shared/const/firebaseVariables"
 
-export function ContactsGuide({
+const defaultNewAllData = {
+    en: { name: "", phone: "" },
+    ro: { name: "", phone: "" },
+    ru: { name: "", phone: "" },
+}
+
+export function FormData({
     data,
     triggerRefetch,
 }: {
@@ -19,7 +25,7 @@ export function ContactsGuide({
     const [isOpen, setIsOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [currentLanguage, setCurrentLanguage] = useState(defaultLanguage)
-    const [newAllData, setNewAllData] = useState({ en: "", ro: "", ru: "" })
+    const [newAllData, setNewAllData] = useState(defaultNewAllData)
 
     useEffect(() => {
         refreshNewData()
@@ -27,7 +33,7 @@ export function ContactsGuide({
 
     function refreshNewData() {
         if (data) {
-            setNewAllData(data.contactsGuide)
+            setNewAllData(data.formData)
         }
     }
 
@@ -43,7 +49,7 @@ export function ContactsGuide({
 
     async function saveClickHandler() {
         if (!data) return
-        if (isShallowEqual(newAllData, data.contactsGuide)) {
+        if (isDeepEqual(newAllData, data.formData)) {
             Alert.info("Nothing to save")
             return
         }
@@ -51,7 +57,7 @@ export function ContactsGuide({
         setIsLoading(true)
 
         try {
-            await updateContactsGuideData(newAllData)
+            await updateFormData(newAllData)
             Alert.success("Success")
         } catch (error) {
             Alert.error("Error")
@@ -72,15 +78,30 @@ export function ContactsGuide({
                 onSaveClick={saveClickHandler}
                 onDiscardClick={discardClickHandler}
             >
-                <MarkdownTextarea
-                    onSaveData={value =>
-                        setNewAllData(prev => ({ ...prev, [currentLanguage]: value }))
+                <Input
+                    label="Name placeholder"
+                    value={newAllData[currentLanguage].name}
+                    onChange={name =>
+                        setNewAllData(prev => ({
+                            ...prev,
+                            [currentLanguage]: { ...prev[currentLanguage], name },
+                        }))
                     }
-                    initialData={newAllData[currentLanguage]}
+                />
+                <Input
+                    label="Phone placeholder"
+                    value={newAllData[currentLanguage].phone}
+                    onChange={phone =>
+                        setNewAllData(prev => ({
+                            ...prev,
+                            [currentLanguage]: { ...prev[currentLanguage], phone },
+                        }))
+                    }
                 />
             </ModalEditorWithTranslation>
             <div>
-                <div>{data?.contactsGuide[defaultLanguage] || ""}</div>
+                <div>Name placeholder: {data && data?.formData[defaultLanguage].name}</div>
+                <div>Phone placeholder: {data && data?.formData[defaultLanguage].phone}</div>
                 <button onClick={() => setIsOpen(true)}>Edit</button>
             </div>
         </>
