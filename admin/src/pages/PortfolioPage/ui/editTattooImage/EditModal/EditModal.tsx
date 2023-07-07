@@ -9,6 +9,7 @@ import { defaultLanguage } from "shared/const/languages"
 import { LanguageType } from "shared/types/types"
 import { Textarea } from "shared/ui/Textarea/Textarea"
 import { Languages } from "shared/components/Languages/Languages"
+import { PlusIcon } from "shared/ui/Icons"
 
 interface IEditModalProps {
     length: number
@@ -60,11 +61,14 @@ export function EditModal(props: IEditModalProps) {
     }, [filtersData])
 
     return (
-        <Modal isOpen={isOpen || isLoading} onClose={onClose}>
+        <Modal isOpen={isOpen || isLoading} onClose={onClose} contentClassName={styles.content}>
             {isLoading ? (
                 "Loading..."
             ) : (
                 <div className={styles.container}>
+                    <div className={styles.cross} onClick={onClose}>
+                        <PlusIcon />
+                    </div>
                     <div>
                         id:
                         <Dropdown
