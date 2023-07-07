@@ -16,7 +16,7 @@ import {
 import { Alert } from "shared/ui/CustomNotifications"
 import { allLanguages } from "./languages"
 import { IFiltersData } from "features/portfolioFilters/types/types"
-import { ISocialMedia } from "pages/OtherPage/types/type"
+import { IAddressData, ISocialMedia } from "pages/OtherPage/types/type"
 
 const IS_DEV = import.meta.env.MODE === "development"
 
@@ -249,4 +249,9 @@ export async function updateFiltersData(filtersData: IFiltersData) {
 export async function updateSocialsData(socialsData: ISocialMedia[]) {
     const ref = doc(db, DATA_COLLECTION, GLOBAL_DATA)
     await updateDoc(ref, { socialsData } as any)
+}
+
+export async function updateAddressData(addressData: IAddressData) {
+    const ref = doc(db, DATA_COLLECTION, GLOBAL_DATA)
+    await updateDoc(ref, { addressData } as any)
 }

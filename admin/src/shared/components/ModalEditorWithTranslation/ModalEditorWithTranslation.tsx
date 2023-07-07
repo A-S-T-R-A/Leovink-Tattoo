@@ -8,7 +8,7 @@ interface IModalEditorWithTranslation {
     children: ReactNode
     isOpen: boolean
     currentLanguage: LanguageType
-    onClose: () => void
+    onClose?: () => void
     onChangeLanguage: (language: LanguageType) => void
     onSaveClick: () => void
     onDiscardClick: () => void
@@ -18,7 +18,7 @@ export function ModalEditorWithTranslation(props: IModalEditorWithTranslation) {
     const {
         children,
         isOpen,
-        onClose,
+        onClose = () => null,
         onChangeLanguage,
         currentLanguage,
         onSaveClick,

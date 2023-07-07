@@ -1,8 +1,13 @@
-import { AddressType, IGlobalData } from "../../../types/type"
+import { AddressType, IAddressData, IGlobalData } from "../../../types/type"
 import { useEffect, useState } from "react"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { updateAddressData } from "shared/const/firebaseVariables"
 import { defaultLanguage } from "shared/const/languages"
+import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
+import { LanguageType } from "shared/types/types"
+import { Alert } from "shared/ui/CustomNotifications"
+import { Input } from "shared/ui/Input/Input"
 
 export function Edit({
     data,
@@ -13,24 +18,55 @@ export function Edit({
     addressType: AddressType
     triggerRefetch: () => void
 }) {
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState<AddressType | null>(null)
     const [isLoading, setIsLoading] = useState(false)
-    const [newData, setNewData] = useState<any>(null)
+    const [newAllData, setNewAllData] = useState<IAddressData | null>(null)
+    const [currentLanguage, setCurrentLanguage] = useState(defaultLanguage)
 
     useEffect(() => {
         refreshNewData()
-    }, [])
+    }, [data])
+
+    console.log(newAllData)
 
     function refreshNewData() {
         if (data) {
-            setNewData(data.addressData[addressType])
+            setNewAllData(data.addressData)
         }
     }
 
+    function onChangeLanguage(lang: LanguageType) {
+        setCurrentLanguage(lang)
+        refreshNewData()
+    }
+
     function discardClickHandler() {
-        setIsOpen(false)
+        setIsOpen(null)
         setIsLoading(false)
         refreshNewData()
+    }
+
+    async function saveClickHandler() {
+        if (!data || !newAllData) return
+        if (isDeepEqual(newAllData, data.addressData)) {
+            Alert.info("Nothing to Edit")
+            return
+        }
+
+        setIsLoading(true)
+
+        const addressDataToUpload = JSON.parse(JSON.stringify(data.addressData)) as IAddressData
+        addressDataToUpload[addressType] = newAllData[addressType] as any
+
+        try {
+            await updateAddressData(addressDataToUpload)
+            Alert.success("Success")
+        } catch (error) {
+            Alert.error("Error")
+        }
+
+        setIsOpen(null)
+        setIsLoading(false)
         triggerRefetch()
     }
 
@@ -38,23 +74,76 @@ export function Edit({
         <>
             <LoadingModal isLoading={isLoading} />
             <ModalEditorWithTranslation
-                isOpen={isOpen}
-                onClose={() => setIsOpen(false)}
+                isOpen={isOpen === "location"}
+                onChangeLanguage={onChangeLanguage}
+                currentLanguage={currentLanguage}
+                onSaveClick={saveClickHandler}
+                onDiscardClick={discardClickHandler}
+            >
+                <Input
+                    label="Address"
+                    value={newAllData?.location[currentLanguage] || ""}
+                    onChange={value =>
+                        setNewAllData((prev: any) => ({
+                            ...prev,
+                            location: { ...prev?.location, [currentLanguage]: value },
+                        }))
+                    }
+                />
+            </ModalEditorWithTranslation>
+
+            <ModalEditorWithTranslation
+                isOpen={isOpen === "phone"}
                 onChangeLanguage={() => null}
                 currentLanguage={defaultLanguage}
                 onSaveClick={saveClickHandler}
                 onDiscardClick={discardClickHandler}
             >
-                <div>
-                    <ModalImage url={newData?.icon || previewImage.url} className={styles.img} />
-                    <EditImage onChange={editImageChangeHandler} />
+                {newAllData?.phone.map((item, index) => (
                     <Input
-                        value={newData?.link || ""}
-                        onChange={link => setNewData((prev: any) => ({ ...prev, link }))}
+                        key={index}
+                        value={item}
+                        onChange={value =>
+                            setNewAllData((prev: any) => ({
+                                ...prev,
+                                phone: prev.phone.map((innerItem: string, innerIndex: number) => {
+                                    if (innerIndex === index) {
+                                        return value
+                                    }
+                                    return innerItem
+                                }),
+                            }))
+                        }
                     />
-                </div>
+                ))}
             </ModalEditorWithTranslation>
-            <button onClick={() => setIsOpen(false)}>Edit</button>
+
+            <ModalEditorWithTranslation
+                isOpen={isOpen === "mail"}
+                onChangeLanguage={() => null}
+                currentLanguage={defaultLanguage}
+                onSaveClick={saveClickHandler}
+                onDiscardClick={discardClickHandler}
+            >
+                {newAllData?.mail.map((item, index) => (
+                    <Input
+                        key={index}
+                        value={item}
+                        onChange={value =>
+                            setNewAllData((prev: any) => ({
+                                ...prev,
+                                mail: prev.mail.map((innerItem: string, innerIndex: number) => {
+                                    if (innerIndex === index) {
+                                        return value
+                                    }
+                                    return innerItem
+                                }),
+                            }))
+                        }
+                    />
+                ))}
+            </ModalEditorWithTranslation>
+            <button onClick={() => setIsOpen(addressType)}>Edit</button>
         </>
     )
 }
