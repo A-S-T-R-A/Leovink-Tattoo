@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react"
 import styles from "./MarkdownTextarea.module.scss"
 import { symbols } from "./const/const"
 import { classNames } from "shared/lib/classNames/classNames"
+import { Alert } from "../CustomNotifications"
 
 export function MarkdownTextarea({
     onSaveData,
@@ -109,7 +110,17 @@ export function MarkdownTextarea({
                 onClick={cursorPositionHandler}
                 className={styles.textarea}
             ></textarea>
-            <button onClick={() => onSaveData(data)}>Save changes</button>
+            <button
+                onClick={() => {
+                    if (isBActive) {
+                        Alert.error(`You have to close the "B" tag`)
+                        return
+                    }
+                    onSaveData(data)
+                }}
+            >
+                Save changes
+            </button>
         </div>
     )
 }

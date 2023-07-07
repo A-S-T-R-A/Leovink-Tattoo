@@ -8,6 +8,7 @@ import { MarkdownTextarea } from "shared/ui/MarkdownTextarea/MarkdownTextarea"
 import { Alert } from "shared/ui/CustomNotifications"
 import { isShallowEqual } from "shared/lib/isShallowEqual/isShallowEqual"
 import { updateContactsGuideData } from "shared/const/firebaseVariables"
+import { DecodeMarkdown } from "shared/ui/MarkdownTextarea/lib/decodeMarkdown"
 
 export function ContactsGuide({
     data,
@@ -80,7 +81,10 @@ export function ContactsGuide({
                 />
             </ModalEditorWithTranslation>
             <div>
-                <div>{data?.contactsGuide[defaultLanguage] || ""}</div>
+                <div>Location Guide:</div>
+                <div>
+                    {data ? <DecodeMarkdown data={data.contactsGuide[defaultLanguage]} /> : ""}
+                </div>
                 <button onClick={() => setIsOpen(true)}>Edit</button>
             </div>
         </>
