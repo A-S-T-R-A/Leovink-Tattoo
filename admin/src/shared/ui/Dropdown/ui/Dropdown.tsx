@@ -42,7 +42,6 @@ export function Dropdown(props: DropdownProps) {
 
     return (
         <div className={classNames(styles.container, {}, [className])}>
-            <ChevronDownIcon className={styles.chevron} />
             <select
                 data-testid="dropdown-label"
                 className={styles.select}

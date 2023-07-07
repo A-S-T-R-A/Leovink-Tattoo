@@ -9,6 +9,8 @@ import { useState } from "react"
 import { Modal } from "shared/ui/Modal"
 import { Alert, Confirm } from "shared/ui/CustomNotifications"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
+import { DeleteIcon } from "shared/assets/icons"
+import styles from "./DeleteTattooImage.module.scss"
 
 export function DeleteTattooImage({
     id,
@@ -61,7 +63,9 @@ export function DeleteTattooImage({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <button onClick={clickHandler}>Delete</button>
+            <div onClick={clickHandler} className={styles.btn}>
+                <DeleteIcon />
+            </div>
         </>
     )
 }

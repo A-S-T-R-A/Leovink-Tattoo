@@ -1,0 +1,169 @@
+.wrapper {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    width: 100%;
+}
+
+.displayedContent {
+    justify-content: start;
+    width: 250px;
+    height: fit-content;
+}
+
+.table th,
+.table td {
+    padding: 5px;
+    text-align: left;
+    font-size: var(--font-size-blockTable);
+}
+
+.table td {
+    display: flex;
+    justify-content: center;
+}
+
+.table td:first-child {
+    margin-top: 10px;
+}
+
+.photo {
+    height: 150px;
+    width: fit-content;
+}
+
+.idCheckbox {
+    display: flex;
+    align-items: center;
+    width: 20px;
+    margin-left: 10px;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.checkbox {
+    opacity: 0;
+}
+
+.idCheckbox::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--color-base-accent);
+    background-color: var(--color-white);
+    border-radius: 3px;
+}
+
+.idCheckbox:checked::before {
+    background-color: var(--color-white);
+}
+
+.idCheckbox::after {
+    content: "\2713";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-base-accent);
+    font-size: 12px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.idCheckbox:checked::after {
+    opacity: 1;
+}
+
+.idCheckbox:checked .table td {
+    background-color: black;
+}
+
+.selectBtns {
+    margin: 10px 10px 20px 50px;
+}
+
+.selectBtn {
+    border: none;
+    background-color: var(--color-light-accent);
+    width: 120px;
+    height: 40px;
+    border-radius: 10px;
+    color: var(--color-dark-accent);
+    cursor: pointer;
+}
+
+.displayedContent {
+    color: var(--color-base-accent);
+    background-color: var(--color-white);
+    max-height: fit-content;
+    margin: auto 5px;
+    box-shadow: 0 0 1px 0 var(--color-base-accent);
+    border-radius: 10px;
+}
+
+.icon {
+    stroke: var(--color-dark-accent);
+    width: 30px;
+    height: 30px;
+}
+
+.tattooCharacteristics {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    background-color: var(--color-table-second);
+}
+
+.icon:hover {
+    stroke: var(--color-white);
+    cursor: pointer;
+}
+
+.icon:active {
+    stroke: var(--color-dark-accent);
+}
+
+.statusPublished,
+.statusUnpublished {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 20px;
+    gap: 5px;
+}
+
+.publishedIcon {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: rgb(114, 255, 114);
+}
+
+.unpublishedIcon {
+    margin: auto 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: rgb(255, 111, 111);
+}
+
+@media screen and (max-width: 1250px) {
+    .photo {
+        height: 50%;
+        width: 100%;
+    }
+    .table {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        width: 100%;
+    }
+}

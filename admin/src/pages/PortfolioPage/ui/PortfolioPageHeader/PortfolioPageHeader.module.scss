@@ -1,15 +1,38 @@
 .header {
+    margin-top: 60px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 40px;
+    justify-content: center;
+
+    .uploadBtn {
+        margin: 0 auto 0 0px;
+    }
 
     .viewToggle {
+        margin-left: 50px;
         display: flex;
-        gap: 5px;
+        .icon {
+            width: 30px;
+            cursor: pointer;
+            fill: var(--color-base-accent);
+        }
 
-        .selectedView {
-            background: var(--color-accent);
+        .icon:hover {
+            cursor: pointer;
+        }
+
+        .icon:active {
+            fill: var(--color-base-accent);
+        }
+
+        .iconBlock {
+            display: flex;
+            align-items: center;
+            border: none;
+            cursor: pointer;
+            width: 30px;
+            margin-left: 20px;
+            background-color: transparent;
+            fill: var(--color-base-accent);
         }
     }
 }
