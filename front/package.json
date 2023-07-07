@@ -31,6 +31,8 @@
         "swiper": "^9.3.2"
     },
     "devDependencies": {
-        "@types/react-icons": "^3.0.0"
+        "@types/react-icons": "^3.0.0",
+        "prettier": "^3.0.0",
+        "prettier-plugin-astro": "^0.10.0"
     }
 }

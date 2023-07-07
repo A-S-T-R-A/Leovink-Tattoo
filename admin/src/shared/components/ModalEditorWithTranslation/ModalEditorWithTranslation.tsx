@@ -3,6 +3,7 @@ import { ReactNode } from "react"
 import { LanguageType } from "shared/types/types"
 import { Modal } from "shared/ui/Modal"
 import styles from "./ModalEditorWithTranslation.module.scss"
+import { PlusIcon } from "shared/ui/Icons"
 
 interface IModalEditorWithTranslation {
     children: ReactNode
@@ -26,7 +27,15 @@ export function ModalEditorWithTranslation(props: IModalEditorWithTranslation) {
     } = props
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal
+            isOpen={isOpen}
+            onClose={() => null}
+            className={styles.container}
+            contentClassName={styles.content}
+        >
+            <div className={styles.cross} onClick={onClose}>
+                <PlusIcon />
+            </div>
             <Languages currentLanguage={currentLanguage} onChangeLanguage={onChangeLanguage} />
             {children}
             <div className={styles.btnContainer}>

@@ -7,6 +7,7 @@ import { tattooLiveDropdownOptions } from "../../const/const"
 import styles from "./EditBulkTattooImages.module.scss"
 import { IFilter } from "features/portfolioFilters/types/types"
 import { defaultLanguage } from "shared/const/languages"
+import { PlusIcon } from "shared/ui/Icons"
 
 export function EditBulkTattooImages({
     imagesId,
@@ -109,11 +110,19 @@ export function EditBulkTattooImages({
 
     return (
         <>
-            <Modal isOpen={isOpen || isLoading} onClose={onClose} className={styles.container}>
+            <Modal
+                isOpen={isOpen || isLoading}
+                onClose={() => null}
+                className={styles.container}
+                contentClassName={styles.content}
+            >
                 {isLoading ? (
                     "Loading..."
                 ) : (
                     <>
+                        <div className={styles.cross} onClick={onClose}>
+                            <PlusIcon />
+                        </div>
                         <h4>Edit {imagesId.length} images</h4>
                         {dropdownOptions.map(item => {
                             return (
