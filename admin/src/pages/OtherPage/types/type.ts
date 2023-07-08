@@ -27,6 +27,8 @@ export interface IFormData {
         loading: string
         success: string
         error: string
+        validName: string
+        validPhone: string
     }
     ro: {
         name: string
@@ -34,6 +36,8 @@ export interface IFormData {
         loading: string
         success: string
         error: string
+        validName: string
+        validPhone: string
     }
     ru: {
         name: string
@@ -41,6 +45,8 @@ export interface IFormData {
         loading: string
         success: string
         error: string
+        validName: string
+        validPhone: string
     }
 }
 
