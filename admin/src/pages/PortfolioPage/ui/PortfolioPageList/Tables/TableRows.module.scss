@@ -13,8 +13,13 @@
     cursor: pointer;
 }
 
+.tableWrapper {
+    height: 600px;
+    overflow-y: scroll;
+    position: relative;
+}
+
 .table {
-    margin-top: 20px;
     width: 100%;
     color: var(--color-white);
     border-radius: 10px;
@@ -22,13 +27,12 @@
     border-spacing: 0;
 }
 
-.tableWrapper {
-    height: 400px; /* Set a fixed height for the table wrapper to enable scrolling */
-    overflow-y: scroll; /* Enable vertical scrolling */
-    position: relative; /* Add relative positioning to the table wrapper */
-}
-
 .tableThead {
+    position: sticky;
+    top: 0;
+    background-color: #f9f9f9;
+    z-index: 10;
+
     tr {
         th {
             &:first-child {
@@ -258,4 +262,22 @@ tr {
         width: 250px;
         white-space: break-spaces;
     }
+}
+
+.table::-webkit-scrollbar {
+    width: 8px;
+    position: relative;
+}
+
+.table::-webkit-scrollbar-track {
+    background-color: #f9f9f9;
+}
+
+.table::-webkit-scrollbar-thumb {
+    background-color: #888;
+}
+
+.table::-webkit-scrollbar-thumb:hover {
+    display: block;
+    background-color: #555;
 }
