@@ -1,26 +1,19 @@
-export function TableRows({ className }: { className?: string }) {
+export function TableRows({ className }: { className: string }) {
     return (
         <svg
             fill="#000000"
             version="1.1"
             id="Capa_1"
             xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 35 35"
+            viewBox="0 0 24.75 24.75"
             className={className}
         >
             <g>
-                <g>
-                    <path d="M0,0v35h35V0H0z M33,33H2V2h31V33z" />
-                    <rect x="14" y="4.5" width="7" height="7" />
-                    <rect x="14" y="14" width="7" height="7" />
-                    <rect x="14" y="23.5" width="7" height="7" />
-                    <rect x="4.5" y="4.5" width="7" height="7" />
-                    <rect x="4.5" y="14" width="7" height="7" />
-                    <rect x="4.5" y="23.5" width="7" height="7" />
-                    <rect x="23.5" y="4.5" width="7" height="7" />
-                    <rect x="23.5" y="14" width="7" height="7" />
-                    <rect x="23.5" y="23.5" width="7" height="7" />
-                </g>
+                <path
+                    d="M0,3.875c0-1.104,0.896-2,2-2h20.75c1.104,0,2,0.896,2,2s-0.896,2-2,2H2C0.896,5.875,0,4.979,0,3.875z M22.75,10.375H2
+		c-1.104,0-2,0.896-2,2c0,1.104,0.896,2,2,2h20.75c1.104,0,2-0.896,2-2C24.75,11.271,23.855,10.375,22.75,10.375z M22.75,18.875H2
+		c-1.104,0-2,0.896-2,2s0.896,2,2,2h20.75c1.104,0,2-0.896,2-2S23.855,18.875,22.75,18.875z"
+                />
             </g>
         </svg>
     )
