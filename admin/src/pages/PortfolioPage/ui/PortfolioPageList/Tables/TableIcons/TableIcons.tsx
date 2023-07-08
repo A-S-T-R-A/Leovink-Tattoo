@@ -48,15 +48,15 @@ export function TableIcons({
     const filterKeys = filtersData.map(item => item.title[defaultLanguage])
 
     return (
-        <div>
-            <table className={styles.wrapper}>
-                <tbody className={styles.table}>
+        <article className={styles.wrapper}>
+            <div className={styles.container}>
+                <section className={styles.table}>
                     {filteredData.map((item, index) => {
                         const { id, filters, img } = item
                         return (
-                            <tr key={id} className={styles.displayedContent}>
+                            <div key={id} className={styles.displayedContent}>
                                 <label htmlFor={index + `checkbox` + uuid}>
-                                    <td>
+                                    <div className={styles.checkboxBlock}>
                                         {id}
                                         <input
                                             type="checkbox"
@@ -65,38 +65,32 @@ export function TableIcons({
                                             checked={selected.includes(id)}
                                             onChange={() => checkboxChangeHandler(id)}
                                         />
-                                    </td>
+                                    </div>
                                 </label>
-                                <td>
-                                    <ModalImage className={styles.photo} url={img} />
-                                </td>
-                                <td className={styles.statusString}>
+                                <ModalImage className={styles.photo} url={img} />
+                                <div className={styles.statusString}>
                                     {filters.isLive ? (
-                                        <td className={styles.statusPublished}>
+                                        <div className={styles.statusPublished}>
                                             <div className={styles.publishedIcon} />
-                                            <td>
-                                                <p>Published</p>
-                                            </td>
-                                        </td>
+                                            <p>Published</p>
+                                        </div>
                                     ) : (
-                                        <td className={styles.statusUnpublished}>
+                                        <div className={styles.statusUnpublished}>
                                             <div className={styles.unpublishedIcon} />
-                                            <td>
-                                                <p>Unpublished</p>
-                                            </td>
-                                        </td>
+                                            <p>Unpublished</p>
+                                        </div>
                                     )}
-                                </td>
-                                <td className={styles.tattooCharacteristics}>
+                                </div>
+                                <div className={styles.tattooCharacteristics}>
                                     {filterKeys.map((key, index) => {
                                         return (
-                                            <td key={key + index}>
+                                            <p key={key + index}>
                                                 {key}: {filters[key] || ""}
-                                            </td>
+                                            </p>
                                         )
                                     })}
-                                </td>
-                                <td className={styles.btns}>
+                                </div>
+                                <div className={styles.btns}>
                                     <EditTattooImage
                                         id={item.id}
                                         triggerRefetch={triggerRefetch}
@@ -109,12 +103,12 @@ export function TableIcons({
                                         triggerRefetch={triggerRefetch}
                                         unselectAllHandler={unselectAllHandler}
                                     />
-                                </td>
-                            </tr>
+                                </div>
+                            </div>
                         )
                     })}
-                </tbody>
-            </table>
-        </div>
+                </section>
+            </div>
+        </article>
     )
 }
