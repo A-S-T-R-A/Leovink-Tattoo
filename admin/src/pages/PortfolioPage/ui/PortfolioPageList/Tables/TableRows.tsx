@@ -52,7 +52,7 @@ export function TableRows({
     return (
         <>
             <div className={styles.tableButtons}>
-                <button onClick={selectAllHandler}>
+                <button onClick={selectAllHandler} className={styles.selectBtn}>
                     {filteredData.length === selected.length ? "Unselect All" : "Select All"}
                 </button>
                 {selected.length === 1 && (
