@@ -8,6 +8,7 @@ import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
 import { Alert } from "shared/ui/CustomNotifications"
 import { updateButtons } from "shared/const/firebaseVariables"
 import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
+import styles from "./Buttons.module.scss"
 
 const defaultNewAllData = {
     en: {
@@ -118,16 +119,19 @@ export function Buttons({
                         )
                     })}
             </ModalEditor>
-            <div>
+            <div className={styles.buttonsContainer}>
+                <p className={styles.buttonsTitle}>Buttons Name</p>
                 {!!data &&
                     Object.entries(data.buttons[defaultLanguage])
                         .sort()
                         .map(([key, value], index) => (
-                            <p key={index}>
-                                {key} : {value}
-                            </p>
+                            <div className={styles.content} key={index}>
+                                <strong>{key}</strong> : {value}
+                            </div>
                         ))}
-                <button onClick={() => setIsOpen(true)}>Edit</button>
+                <button className={styles.editBtn} onClick={() => setIsOpen(true)}>
+                    Edit
+                </button>
             </div>
         </>
     )

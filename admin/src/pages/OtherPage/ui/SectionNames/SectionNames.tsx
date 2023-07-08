@@ -8,6 +8,7 @@ import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
 import { Alert } from "shared/ui/CustomNotifications"
 import { updateSectionNames } from "shared/const/firebaseVariables"
 import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
+import styles from "./SectionNames.module.scss"
 
 const defaultNewAllData = {
     en: {
@@ -121,16 +122,19 @@ export function SectionNames({
                         />
                     ))}
             </ModalEditor>
-            <div>
+            <div className={styles.sectionNamesContainer}>
+                <p className={styles.sectionNamesTitle}>Section Name</p>
                 {!!data &&
                     Object.entries(data.sectionNames[defaultLanguage])
                         .sort()
                         .map(([key, value], index) => (
-                            <p key={index}>
-                                {key} : {value}
-                            </p>
+                            <div className={styles.content} key={index}>
+                                <strong>{key}</strong> : {value}
+                            </div>
                         ))}
-                <button onClick={() => setIsOpen(true)}>Edit</button>
+                <button className={styles.editBtn} onClick={() => setIsOpen(true)}>
+                    Edit
+                </button>
             </div>
         </>
     )

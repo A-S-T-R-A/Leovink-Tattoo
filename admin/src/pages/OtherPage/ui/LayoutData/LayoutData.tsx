@@ -8,6 +8,7 @@ import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
 import { Alert } from "shared/ui/CustomNotifications"
 import { updateLayoutData } from "shared/const/firebaseVariables"
 import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
+import styles from "./LayoutData.module.scss"
 
 const defaultNewAllData: ILayoutData = {
     footerList: {
@@ -234,22 +235,40 @@ export function LayoutData({
                     />
                 </div>
             </ModalEditor>
-            <div>
-                <div>
-                    Footer List
-                    <p>Location : {data?.layoutData.footerList[defaultLanguage][0] || ""}</p>
-                    <p>Contacts : {data?.layoutData.footerList[defaultLanguage][1] || ""}</p>
-                    <p>Follow : {data?.layoutData.footerList[defaultLanguage][2] || ""}</p>
+            <div className={styles.wrapper}>
+                <div className={styles.container}>
+                    <p className={styles.title}>Footer list</p>
+                    <div className={styles.content}>
+                        Location : {data?.layoutData.footerList[defaultLanguage][0] || ""}
+                    </div>
+                    <div className={styles.content}>
+                        Contacts : {data?.layoutData.footerList[defaultLanguage][1] || ""}
+                    </div>
+                    <div className={styles.content}>
+                        Follow : {data?.layoutData.footerList[defaultLanguage][2] || ""}
+                    </div>
                 </div>
-                <div>
-                    Navlist List
-                    <p>Main : {data?.layoutData.navList[defaultLanguage][0].text || ""}</p>
-                    <p>Portfolio : {data?.layoutData.navList[defaultLanguage][1].text || ""}</p>
-                    <p>FAQ : {data?.layoutData.navList[defaultLanguage][2].text || ""}</p>
-                    <p>Contacts : {data?.layoutData.navList[defaultLanguage][3].text || ""}</p>
-                    <p>Testimonial : {data?.layoutData.navList[defaultLanguage][4].text || ""}</p>
+                <div className={styles.container}>
+                    <p className={styles.title}> Navlist List </p>
+                    <div className={styles.content}>
+                        Main : {data?.layoutData.navList[defaultLanguage][0].text || ""}
+                    </div>
+                    <div className={styles.content}>
+                        Portfolio : {data?.layoutData.navList[defaultLanguage][1].text || ""}
+                    </div>
+                    <div className={styles.content}>
+                        FAQ : {data?.layoutData.navList[defaultLanguage][2].text || ""}
+                    </div>
+                    <div className={styles.content}>
+                        Contacts : {data?.layoutData.navList[defaultLanguage][3].text || ""}
+                    </div>
+                    <div className={styles.content}>
+                        Testimonial : {data?.layoutData.navList[defaultLanguage][4].text || ""}
+                    </div>
                 </div>
-                <button onClick={() => setIsOpen(true)}>Edit</button>
+                <button className={styles.editBtn} onClick={() => setIsOpen(true)}>
+                    Edit
+                </button>
             </div>
         </>
     )

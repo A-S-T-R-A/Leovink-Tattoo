@@ -7,7 +7,7 @@ import { EditItem } from "./EditItem/EditItem"
 import { DeleteFilter } from "./DeleteFilter/DeleteFilter"
 import { DeleteItem } from "./DeleteItem/DeleteItem"
 import { defaultLanguage } from "shared/const/languages"
-import { Typography, TypographySize } from "shared/ui/Typography/Typography"
+import { Typography, TypographyColor, TypographySize } from "shared/ui/Typography/Typography"
 import { IGlobalData } from "pages/OtherPage"
 import styles from "./PortfolioFilters.module.scss"
 
@@ -36,7 +36,11 @@ export function PortfolioFilters({
         <div className={styles.filterTableContainer}>
             <div className={styles.titleContainer} onClick={onOpen}>
                 <span className={styles.arrow}>🡇</span>
-                <Typography size={TypographySize.H4} className={styles.title}>
+                <Typography
+                    size={TypographySize.H4}
+                    color={TypographyColor.COLOR_WHITE}
+                    className={styles.title}
+                >
                     Filters
                 </Typography>
                 <AddNewFilter data={data} triggerRefetch={triggerRefetch} />

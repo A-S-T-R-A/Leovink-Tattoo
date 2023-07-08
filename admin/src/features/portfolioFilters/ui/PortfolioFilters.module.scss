@@ -15,11 +15,12 @@
         border-radius: 5px 5px 0 5px;
         padding: 0 15px;
         cursor: pointer;
+        background-color: var(--color-dark-accent);
+        color: white;
 
         .arrow {
-            color: var(--color-dark-accent);
+            color: var(--color-moderate-accent);
             font-size: 24px;
-            text-shadow: 0px 1px 1px var(--color-light-accent);
         }
     }
 

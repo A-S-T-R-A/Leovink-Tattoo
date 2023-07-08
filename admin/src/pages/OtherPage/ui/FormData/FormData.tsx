@@ -154,25 +154,30 @@ export function FormData({
             <div className={styles.formsContainer}>
                 <p className={styles.formsTitle}>Form Data</p>
                 <div className={styles.content}>
-                    Name placeholder: {data && data?.formData[defaultLanguage].name}
+                    <strong>Name placeholder:</strong>
+                    {data && data?.formData[defaultLanguage].name}
                 </div>
                 <div className={styles.content}>
-                    Phone placeholder: {data && data?.formData[defaultLanguage].phone}
+                    <strong>Phone placeholder:</strong>
+                    {data && data?.formData[defaultLanguage].phone}
                 </div>
                 <div className={styles.content}>
-                    Loading message: {data && data?.formData[defaultLanguage].loading}
+                    <strong>Loading message:</strong>
+                    {data && data?.formData[defaultLanguage].loading}
                 </div>
                 <div className={styles.content}>
-                    Success message: {data && data?.formData[defaultLanguage].success}
+                    <strong>Success message:</strong>
+                    {data && data?.formData[defaultLanguage].success}
                 </div>
                 <div className={styles.content}>
-                    Error message: {data && data?.formData[defaultLanguage].error}
+                    <strong>Error message:</strong> {data && data?.formData[defaultLanguage].error}
                 </div>
                 <div className={styles.content}>
-                    Valid name: {data && data?.formData[defaultLanguage].validName}
+                    <strong>Valid name:</strong> {data && data?.formData[defaultLanguage].validName}
                 </div>
                 <div className={styles.content}>
-                    Valid phone: {data && data?.formData[defaultLanguage].validPhone}
+                    <strong>Valid phone:</strong>
+                    {data && data?.formData[defaultLanguage].validPhone}
                 </div>
                 <button className={styles.editBtn} onClick={() => setIsOpen(true)}>
                     Edit
