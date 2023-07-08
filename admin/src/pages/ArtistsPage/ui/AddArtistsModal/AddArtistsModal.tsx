@@ -79,36 +79,35 @@ export function AddArtistsModal({
             for (const lang of allLanguages) {
                 allArtistsData[lang][id] = newAllData[lang]
                 allArtistsData[lang][id].img = newImg
+                allArtistsData[lang][id].key = newAllData[defaultLanguage].key
 
                 const objectData = reformatArrayToObject(allArtistsData[lang])
                 await updateSectionData(lang, "artists", objectData)
+            }
 
-                if (filtersData) {
-                    const updatedFiltersData = JSON.parse(
-                        JSON.stringify(filtersData)
-                    ) as IFiltersData
+            if (filtersData) {
+                const updatedFiltersData = JSON.parse(JSON.stringify(filtersData)) as IFiltersData
 
-                    const newFiltersItem = {
-                        key: "",
-                        label: {
-                            en: "",
-                            ro: "",
-                            ru: "",
-                        },
-                    }
-
-                    for (const key in newAllData) {
-                        const lang = key as LanguageType
-                        newFiltersItem.label[lang] = newAllData[lang].name
-                        if (lang === defaultLanguage) {
-                            newFiltersItem.key = newAllData[lang].name
-                        }
-                    }
-
-                    updatedFiltersData.filters[0].items.push(newFiltersItem)
-
-                    await updateFiltersData(updatedFiltersData)
+                const newFiltersItem = {
+                    key: "",
+                    label: {
+                        en: "",
+                        ro: "",
+                        ru: "",
+                    },
                 }
+
+                for (const key in newAllData) {
+                    const lang = key as LanguageType
+                    newFiltersItem.label[lang] = newAllData[lang].name
+                    if (lang === defaultLanguage) {
+                        newFiltersItem.key = newAllData[lang].name
+                    }
+                }
+
+                updatedFiltersData.filters[0].items.push(newFiltersItem)
+
+                await updateFiltersData(updatedFiltersData)
             }
 
             Alert.success("Success")
