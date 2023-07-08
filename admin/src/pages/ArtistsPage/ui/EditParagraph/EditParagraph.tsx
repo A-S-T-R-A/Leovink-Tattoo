@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { Input } from "shared/ui/Input/Input"
 import { Textarea } from "shared/ui/Textarea/Textarea"
@@ -178,7 +178,8 @@ export function EditParagraph({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <ModalEditorWithTranslation
+            <ModalEditor
+                withTranslation
                 isOpen={isOpen}
                 onClose={onClose}
                 onChangeLanguage={onChangeLanguage}
@@ -227,7 +228,7 @@ export function EditParagraph({
                         />
                     </div>
                 </div>
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <button onClick={() => setIsOpen(true)}>Edit</button>
         </>
     )

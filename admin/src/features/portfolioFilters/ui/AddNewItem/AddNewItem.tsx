@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { defaultNewFilter } from "../../const/const"
 import { IFilterItem, IFiltersData } from "../../types/types"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 import { updateFiltersData } from "shared/const/firebaseVariables"
 import { defaultLanguage } from "shared/const/languages"
 import { LanguageType } from "shared/types/types"
@@ -77,9 +77,10 @@ export function AddNewItem({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <ModalEditorWithTranslation
+            <ModalEditor
+                withTranslation
                 isOpen={isOpen}
-                onClose={() => setIsOpen(true)}
+                onClose={() => setIsOpen(false)}
                 currentLanguage={currentLanguage}
                 onChangeLanguage={onChangeLanguage}
                 onSaveClick={saveClickHandler}
@@ -91,7 +92,7 @@ export function AddNewItem({
                         setNewAllItem(prev => ({ ...prev, [currentLanguage]: value }))
                     }
                 />
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <button className={styles.btn} onClick={() => setIsOpen(true)}>
                 Add New Item
             </button>

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { FilePond } from "react-filepond"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 import { Input } from "shared/ui/Input/Input"
 import { Textarea } from "shared/ui/Textarea/Textarea"
 import styles from "./AddStepModal.module.scss"
@@ -30,7 +30,7 @@ export function AddStepModal({ length }: { length: number }) {
 
     return (
         <>
-            <ModalEditorWithTranslation
+            <ModalEditor
                 isOpen={isOpen}
                 onClose={onClose}
                 onChangeLanguage={onChangeLanguage}
@@ -61,7 +61,7 @@ export function AddStepModal({ length }: { length: number }) {
                         }
                     />
                 </div>
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <button onClick={() => setIsOpen(true)}>Add New</button>
         </>
     )

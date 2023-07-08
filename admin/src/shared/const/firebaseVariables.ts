@@ -14,7 +14,6 @@ import {
     where,
 } from "firebase/firestore"
 import { Alert } from "shared/ui/CustomNotifications"
-import { allLanguages } from "./languages"
 import { IFiltersData } from "features/portfolioFilters/types/types"
 import {
     IAddressData,

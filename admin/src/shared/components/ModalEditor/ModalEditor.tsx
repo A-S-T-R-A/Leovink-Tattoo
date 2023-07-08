@@ -2,21 +2,25 @@ import { Languages } from "shared/components/Languages/Languages"
 import { ReactNode } from "react"
 import { LanguageType } from "shared/types/types"
 import { Modal } from "shared/ui/Modal"
-import styles from "./ModalEditorWithTranslation.module.scss"
+import styles from "./ModalEditor.module.scss"
 import { PlusIcon } from "shared/ui/Icons"
 
-interface IModalEditorWithTranslation {
+interface IModalEditor {
+    withTranslation?: boolean
+    isOverlayClose?: boolean
     children: ReactNode
     isOpen: boolean
-    currentLanguage: LanguageType
-    onClose?: () => void
-    onChangeLanguage: (language: LanguageType) => void
+    currentLanguage?: LanguageType
+    onClose: () => void
+    onChangeLanguage?: (language: LanguageType) => void
     onSaveClick: () => void
     onDiscardClick: () => void
 }
 
-export function ModalEditorWithTranslation(props: IModalEditorWithTranslation) {
+export function ModalEditor(props: IModalEditor) {
     const {
+        withTranslation = false,
+        isOverlayClose = false,
         children,
         isOpen,
         onClose = () => null,
@@ -29,14 +33,19 @@ export function ModalEditorWithTranslation(props: IModalEditorWithTranslation) {
     return (
         <Modal
             isOpen={isOpen}
-            onClose={() => null}
+            onClose={isOverlayClose === true ? onClose : () => null}
             className={styles.container}
             contentClassName={styles.content}
         >
             <div className={styles.cross} onClick={onClose}>
                 <PlusIcon />
             </div>
-            <Languages currentLanguage={currentLanguage} onChangeLanguage={onChangeLanguage} />
+            {withTranslation && (
+                <Languages
+                    currentLanguage={withTranslation ? currentLanguage : undefined}
+                    onChangeLanguage={withTranslation ? onChangeLanguage : undefined}
+                />
+            )}
             {children}
             <div className={styles.btnContainer}>
                 <button onClick={onSaveClick}>save</button>

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 import { Input } from "shared/ui/Input/Input"
 import { defaultLanguage } from "shared/const/languages"
 import { LanguageType } from "shared/types/types"
@@ -65,9 +65,10 @@ export function AddNewFilter({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <ModalEditorWithTranslation
+            <ModalEditor
+                withTranslation
                 isOpen={isOpen}
-                onClose={() => setIsOpen(true)}
+                onClose={() => setIsOpen(false)}
                 currentLanguage={currentLanguage}
                 onChangeLanguage={onChangeLanguage}
                 onSaveClick={saveClickHandler}
@@ -79,7 +80,7 @@ export function AddNewFilter({
                         setNewFilter((prev: any) => ({ ...prev, [currentLanguage]: value }))
                     }
                 />
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <button className={styles.btn} onClick={() => setIsOpen(true)}>
                 Add New Filter
             </button>

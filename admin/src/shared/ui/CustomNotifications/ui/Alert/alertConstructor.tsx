@@ -9,23 +9,25 @@ export function alertConstructor(
     variant: string
 ) {
     const alertContainerEl = document.createElement("div")
+    const messageContainerEl = document.createElement("div")
+    const strongTitleEl = document.createElement("strong")
     const messageEl = document.createElement("p")
-    const strongTextEl = document.createElement("strong")
     const closeIconEl = crossIcon(styles.cross)
     const iconEl = icon(styles.icon)
 
-    strongTextEl.textContent = text
+    strongTitleEl.textContent = text + " "
     messageEl.textContent = message
+    messageContainerEl.append(strongTitleEl)
+    messageContainerEl.append(messageEl)
 
     alertContainerEl.classList.add(styles.container)
     alertContainerEl.classList.add(styles[variant])
-    messageEl.classList.add(styles.message)
+    messageContainerEl.classList.add(styles.message)
 
     alertContainerEl.style.transition = `transform ${TRANSITION_TIME}ms ease`
 
     alertContainerEl.append(iconEl)
-    alertContainerEl.append(strongTextEl)
-    alertContainerEl.append(messageEl)
+    alertContainerEl.append(messageContainerEl)
     alertContainerEl.append(closeIconEl)
 
     document.body.append(alertContainerEl)
