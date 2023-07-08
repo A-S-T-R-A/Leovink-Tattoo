@@ -1,14 +1,11 @@
 import { useState } from "preact/hooks"
-import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper"
 import { Section } from "shared/ui/Section/Section"
-import { data as artistsData } from "widgets/Artists/const/data"
-import { data as dummyGalleryData } from "shared/const/data"
 import { Typography } from "shared/ui/Typography/Typography"
 import { Form } from "shared/components/Form/Form"
 import { ModalGallery } from "widgets/ModalGallery/ModalGallery"
 import styles from "./ArtistPage.module.scss"
 import { GalleryGrid } from "shared/components/GalleryGrid/GalleryGrid"
-import type { IArtistsData, IImagesData } from "shared/const/firebaseVariables"
+import type { IArtistsData, ITattooImage } from "shared/const/firebaseVariables"
 import type { LanguageType } from "shared/types/types"
 
 export function ArtistPage({
@@ -20,10 +17,16 @@ export function ArtistPage({
     language,
 }: {
     data: IArtistsData
-    formData: { name: string; phone: string }
+    formData: {
+        name: string
+        phone: string
+        loading: string
+        success: string
+        error: string
+    }
     formTitle: string
     cta: string
-    imagesData: IImagesData[]
+    imagesData: ITattooImage[]
     language: LanguageType
 }) {
     const { name, img, specialization, description } = data
@@ -56,7 +59,7 @@ export function ArtistPage({
                         </Typography>
                     </div>
                 </div>
-                <Form isVertical placeholdersData={formData} title={formTitle} cta={cta} />
+                <Form isVertical data={formData} title={formTitle} cta={cta} />
             </Section>
             <Section title="Gallery">
                 <GalleryGrid data={galleryData} onClick={clickHandler} language={language} />

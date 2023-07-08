@@ -1,26 +1,28 @@
 ---
 import Layout from "layouts/Layout.astro";
 import { PortfolioPage } from "pageComponents/PortfolioPage/PortfolioPage";
-import { fetchImagesData, fetchSectionData, IImagesData, ILayoutData, type IOtherData } from "shared/const/firebaseVariables";
+import { fetchGlobalData, fetchImagesData, ITattooImage } from "shared/const/firebaseVariables";
 import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl";
+import type { IGlobalData } from "shared/types/IGlobalData";
 import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
 import cave from "widgets/Main/const/dungeon.webp"
 
-const imagesData = await fetchImagesData() as IImagesData[];
 const language = getLangFromUrl(Astro.url)
-const layoutData = await fetchSectionData(language, "layout", true) as ILayoutData;
-const otherData = await fetchSectionData(language, "other", true) as IOtherData;
-const { sectionNames, formData, buttons, filtersData } = otherData;
-const { cta } = buttons;
+
+const imagesData = await fetchImagesData() as ITattooImage[]
+const globalData = await fetchGlobalData() as IGlobalData
+const {sectionNames, buttons,formData ,layoutData, filtersData} = globalData
+const { cta } = buttons[language]
 ---
 
 <Layout image={cave}>
-    <PageWrapper title={layoutData.navlist[1].text} main={layoutData.navlist[0].text}>
-        <PortfolioPage client:load 
-         formTitle={sectionNames.form}
-         placeholdersData={formData}
+    <PageWrapper title={layoutData.navList[language][1].text} main={layoutData.navList[language][0].text}>
+        <PortfolioPage 
+        client:load
+        formTitle={sectionNames[language].form} 
+         formData={formData[language]}
          button={cta}
-         filtersData={filtersData}
+         globalFiltersData={filtersData}
          fetchedData={imagesData}
          language={language}
          />

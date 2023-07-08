@@ -7,22 +7,26 @@ import { Artists } from "widgets/Artists/Artists";
 import { Testimonials } from "widgets/Testimonials/Testimonials";
 import { Faq } from "widgets/Faq/Faq";
 import { FormSection } from "widgets/FormSection/FormSection";
-import { fetchSectionData, IStepData, fetchImagesData, IServicesData, IArtistsData, IFaqData, ITestimonialsData, IOtherData, IImagesData } from "shared/const/firebaseVariables";
+import { fetchSectionData, IStepData, fetchImagesData, IServicesData, IArtistsData, IFaqData, ITestimonialsData,  fetchGlobalData, ITattooImage } from "shared/const/firebaseVariables";
 import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl";
 import Main from "widgets/Main/Main.astro";
+import type { IGlobalData } from "shared/types/IGlobalData";
+import type {  LanguageType } from "shared/types/types";
 
+const defaultLanguage:LanguageType = 'en'
 
-const imagesData = await fetchImagesData() as IImagesData[];
+const imagesData = await fetchImagesData() as ITattooImage[];
 const language = getLangFromUrl(Astro.url)
 const stepsData = await fetchSectionData(language, "steps") as IStepData[];
 const servicesData = await fetchSectionData(language, "services") as IServicesData[];
 const artistsData = await fetchSectionData(language, "artists") as IArtistsData[];
 const faqData = await fetchSectionData(language, "faq") as IFaqData[];
 const testimonialsData = await fetchSectionData(language, "testimonials") as ITestimonialsData[];
-const otherData = await fetchSectionData(language, "other", true) as IOtherData;
-const { formData, sectionNames, buttons, defaultLanguage } = otherData;
-const { portfolio, steps, services, artists, testimonials, faq, form } = sectionNames;
-const { cta, showMore, viewGallery } = buttons;
+const globalData = await fetchGlobalData() as IGlobalData
+const {sectionNames, buttons,formData} = globalData
+const { portfolio, steps, services, artists, testimonials, faq, form } = sectionNames[language];
+const { cta, showMore, viewGallery } = buttons[language]
+
 ---
 
 <Layout>
@@ -33,6 +37,6 @@ const { cta, showMore, viewGallery } = buttons;
         <Artists client:idle data={artistsData} title={artists} button={viewGallery} language={language} defaultLanguage={defaultLanguage}/>
         <Testimonials data={testimonialsData.slice(0,2)} title={testimonials} showMore={showMore} cta={cta} language={language} defaultLanguage={defaultLanguage}/>
         <Faq client:idle data={faqData} title={faq} button={showMore} language={language} defaultLanguage={defaultLanguage}/>
-        <FormSection client:load data={formData} title={form} button={cta}/>
+        <FormSection client:load data={formData[language]} title={form} button={cta}/>
     </Main>
 </Layout>

@@ -5,7 +5,7 @@ import { ShowMoreLink } from "shared/components/ShowMoreLink/ShowMoreLink"
 import styles from "./Portfolio.module.scss"
 import type { LanguageType } from "shared/types/types"
 import { GalleryGrid } from "shared/components/GalleryGrid/GalleryGrid"
-import type { IImagesData } from "shared/const/firebaseVariables"
+import type { ITattooImage } from "shared/const/firebaseVariables"
 
 export function Portfolio({
     title,
@@ -16,12 +16,12 @@ export function Portfolio({
 }: {
     title: string
     button: string
-    fetchedData: IImagesData[]
+    fetchedData: ITattooImage[]
     language: LanguageType
     defaultLanguage: LanguageType
 }) {
     const [isOpen, setIsOpen] = useState(false)
-    const [modalData, setModalData] = useState<IImagesData[]>([])
+    const [modalData, setModalData] = useState<ITattooImage[]>([])
 
     const data = fetchedData.slice(0, 12)
 

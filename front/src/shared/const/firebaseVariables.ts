@@ -1,6 +1,6 @@
 import type { LanguageType } from "shared/types/types"
 import { db } from "../../../firebase"
-import { addDoc, collection, getDocs } from "firebase/firestore"
+import { addDoc, collection, doc, getDoc, getDocs } from "firebase/firestore"
 
 const IS_DEV = import.meta.env.IS_DEV
 
@@ -15,6 +15,8 @@ const LANGUAGE_DOCUMENT = {
     ru: "russian",
 }
 
+export const GLOBAL_DATA = "global"
+
 export const SECTION_COLLECTION = {
     steps: "steps",
     services: "services",
@@ -23,6 +25,11 @@ export const SECTION_COLLECTION = {
     testimonials: "testimonials",
     layout: "layout",
     other: "other",
+}
+
+export function reformatAndSortObjectValuesToArray(obj: any): any[] {
+    const sortedObject = sortObjectData(obj)
+    return Object.values(sortedObject) as any[]
 }
 
 function reformatObjectValuesToArray(obj: any): any[] {
@@ -42,7 +49,7 @@ export async function fetchSectionData(
     )
     const docs = await getDocs(ref)
 
-    if (docs.empty) return
+    if (docs.empty) throw new Error()
     const newData = docs.docs[0].data()
     const reformattedNewData = reformatObjectValuesToArray(newData)
     const data = !!raw ? newData : reformattedNewData
@@ -50,6 +57,7 @@ export async function fetchSectionData(
 }
 
 export function sortObjectData(obj: any): any {
+    if (!obj) return {}
     const sortedKeys = Object.keys(obj).sort((a, b) => Number(a) - Number(b))
     const sortedObject: any = {}
 
@@ -63,17 +71,17 @@ export function sortObjectData(obj: any): any {
 export async function fetchImagesData() {
     const ref = collection(db, PORTFOLIO_PICTURES_DB)
     const docs = await getDocs(ref)
-    if (docs.empty) return
+    if (docs.empty) throw new Error()
     const currentData = docs.docs[0].data()
     const ascSortedData = sortObjectData(currentData)
     const dataArray = reformatObjectValuesToArray(ascSortedData)
-    const liveData = dataArray.filter(item => item.isLive)
+    const liveData = dataArray.filter(item => item.filters.isLive)
     return liveData
 }
 
 export const portfolioPicturesRef = collection(db, PORTFOLIO_PICTURES_DB)
 
-export const TattooArtists = {
+/* export const TattooArtists = {
     Dinu: "Dinu",
     Katia: "Katia",
     Nastia: "Nastia",
@@ -87,9 +95,9 @@ export const TattooStyles = {
 export const TattooColors = {
     Black: "Black",
     Color: "Color",
-} as const
+} as const */
 
-export type ArtistType = (typeof TattooArtists)[keyof typeof TattooArtists]
+/* export type ArtistType = (typeof TattooArtists)[keyof typeof TattooArtists]
 export type StyleType = (typeof TattooStyles)[keyof typeof TattooStyles]
 export type ColorType = (typeof TattooColors)[keyof typeof TattooColors]
 
@@ -100,7 +108,7 @@ export interface IImagesData {
     style: StyleType
     color: ColorType
     isLive: boolean
-}
+} */
 
 export interface IStepData {
     img: string
@@ -172,16 +180,23 @@ export interface IOtherData {
     defaultLanguage: LanguageType
 }
 
-export interface IFilters {
+/* export interface IFilters {
     artist: ArtistType | ""
     style: StyleType | ""
     color: ColorType | ""
     isLive: boolean
-}
+} */
 
-export interface ITattooImage extends IFilters {
+/* export interface ITattooImage extends IFilters {
     img: string
     alt: string
+} */
+
+export async function fetchGlobalData() {
+    const ref = doc(db, DATA_COLLECTION, GLOBAL_DATA)
+    const newDoc = await getDoc(ref)
+    const newData = newDoc.data()
+    return newData
 }
 
 /* export function addData() {
@@ -200,3 +215,19 @@ export interface ITattooImage extends IFilters {
 
     addDoc(ref, data)
 } */
+
+export interface IChosenFilter {
+    [key: string]: string | boolean
+    isLive: boolean
+}
+
+export interface ITattooImage {
+    id: number
+    img: string
+    alt: {
+        en: string
+        ro: string
+        ru: string
+    }
+    filters: IChosenFilter
+}
