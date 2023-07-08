@@ -21,3 +21,10 @@
 .img {
     width: 50px;
 }
+
+.cont {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}

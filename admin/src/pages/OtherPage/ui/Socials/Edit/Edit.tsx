@@ -120,7 +120,7 @@ export function Edit({
                 onSaveClick={saveClickHandler}
                 onDiscardClick={discardClickHandler}
             >
-                <div>
+                <div className={styles.cont}>
                     <ModalImage url={newData?.icon || previewImage.url} className={styles.img} />
                     <EditImage onChange={editImageChangeHandler} />
                     <Input
