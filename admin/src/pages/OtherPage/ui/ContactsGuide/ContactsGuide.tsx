@@ -8,7 +8,7 @@ import { MarkdownTextarea } from "shared/ui/MarkdownTextarea/MarkdownTextarea"
 import { Alert } from "shared/ui/CustomNotifications"
 import { isShallowEqual } from "shared/lib/isShallowEqual/isShallowEqual"
 import { updateContactsGuideData } from "shared/const/firebaseVariables"
-import { DecodeMarkdown } from "shared/ui/MarkdownTextarea/lib/decodeMarkdown"
+import { DecodeMarkdown } from "shared/ui/MarkdownTextarea/lib/DecodeMarkdown"
 
 export function ContactsGuide({
     data,

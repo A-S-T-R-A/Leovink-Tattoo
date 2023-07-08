@@ -10,9 +10,9 @@ import { Alert } from "shared/ui/CustomNotifications"
 import { updateFormData } from "shared/const/firebaseVariables"
 
 const defaultNewAllData = {
-    en: { name: "", phone: "" },
-    ro: { name: "", phone: "" },
-    ru: { name: "", phone: "" },
+    en: { name: "", phone: "", loading: "", success: "", error: "" },
+    ro: { name: "", phone: "", loading: "", success: "", error: "" },
+    ru: { name: "", phone: "", loading: "", success: "", error: "" },
 }
 
 export function FormData({
@@ -98,10 +98,43 @@ export function FormData({
                         }))
                     }
                 />
+                <Input
+                    label="Loading"
+                    value={newAllData[currentLanguage].loading}
+                    onChange={loading =>
+                        setNewAllData(prev => ({
+                            ...prev,
+                            [currentLanguage]: { ...prev[currentLanguage], loading },
+                        }))
+                    }
+                />
+                <Input
+                    label="Success"
+                    value={newAllData[currentLanguage].success}
+                    onChange={success =>
+                        setNewAllData(prev => ({
+                            ...prev,
+                            [currentLanguage]: { ...prev[currentLanguage], success },
+                        }))
+                    }
+                />
+                <Input
+                    label="Error"
+                    value={newAllData[currentLanguage].error}
+                    onChange={error =>
+                        setNewAllData(prev => ({
+                            ...prev,
+                            [currentLanguage]: { ...prev[currentLanguage], error },
+                        }))
+                    }
+                />
             </ModalEditorWithTranslation>
             <div>
                 <div>Name placeholder: {data && data?.formData[defaultLanguage].name}</div>
                 <div>Phone placeholder: {data && data?.formData[defaultLanguage].phone}</div>
+                <div>Loading message: {data && data?.formData[defaultLanguage].loading}</div>
+                <div>Success message: {data && data?.formData[defaultLanguage].success}</div>
+                <div>Error message: {data && data?.formData[defaultLanguage].error}</div>
                 <button onClick={() => setIsOpen(true)}>Edit</button>
             </div>
         </>

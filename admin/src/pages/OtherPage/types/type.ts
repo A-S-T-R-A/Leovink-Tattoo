@@ -24,14 +24,23 @@ export interface IFormData {
     en: {
         name: string
         phone: string
+        loading: string
+        success: string
+        error: string
     }
     ro: {
         name: string
         phone: string
+        loading: string
+        success: string
+        error: string
     }
     ru: {
         name: string
         phone: string
+        loading: string
+        success: string
+        error: string
     }
 }
 
@@ -86,6 +95,35 @@ export interface IButtonsData {
     }
 }
 
+export interface IFooterList {
+    en: {
+        [key: number]: string
+    }
+    ro: {
+        [key: number]: string
+    }
+    ru: {
+        [key: number]: string
+    }
+}
+
+export interface INavList {
+    en: {
+        [key: number]: { link: string; text: string }
+    }
+    ro: {
+        [key: number]: { link: string; text: string }
+    }
+    ru: {
+        [key: number]: { link: string; text: string }
+    }
+}
+
+export interface ILayoutData {
+    footerList: IFooterList
+    navList: INavList
+}
+
 export interface IGlobalData {
     filtersData: IFiltersData
     socialsData: ISocialMedia[]
@@ -94,6 +132,7 @@ export interface IGlobalData {
     formData: IFormData
     sectionNames: ISectionNames
     buttons: IButtonsData
+    layoutData: ILayoutData
 }
 
 export interface IPreviewImage {

@@ -21,6 +21,7 @@ import {
     IButtonsData,
     IContactsGuide,
     IFormData,
+    ILayoutData,
     ISectionNames,
     ISocialMedia,
 } from "pages/OtherPage/types/type"
@@ -281,4 +282,9 @@ export async function updateSectionNames(sectionNames: ISectionNames) {
 export async function updateButtons(buttons: IButtonsData) {
     const ref = doc(db, DATA_COLLECTION, GLOBAL_DATA)
     await updateDoc(ref, { buttons: buttons } as any)
+}
+
+export async function updateLayoutData(layoutData: ILayoutData) {
+    const ref = doc(db, DATA_COLLECTION, GLOBAL_DATA)
+    await updateDoc(ref, { layoutData: layoutData } as any)
 }

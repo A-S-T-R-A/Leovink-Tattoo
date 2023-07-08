@@ -9,6 +9,7 @@ import { ContactsGuide } from "./ContactsGuide/ContactsGuide"
 import { FormData } from "./FormData/FormData"
 import { SectionNames } from "./SectionNames/SectionNames"
 import { Buttons } from "./Buttons/Buttons"
+import { LayoutData } from "./LayoutData/LayoutData"
 
 export function OtherPage() {
     const [data, setData] = useState<IGlobalData | null>(null)
@@ -40,6 +41,7 @@ export function OtherPage() {
             <FormData data={data} triggerRefetch={triggerRefetch} />
             <SectionNames data={data} triggerRefetch={triggerRefetch} />
             <Buttons data={data} triggerRefetch={triggerRefetch} />
+            <LayoutData data={data} triggerRefetch={triggerRefetch} />
         </div>
     )
 }
