@@ -40,12 +40,14 @@ export function ModalEditor(props: IModalEditor) {
             <div className={styles.cross} onClick={onClose}>
                 <PlusIcon />
             </div>
-            {withTranslation && (
-                <Languages
-                    currentLanguage={withTranslation ? currentLanguage : undefined}
-                    onChangeLanguage={withTranslation ? onChangeLanguage : undefined}
-                />
-            )}
+            <div className={styles.translationSlot}>
+                {withTranslation && (
+                    <Languages
+                        currentLanguage={withTranslation ? currentLanguage : undefined}
+                        onChangeLanguage={withTranslation ? onChangeLanguage : undefined}
+                    />
+                )}
+            </div>
             {children}
             <div className={styles.btnContainer}>
                 <button onClick={onSaveClick}>save</button>

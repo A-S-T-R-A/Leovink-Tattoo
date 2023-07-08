@@ -38,11 +38,11 @@ export function EditImage({ onChange }: { onChange: (v: Blob) => void }) {
     }
 
     return (
-        <>
+        <div className={styles.container}>
             <label className={styles.editLabel} htmlFor={id}>
                 Edit
             </label>
             <input type="file" id={id} className={styles.file} onChange={imageChangeHandler} />
-        </>
+        </div>
     )
 }

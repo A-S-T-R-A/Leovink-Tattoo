@@ -27,7 +27,7 @@ const { cta } = buttons[language]
         cta={cta} 
         formData={formData[language]} 
         data={artist} 
-        imagesData={imagesData} 
+        imagesData={imagesData.filter(item=>item.filters.artists === artist.key)} 
         language={language}/>
     </PageWrapper>
 </Layout>
