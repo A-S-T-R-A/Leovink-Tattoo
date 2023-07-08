@@ -96,7 +96,7 @@ export function TableIcons({
                                         )
                                     })}
                                 </td>
-                                <td>
+                                <td className={styles.btns}>
                                     <EditTattooImage
                                         id={item.id}
                                         triggerRefetch={triggerRefetch}

@@ -4,7 +4,7 @@ import { ViewType } from "../../types/types"
 import { localStorageView } from "pages/PortfolioPage/lib/localStorageLib"
 import { UploadModal } from "../uploadTattooImage/UploadModal"
 import { TriggerRefetchBtn } from "shared/components/TriggerRefetchBtn/TriggerRefetchBtn"
-import { TableIcons, TableRows } from "shared/assets/icons"
+import { DownArrowIcon, TableIcons, TableRows } from "shared/assets/icons"
 
 export function PortfolioPageHeader({
     view,

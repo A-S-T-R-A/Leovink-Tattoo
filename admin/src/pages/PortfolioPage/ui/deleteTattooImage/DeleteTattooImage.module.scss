@@ -1,10 +1,13 @@
 .btn {
     width: 30px;
     height: 30px;
-    fill: var(--color-dark-accent);
     cursor: pointer;
 }
 
 .btn path {
-    stroke: var(--color-dark-accent);
+    stroke: var(--color-base-accent);
+}
+
+.btn:hover path {
+    stroke: var(--color-moderate-accent);
 }
