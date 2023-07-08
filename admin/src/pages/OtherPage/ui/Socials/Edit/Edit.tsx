@@ -2,7 +2,6 @@ import { EditImage } from "features/editImage"
 import { IGlobalData, IPreviewImage, ISocialMedia } from "../../../types/type"
 import { useEffect, useState } from "react"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
 import { defaultLanguage } from "shared/const/languages"
 import { Input } from "shared/ui/Input/Input"
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
@@ -16,6 +15,7 @@ import {
     updateSocialsData,
     uploadImageToBucket,
 } from "shared/const/firebaseVariables"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 
 export function Edit({
     data,
@@ -112,7 +112,7 @@ export function Edit({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <ModalEditorWithTranslation
+            <ModalEditor
                 isOpen={isOpen}
                 onClose={onClose}
                 onChangeLanguage={() => null}
@@ -128,7 +128,7 @@ export function Edit({
                         onChange={link => setNewData((prev: any) => ({ ...prev, link }))}
                     />
                 </div>
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <button onClick={() => setIsOpen(true)}>Edit</button>
         </>
     )

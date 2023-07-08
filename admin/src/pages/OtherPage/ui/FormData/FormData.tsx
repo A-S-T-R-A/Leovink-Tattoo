@@ -3,11 +3,11 @@ import { IGlobalData } from "../../types/type"
 import { useEffect, useState } from "react"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 import { LanguageType } from "shared/types/types"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
 import { Input } from "shared/ui/Input/Input"
 import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
 import { Alert } from "shared/ui/CustomNotifications"
 import { updateFormData } from "shared/const/firebaseVariables"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 
 const defaultNewAllData = {
     en: { name: "", phone: "", loading: "", success: "", error: "" },
@@ -71,8 +71,9 @@ export function FormData({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <ModalEditorWithTranslation
+            <ModalEditor
                 isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
                 onChangeLanguage={onChangeLanguage}
                 currentLanguage={currentLanguage}
                 onSaveClick={saveClickHandler}
@@ -128,7 +129,7 @@ export function FormData({
                         }))
                     }
                 />
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <div>
                 <div>Name placeholder: {data && data?.formData[defaultLanguage].name}</div>
                 <div>Phone placeholder: {data && data?.formData[defaultLanguage].phone}</div>

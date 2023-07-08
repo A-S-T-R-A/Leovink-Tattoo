@@ -1,14 +1,14 @@
 import { defaultLanguage } from "shared/const/languages"
-import { IContactsGuide, IGlobalData } from "../../types/type"
+import { IGlobalData } from "../../types/type"
 import { useEffect, useState } from "react"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
 import { LanguageType } from "shared/types/types"
 import { MarkdownTextarea } from "shared/ui/MarkdownTextarea/MarkdownTextarea"
 import { Alert } from "shared/ui/CustomNotifications"
 import { isShallowEqual } from "shared/lib/isShallowEqual/isShallowEqual"
 import { updateContactsGuideData } from "shared/const/firebaseVariables"
 import { DecodeMarkdown } from "shared/ui/MarkdownTextarea/lib/DecodeMarkdown"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 
 export function ContactsGuide({
     data,
@@ -66,8 +66,9 @@ export function ContactsGuide({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <ModalEditorWithTranslation
+            <ModalEditor
                 isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
                 onChangeLanguage={onChangeLanguage}
                 currentLanguage={currentLanguage}
                 onSaveClick={saveClickHandler}
@@ -79,7 +80,7 @@ export function ContactsGuide({
                     }
                     initialData={newAllData[currentLanguage]}
                 />
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <div>
                 <div>Location Guide:</div>
                 <div>

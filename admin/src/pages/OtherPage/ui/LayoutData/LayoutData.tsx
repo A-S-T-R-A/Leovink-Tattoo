@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 import { IGlobalData, ILayoutData } from "../../types/type"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
 import { defaultLanguage } from "shared/const/languages"
 import { LanguageType } from "shared/types/types"
 import { Input } from "shared/ui/Input/Input"
 import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
 import { Alert } from "shared/ui/CustomNotifications"
 import { updateLayoutData } from "shared/const/firebaseVariables"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 
 const defaultNewAllData: ILayoutData = {
     footerList: {
@@ -179,8 +179,9 @@ export function LayoutData({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <ModalEditorWithTranslation
+            <ModalEditor
                 isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
                 onChangeLanguage={onChangeLanguage}
                 currentLanguage={currentLanguage}
                 onSaveClick={saveClickHandler}
@@ -232,7 +233,7 @@ export function LayoutData({
                         onChange={value => navChangeHandler(value, 4)}
                     />
                 </div>
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <div>
                 <div>
                     Footer List

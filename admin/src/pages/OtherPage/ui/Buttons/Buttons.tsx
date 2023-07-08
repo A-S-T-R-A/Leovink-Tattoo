@@ -3,11 +3,11 @@ import { IGlobalData } from "../../types/type"
 import { useEffect, useState } from "react"
 import { defaultLanguage } from "shared/const/languages"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
 import { Input } from "shared/ui/Input/Input"
 import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
 import { Alert } from "shared/ui/CustomNotifications"
 import { updateButtons } from "shared/const/firebaseVariables"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 
 const defaultNewAllData = {
     en: {
@@ -86,8 +86,9 @@ export function Buttons({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <ModalEditorWithTranslation
+            <ModalEditor
                 isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
                 onChangeLanguage={onChangeLanguage}
                 currentLanguage={currentLanguage}
                 onSaveClick={saveClickHandler}
@@ -116,7 +117,7 @@ export function Buttons({
                             />
                         )
                     })}
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <div>
                 {!!data &&
                     Object.entries(data.buttons[defaultLanguage])

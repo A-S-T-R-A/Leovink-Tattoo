@@ -1,7 +1,7 @@
 import { AddressType, IAddressData, IGlobalData } from "../../../types/type"
 import { useEffect, useState } from "react"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 import { updateAddressData } from "shared/const/firebaseVariables"
 import { defaultLanguage } from "shared/const/languages"
 import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
@@ -71,8 +71,9 @@ export function Edit({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <ModalEditorWithTranslation
+            <ModalEditor
                 isOpen={isOpen === "location"}
+                onClose={() => setIsOpen(null)}
                 onChangeLanguage={onChangeLanguage}
                 currentLanguage={currentLanguage}
                 onSaveClick={saveClickHandler}
@@ -88,10 +89,11 @@ export function Edit({
                         }))
                     }
                 />
-            </ModalEditorWithTranslation>
+            </ModalEditor>
 
-            <ModalEditorWithTranslation
+            <ModalEditor
                 isOpen={isOpen === "phone"}
+                onClose={() => setIsOpen(null)}
                 onChangeLanguage={() => null}
                 currentLanguage={defaultLanguage}
                 onSaveClick={saveClickHandler}
@@ -114,10 +116,11 @@ export function Edit({
                         }
                     />
                 ))}
-            </ModalEditorWithTranslation>
+            </ModalEditor>
 
-            <ModalEditorWithTranslation
+            <ModalEditor
                 isOpen={isOpen === "mail"}
+                onClose={() => setIsOpen(null)}
                 onChangeLanguage={() => null}
                 currentLanguage={defaultLanguage}
                 onSaveClick={saveClickHandler}
@@ -140,7 +143,7 @@ export function Edit({
                         }
                     />
                 ))}
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <button onClick={() => setIsOpen(addressType)}>Edit</button>
         </>
     )
