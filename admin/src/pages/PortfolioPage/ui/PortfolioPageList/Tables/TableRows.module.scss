@@ -7,6 +7,12 @@
     border-spacing: 0;
 }
 
+.tableWrapper {
+    height: 400px; /* Set a fixed height for the table wrapper to enable scrolling */
+    overflow-y: scroll; /* Enable vertical scrolling */
+    position: relative; /* Add relative positioning to the table wrapper */
+}
+
 .tableThead {
     tr {
         th {

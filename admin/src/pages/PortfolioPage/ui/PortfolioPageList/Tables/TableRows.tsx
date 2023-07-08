@@ -86,84 +86,86 @@ export function TableRows({
                     </>
                 )}
             </div>
-            <table className={styles.table}>
-                <thead className={styles.tableThead}>
-                    <tr className={styles.thead}>
-                        <th></th>
-                        <th>ID</th>
-                        <th>Photo</th>
-                        <th>Status</th>
-                        <th>Name</th>
-                        <th>Style</th>
-                        <th>Place</th>
-                        <th>Color</th>
-                        <th>Edit/Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {filteredData.map((item, index) => {
-                        const { id, img, filters } = item
+            <div className={styles.tableWrapper}>
+                <table className={styles.table}>
+                    <thead className={styles.tableThead}>
+                        <tr className={styles.thead}>
+                            <th></th>
+                            <th>ID</th>
+                            <th>Photo</th>
+                            <th>Status</th>
+                            <th>Name</th>
+                            <th>Style</th>
+                            <th>Place</th>
+                            <th>Color</th>
+                            <th>Edit/Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {filteredData.map((item, index) => {
+                            const { id, img, filters } = item
 
-                        return (
-                            <tr key={id} className={styles.displayedContent}>
-                                <td className={styles.idBlock}>
-                                    <input
-                                        type="checkbox"
-                                        className={styles.idCheckbox}
-                                        id={`${index}checkbox${uuid}`}
-                                        checked={selected.includes(item.id)}
-                                        onChange={() => checkboxChangeHandler(item.id)}
-                                    />
-                                </td>
-                                <td>{id}</td>
-                                <td>
-                                    <ModalImage className={styles.photo} url={img} />
-                                </td>
-                                <td className={styles.status}>
-                                    {filters.isLive ? (
-                                        <p className={styles.statusIcons}>
-                                            <div className={styles.statusGreen} />
-                                            Published
-                                        </p>
-                                    ) : (
-                                        <p className={styles.statusIcons}>
-                                            <div className={styles.statusRed} />
-                                            Unpublished
-                                        </p>
-                                    )}
-                                </td>
+                            return (
+                                <tr key={id} className={styles.displayedContent}>
+                                    <td className={styles.idBlock}>
+                                        <input
+                                            type="checkbox"
+                                            className={styles.idCheckbox}
+                                            id={`${index}checkbox${uuid}`}
+                                            checked={selected.includes(item.id)}
+                                            onChange={() => checkboxChangeHandler(item.id)}
+                                        />
+                                    </td>
+                                    <td>{id}</td>
+                                    <td>
+                                        <ModalImage className={styles.photo} url={img} />
+                                    </td>
+                                    <td className={styles.status}>
+                                        {filters.isLive ? (
+                                            <p className={styles.statusIcons}>
+                                                <div className={styles.statusGreen} />
+                                                Published
+                                            </p>
+                                        ) : (
+                                            <p className={styles.statusIcons}>
+                                                <div className={styles.statusRed} />
+                                                Unpublished
+                                            </p>
+                                        )}
+                                    </td>
 
-                                {filterKeys.map((key, index) => {
-                                    return (
-                                        <td key={key + index}>
-                                            {key}: {item.filters[key] || ""}
-                                        </td>
-                                    )
-                                })}
-                                <td className={styles.editDelete}>
-                                    <div className={styles.editDeleteInternal}>
-                                        <button className={styles.editBtn}>
-                                            <p>Edit</p>
-                                            <EditIcon
-                                                className={styles.editIcon}
+                                    {filterKeys.map((key, index) => {
+                                        return (
+                                            <td key={key + index}>
+                                                {key}: {item.filters[key] || ""}
+                                            </td>
+                                        )
+                                    })}
+                                    <td className={styles.editDelete}>
+                                        <div className={styles.editDeleteInternal}>
+                                            <button className={styles.editBtn}>
+                                                <p>Edit</p>
+                                                <EditTattooImage
+                                                    id={item.id}
+                                                    triggerRefetch={triggerRefetch}
+                                                    data={data}
+                                                    filtersData={filtersData}
+                                                    unselectAllHandler={unselectAllHandler}
+                                                />
+                                            </button>
+                                            <DeleteTattooImage
                                                 id={id}
                                                 triggerRefetch={triggerRefetch}
                                                 unselectAllHandler={unselectAllHandler}
                                             />
-                                        </button>
-                                        <DeleteIcon
-                                            className={styles.deleteIcon}
-                                            id={id}
-                                            triggerRefetch={triggerRefetch}
-                                            unselectAllHandler={unselectAllHandler}
-                                        />
-                                    </div>
-                                </td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+            </div>
         </>
     )
 }
