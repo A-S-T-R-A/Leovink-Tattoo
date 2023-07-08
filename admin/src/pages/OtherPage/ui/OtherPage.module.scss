@@ -53,4 +53,10 @@
         padding: 5px;
         border: 2px solid var(--color-base);
     }
+
+    .uiContainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+    }
 }

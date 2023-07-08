@@ -8,6 +8,7 @@ import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
 import { Alert } from "shared/ui/CustomNotifications"
 import { updateFormData } from "shared/const/firebaseVariables"
 import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
+import styles from "./FormData.module.scss"
 
 const defaultNewAllData = {
     en: { name: "", phone: "", loading: "", success: "", error: "" },
@@ -130,13 +131,26 @@ export function FormData({
                     }
                 />
             </ModalEditor>
-            <div>
-                <div>Name placeholder: {data && data?.formData[defaultLanguage].name}</div>
-                <div>Phone placeholder: {data && data?.formData[defaultLanguage].phone}</div>
-                <div>Loading message: {data && data?.formData[defaultLanguage].loading}</div>
-                <div>Success message: {data && data?.formData[defaultLanguage].success}</div>
-                <div>Error message: {data && data?.formData[defaultLanguage].error}</div>
-                <button onClick={() => setIsOpen(true)}>Edit</button>
+            <div className={styles.formsContainer}>
+                <p className={styles.formsTitle}>Form Data</p>
+                <div className={styles.content}>
+                    Name placeholder: {data && data?.formData[defaultLanguage].name}
+                </div>
+                <div className={styles.content}>
+                    Phone placeholder: {data && data?.formData[defaultLanguage].phone}
+                </div>
+                <div className={styles.content}>
+                    Loading message: {data && data?.formData[defaultLanguage].loading}
+                </div>
+                <div className={styles.content}>
+                    Success message: {data && data?.formData[defaultLanguage].success}
+                </div>
+                <div className={styles.content}>
+                    Error message: {data && data?.formData[defaultLanguage].error}
+                </div>
+                <button className={styles.editBtn} onClick={() => setIsOpen(true)}>
+                    Edit
+                </button>
             </div>
         </>
     )

@@ -87,7 +87,9 @@ export function ContactsGuide({
                     <strong>Location Guide:</strong>
                     {data ? <DecodeMarkdown data={data.contactsGuide[defaultLanguage]} /> : ""}
                 </div>
-                <button onClick={() => setIsOpen(true)}>Edit</button>
+                <button className={styles.editBtn} onClick={() => setIsOpen(true)}>
+                    Edit
+                </button>
             </div>
         </>
     )
