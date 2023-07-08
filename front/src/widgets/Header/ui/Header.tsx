@@ -6,17 +6,20 @@ import { classNames } from "shared/lib/classNames/classNames"
 import type { LanguageType } from "shared/types/types"
 import type { NavlistType } from "shared/const/firebaseVariables"
 import type { ComponentChildren } from "preact"
+import type { ISocialMedia } from "shared/types/IGlobalData"
 
 export function Header({
     language,
     data,
     children,
     defaultLanguage,
+    socialsData,
 }: {
     children: ComponentChildren
     language: LanguageType
-    data: NavlistType
+    data: { [key: number]: { link: string; text: string } }
     defaultLanguage: LanguageType
+    socialsData: ISocialMedia[]
 }) {
     const [isScrolled, setIsScrolled] = useState(false)
 
@@ -37,6 +40,7 @@ export function Header({
                 defaultLanguage={defaultLanguage}
                 className={styles.burger}
                 data={data}
+                socialsData={socialsData}
             />
             <div className={classNames(styles.wrapper, { [styles.blur]: isScrolled })}>
                 <div className={styles.container}>
@@ -46,6 +50,7 @@ export function Header({
                         language={language}
                         defaultLanguage={defaultLanguage}
                         data={data}
+                        socialsData={socialsData}
                     />
                 </div>
             </div>

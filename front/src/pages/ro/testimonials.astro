@@ -4,24 +4,24 @@ import { Section } from "shared/ui/Section/Section";
 import { FormSection } from "widgets/FormSection/FormSection";
 import { TestimonialPage } from "pageComponents/TestimonialsPage/TestimonialsPage";
 import Layout from "layouts/Layout.astro";
-import { ILayoutData, IOtherData, ITestimonialsData, fetchSectionData } from "shared/const/firebaseVariables";
+import { ITestimonialsData, fetchGlobalData, fetchSectionData } from "shared/const/firebaseVariables";
 import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl";
 import cave from "widgets/Main/const/dungeon.webp"
+import type { IGlobalData } from "shared/types/IGlobalData";
 
 
 const language = getLangFromUrl(Astro.url)
 const testimonialsData = await fetchSectionData(language, "testimonials") as ITestimonialsData[];
-const layoutData = await fetchSectionData(language, "layout", true) as ILayoutData;
-const otherData = await fetchSectionData(language, "other", true) as IOtherData;
-const { sectionNames, formData, buttons } = otherData;
-const { cta } = buttons;
+const globalData = await fetchGlobalData() as IGlobalData
+const {sectionNames, buttons,formData ,layoutData} = globalData
+const { cta } = buttons[language]
 ---
 
 <Layout image={cave}>
-    <PageWrapper title={layoutData.navlist[4].text} main={layoutData.navlist[0].text}>
+    <PageWrapper title={layoutData.navList[language][4].text} main={layoutData.navList[language][0].text}>
         <Section>
             <TestimonialPage client:load cta={cta} data={testimonialsData}/>
         </Section>
-        <FormSection client:load title={sectionNames.form} button={cta} data={formData}/>
+        <FormSection client:load title={sectionNames[language].form} button={cta} data={formData[language]}/>
     </PageWrapper>
 </Layout>

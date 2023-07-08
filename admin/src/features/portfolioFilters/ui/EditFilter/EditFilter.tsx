@@ -1,10 +1,10 @@
 import { defaultNewFilter } from "features/portfolioFilters/const/const"
-import { IFiltersData, IGlobalData, INewFilter } from "../../types/types"
+import { IFiltersData, INewFilter } from "../../types/types"
 import styles from "./EditFilter.module.scss"
 import { defaultLanguage } from "shared/const/languages"
 import { useEffect, useState } from "react"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 import { Input } from "shared/ui/Input/Input"
 import { LanguageType } from "shared/types/types"
 import { Alert } from "shared/ui/CustomNotifications"
@@ -12,6 +12,7 @@ import { isShallowEqual } from "shared/lib/isShallowEqual/isShallowEqual"
 import { updateFiltersData } from "shared/const/firebaseVariables"
 import { fetchAllImages } from "features/portfolioFilters/lib/fetchTattooImages"
 import { uploadTattooImages } from "features/portfolioFilters/lib/uploadTattooImages"
+import { IGlobalData } from "pages/OtherPage"
 
 export function EditFilter({
     id,
@@ -110,9 +111,10 @@ export function EditFilter({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <ModalEditorWithTranslation
+            <ModalEditor
+                withTranslation
                 isOpen={isOpen}
-                onClose={() => setIsOpen(true)}
+                onClose={() => setIsOpen(false)}
                 currentLanguage={currentLanguage}
                 onChangeLanguage={onChangeLanguage}
                 onSaveClick={saveClickHandler}
@@ -124,7 +126,7 @@ export function EditFilter({
                         setNewAllFilter((prev: any) => ({ ...prev, [currentLanguage]: value }))
                     }
                 />
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <button className={styles.btn} onClick={() => setIsOpen(true)}>
                 Edit Filter
             </button>

@@ -1,13 +1,15 @@
-import { defaultNewFilter } from "../../const/const"
-import { IFilterItem, IFiltersData, IGlobalData } from "../../types/types"
 import { useState } from "react"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { defaultNewFilter } from "../../const/const"
+import { IFilterItem, IFiltersData } from "../../types/types"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 import { updateFiltersData } from "shared/const/firebaseVariables"
 import { defaultLanguage } from "shared/const/languages"
 import { LanguageType } from "shared/types/types"
 import { Alert } from "shared/ui/CustomNotifications"
 import { Input } from "shared/ui/Input/Input"
 import styles from "./AddNewItem.module.scss"
+import { IGlobalData } from "pages/OtherPage"
+import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 
 export function AddNewItem({
     data,
@@ -74,9 +76,11 @@ export function AddNewItem({
 
     return (
         <>
-            <ModalEditorWithTranslation
+            <LoadingModal isLoading={isLoading} />
+            <ModalEditor
+                withTranslation
                 isOpen={isOpen}
-                onClose={() => setIsOpen(true)}
+                onClose={() => setIsOpen(false)}
                 currentLanguage={currentLanguage}
                 onChangeLanguage={onChangeLanguage}
                 onSaveClick={saveClickHandler}
@@ -88,7 +92,7 @@ export function AddNewItem({
                         setNewAllItem(prev => ({ ...prev, [currentLanguage]: value }))
                     }
                 />
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <button className={styles.btn} onClick={() => setIsOpen(true)}>
                 Add New Item
             </button>

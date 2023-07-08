@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ModalEditorWithTranslation } from "shared/components/ModalEditorWithTranslation/ModalEditorWithTranslation"
+import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 import { Input } from "shared/ui/Input/Input"
 import { Textarea } from "shared/ui/Textarea/Textarea"
 import styles from "./AddArtistsModal.module.scss"
@@ -20,7 +20,7 @@ import {
     uploadImageToBucket,
 } from "shared/const/firebaseVariables"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
-import { IFiltersData, IOtherData } from "features/portfolioFilters/types/types"
+import { IFiltersData } from "features/portfolioFilters"
 
 export function AddArtistsModal({
     data,
@@ -127,7 +127,8 @@ export function AddArtistsModal({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <ModalEditorWithTranslation
+            <ModalEditor
+                withTranslation
                 isOpen={isOpen}
                 onClose={onClose}
                 onChangeLanguage={onChangeLanguage}
@@ -200,7 +201,7 @@ export function AddArtistsModal({
                         />
                     </div>
                 </div>
-            </ModalEditorWithTranslation>
+            </ModalEditor>
             <button onClick={() => setIsOpen(true)}>Add New</button>
         </>
     )

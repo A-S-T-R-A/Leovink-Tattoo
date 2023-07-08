@@ -61,7 +61,7 @@ export function EditModal(props: IEditModalProps) {
     }, [filtersData])
 
     return (
-        <Modal isOpen={isOpen || isLoading} onClose={onClose} contentClassName={styles.content}>
+        <Modal isOpen={isOpen || isLoading} onClose={() => null} contentClassName={styles.content}>
             {isLoading ? (
                 "Loading..."
             ) : (

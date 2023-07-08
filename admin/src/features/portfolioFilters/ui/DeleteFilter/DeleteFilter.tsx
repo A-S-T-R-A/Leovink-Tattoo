@@ -1,11 +1,12 @@
 import { updateFiltersData } from "shared/const/firebaseVariables"
-import { IFiltersData, IGlobalData } from "../../types/types"
+import { IFiltersData } from "../../types/types"
 import styles from "./DeleteFilter.module.scss"
 import { useState } from "react"
 import { Alert, Confirm } from "shared/ui/CustomNotifications"
 import { fetchAllImages } from "../../lib/fetchTattooImages"
 import { uploadTattooImages } from "features/portfolioFilters/lib/uploadTattooImages"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
+import { IGlobalData } from "pages/OtherPage"
 
 export function DeleteFilter({
     data,

@@ -14,7 +14,7 @@ export function ModalImage({ url, className }: { url: string; className?: string
     if (!url) return null
     return (
         <>
-            <Modal isOpen={isOpen} onClose={onClose} contentClassName={styles.container}>
+            <Modal isOpen={isOpen} onClose={() => null} contentClassName={styles.container}>
                 <div className={styles.cross} onClick={onClose}>
                     <PlusIcon />
                 </div>

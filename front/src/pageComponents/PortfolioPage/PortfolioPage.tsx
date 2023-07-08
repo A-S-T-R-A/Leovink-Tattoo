@@ -1,68 +1,74 @@
-import { useState, useEffect } from "preact/hooks"
+import { useState, useEffect, useMemo } from "preact/hooks"
 import { ModalGallery } from "widgets/ModalGallery/ModalGallery"
 import { Dropdown } from "shared/ui/Dropdown"
 import { FormSection } from "widgets/FormSection/FormSection"
 import styles from "./PortfolioPage.module.scss"
-import type { IImagesData } from "shared/const/firebaseVariables"
-import {
-    tattooArtistsDropdownOptions,
-    tattooColorsDropdownOptions,
-    tattooStylesDropdownOptions,
-} from "shared/const/filters"
 import { Section } from "shared/ui/Section/Section"
 import { Button } from "shared/ui/Button/Button"
 import { AntiClockwiseIcon } from "shared/ui/Icons"
 import { GalleryGrid } from "shared/components/GalleryGrid/GalleryGrid"
-import { data as dummyData } from "shared/const/data"
 import type { LanguageType } from "shared/types/types"
-
-interface IFilters {
-    artist: string
-    style: string
-    color: string
-}
+import type { IFilter, IFiltersData } from "shared/types/IGlobalData"
+import type { ITattooImage } from "shared/const/firebaseVariables"
 
 export function PortfolioPage({
     formTitle,
-    placeholdersData,
+    formData,
     button,
-    filtersData,
+    globalFiltersData,
     fetchedData,
     language,
 }: {
-    filtersData: {
-        artists: string
-        styles: string
-        colors: string
-        reset: string
-    }
+    globalFiltersData: IFiltersData
     formTitle: string
-    placeholdersData: { name: string; phone: string }
+    formData: {
+        name: string
+        phone: string
+        loading: string
+        success: string
+        error: string
+    }
     button: string
-    fetchedData: IImagesData[]
+    fetchedData: ITattooImage[]
     language: LanguageType
 }) {
     const [isOpen, setIsOpen] = useState(false)
-    const [filteredData, setFilteredData] = useState<IImagesData[]>([])
-    const [modalData, setModalData] = useState<IImagesData[]>([])
-    const [filters, setFilters] = useState<IFilters>({ artist: "", style: "", color: "" })
-
-    const data = fetchedData
-
-    function filterImages(filters: IFilters): IImagesData[] {
-        const newData = data
-            .filter(item => (!filters.artist ? true : item.artist === filters.artist))
-            .filter(item => (!filters.style ? true : item.style === filters.style))
-            .filter(item => (!filters.color ? true : item.color === filters.color))
-
-        return newData
-    }
+    const [modalData, setModalData] = useState<ITattooImage[]>([])
+    const f: { [key: string]: string } = {}
+    globalFiltersData.filters.forEach((item: any) => (f[item.title[language]] = ""))
+    const [filters, setFilters] = useState<{ [key: string]: string }>(f)
+    const [filtersData, setFiltersData] = useState<IFilter[]>(globalFiltersData.filters)
+    const keys = filtersData.map(item => item.title.en)
+    const data = filter(fetchedData, keys)
+    const [filteredData, setFilteredData] = useState<ITattooImage[]>(data)
 
     useEffect(() => {
-        const newData = filterImages(filters)
+        const keys = filtersData.map(item => item.title.en)
+        const data = filter(fetchedData, keys)
+        setFilteredData(data)
+    }, [filters, fetchedData])
 
-        setFilteredData(newData)
-    }, [filters])
+    function filter(data: ITattooImage[], keys: string[] = []) {
+        if (!filters) return []
+        if (keys.length === 0) return data
+
+        const newData = data.filter(item => {
+            return filters[keys[0]] === ""
+                ? true
+                : filters[keys[0]] === ("Unassigned" as any)
+                ? item.filters[keys[0]] === ""
+                : item.filters[keys[0]] === (filters[keys[0]] as any)
+        })
+
+        return filter(newData, keys.slice(1))
+    }
+
+    function resetFiltersHandler() {
+        if (!filtersData) return
+        const initialFilters: { [key: string]: string } = {}
+        filtersData.forEach(item => (initialFilters[item.title[language]] = ""))
+        setFilters(initialFilters)
+    }
 
     function clickHandler(index: number) {
         const newModalData = [...filteredData.slice(index), ...filteredData.slice(0, index)]
@@ -70,9 +76,15 @@ export function PortfolioPage({
         setModalData(newModalData)
     }
 
-    function resetFiltersHandler() {
-        setFilters({ artist: "", style: "", color: "" })
-    }
+    const dropdownOptions = useMemo(() => {
+        return globalFiltersData.filters.map(item => ({
+            name: item.title[language],
+            options: item.items.map(innerItem => ({
+                label: innerItem.label[language],
+                value: innerItem.key,
+            })),
+        }))
+    }, [globalFiltersData])
 
     return (
         <>
@@ -84,31 +96,29 @@ export function PortfolioPage({
             />
             <Section>
                 <div className={styles.filters}>
-                    <Dropdown
-                        options={tattooArtistsDropdownOptions}
-                        firstOptionText={filtersData.artists}
-                        value={filters.artist}
-                        onChange={value => setFilters(prev => ({ ...prev, artist: value }))}
-                    />
-                    <Dropdown
-                        options={tattooStylesDropdownOptions}
-                        firstOptionText={filtersData.styles}
-                        value={filters.style}
-                        onChange={value => setFilters(prev => ({ ...prev, style: value }))}
-                    />
-                    <Dropdown
-                        options={tattooColorsDropdownOptions}
-                        firstOptionText={filtersData.colors}
-                        value={filters.color}
-                        onChange={value => setFilters(prev => ({ ...prev, color: value }))}
-                    />
-                    <Button className={styles.btn} onClick={() => resetFiltersHandler()}>
-                        {filtersData.reset} <AntiClockwiseIcon />
+                    {dropdownOptions?.map((item, index) => {
+                        const { name, options } = item
+
+                        return (
+                            <Dropdown
+                                key={index}
+                                options={options}
+                                firstOptionText={`All ${name}`}
+                                value={filters?.[name] || ("" as string)}
+                                onChange={value =>
+                                    setFilters((prev: any) => ({ ...prev, [name]: value }))
+                                }
+                            />
+                        )
+                    })}
+                    <Button className={styles.btn} onClick={resetFiltersHandler}>
+                        {globalFiltersData.reset[language]}
+                        <AntiClockwiseIcon />
                     </Button>
                 </div>
                 <GalleryGrid data={filteredData} onClick={clickHandler} language={language} />
                 <div className={styles.marginBottom} />
-                <FormSection title={formTitle} data={placeholdersData} button={button} />
+                <FormSection title={formTitle} data={formData} button={button} />
             </Section>
         </>
     )

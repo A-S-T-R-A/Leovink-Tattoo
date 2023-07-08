@@ -12,6 +12,7 @@ import {
 import { localStorageView } from "../lib/localStorageLib"
 import { IFilter } from "features/portfolioFilters/types/types"
 import { defaultLanguage } from "shared/const/languages"
+import { IGlobalData } from "pages/OtherPage"
 
 export function PortfolioPage() {
     const [data, setData] = useState<ITattooImage[]>([])
@@ -29,7 +30,7 @@ export function PortfolioPage() {
         const dataArray = reformatAndSortObjectValuesToArray(currentData)
         setData(dataArray)
 
-        const d = await fetchGlobalData()
+        const d = (await fetchGlobalData()) as IGlobalData
 
         setFiltersData(d.filtersData.filters)
         const f: { [key: string]: string } = { isLive: "" }

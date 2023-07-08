@@ -139,7 +139,7 @@ export function UploadModal({ triggerRefetch }: { triggerRefetch: () => void }) 
         <>
             <Modal
                 isOpen={isOpen || isLoading}
-                onClose={() => setIsOpen(false)}
+                onClose={() => null}
                 contentClassName={styles.modal}
             >
                 <div className={styles.container}>

@@ -1,10 +1,11 @@
 ---
-import { IArtistsData, IImagesData, ILayoutData, IOtherData, fetchImagesData, fetchSectionData } from "shared/const/firebaseVariables";
+import { IArtistsData,  ITattooImage, fetchGlobalData, fetchImagesData, fetchSectionData } from "shared/const/firebaseVariables";
 import Layout from "layouts/Layout.astro";
 import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
 import { ArtistPage } from "pageComponents/ArtistPage/ArtistPage";
 import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl";
 import cave from "widgets/Main/const/dungeon.webp"
+import type { IGlobalData } from "shared/types/IGlobalData";
 
 const language = getLangFromUrl(Astro.url)
 const {artistSlug} = Astro.params
@@ -12,20 +13,19 @@ const pages = await fetchSectionData(language, "artists") as IArtistsData[];
 const artist = pages.find((page) => page.slug === artistSlug);
 if (!artist) return Astro.redirect("/404");
 
-const imagesData = await fetchImagesData() as IImagesData[];
-const layoutData = await fetchSectionData(language, "layout", true) as ILayoutData;
-const otherData = await fetchSectionData(language, "other", true) as IOtherData;
-const { sectionNames, formData, buttons } = otherData;
-const { cta } = buttons;
+const imagesData = await fetchImagesData() as ITattooImage[]
+const globalData = await fetchGlobalData() as IGlobalData
+const {sectionNames, buttons,formData ,layoutData} = globalData
+const { cta } = buttons[language]
 ---
 
 <Layout image={cave}>
-    <PageWrapper title={sectionNames.artists} main={layoutData.navlist[0].text}>
+    <PageWrapper title={sectionNames[language].artists} main={layoutData.navList[language][0].text}>
         <ArtistPage 
         client:load 
-        formTitle={sectionNames.form} 
+        formTitle={sectionNames[language].form} 
         cta={cta} 
-        formData={formData} 
+        formData={formData[language]} 
         data={artist} 
         imagesData={imagesData} 
         language={language}/>

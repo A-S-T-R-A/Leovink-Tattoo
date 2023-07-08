@@ -6,18 +6,24 @@ import { SocialIcons } from "shared/components/SocialIcons/SocialIcons"
 import { disableScroll } from "shared/lib/disableScroll/disableScroll"
 import { Languages } from "../Languages/Languages"
 import type { LanguageType } from "shared/types/types"
-import type { NavlistType } from "shared/const/firebaseVariables"
+import {
+    reformatAndSortObjectValuesToArray,
+    type NavlistType,
+} from "shared/const/firebaseVariables"
+import type { ISocialMedia } from "shared/types/IGlobalData"
 
 export function Burger({
     className,
     language,
     defaultLanguage,
     data,
+    socialsData,
 }: {
     className?: string
     language: LanguageType
     defaultLanguage: LanguageType
-    data: NavlistType
+    data: { [key: number]: { link: string; text: string } }
+    socialsData: ISocialMedia[]
 }) {
     const [isBurgerVisible, setIsBurgerVisible] = useState(false)
 
@@ -37,7 +43,12 @@ export function Burger({
                 className={styles.languages}
             />
             <BurgerIcon className={className} onClick={toggleBurger} isOpen={isBurgerVisible} />
-            <BurgerModal data={data} isOpen={isBurgerVisible} onClose={toggleBurger} />
+            <BurgerModal
+                data={data}
+                isOpen={isBurgerVisible}
+                onClose={toggleBurger}
+                socialsData={socialsData}
+            />
         </>
     )
 }
@@ -64,10 +75,12 @@ function BurgerModal({
     isOpen,
     onClose,
     data,
+    socialsData,
 }: {
     isOpen: boolean
     onClose: () => void
-    data: NavlistType
+    data: { [key: number]: { link: string; text: string } }
+    socialsData: ISocialMedia[]
 }) {
     return (
         <>
@@ -79,7 +92,7 @@ function BurgerModal({
             <div className={classNames(styles.wrapper, { [styles.navOpen]: isOpen })}>
                 <div className={styles.container}>
                     <NavigationList data={data} closeClickHandler={onClose} />
-                    <SocialIcons />
+                    <SocialIcons data={socialsData} />
                 </div>
             </div>
         </>

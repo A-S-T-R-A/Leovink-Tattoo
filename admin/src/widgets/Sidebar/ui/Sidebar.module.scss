@@ -35,7 +35,7 @@
         font-size: 18px;
         box-shadow: 1px 1px 0 0 var(--color-moderate-accent);
         text-decoration: none;
-        transition: ease 0.2s;
+        transition: ease 0.3s;
 
         &.currentLink {
             display: flex;
@@ -56,6 +56,7 @@
         background-color: var(--color-moderate-accent);
         border-right: 1px solid var(--color-base-accent);
         box-shadow: 0 1px 0 0 var(--color-base-accent);
+        border-radius: 10px;
     }
 
     .svg path {
