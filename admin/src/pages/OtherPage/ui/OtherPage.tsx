@@ -38,10 +38,12 @@ export function OtherPage() {
             <Socials data={data} triggerRefetch={triggerRefetch} />
             <Contacts data={data} triggerRefetch={triggerRefetch} />
             <ContactsGuide data={data} triggerRefetch={triggerRefetch} />
-            <FormData data={data} triggerRefetch={triggerRefetch} />
-            <SectionNames data={data} triggerRefetch={triggerRefetch} />
-            <Buttons data={data} triggerRefetch={triggerRefetch} />
-            <LayoutData data={data} triggerRefetch={triggerRefetch} />
+            <div className={styles.uiContainer}>
+                <FormData data={data} triggerRefetch={triggerRefetch} />
+                <SectionNames data={data} triggerRefetch={triggerRefetch} />
+                <Buttons data={data} triggerRefetch={triggerRefetch} />
+                <LayoutData data={data} triggerRefetch={triggerRefetch} />
+            </div>
         </div>
     )
 }

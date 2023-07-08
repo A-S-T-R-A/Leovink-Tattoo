@@ -11,16 +11,18 @@ export function Socials({
     triggerRefetch: () => void
 }) {
     return (
-        <div className={styles.socials}>
-            <p className={styles.title}>Social Media</p>
+        <div className={styles.socialsContainer}>
+            <p className={styles.socialsTitle}>Social Media</p>
             {data?.socialsData.map(item => {
                 const { icon, link, id } = item
                 return (
                     <div className={styles.socialContainer}>
-                        <p>
-                            icon: <img src={icon} alt="" className={styles.img} />
+                        <div className={styles.icon}>
+                            <strong>Icon:</strong> <img src={icon} alt="" className={styles.img} />
+                        </div>
+                        <p className={styles.link}>
+                            <strong>Link:</strong> {link}
                         </p>
-                        <p>link: {link}</p>
                         <div className={styles.btns}>
                             <Edit data={data} id={id} triggerRefetch={triggerRefetch} />
                         </div>

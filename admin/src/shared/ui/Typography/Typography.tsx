@@ -18,6 +18,7 @@ export enum TypographyColor {
     COLOR_DARKGRAY = "color_darkgray",
     COLOR_LIGHTGRAY = "color_lightgray",
     COLOR_ACCENT = "color_accent",
+    COLOR_WHITE = "color_white",
     COLOR_ERROR = "color-error",
 }
 

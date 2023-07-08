@@ -9,6 +9,7 @@ import { isShallowEqual } from "shared/lib/isShallowEqual/isShallowEqual"
 import { updateContactsGuideData } from "shared/const/firebaseVariables"
 import { DecodeMarkdown } from "shared/ui/MarkdownTextarea/lib/DecodeMarkdown"
 import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
+import styles from "./ContactsGuide.module.scss"
 
 export function ContactsGuide({
     data,
@@ -81,12 +82,14 @@ export function ContactsGuide({
                     initialData={newAllData[currentLanguage]}
                 />
             </ModalEditor>
-            <div>
-                <div>Location Guide:</div>
-                <div>
+            <div className={styles.guideContainer}>
+                <div className={styles.guide}>
+                    <strong>Location Guide:</strong>
                     {data ? <DecodeMarkdown data={data.contactsGuide[defaultLanguage]} /> : ""}
                 </div>
-                <button onClick={() => setIsOpen(true)}>Edit</button>
+                <button className={styles.editBtn} onClick={() => setIsOpen(true)}>
+                    Edit
+                </button>
             </div>
         </>
     )

@@ -129,7 +129,9 @@ export function Edit({
                     />
                 </div>
             </ModalEditor>
-            <button onClick={() => setIsOpen(true)}>Edit</button>
+            <button className={styles.editBtn} onClick={() => setIsOpen(true)}>
+                Edit
+            </button>
         </>
     )
 }

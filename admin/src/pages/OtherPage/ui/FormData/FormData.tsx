@@ -8,6 +8,7 @@ import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
 import { Alert } from "shared/ui/CustomNotifications"
 import { updateFormData } from "shared/const/firebaseVariables"
 import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
+import styles from "./FormData.module.scss"
 
 const defaultNewAllData = {
     en: { name: "", phone: "", loading: "", success: "", error: "", validName: "", validPhone: "" },
@@ -150,15 +151,37 @@ export function FormData({
                     }
                 />
             </ModalEditor>
-            <div>
-                <div>Name placeholder: {data && data?.formData[defaultLanguage].name}</div>
-                <div>Phone placeholder: {data && data?.formData[defaultLanguage].phone}</div>
-                <div>Loading message: {data && data?.formData[defaultLanguage].loading}</div>
-                <div>Success message: {data && data?.formData[defaultLanguage].success}</div>
-                <div>Error message: {data && data?.formData[defaultLanguage].error}</div>
-                <div>Valid name: {data && data?.formData[defaultLanguage].validName}</div>
-                <div>Valid phone: {data && data?.formData[defaultLanguage].validPhone}</div>
-                <button onClick={() => setIsOpen(true)}>Edit</button>
+            <div className={styles.formsContainer}>
+                <p className={styles.formsTitle}>Form Data</p>
+                <div className={styles.content}>
+                    <strong>Name placeholder:</strong>
+                    {data && data?.formData[defaultLanguage].name}
+                </div>
+                <div className={styles.content}>
+                    <strong>Phone placeholder:</strong>
+                    {data && data?.formData[defaultLanguage].phone}
+                </div>
+                <div className={styles.content}>
+                    <strong>Loading message:</strong>
+                    {data && data?.formData[defaultLanguage].loading}
+                </div>
+                <div className={styles.content}>
+                    <strong>Success message:</strong>
+                    {data && data?.formData[defaultLanguage].success}
+                </div>
+                <div className={styles.content}>
+                    <strong>Error message:</strong> {data && data?.formData[defaultLanguage].error}
+                </div>
+                <div className={styles.content}>
+                    <strong>Valid name:</strong> {data && data?.formData[defaultLanguage].validName}
+                </div>
+                <div className={styles.content}>
+                    <strong>Valid phone:</strong>
+                    {data && data?.formData[defaultLanguage].validPhone}
+                </div>
+                <button className={styles.editBtn} onClick={() => setIsOpen(true)}>
+                    Edit
+                </button>
             </div>
         </>
     )

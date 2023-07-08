@@ -15,11 +15,12 @@
         border-radius: 5px 5px 0 5px;
         padding: 0 15px;
         cursor: pointer;
+        background-color: var(--color-dark-accent);
+        color: white;
 
         .arrow {
-            color: orange;
+            color: var(--color-moderate-accent);
             font-size: 24px;
-            text-shadow: 0px 1px 1px black;
         }
     }
 
@@ -78,13 +79,16 @@
     width: fit-content;
     height: fit-content;
     border-radius: 5px;
-    border: 1px solid orange;
-    background-color: orange;
-    padding: 2px 10px;
+    border: 1px solid var(--color-dark-accent);
+    background-color: var(--color-dark-accent);
+    color: white;
+    padding: 5px 10px;
     margin-left: auto;
     cursor: pointer;
+    transition: all 0.3s ease;
 
     &:hover {
-        filter: brightness(90%);
+        background-color: var(--color-light-accent);
+        color: var(--color-dark-accent);
     }
 }

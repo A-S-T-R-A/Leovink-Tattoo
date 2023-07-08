@@ -1,15 +1,19 @@
 .btn {
     font-size: 14px;
     width: fit-content;
+    min-width: 100px;
     height: fit-content;
     border-radius: 5px;
-    border: 1px solid orange;
-    background-color: orange;
-    padding: 2px 6px;
+    border: 1px solid var(--color-dark-accent);
+    background-color: var(--color-dark-accent);
+    color: white;
+    padding: 5px 10px;
     margin-left: auto;
     cursor: pointer;
+    transition: all 0.3s ease;
 
     &:hover {
-        filter: brightness(90%);
+        background-color: var(--color-light-accent);
+        color: var(--color-dark-accent);
     }
 }
