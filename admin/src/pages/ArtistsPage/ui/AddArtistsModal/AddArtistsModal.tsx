@@ -20,7 +20,7 @@ import {
     uploadImageToBucket,
 } from "shared/const/firebaseVariables"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
-import { IFiltersData } from "features/portfolioFilters/types/types"
+import { IFiltersData } from "features/portfolioFilters"
 
 export function AddArtistsModal({
     data,

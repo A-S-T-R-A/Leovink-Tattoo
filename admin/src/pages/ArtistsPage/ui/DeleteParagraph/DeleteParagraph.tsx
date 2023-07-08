@@ -10,7 +10,7 @@ import {
 } from "shared/const/firebaseVariables"
 import { allLanguages, defaultLanguage } from "shared/const/languages"
 import { Alert, Confirm } from "shared/ui/CustomNotifications"
-import { IFiltersData } from "features/portfolioFilters/types/types"
+import { IFiltersData } from "features/portfolioFilters"
 
 export function DeleteParagraph({
     name,

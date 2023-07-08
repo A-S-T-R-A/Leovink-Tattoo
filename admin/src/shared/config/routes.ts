@@ -1,4 +1,5 @@
 import { UserRoleType } from "features/authByGoogle"
+import { ReactNode } from "react"
 import {
     ArtistsIcon,
     FaqIcon,
@@ -27,13 +28,6 @@ export const routes: IRoute[] = [
     { Svg: TestimonialsIcon, path: "/reviews", name: "Reviews", private: true },
     { Svg: ArtistsIcon, path: "/artists", name: "Artists", private: true },
     { Svg: FaqIcon, path: "/faq", name: "FAQ", private: true },
-    {
-        Svg: HowitworksIcon,
-        path: "/contacts",
-        name: "*Contacts",
-        allowedRoles: ["dev"],
-        private: true,
-    },
     { Svg: OtherIcon, path: "/other", name: "*Other", allowedRoles: ["dev"], private: true },
     { Svg: OtherIcon, path: "/test", name: "*Test", allowedRoles: ["dev"], private: true },
 ]

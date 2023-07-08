@@ -9,7 +9,6 @@ import { ServicesPage } from "pages/ServicesPage"
 import { ReviewsPage } from "pages/ReviewsPage"
 import { FAQPage } from "pages/FAQPage"
 import { OtherPage } from "pages/OtherPage"
-import { ContactsPage } from "pages/ContactPage/ui/ContactsPage"
 import { ArtistsPage } from "pages/ArtistsPage"
 import { DevPage } from "pages/DevPage"
 
@@ -66,14 +65,6 @@ function App() {
                         element={
                             <RequireAuth>
                                 <FAQPage />
-                            </RequireAuth>
-                        }
-                    />
-                    <Route
-                        path="/contacts"
-                        element={
-                            <RequireAuth allowedRoles={["dev"]}>
-                                <ContactsPage />
                             </RequireAuth>
                         }
                     />

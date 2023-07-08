@@ -1,11 +1,12 @@
 import { useState } from "react"
 import styles from "./DeleteItem.module.scss"
-import { IFiltersData, IGlobalData } from "../../types/types"
+import { IFiltersData } from "../../types/types"
 import { Alert, Confirm } from "shared/ui/CustomNotifications"
 import { updateFiltersData } from "shared/const/firebaseVariables"
 import { fetchAllImages } from "features/portfolioFilters/lib/fetchTattooImages"
 import { uploadTattooImages } from "features/portfolioFilters/lib/uploadTattooImages"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
+import { IGlobalData } from "pages/OtherPage"
 
 export function DeleteItem({
     data,

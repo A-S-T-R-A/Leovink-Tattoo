@@ -1,5 +1,5 @@
 import { defaultNewFilter } from "features/portfolioFilters/const/const"
-import { IFiltersData, IGlobalData, INewFilter } from "../../types/types"
+import { IFiltersData, INewFilter } from "../../types/types"
 import styles from "./EditFilter.module.scss"
 import { defaultLanguage } from "shared/const/languages"
 import { useEffect, useState } from "react"
@@ -12,6 +12,7 @@ import { isShallowEqual } from "shared/lib/isShallowEqual/isShallowEqual"
 import { updateFiltersData } from "shared/const/firebaseVariables"
 import { fetchAllImages } from "features/portfolioFilters/lib/fetchTattooImages"
 import { uploadTattooImages } from "features/portfolioFilters/lib/uploadTattooImages"
+import { IGlobalData } from "pages/OtherPage"
 
 export function EditFilter({
     id,

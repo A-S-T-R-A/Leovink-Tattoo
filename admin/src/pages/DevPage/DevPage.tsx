@@ -1,4 +1,5 @@
 import { Alert, Confirm } from "shared/ui/CustomNotifications"
+import { MarkdownTextarea } from "shared/ui/MarkdownTextarea/MarkdownTextarea"
 
 export function DevPage() {
     async function saveClickHandler() {
@@ -16,6 +17,7 @@ export function DevPage() {
             <button onClick={() => Alert.success("everything is ok")}>click suc</button>
             <button onClick={() => Alert.info("some information")}>click info</button>
             <button onClick={saveClickHandler}>click info</button>
+            <div style={{ marginBottom: "50px" }}></div>
         </div>
     )
 }

@@ -23,7 +23,7 @@ export function ModalEditor(props: IModalEditor) {
         isOverlayClose = false,
         children,
         isOpen,
-        onClose,
+        onClose = () => null,
         onChangeLanguage,
         currentLanguage,
         onSaveClick,
