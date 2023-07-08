@@ -2,11 +2,11 @@
 import styles from "./GalleryGrid.module.scss"
 import { EyeIcon } from "shared/ui/Icons"
 import { classNames } from "shared/lib/classNames/classNames"
-import type { IImagesData } from "shared/const/firebaseVariables"
 import type { LanguageType } from "shared/types/types"
+import type { ITattooImage } from "shared/const/firebaseVariables"
 
 interface IGalleryGrid {
-    data: IImagesData[]
+    data: ITattooImage[]
     maxHeight?: string
     onClick?: (index: number) => void
     language: LanguageType
