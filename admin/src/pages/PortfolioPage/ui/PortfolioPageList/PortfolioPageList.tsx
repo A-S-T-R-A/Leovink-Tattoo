@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
-import { ITattooImage, ViewType } from "pages/PortfolioPage/types/types"
+import { ITattooImage, ViewType } from "../../types/types"
 import styles from "./PortfolioPageList.module.scss"
 import { EditTattooImage } from "../editTattooImage/EditTattoImage"
 import { DeleteTattooImage } from "../deleteTattooImage/DeleteTattooImage"
