@@ -13,6 +13,22 @@ interface IGalleryGrid {
 }
 
 export function GalleryGrid({ data, onClick, maxHeight = "auto", language }: IGalleryGrid) {
+    /* function formatImagesRowByRow(data, columns = 5) {
+        const res = []
+
+        for (let i = 0; i < columns - 1; i++) {
+            res.push([])
+        }
+
+        for (let i = 0; i < data.length; i++) {
+            res[i % (columns - 1)].push(data[i])
+        }
+
+        return res.flat()
+    } */
+
+    const formatedImages = data // formatImagesRowByRow(data) as ITattooImage[]
+
     return (
         <div
             className={classNames(styles.container, {
@@ -21,7 +37,7 @@ export function GalleryGrid({ data, onClick, maxHeight = "auto", language }: IGa
             style={{ maxHeight }}
         >
             <div className={styles.gridContainer}>
-                {data.map((item, index) => {
+                {formatedImages.map((item, index) => {
                     const { img, alt } = item
                     return (
                         <div
