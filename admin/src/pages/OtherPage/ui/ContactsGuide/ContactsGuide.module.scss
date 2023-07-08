@@ -1,0 +1,10 @@
+.guideContainer {
+    border: 1px solid red;
+    display: grid;
+    grid-template-columns: 1fr 100px;
+    padding: 10px 15px;
+
+    .guide {
+        border: 1px solid green;
+    }
+}
