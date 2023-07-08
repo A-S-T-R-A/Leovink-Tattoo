@@ -11,9 +11,9 @@ import { ModalEditor } from "shared/components/ModalEditor/ModalEditor"
 import styles from "./FormData.module.scss"
 
 const defaultNewAllData = {
-    en: { name: "", phone: "", loading: "", success: "", error: "" },
-    ro: { name: "", phone: "", loading: "", success: "", error: "" },
-    ru: { name: "", phone: "", loading: "", success: "", error: "" },
+    en: { name: "", phone: "", loading: "", success: "", error: "", validName: "", validPhone: "" },
+    ro: { name: "", phone: "", loading: "", success: "", error: "", validName: "", validPhone: "" },
+    ru: { name: "", phone: "", loading: "", success: "", error: "", validName: "", validPhone: "" },
 }
 
 export function FormData({
@@ -130,6 +130,26 @@ export function FormData({
                         }))
                     }
                 />
+                <Input
+                    label="Valid Name"
+                    value={newAllData[currentLanguage].validName}
+                    onChange={validName =>
+                        setNewAllData(prev => ({
+                            ...prev,
+                            [currentLanguage]: { ...prev[currentLanguage], validName },
+                        }))
+                    }
+                />
+                <Input
+                    label="Valid Phone"
+                    value={newAllData[currentLanguage].validPhone}
+                    onChange={validPhone =>
+                        setNewAllData(prev => ({
+                            ...prev,
+                            [currentLanguage]: { ...prev[currentLanguage], validPhone },
+                        }))
+                    }
+                />
             </ModalEditor>
             <div className={styles.formsContainer}>
                 <p className={styles.formsTitle}>Form Data</p>
@@ -147,6 +167,12 @@ export function FormData({
                 </div>
                 <div className={styles.content}>
                     Error message: {data && data?.formData[defaultLanguage].error}
+                </div>
+                <div className={styles.content}>
+                    Valid name: {data && data?.formData[defaultLanguage].validName}
+                </div>
+                <div className={styles.content}>
+                    Valid phone: {data && data?.formData[defaultLanguage].validPhone}
                 </div>
                 <button className={styles.editBtn} onClick={() => setIsOpen(true)}>
                     Edit

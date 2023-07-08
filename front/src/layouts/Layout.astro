@@ -1,16 +1,19 @@
 ---
 import { Header } from "widgets/Header"
 import { Footer } from "widgets/Footer/Footer";
-import { ILayoutData, IOtherData, fetchSectionData } from "shared/const/firebaseVariables";
+import { ILayoutData, IOtherData, fetchGlobalData, fetchSectionData } from "shared/const/firebaseVariables";
 import "./Layout.scss"
 import {LogoLink} from "shared/components/LogoLink/LogoLink"
 import type { LanguageType } from "shared/types/types";
 import {getLangFromUrl} from 'shared/lib/i18n/getLangFromUrl'
+import type { IGlobalData } from "shared/types/IGlobalData";
+
+const defaultLanguage:LanguageType = "en"
+
 
 const language: LanguageType =  getLangFromUrl(Astro.url)
-const otherData = await fetchSectionData(language, "other", true) as IOtherData;
-const {defaultLanguage} = otherData;
-const layoutData = await fetchSectionData(language, "layout",true) as ILayoutData;
+const globalData = await fetchGlobalData() as IGlobalData
+const {layoutData, addressData, socialsData} = globalData
 
 const { image } = Astro.props;
 ---
@@ -33,11 +36,11 @@ const { image } = Astro.props;
     </head>
     <body>
         {image && <div class='layout__dungeon-background' style={{backgroundImage: `url(${image})`}} />}
-        <Header client:load language={language} defaultLanguage={defaultLanguage} data={layoutData.navlist}>
+        <Header client:load language={language} defaultLanguage={defaultLanguage} data={layoutData.navList[language]} socialsData={socialsData}>
             <LogoLink language={language} defaultLanguage={defaultLanguage}/>
         </Header>
         <slot />
-        <Footer data={layoutData.footer}>  
+        <Footer data={layoutData.footerList[language]} addressData={addressData} language={language} socialsData={socialsData}>  
             <LogoLink language={language} defaultLanguage={defaultLanguage}/>
         </Footer>
     </body>

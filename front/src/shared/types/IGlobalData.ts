@@ -1,4 +1,22 @@
-import { IFiltersData } from "features/portfolioFilters"
+export interface IFilterItem {
+    key: string
+    label: {
+        en: string
+        ro: string
+        ru: string
+    }
+}
+
+export interface IFilter {
+    id: number
+    title: { en: string; ro: string; ru: string }
+    items: IFilterItem[]
+}
+
+export interface IFiltersData {
+    filters: IFilter[]
+    reset: { en: string; ro: string; ru: string }
+}
 
 export interface ISocialMedia {
     id: number
@@ -27,8 +45,6 @@ export interface IFormData {
         loading: string
         success: string
         error: string
-        validName: string
-        validPhone: string
     }
     ro: {
         name: string
@@ -36,8 +52,6 @@ export interface IFormData {
         loading: string
         success: string
         error: string
-        validName: string
-        validPhone: string
     }
     ru: {
         name: string
@@ -45,8 +59,6 @@ export interface IFormData {
         loading: string
         success: string
         error: string
-        validName: string
-        validPhone: string
     }
 }
 

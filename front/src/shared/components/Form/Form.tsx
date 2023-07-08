@@ -16,13 +16,21 @@ import { AiOutlineCheckCircle } from "react-icons/ai"
 export function Form({
     isVertical,
     className,
-    placeholdersData,
+    data,
     title,
     cta,
 }: {
     className?: string
     isVertical?: boolean
-    placeholdersData: { name: string; phone: string }
+    data: {
+        name: string
+        phone: string
+        loading: string
+        success: string
+        error: string
+        validName: string
+        validPhone: string
+    }
     title: string
     cta: string
 }) {
@@ -41,12 +49,12 @@ export function Form({
         const { name, phone } = formData
 
         if (!NAME_REG_EX.test(name)) {
-            setFormErrors(prev => ({ ...prev, name: "Enter Valid Name" }))
+            setFormErrors(prev => ({ ...prev, name: data.validName }))
             nameRef.current?.scrollIntoView()
             return false
         }
         if (!PHONE_REG_EX.test(phone)) {
-            setFormErrors(prev => ({ ...prev, phone: "Enter Valid Phone" }))
+            setFormErrors(prev => ({ ...prev, phone: data.validPhone }))
             phoneRef.current?.scrollIntoView()
             return false
         }
@@ -99,7 +107,7 @@ export function Form({
                 return (
                     <FormStatus
                         icon={<AnimatedLoadingIcon className={styles.loadingIcon} />}
-                        text="Loading..."
+                        text={data.loading}
                     />
                 )
             case isError:
@@ -107,7 +115,7 @@ export function Form({
                     <FormStatus
                         /* @ts-ignore */
                         icon={<BiErrorCircle className={styles.failIcon} />}
-                        text="Error! Please try again later"
+                        text={data.error}
                     />
                 )
             case isSuccess:
@@ -115,7 +123,7 @@ export function Form({
                     <FormStatus
                         /* @ts-ignore */
                         icon={<AiOutlineCheckCircle className={styles.successIcon} />}
-                        text="Thanks! I will contact you soon"
+                        text={data.success}
                     />
                 )
             default:
@@ -123,7 +131,7 @@ export function Form({
                     <>
                         <div className={styles.formContent}>
                             <Input
-                                placeholder={placeholdersData.name}
+                                placeholder={data.name}
                                 className={styles.input}
                                 value={formData.name}
                                 error={formErrors.name}
@@ -135,7 +143,7 @@ export function Form({
                                 }}
                             />
                             <Input
-                                placeholder={placeholdersData.phone}
+                                placeholder={data.phone}
                                 className={styles.input}
                                 value={formData.phone}
                                 name="phone"
@@ -161,7 +169,9 @@ export function Form({
             ref={formRef}
             onSubmit={submitHandler}
         >
-            <Typography tag="h2" size="xxl" className={styles.title}>{title}</Typography>
+            <Typography tag="h2" size="xxl" className={styles.title}>
+                {title}
+            </Typography>
             {content}
         </form>
     )
