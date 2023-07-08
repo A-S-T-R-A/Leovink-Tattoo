@@ -3,7 +3,6 @@ const B = ["*b*", "*/b*"]
 
 export function DecodeMarkdown({ data }: { data: string }) {
     function findBoldWords(d: string) {
-        if (d.indexOf(B[0]) === -1) return d
         if (d.indexOf(B[0]) > d.indexOf(B[1])) return d
         if (d.lastIndexOf(B[1]) < d.lastIndexOf(B[0])) return d
         if (d.split(B[0]).length !== d.split(B[1]).length) return d
