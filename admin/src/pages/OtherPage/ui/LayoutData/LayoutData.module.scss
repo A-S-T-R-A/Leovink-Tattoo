@@ -57,3 +57,27 @@
         }
     }
 }
+
+.wrapperModal {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    gap: 20px;
+
+    .modalContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        border-right: 1px solid black;
+        padding-right: 20px;
+
+        &:last-child {
+            border-right: none;
+        }
+
+        p {
+            font-weight: 700;
+            margin: 10px auto;
+        }
+    }
+}

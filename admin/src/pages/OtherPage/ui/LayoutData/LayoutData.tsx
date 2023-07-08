@@ -188,51 +188,54 @@ export function LayoutData({
                 onSaveClick={saveClickHandler}
                 onDiscardClick={discardClickHandler}
             >
-                <div>
-                    Footer List
-                    <Input
-                        label="Location"
-                        value={newAllData.footerList[currentLanguage][0]}
-                        onChange={value => footerChangeHandler(value, 0)}
-                    />
-                    <Input
-                        label="Contacts"
-                        value={newAllData.footerList[currentLanguage][1]}
-                        onChange={value => footerChangeHandler(value, 1)}
-                    />
-                    <Input
-                        label="Follow"
-                        value={newAllData.footerList[currentLanguage][2]}
-                        onChange={value => footerChangeHandler(value, 2)}
-                    />
-                </div>
-                <div>
-                    Navlist List
-                    <Input
-                        label="Main"
-                        value={newAllData.navList[currentLanguage][0].text}
-                        onChange={value => navChangeHandler(value, 0)}
-                    />
-                    <Input
-                        label="Portfolio"
-                        value={newAllData.navList[currentLanguage][1].text}
-                        onChange={value => navChangeHandler(value, 1)}
-                    />
-                    <Input
-                        label="FAQ"
-                        value={newAllData.navList[currentLanguage][2].text}
-                        onChange={value => navChangeHandler(value, 2)}
-                    />
-                    <Input
-                        label="Contacts"
-                        value={newAllData.navList[currentLanguage][3].text}
-                        onChange={value => navChangeHandler(value, 3)}
-                    />
-                    <Input
-                        label="Testimonial"
-                        value={newAllData.navList[currentLanguage][4].text}
-                        onChange={value => navChangeHandler(value, 4)}
-                    />
+                <div className={styles.wrapperModal}>
+                    {" "}
+                    <div className={styles.modalContainer}>
+                        <p>Footer List</p>
+                        <Input
+                            label="Location"
+                            value={newAllData.footerList[currentLanguage][0]}
+                            onChange={value => footerChangeHandler(value, 0)}
+                        />
+                        <Input
+                            label="Contacts"
+                            value={newAllData.footerList[currentLanguage][1]}
+                            onChange={value => footerChangeHandler(value, 1)}
+                        />
+                        <Input
+                            label="Follow"
+                            value={newAllData.footerList[currentLanguage][2]}
+                            onChange={value => footerChangeHandler(value, 2)}
+                        />
+                    </div>
+                    <div className={styles.modalContainer}>
+                        <p> Navlist List</p>
+                        <Input
+                            label="Main"
+                            value={newAllData.navList[currentLanguage][0].text}
+                            onChange={value => navChangeHandler(value, 0)}
+                        />
+                        <Input
+                            label="Portfolio"
+                            value={newAllData.navList[currentLanguage][1].text}
+                            onChange={value => navChangeHandler(value, 1)}
+                        />
+                        <Input
+                            label="FAQ"
+                            value={newAllData.navList[currentLanguage][2].text}
+                            onChange={value => navChangeHandler(value, 2)}
+                        />
+                        <Input
+                            label="Contacts"
+                            value={newAllData.navList[currentLanguage][3].text}
+                            onChange={value => navChangeHandler(value, 3)}
+                        />
+                        <Input
+                            label="Testimonial"
+                            value={newAllData.navList[currentLanguage][4].text}
+                            onChange={value => navChangeHandler(value, 4)}
+                        />
+                    </div>
                 </div>
             </ModalEditor>
             <div className={styles.wrapper}>
