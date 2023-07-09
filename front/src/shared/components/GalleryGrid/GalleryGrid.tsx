@@ -13,21 +13,7 @@ interface IGalleryGrid {
 }
 
 export function GalleryGrid({ data, onClick, maxHeight = "auto", language }: IGalleryGrid) {
-    /* function formatImagesRowByRow(data, columns = 5) {
-        const res = []
-
-        for (let i = 0; i < columns - 1; i++) {
-            res.push([])
-        }
-
-        for (let i = 0; i < data.length; i++) {
-            res[i % (columns - 1)].push(data[i])
-        }
-
-        return res.flat()
-    } */
-
-    const formatedImages = data // formatImagesRowByRow(data) as ITattooImage[]
+    const formatedImages = data
 
     return (
         <div
@@ -40,17 +26,29 @@ export function GalleryGrid({ data, onClick, maxHeight = "auto", language }: IGa
                 {formatedImages.map((item, index) => {
                     const { img, alt } = item
                     return (
-                        <div
+                        <div key={index} className={styles.item} onClick={() => onClick?.(index)}>
+                            <img src={img} alt={alt[language]} />
+                            <EyeIcon className={styles.eye} />
+                        </div>
+                    )
+                })}
+
+                <span className={`${styles.item} ${styles.break}`}></span>
+                <span className={`${styles.item} ${styles.break}`}></span>
+                <span className={`${styles.item} ${styles.break}`}></span>
+                <span className={`${styles.item} ${styles.break}`}></span>
+            </div>
+        </div>
+    )
+}
+
+{
+    /* <div
                             key={index}
                             className={styles.imgContainer}
                             onClick={() => onClick?.(index)}
                         >
                             <img src={img} alt={alt[language]} />
                             <EyeIcon className={styles.eye} />
-                        </div>
-                    )
-                })}
-            </div>
-        </div>
-    )
+                        </div> */
 }
