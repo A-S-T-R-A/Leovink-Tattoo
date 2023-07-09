@@ -1,7 +1,6 @@
 import styles from "./FormStatus.module.scss"
-import { ReactNode } from "react"
 
-export function FormStatus({ icon, text }: { icon: ReactNode; text: string }) {
+export function FormStatus({ icon, text }: { icon: any; text: string }) {
     return (
         <div className={styles.container}>
             <div className={styles.iconContainer}>{icon}</div>

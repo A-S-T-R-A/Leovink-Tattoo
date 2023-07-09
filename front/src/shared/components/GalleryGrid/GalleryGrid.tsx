@@ -41,14 +41,3 @@ export function GalleryGrid({ data, onClick, maxHeight = "auto", language }: IGa
         </div>
     )
 }
-
-{
-    /* <div
-                            key={index}
-                            className={styles.imgContainer}
-                            onClick={() => onClick?.(index)}
-                        >
-                            <img src={img} alt={alt[language]} />
-                            <EyeIcon className={styles.eye} />
-                        </div> */
-}
