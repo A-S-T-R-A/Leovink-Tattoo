@@ -38,9 +38,15 @@ export function PortfolioPage() {
         setFilters(f)
     }
 
-    function triggerRefetch() {
+    async function triggerRefetch() {
         setData([])
-        fetch()
+        setIsDataLoading(true)
+        const currentDoc = await getImagesDoc()
+        setIsDataLoading(false)
+        if (!currentDoc) return
+        const currentData = currentDoc.data()
+        const dataArray = reformatAndSortObjectValuesToArray(currentData)
+        setData(dataArray)
     }
 
     useEffect(() => {
