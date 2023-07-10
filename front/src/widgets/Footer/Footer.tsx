@@ -15,12 +15,13 @@ export function Footer({
 }: {
     data: {
         [key: number]: string
-    }
+    } | null
     children: ComponentChildren
     language: LanguageType
-    addressData: IAddressData
+    addressData: IAddressData | null
     socialsData: ISocialMedia[]
 }) {
+    if (!data || !addressData) return null
     const footerList = reformatAndSortObjectValuesToArray(data)
     const { location, mail, phone } = addressData
     return (

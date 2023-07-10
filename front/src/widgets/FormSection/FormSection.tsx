@@ -15,10 +15,11 @@ export function FormSection({
         error: string
         validName: string
         validPhone: string
-    }
+    } | null
     title: string
     button: string
 }) {
+    if (!data) return null
     return (
         <Section wrapperClassName={styles.wrapper}>
             <Form className={styles.form} data={data} title={title} cta={button} />
