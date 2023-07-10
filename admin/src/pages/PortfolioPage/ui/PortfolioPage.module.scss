@@ -1,6 +1,7 @@
 .wrapper {
     width: calc(100vw - var(--sidebar-width) - 100px);
     height: calc(100vh - var(--navbar-height) - 50px);
+    overflow: hidden;
 }
 
 .loadingContainer {
@@ -8,4 +9,9 @@
     justify-content: center;
     align-items: center;
     min-height: 100%;
+}
+
+.aboveList {
+    height: calc(var(--portfolio-header-height) - 30px);
+    margin-bottom: 5px;
 }

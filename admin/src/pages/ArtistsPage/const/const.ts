@@ -4,6 +4,7 @@ export const defaultNewEditData = {
     specialization: "",
     img: "",
     slug: "",
+    key: "",
 }
 
 export const defaultPreviewImage = {

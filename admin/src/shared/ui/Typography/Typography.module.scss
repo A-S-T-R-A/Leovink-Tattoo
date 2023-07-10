@@ -51,6 +51,10 @@
         color: var(--color-error);
     }
 
+    &.color_white {
+        color: white;
+    }
+
     &.bold {
         font-weight: 700;
     }

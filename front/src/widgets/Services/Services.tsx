@@ -15,7 +15,7 @@ export function Services({
     title,
     button,
 }: {
-    data: IServicesData[]
+    data: IServicesData[] | null
     title: string
     button: string
 }) {
@@ -28,6 +28,8 @@ export function Services({
             setOpen(-1)
         }
     }
+
+    if (!data) return null
 
     return (
         <Section title={title}>

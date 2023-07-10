@@ -28,6 +28,8 @@ export function Form({
         loading: string
         success: string
         error: string
+        validName: string
+        validPhone: string
     }
     title: string
     cta: string
@@ -47,12 +49,12 @@ export function Form({
         const { name, phone } = formData
 
         if (!NAME_REG_EX.test(name)) {
-            setFormErrors(prev => ({ ...prev, name: "Enter Valid Name" }))
+            setFormErrors(prev => ({ ...prev, name: data.validName }))
             nameRef.current?.scrollIntoView()
             return false
         }
         if (!PHONE_REG_EX.test(phone)) {
-            setFormErrors(prev => ({ ...prev, phone: "Enter Valid Phone" }))
+            setFormErrors(prev => ({ ...prev, phone: data.validPhone }))
             phoneRef.current?.scrollIntoView()
             return false
         }

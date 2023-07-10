@@ -81,35 +81,6 @@ export async function fetchImagesData() {
 
 export const portfolioPicturesRef = collection(db, PORTFOLIO_PICTURES_DB)
 
-/* export const TattooArtists = {
-    Dinu: "Dinu",
-    Katia: "Katia",
-    Nastia: "Nastia",
-} as const
-
-export const TattooStyles = {
-    First: "First",
-    Second: "Second",
-} as const
-
-export const TattooColors = {
-    Black: "Black",
-    Color: "Color",
-} as const */
-
-/* export type ArtistType = (typeof TattooArtists)[keyof typeof TattooArtists]
-export type StyleType = (typeof TattooStyles)[keyof typeof TattooStyles]
-export type ColorType = (typeof TattooColors)[keyof typeof TattooColors]
-
-export interface IImagesData {
-    alt: { en: ""; ro: ""; ru: "" }
-    img: string
-    artist: ArtistType
-    style: StyleType
-    color: ColorType
-    isLive: boolean
-} */
-
 export interface IStepData {
     img: string
     title: string
@@ -128,6 +99,7 @@ export interface IArtistsData {
     specialization: string
     img: string
     slug: string
+    key: string
 }
 
 export interface IFaqData {
@@ -179,18 +151,6 @@ export interface IOtherData {
     }
     defaultLanguage: LanguageType
 }
-
-/* export interface IFilters {
-    artist: ArtistType | ""
-    style: StyleType | ""
-    color: ColorType | ""
-    isLive: boolean
-} */
-
-/* export interface ITattooImage extends IFilters {
-    img: string
-    alt: string
-} */
 
 export async function fetchGlobalData() {
     const ref = doc(db, DATA_COLLECTION, GLOBAL_DATA)

@@ -23,7 +23,9 @@ export function ArtistPage({
         loading: string
         success: string
         error: string
-    }
+        validName: string
+        validPhone: string
+    } | null
     formTitle: string
     cta: string
     imagesData: ITattooImage[]
@@ -59,7 +61,7 @@ export function ArtistPage({
                         </Typography>
                     </div>
                 </div>
-                <Form isVertical data={formData} title={formTitle} cta={cta} />
+                {formData && <Form isVertical data={formData} title={formTitle} cta={cta} />}
             </Section>
             <Section title="Gallery">
                 <GalleryGrid data={galleryData} onClick={clickHandler} language={language} />

@@ -4,6 +4,7 @@ import { ViewType } from "../../types/types"
 import { localStorageView } from "pages/PortfolioPage/lib/localStorageLib"
 import { UploadModal } from "../uploadTattooImage/UploadModal"
 import { TriggerRefetchBtn } from "shared/components/TriggerRefetchBtn/TriggerRefetchBtn"
+import { DownArrowIcon, TableIcons, TableRows } from "shared/assets/icons"
 
 export function PortfolioPageHeader({
     view,
@@ -21,20 +22,28 @@ export function PortfolioPageHeader({
 
     return (
         <div className={styles.header}>
-            <UploadModal triggerRefetch={triggerRefetch} />
-            <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
+            <div className={styles.uploadBtn}>
+                <UploadModal triggerRefetch={triggerRefetch} />
+            </div>
+            <div className={styles.triggerBtn}>
+                <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
+            </div>
             <div className={styles.viewToggle}>
                 <button
                     onClick={() => changeView("table")}
-                    className={classNames("", { [styles.selectedView]: view === "table" })}
+                    className={classNames(styles.iconBlock, {
+                        [styles.selectedView]: view === "table",
+                    })}
                 >
-                    Table
+                    <TableRows className={styles.icon} />
                 </button>
                 <button
                     onClick={() => changeView("icons")}
-                    className={classNames("", { [styles.selectedView]: view === "icons" })}
+                    className={classNames(styles.iconBlock, {
+                        [styles.selectedView]: view === "icons",
+                    })}
                 >
-                    Icons
+                    <TableIcons className={styles.icon} />
                 </button>
             </div>
         </div>

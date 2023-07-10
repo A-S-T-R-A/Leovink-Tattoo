@@ -15,28 +15,70 @@ import type {  LanguageType } from "shared/types/types";
 
 const defaultLanguage:LanguageType = 'en'
 
-const imagesData = await fetchImagesData() as ITattooImage[];
 const language = getLangFromUrl(Astro.url)
-const stepsData = await fetchSectionData(language, "steps") as IStepData[];
-const servicesData = await fetchSectionData(language, "services") as IServicesData[];
-const artistsData = await fetchSectionData(language, "artists") as IArtistsData[];
-const faqData = await fetchSectionData(language, "faq") as IFaqData[];
-const testimonialsData = await fetchSectionData(language, "testimonials") as ITestimonialsData[];
-const globalData = await fetchGlobalData() as IGlobalData
-const {sectionNames, buttons,formData} = globalData
-const { portfolio, steps, services, artists, testimonials, faq, form } = sectionNames[language];
-const { cta, showMore, viewGallery } = buttons[language]
 
+let stepsData = null
+let imagesData = null
+let servicesData = null
+let artistsData = null
+let faqData = null
+let testimonialsData = null
+let globalData = null
+try{
+    stepsData = await fetchSectionData(language, "steps") as IStepData[];
+    imagesData = await fetchImagesData() as ITattooImage[];
+     servicesData = await fetchSectionData(language, "services") as IServicesData[];
+     artistsData = await fetchSectionData(language, "artists") as IArtistsData[];
+     faqData = await fetchSectionData(language, "faq") as IFaqData[];
+     testimonialsData = await fetchSectionData(language, "testimonials") as ITestimonialsData[];
+     globalData = await fetchGlobalData() as IGlobalData
+}catch(e){}
 ---
 
 <Layout>
     <Main >
-        <Portfolio client:idle title={portfolio} button={showMore} fetchedData={imagesData} language={language} defaultLanguage={defaultLanguage}/>
-        <Steps client:load data={stepsData} title={steps} button={cta}/>
-        <Services client:idle data={servicesData} title={services} button={cta}/>
-        <Artists client:idle data={artistsData} title={artists} button={viewGallery} language={language} defaultLanguage={defaultLanguage}/>
-        <Testimonials data={testimonialsData.slice(0,2)} title={testimonials} showMore={showMore} cta={cta} language={language} defaultLanguage={defaultLanguage}/>
-        <Faq client:idle data={faqData} title={faq} button={showMore} language={language} defaultLanguage={defaultLanguage}/>
-        <FormSection client:load data={formData[language]} title={form} button={cta}/>
+        <Portfolio 
+            client:idle 
+            title={globalData?.sectionNames[language].portfolio || "Portfolio"} 
+            button={globalData?.buttons[language].showMore || "show more"} 
+            fetchedData={imagesData || []} 
+            language={language} 
+            defaultLanguage={defaultLanguage}/>
+        <Steps 
+            client:load 
+            data={stepsData} 
+            title={globalData?.sectionNames[language].steps || "How it Works"} 
+            button={globalData?.buttons[language].cta || "book an appointment"} />
+        <Services 
+            client:idle 
+            data={servicesData} 
+            title={globalData?.sectionNames[language].services || "Services"} 
+            button={globalData?.buttons[language].cta || "book an appointment"} />
+        <Artists 
+            client:idle 
+            data={artistsData} 
+            title={globalData?.sectionNames[language].artists || "Artists"} 
+            button={globalData?.buttons[language].viewGallery || "view gallery"} 
+            language={language} 
+            defaultLanguage={defaultLanguage}/>
+        <Testimonials 
+            data={testimonialsData} 
+            title={globalData?.sectionNames[language].testimonials || "Testimonials"} 
+            showMore={globalData?.buttons[language].showMore || "show more"}
+            cta={globalData?.buttons[language].cta || "book an appointment"} 
+            language={language} 
+            defaultLanguage={defaultLanguage}/>
+        <Faq 
+            client:idle 
+            data={faqData} 
+            title={globalData?.sectionNames[language].faq || "FAQ"}  
+            button={globalData?.buttons[language].showMore || "show more"}
+            language={language} 
+            defaultLanguage={defaultLanguage}/>
+        <FormSection   
+            client:load 
+            data={globalData?.formData[language] || null} 
+            title={globalData?.sectionNames[language].form || "Book an appointment"} 
+            button={globalData?.buttons[language].cta || "book an appointment"}/>
     </Main>
 </Layout>

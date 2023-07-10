@@ -89,8 +89,8 @@ export function EditParagraph({
 
         setIsLoading(true)
 
-        const documentData = [...data[currentLanguage]]
-        const dataToUpload = { ...newData }
+        const previousData = JSON.parse(JSON.stringify(data[currentLanguage])) as typeof data.en
+        const dataToUpload = JSON.parse(JSON.stringify(newData)) as typeof newData
 
         try {
             if (previewImage.url !== "") {
@@ -101,19 +101,59 @@ export function EditParagraph({
                 )
                 deleteImageFromBucket(newData.img, DATA_BUCKET.artists)
 
-                const allArtistsData = { ...data }
+                const allArtistsData = JSON.parse(JSON.stringify(data)) as typeof data
 
                 for (const lang of allLanguages) {
                     if (lang === currentLanguage) {
-                        allArtistsData[lang][id] = dataToUpload
+                        allArtistsData[defaultLanguage][id] = dataToUpload
+
+                        if (
+                            currentLanguage === defaultLanguage &&
+                            newData.name !== data[lang][id].name
+                        ) {
+                            dataToUpload.key = newData.name
+                            const currentImagesDoc = await getImagesDoc()
+
+                            if (currentImagesDoc && currentLanguage === defaultLanguage) {
+                                const currentImagesData = currentImagesDoc.data()
+                                const imagesArray = reformatAndSortObjectValuesToArray(
+                                    currentImagesData
+                                ) as ITattooImage[]
+
+                                const newImagesArray = imagesArray.map(item => {
+                                    if (
+                                        item.filters["artists"] &&
+                                        item.filters["artists"] === data[defaultLanguage][id].key
+                                    ) {
+                                        const newItem = JSON.parse(
+                                            JSON.stringify(item)
+                                        ) as ITattooImage
+                                        newItem.filters["artists"] = dataToUpload.key
+                                        return newItem
+                                    }
+                                    return item
+                                })
+
+                                const dataToUpload = reformatArrayToObject(newImagesArray)
+                                await rewriteImagesDoc(dataToUpload)
+                            }
+                        }
                     }
+
                     allArtistsData[lang][id].img = newImg
                     const objectData = reformatArrayToObject(allArtistsData[lang])
                     await updateSectionData(lang, "artists", objectData)
                 }
             } else {
-                documentData[id] = dataToUpload
-                const objectData = reformatArrayToObject(documentData)
+                previousData[id] = dataToUpload
+                if (
+                    currentLanguage === defaultLanguage &&
+                    newData.name !== data[defaultLanguage][id].name
+                ) {
+                    dataToUpload.key = newData.name
+                }
+
+                const objectData = reformatArrayToObject(previousData)
                 await updateSectionData(currentLanguage, "artists", objectData)
 
                 if (filtersData) {
@@ -149,17 +189,17 @@ export function EditParagraph({
                         const newImagesArray = imagesArray.map(item => {
                             if (
                                 item.filters["artists"] &&
-                                item.filters["artists"] === data[defaultLanguage][id].name
+                                item.filters["artists"] === data[defaultLanguage][id].key
                             ) {
                                 const newItem = JSON.parse(JSON.stringify(item)) as ITattooImage
-                                newItem.filters["artists"] = newData.name
+                                newItem.filters["artists"] = dataToUpload.key
                                 return newItem
                             }
                             return item
                         })
 
-                        const dataToUpload = reformatArrayToObject(newImagesArray)
-                        await rewriteImagesDoc(dataToUpload)
+                        const imagesDataToUpload = reformatArrayToObject(newImagesArray)
+                        await rewriteImagesDoc(imagesDataToUpload)
                     }
                 }
             }
@@ -194,6 +234,7 @@ export function EditParagraph({
                         <EditImage onChange={editImageChangeHandler} />
                     </div>
                     <div>id: {id}</div>
+                    <div>key: {newData.key}</div>
                     <div>
                         <Input
                             label="Name"

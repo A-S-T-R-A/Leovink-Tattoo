@@ -12,25 +12,34 @@ export function Contacts({
     triggerRefetch: () => void
 }) {
     return (
-        <div>
+        <div className={styles.container}>
+            <p className={styles.contactsTitle}>Contacts & Location</p>
             <div className={styles.location}>
-                Location: {data?.addressData.location[defaultLanguage] || ""}
+                <p>
+                    <strong>Location:</strong> {data?.addressData.location[defaultLanguage] || ""}
+                </p>
                 <div className={styles.btns}>
                     <Edit data={data} triggerRefetch={triggerRefetch} addressType="location" />
                 </div>
             </div>
             <div className={styles.phone}>
-                Phone:
-                {data?.addressData.phone.map((item, index) => (
-                    <Typography key={index}>{item}</Typography>
-                ))}
+                <div className={styles.dataContainer}>
+                    {data?.addressData.phone.map((item, index) => (
+                        <Typography key={index}>
+                            <strong>{index + 1}. Phone:</strong> {item}
+                        </Typography>
+                    ))}
+                </div>
                 <Edit data={data} triggerRefetch={triggerRefetch} addressType="phone" />
             </div>
             <div className={styles.mail}>
-                Mail:
-                {data?.addressData.mail.map((item, index) => (
-                    <Typography key={index}>{item}</Typography>
-                ))}
+                <div className={styles.dataContainer}>
+                    {data?.addressData.mail.map((item, index) => (
+                        <Typography key={index}>
+                            <strong>{index + 1}. Mail:</strong> {item}
+                        </Typography>
+                    ))}
+                </div>
                 <Edit data={data} triggerRefetch={triggerRefetch} addressType="mail" />
             </div>
         </div>

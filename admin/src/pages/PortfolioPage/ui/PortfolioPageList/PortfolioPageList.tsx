@@ -8,6 +8,7 @@ import { EditBulkTattooImages } from "../editBulkTattooImages/EditBulkTattooImag
 import { DeleteBulkTattooImages } from "../deleteBulkTattooImages/DeleteBulkTattooImages"
 import { IFilter } from "features/portfolioFilters/types/types"
 import { defaultLanguage } from "shared/const/languages"
+import { TableIcons } from "./Tables/TableIcons/TableIcons"
 import { DeleteIcon, EditIcon } from "shared/assets/icons"
 import { v4 as uuidv4 } from "uuid"
 import { TableRows } from "./Tables/TableRows"
@@ -51,36 +52,13 @@ export function PortfolioPageList({
     const filterKeys = filtersData.map(item => item.title[defaultLanguage])
 
     return view === "icons" ? (
-        <div className={styles.icons}>
-            {filteredData.map((item, index) => (
-                <div className={styles.item} key={index}>
-                    <ModalImage className={styles.img} url={item.img} />
-                    <div>id: {item.id}</div>
-                    {filterKeys.map((key, index) => {
-                        return (
-                            <div key={key + index}>
-                                {key}: {item.filters[key] || ""}
-                            </div>
-                        )
-                    })}
-                    <div>{item.filters.isLive ? "Published" : "Unpublished"}</div>
-                    <div className={styles.buttons}>
-                        <EditTattooImage
-                            id={item.id}
-                            triggerRefetch={triggerRefetch}
-                            data={data}
-                            filtersData={filtersData}
-                            unselectAllHandler={unselectAllHandler}
-                        />
-                        <DeleteTattooImage
-                            id={item.id}
-                            triggerRefetch={triggerRefetch}
-                            unselectAllHandler={unselectAllHandler}
-                        />
-                    </div>
-                </div>
-            ))}
-        </div>
+        <TableIcons
+            triggerRefetch={triggerRefetch}
+            data={data}
+            filtersData={filtersData}
+            view="icons"
+            filteredData={filteredData}
+        />
     ) : (
         <TableRows
             data={data}

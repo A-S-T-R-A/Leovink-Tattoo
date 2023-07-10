@@ -4,6 +4,7 @@ export interface IArtistData {
     specialization: string
     img: string
     slug: string
+    key: string
 }
 
 export interface ITranslatedArtistsData {

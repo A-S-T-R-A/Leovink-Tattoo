@@ -8,6 +8,7 @@ import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
 import { LanguageType } from "shared/types/types"
 import { Alert } from "shared/ui/CustomNotifications"
 import { Input } from "shared/ui/Input/Input"
+import styles from "./Edit.module.scss"
 
 export function Edit({
     data,
@@ -144,7 +145,9 @@ export function Edit({
                     />
                 ))}
             </ModalEditor>
-            <button onClick={() => setIsOpen(addressType)}>Edit</button>
+            <button className={styles.editBtn} onClick={() => setIsOpen(addressType)}>
+                Edit
+            </button>
         </>
     )
 }

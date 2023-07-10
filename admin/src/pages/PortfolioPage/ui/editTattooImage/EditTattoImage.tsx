@@ -9,6 +9,7 @@ import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
 import { ITattooImage } from "../../types/types"
 import { IFilter } from "features/portfolioFilters/types/types"
 import { defaultLanguage } from "shared/const/languages"
+import { EditIcon } from "shared/assets/icons"
 
 export function EditTattooImage({
     id,
@@ -29,7 +30,7 @@ export function EditTattooImage({
     const [isLoading, setIsLoading] = useState(false)
 
     const length = data.length
-
+    console.log(data.map((_, i) => i).sort((a, b) => +a - +b))
     function onChangeLanguage(lang: LanguageType) {
         setCurrentLanguage(lang)
     }
@@ -39,7 +40,7 @@ export function EditTattooImage({
         setNewData(currentImg)
         setIsOpen(true)
     }
-    console.log(newData)
+
     async function saveClickHandler() {
         if (!newData) return
         const { id: _, ...restNewData } = newData
@@ -69,17 +70,17 @@ export function EditTattooImage({
                 const minId = Math.min(from, to)
                 const maxId = Math.max(from, to)
 
-                const queue = Object.keys(data)
+                const queue = data
+                    .map((_, i) => i)
                     .sort((a, b) => +a - +b)
                     .slice(minId, maxId + 1)
 
                 const slots = queue.filter(item => +item != to)
                 const itemsToPut = queue.filter(item => +item != from)
-
+                const intermediateData = JSON.parse(JSON.stringify(dataToUpload))
                 for (let i = 0; i < slots.length; i++) {
-                    dataToUpload[slots[i]] = dataToUpload[itemsToPut[i]]
+                    dataToUpload[slots[i]] = intermediateData[itemsToPut[i]]
                 }
-
                 dataToUpload[to] = updatedRestData
 
                 await rewriteImagesDoc(dataToUpload)
@@ -120,9 +121,9 @@ export function EditTattooImage({
                 saveClickHandler={saveClickHandler}
                 discardClickHandler={discardClickHandler}
             />
-            <button onClick={openClickHandler} className={styles.btn}>
-                Edit
-            </button>
+            <div onClick={openClickHandler} className={styles.btn}>
+                <EditIcon />
+            </div>
         </>
     )
 }

@@ -17,7 +17,7 @@ export function Header({
 }: {
     children: ComponentChildren
     language: LanguageType
-    data: { [key: number]: { link: string; text: string } }
+    data: { [key: number]: { link: string; text: string } } | null
     defaultLanguage: LanguageType
     socialsData: ISocialMedia[]
 }) {
@@ -32,6 +32,8 @@ export function Header({
         window.addEventListener("scroll", scrollHandler)
         return () => window.removeEventListener("scroll", scrollHandler)
     }, [])
+
+    if (!data) return null
 
     return (
         <>

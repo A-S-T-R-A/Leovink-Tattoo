@@ -9,21 +9,26 @@ import cave from "widgets/Main/const/dungeon.webp"
 
 const language = getLangFromUrl(Astro.url)
 
-const imagesData = await fetchImagesData() as ITattooImage[]
-const globalData = await fetchGlobalData() as IGlobalData
-const {sectionNames, buttons,formData ,layoutData, filtersData} = globalData
-const { cta } = buttons[language]
+let imagesData = null
+let globalData = null
+try{
+    imagesData = await fetchImagesData() as ITattooImage[]
+    globalData = await fetchGlobalData() as IGlobalData
+}catch(e){}
 ---
 
 <Layout image={cave}>
-    <PageWrapper title={layoutData.navList[language][1].text} main={layoutData.navList[language][0].text}>
+    <PageWrapper 
+            title={globalData?.layoutData.navList[language][1].text || 'Portfolio'} 
+            main={globalData?.layoutData.navList[language][0].text || 'Main'}
+            >
         <PortfolioPage 
-        client:load
-        formTitle={sectionNames[language].form} 
-         formData={formData[language]}
-         button={cta}
-         globalFiltersData={filtersData}
-         fetchedData={imagesData}
+         client:load
+         formTitle={globalData?.sectionNames[language].form || 'Book an appointment'} 
+         formData={globalData?.formData[language] || null}
+         button={globalData?.buttons[language].cta || 'Book an appointment'}
+         globalFiltersData={globalData?.filtersData || null}
+         fetchedData={imagesData || []}
          language={language}
          />
     </PageWrapper>
