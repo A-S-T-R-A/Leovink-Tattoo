@@ -6,7 +6,7 @@
         "dev": "cross-env IS_DEV=true astro dev ",
         "dev:prod": "cross-env IS_DEV=false astro dev",
         "build": "astro build",
-        "translate": "npx astro-i18next generate",
+        "build:dev": "cross-env IS_DEV=true astro build",
         "deploy": "npm run translate && npm run build && firebase deploy",
         "preview": "astro preview",
         "astro": "astro",
