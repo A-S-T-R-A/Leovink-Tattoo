@@ -1,7 +1,6 @@
 import { Section } from "shared/ui/Section/Section"
 import { Form } from "shared/components/Form/Form"
 import styles from "./FormSection.module.scss"
-import type { IFormData } from "shared/types/IGlobalData"
 
 export function FormSection({
     data,
@@ -14,6 +13,8 @@ export function FormSection({
         loading: string
         success: string
         error: string
+        validName: string
+        validPhone: string
     }
     title: string
     button: string
