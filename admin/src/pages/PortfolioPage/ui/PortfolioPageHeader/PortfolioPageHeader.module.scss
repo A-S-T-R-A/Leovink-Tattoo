@@ -39,13 +39,14 @@
         }
 
         .iconBlock:hover .icon {
-            fill: var(--color-moderate-accent);
+            fill: var(--color-base-light-accent);
         }
 
         .icon {
             width: 20px;
             cursor: pointer;
             fill: var(--color-base-accent);
+            transition: 0.1s ease;
         }
 
         .icon:active {

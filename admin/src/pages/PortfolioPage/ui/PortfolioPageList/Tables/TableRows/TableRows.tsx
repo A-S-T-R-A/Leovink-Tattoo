@@ -134,7 +134,9 @@ export function TableRows({
                                     {filterKeys.map((key, index) => {
                                         return (
                                             <td key={key + index}>
-                                                {key}: {item.filters[key] || ""}
+                                                {item.filters[key] && item.filters[key] !== ""
+                                                    ? item.filters[key]
+                                                    : "	---"}
                                             </td>
                                         )
                                     })}
