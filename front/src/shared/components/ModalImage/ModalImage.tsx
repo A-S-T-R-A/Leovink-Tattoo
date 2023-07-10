@@ -4,7 +4,15 @@ import { Modal } from "shared/ui/Modal"
 
 import styles from "./ModalImage.module.scss"
 
-export function ModalImage({ url, className }: { url: string; className?: string }) {
+export function ModalImage({
+    url,
+    className,
+    alt,
+}: {
+    url: string
+    className?: string
+    alt?: string
+}) {
     const [isOpen, setIsOpen] = useState(false)
 
     function onClose() {
@@ -18,9 +26,14 @@ export function ModalImage({ url, className }: { url: string; className?: string
                 <div className={styles.cross} onClick={onClose}>
                     <PlusIcon />
                 </div>
-                <img src={url} className={styles.img} />
+                <img src={url} alt={`${alt}. Service.`} className={styles.img} />
             </Modal>
-            <img src={url} alt="" className={className} onClick={() => setIsOpen(true)} />
+            <img
+                src={url}
+                alt={`${alt} img.`}
+                className={className}
+                onClick={() => setIsOpen(true)}
+            />
         </>
     )
 }

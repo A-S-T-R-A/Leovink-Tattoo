@@ -74,7 +74,7 @@ export function Services({
                                         </Typography>
                                         <div className={styles.imgContainer}>
                                             {images.map(image => {
-                                                return <ModalImage url={image} />
+                                                return <ModalImage url={image} alt={title} />
                                             })}
                                         </div>
                                         <CtaButton className={styles.btn} text={button} />

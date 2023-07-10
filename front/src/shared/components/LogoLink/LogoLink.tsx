@@ -13,10 +13,14 @@ export function LogoLink({
         if (language === defaultLanguage) return "/"
         return "/" + language + "/"
     }
-    
+
     return (
         <a href={getLogoLink(language)} className={styles.logoContainer}>
-            <img src={logo} className={styles.logo} alt="" />
+            <img
+                src={logo}
+                className={styles.logo}
+                alt="Logo al salonului de tatuaje din Chișinău"
+            />
         </a>
     )
 }

@@ -20,7 +20,7 @@ export function Navbar({
     socialsData: ISocialMedia[]
 }) {
     return (
-        <div className={classNames(styles.container, {}, [className])}>
+        <nav className={classNames(styles.container, {}, [className])}>
             <NavigationList className={styles.navList} data={data} />
             <SocialIcons className={styles.socialIcons} data={socialsData} />
             <Languages
@@ -28,6 +28,6 @@ export function Navbar({
                 defaultLanguage={defaultLanguage}
                 language={language}
             />
-        </div>
+        </nav>
     )
 }
