@@ -23,6 +23,8 @@ export function ArtistPage({
         loading: string
         success: string
         error: string
+        validName: string
+        validPhone: string
     }
     formTitle: string
     cta: string

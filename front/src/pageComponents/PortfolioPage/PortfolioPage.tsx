@@ -27,6 +27,8 @@ export function PortfolioPage({
         loading: string
         success: string
         error: string
+        validName: string
+        validPhone: string
     }
     button: string
     fetchedData: ITattooImage[]

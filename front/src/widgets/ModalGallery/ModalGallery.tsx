@@ -12,12 +12,12 @@ import { classNames } from "../../shared/lib/classNames/classNames"
 import type { LanguageType } from "../../shared/types/types"
 import { ChevronDownIcon, PlusIcon } from "../../shared/ui/Icons"
 import { Typography } from "shared/ui/Typography/Typography"
-import type { IImagesData } from "shared/const/firebaseVariables"
+import type { ITattooImage } from "shared/const/firebaseVariables"
 
 interface IModalGallery {
     isOpen: boolean
     onClose: () => void
-    data: IImagesData[]
+    data: ITattooImage[]
     language: LanguageType
 }
 

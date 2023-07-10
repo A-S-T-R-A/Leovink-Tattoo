@@ -1,12 +1,12 @@
 {
-    "name": "Leovink Tattoo",
+    "name": "leovink_tattoo",
     "type": "module",
     "version": "0.0.1",
     "scripts": {
         "dev": "cross-env IS_DEV=true astro dev ",
         "dev:prod": "cross-env IS_DEV=false astro dev",
         "build": "astro build",
-        "translate": "npx astro-i18next generate",
+        "build:dev": "cross-env IS_DEV=true astro build",
         "deploy": "npm run translate && npm run build && firebase deploy",
         "preview": "astro preview",
         "astro": "astro",
@@ -19,7 +19,6 @@
         "@emailjs/browser": "^3.11.0",
         "@preact/compat": "^17.1.2",
         "astro": "^2.6.6",
-        "astro-i18next": "^1.0.0-beta.21",
         "cross-env": "^7.0.3",
         "emailjs": "^4.0.2",
         "firebase": "^9.22.2",
