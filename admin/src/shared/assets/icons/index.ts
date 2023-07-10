@@ -7,8 +7,8 @@ import { ServicesIcon } from "./services"
 import { TestimonialsIcon } from "./testimonials"
 import { DownArrowIcon } from "./downarrow"
 import { ExitIcon } from "./exit"
-import { GalleryBlockIcon } from "./galleryBlock"
-import { GalleryRowIcon } from "./galleryRow"
+import { TableIcons } from "./tableIcons"
+import { TableRows } from "./tableRows"
 import { EditIcon } from "./edit"
 import { DeleteIcon } from "./delete"
 import { FilterIcon } from "./filter"
@@ -25,8 +25,8 @@ export {
     TestimonialsIcon,
     DownArrowIcon,
     ExitIcon,
-    GalleryBlockIcon,
-    GalleryRowIcon,
+    TableIcons,
+    TableRows,
     EditIcon,
     DeleteIcon,
     FilterIcon,

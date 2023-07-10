@@ -49,7 +49,7 @@ a:active {
 :root {
     --color-accent: #e2ab4d;
     --color-base: #020b13;
-    --color-bg: #e5e5e5;
+    --color-bg: #fff1e9;
     --color-darkgray: rgb(49, 49, 49);
     --color-gray: rgb(128, 128, 128);
     --color-lightgray: rgb(189, 189, 189);
@@ -69,6 +69,7 @@ a:active {
     --index: calc(1vw + 1vh);
 
     --header-height: 60px;
+    --portfolio-header-height: 130px;
     --sidebar-width: 300px;
     /*  --transition: transform 0.2 ease-in; */
     --color-white: #fff;
@@ -80,9 +81,10 @@ a:active {
     --color-dark-accent: #004373;
     --color-light-accent: #edf7ff;
     --color-table-initial: #6e6e6e;
-    --color-table-second: #d3d3d3;
+    --color-table-second: #f7f7f7;
     --color-status-dropdown: #6a6a6a;
     --color-table-initial-block: #797979;
+    --color-light-brown: #c5b1a6;
     //
     --font-size-blockTable: 14px;
     --font-size-rowTable: 14px;

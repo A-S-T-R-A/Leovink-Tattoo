@@ -52,7 +52,9 @@ export function PortfolioPageFilters({
                 )
             })}
 
-            <button onClick={resetFilters}>Reset Filters</button>
+            <button onClick={resetFilters} className={styles.btnReset}>
+                Reset Filters
+            </button>
         </div>
     )
 }

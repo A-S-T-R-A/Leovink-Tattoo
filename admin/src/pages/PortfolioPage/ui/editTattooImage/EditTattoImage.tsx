@@ -9,6 +9,7 @@ import { isDeepEqual } from "shared/lib/isDeepEqual/isDeepEqual"
 import { ITattooImage } from "../../types/types"
 import { IFilter } from "features/portfolioFilters/types/types"
 import { defaultLanguage } from "shared/const/languages"
+import { EditIcon } from "shared/assets/icons"
 
 export function EditTattooImage({
     id,
@@ -120,9 +121,9 @@ export function EditTattooImage({
                 saveClickHandler={saveClickHandler}
                 discardClickHandler={discardClickHandler}
             />
-            <button onClick={openClickHandler} className={styles.btn}>
-                Edit
-            </button>
+            <div onClick={openClickHandler} className={styles.btn}>
+                <EditIcon />
+            </div>
         </>
     )
 }
