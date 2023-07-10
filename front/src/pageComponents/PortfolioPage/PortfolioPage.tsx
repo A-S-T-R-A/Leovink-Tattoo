@@ -19,7 +19,7 @@ export function PortfolioPage({
     fetchedData,
     language,
 }: {
-    globalFiltersData: IFiltersData
+    globalFiltersData: IFiltersData | null
     formTitle: string
     formData: {
         name: string
@@ -29,17 +29,20 @@ export function PortfolioPage({
         error: string
         validName: string
         validPhone: string
-    }
+    } | null
     button: string
-    fetchedData: ITattooImage[]
+    fetchedData: ITattooImage[] | []
     language: LanguageType
 }) {
     const [isOpen, setIsOpen] = useState(false)
     const [modalData, setModalData] = useState<ITattooImage[]>([])
     const f: { [key: string]: string } = {}
-    globalFiltersData.filters.forEach((item: any) => (f[item.title[language]] = ""))
+    globalFiltersData &&
+        globalFiltersData.filters.forEach((item: any) => (f[item.title[language]] = ""))
     const [filters, setFilters] = useState<{ [key: string]: string }>(f)
-    const [filtersData, setFiltersData] = useState<IFilter[]>(globalFiltersData.filters)
+    const [filtersData, setFiltersData] = useState<IFilter[]>(
+        () => globalFiltersData?.filters || []
+    )
     const keys = filtersData.map(item => item.title.en)
     const data = filter(fetchedData, keys)
     const [filteredData, setFilteredData] = useState<ITattooImage[]>(data)
@@ -79,7 +82,7 @@ export function PortfolioPage({
     }
 
     const dropdownOptions = useMemo(() => {
-        return globalFiltersData.filters.map(item => ({
+        return globalFiltersData?.filters.map(item => ({
             name: item.title[language],
             options: item.items.map(innerItem => ({
                 label: innerItem.label[language],
@@ -113,10 +116,12 @@ export function PortfolioPage({
                             />
                         )
                     })}
-                    <Button className={styles.btn} onClick={resetFiltersHandler}>
-                        {globalFiltersData.reset[language]}
-                        <AntiClockwiseIcon />
-                    </Button>
+                    {globalFiltersData && (
+                        <Button className={styles.btn} onClick={resetFiltersHandler}>
+                            {globalFiltersData?.reset[language]}
+                            <AntiClockwiseIcon />
+                        </Button>
+                    )}
                 </div>
                 <GalleryGrid data={filteredData} onClick={clickHandler} language={language} />
                 <div className={styles.marginBottom} />

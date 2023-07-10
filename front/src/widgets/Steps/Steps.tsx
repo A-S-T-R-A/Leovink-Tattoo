@@ -14,9 +14,10 @@ export function Steps({
 }: {
     title: string
     button: string
-    data: IStepData[]
+    data: IStepData[] | null
 }) {
     const [selected, setSelected] = useState(0)
+    if (!data) return null
 
     return (
         <Section title={title}>

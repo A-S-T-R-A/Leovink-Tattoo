@@ -19,12 +19,14 @@ export function Artists({
     language,
     defaultLanguage,
 }: {
-    data: IArtistsData[]
+    data: IArtistsData[] | null
     title: string
     button: string
     language: LanguageType
     defaultLanguage: LanguageType
 }) {
+    if (!data) return null
+
     return (
         <Section title={title}>
             <Swiper
