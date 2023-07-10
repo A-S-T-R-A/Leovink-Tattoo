@@ -34,6 +34,53 @@ const { image } = Astro.props;
         />
         <meta name="generator" content={Astro.generator} />
         <title>Leovink Tattoo</title>
+        <script is:inline>
+            const defaultLanguage = "en"
+            let lang = "ro"
+            
+            const langFromStorage = localStorage.getItem("language")
+                switch(true ){
+                    case !!langFromStorage:
+                        lang = langFromStorage
+                        break
+                    case navigator.language.slice(0,2) === 'en':
+                    localStorage.setItem('language', 'en')
+                        lang = 'en';
+                        break
+                    case navigator.language.slice(0,2) === 'ro':
+                    localStorage.setItem('language', 'ro')
+                    lang = 'ro'
+                        break
+                    case navigator.language.slice(0,2) ==='ru':
+                    localStorage.setItem('language', 'ru')
+                    lang = 'ru'
+                        break
+                    default:
+                    localStorage.setItem('language', 'ro')
+                    lang = 'ro'
+                }
+
+
+            const url = window.location.href
+            
+            function getLangFromUrl(url) {
+                const [,,,lang] = url.split("/") //https://
+                if (lang === "ru") return "ru"
+                if (lang === "ro") return "ro"
+                return "en"
+            }
+            
+            const urlLanguage =  getLangFromUrl(url)
+           
+            if(lang !== urlLanguage){
+                const to = "/" + url.split('3000').pop()?.split("/").pop()
+                if(to.slice(1) === "ro" || to.slice(1) === "ru" || to.slice(1) === "en"){
+                    window.location.href = lang === defaultLanguage ? "/" : "/" + lang 
+                }else{
+                    window.location.href = lang === defaultLanguage ? to : "/" + lang + to
+                }
+            } 
+        </script>
     </head>
     <body>
         {image && <div class='layout__dungeon-background' style={{backgroundImage: `url(${image})`}} />}
