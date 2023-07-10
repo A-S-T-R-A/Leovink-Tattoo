@@ -91,13 +91,19 @@ export function PortfolioPage() {
 
     return (
         <div className={styles.wrapper}>
-            <PortfolioPageHeader view={view} setView={setView} triggerRefetch={triggerRefetch} />
-            <PortfolioPageFilters
-                filtersData={filtersData}
-                filters={filters}
-                setFilters={setFilters}
-                resetFilters={resetFilters}
-            />
+            <div className={styles.aboveList}>
+                <PortfolioPageHeader
+                    view={view}
+                    setView={setView}
+                    triggerRefetch={triggerRefetch}
+                />
+                <PortfolioPageFilters
+                    filtersData={filtersData}
+                    filters={filters}
+                    setFilters={setFilters}
+                    resetFilters={resetFilters}
+                />
+            </div>
             <PortfolioPageList
                 data={data}
                 filteredData={filteredData}

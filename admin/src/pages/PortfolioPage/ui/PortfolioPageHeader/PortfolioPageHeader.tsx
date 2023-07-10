@@ -25,7 +25,9 @@ export function PortfolioPageHeader({
             <div className={styles.uploadBtn}>
                 <UploadModal triggerRefetch={triggerRefetch} />
             </div>
-            <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
+            <div className={styles.triggerBtn}>
+                <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
+            </div>
             <div className={styles.viewToggle}>
                 <button
                     onClick={() => changeView("table")}

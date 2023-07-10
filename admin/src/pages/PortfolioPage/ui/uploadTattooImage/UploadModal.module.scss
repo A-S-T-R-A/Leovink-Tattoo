@@ -36,13 +36,14 @@
 }
 
 .uploadBtn {
-    width: 200px;
-    height: 50px;
+    width: 150px;
+    height: 40px;
     color: var(--color-base-accent);
     background-color: var(--color-light-accent);
     transition: 0.1s ease;
     box-shadow: 0 1px 0 0 var(--color-dark-accent);
     border-radius: 5px;
+    margin-left: 7px;
     font-weight: bold;
     border: none;
     cursor: pointer;
