@@ -17,7 +17,7 @@ export function Section(props: ISectionProps) {
         <section className={classNames(styles.wrapper, {}, [wrapperClassName])}>
             <div className={classNames(styles.container, {}, [containerClassName])}>
                 {!!title && (
-                    <Typography className={styles.title} tag="h1">
+                    <Typography className={styles.title} tag="h2">
                         {title}
                     </Typography>
                 )}

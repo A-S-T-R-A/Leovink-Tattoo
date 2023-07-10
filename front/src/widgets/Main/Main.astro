@@ -13,41 +13,43 @@ import { ScrollIcon } from "shared/ui/ScrollIcon/ScrollIcon"
 import "./Main.scss"
 ---
 
-<header id="wrapperMainSection" class={styles.mainWrapper}>
-  <div id="main-container" class={styles.mainContainer}>
-    <div class={styles.textContainer}>
-      <img src={leovinkHorns} class={styles.horns} />
-      <img src={leovinkTitle} alt="" class={styles.title} />
-      <p class={styles.caption}>TATTOO & PIERCING</p>
-      <p class={styles.est}>EST. 2010</p>
+<main>
+  <section id="wrapperMainSection" class={styles.mainWrapper}>
+    <div id="main-container" class={styles.mainContainer}>
+      <div class={styles.textContainer}>
+        <img src={leovinkHorns} alt="Tattoo parlor in Chisinau" class={styles.horns} />
+        <img src={leovinkTitle} alt="Leaovink Tattoo. Tattoo parlor in Chisinau" class={styles.title} />
+        <p class={styles.caption}>TATTOO & PIERCING</p>
+        <p class={styles.est}>EST. 2010</p>
+      </div>
+  
+      <div
+        id="baseImg"
+        class={`${styles.layerBase} ${styles.layer}`}
+        style={{ backgroundImage: `url(${layerBaseImgLowRes})` }}
+        data-src = {layerBaseImg}
+      />
+      
+      <div
+        id="middleImg"
+        class={`${styles.layerMiddle} ${styles.layer}`}
+        style={{ backgroundImage: `url(${layerMiddleImgLowRes})` }}
+        data-src = {layerMiddleImg}
+      />
+      
+      <div
+        id="frontImg"
+        class={`${styles.layerFront} ${styles.layer}`}
+        style={{ backgroundImage: `url(${layerFrontImgLowRes})` }}
+        data-src = {layerFrontImg}
+      />
+  
+      <ScrollIcon client:load className={styles.scroll} />
     </div>
-
-    <div
-      id="baseImg"
-      class={`${styles.layerBase} ${styles.layer}`}
-      style={{ backgroundImage: `url(${layerBaseImgLowRes})` }}
-      data-src = {layerBaseImg}
-    />
-    
-    <div
-      id="middleImg"
-      class={`${styles.layerMiddle} ${styles.layer}`}
-      style={{ backgroundImage: `url(${layerMiddleImgLowRes})` }}
-      data-src = {layerMiddleImg}
-    />
-    
-    <div
-      id="frontImg"
-      class={`${styles.layerFront} ${styles.layer}`}
-      style={{ backgroundImage: `url(${layerFrontImgLowRes})` }}
-      data-src = {layerFrontImg}
-    />
-
-    <ScrollIcon client:load className={styles.scroll} />
-  </div>
-</header>
-<div class={styles.dungeon} id="dungeon" style={{ backgroundImage: `url(${dungeonImg})` }}></div>
-<slot />
+  </section>
+  <div class={styles.dungeon} id="dungeon" style={{ backgroundImage: `url(${dungeonImg})` }}></div>
+  <slot />  
+</main>
 
 <script is:inline>
 function onScrollMobile() {

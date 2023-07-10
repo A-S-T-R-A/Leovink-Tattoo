@@ -24,7 +24,7 @@ export function PageWrapper({
                 </AppLink>
             </div>
 
-            <div className={styles.content}>{children}</div>
+            <main className={styles.content}>{children}</main>
         </div>
     )
 }

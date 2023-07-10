@@ -26,7 +26,7 @@ export function ArtistCard({
 
     return (
         <div className={styles.container}>
-            <img src={img} alt="" className={styles.img} />
+            <img src={img} alt={`Fotografie cu artistul tatuator ${name}`} className={styles.img} />
             <Typography tag="h3" size="xxl" className={styles.name}>
                 {name}
             </Typography>

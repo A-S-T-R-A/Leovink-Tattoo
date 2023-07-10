@@ -44,7 +44,7 @@ export function Header({
                 data={data}
                 socialsData={socialsData}
             />
-            <div className={classNames(styles.wrapper, { [styles.blur]: isScrolled })}>
+            <section className={classNames(styles.wrapper, { [styles.blur]: isScrolled })}>
                 <div className={styles.container}>
                     {children}
                     <Navbar
@@ -55,7 +55,7 @@ export function Header({
                         socialsData={socialsData}
                     />
                 </div>
-            </div>
+            </section>
         </>
     )
 }

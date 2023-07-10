@@ -46,14 +46,14 @@ export function ModalGallery({ data, isOpen, onClose, language }: IModalGallery)
                     const { img, alt } = item
                     return (
                         <SwiperSlide key={index} className={styles.slide}>
-                            <div className={styles.slideContainer}>
+                            <figure className={styles.slideContainer}>
                                 <img src={img} className={styles.img} alt={alt[language]} />
-                                <div className={styles.descriptionContainer}>
+                                <figcaption className={styles.descriptionContainer}>
                                     <Typography tag="p" className={styles.description}>
                                         {alt[language]}
                                     </Typography>
-                                </div>
-                            </div>
+                                </figcaption>
+                            </figure>
                         </SwiperSlide>
                     )
                 })}

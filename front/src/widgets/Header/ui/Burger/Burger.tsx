@@ -90,10 +90,10 @@ function BurgerModal({
             />
 
             <div className={classNames(styles.wrapper, { [styles.navOpen]: isOpen })}>
-                <div className={styles.container}>
+                <nav className={styles.container}>
                     <NavigationList data={data} closeClickHandler={onClose} />
                     <SocialIcons data={socialsData} />
-                </div>
+                </nav>
             </div>
         </>
     )
