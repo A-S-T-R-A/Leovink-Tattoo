@@ -14,8 +14,8 @@ import "./Main.scss"
 ---
 
 <main>
-  <header id="wrapperMainSection" class={styles.mainWrapper}>
-    <article id="main-container" class={styles.mainContainer}>
+  <section id="wrapperMainSection" class={styles.mainWrapper}>
+    <div id="main-container" class={styles.mainContainer}>
       <div class={styles.textContainer}>
         <img src={leovinkHorns} alt="Tattoo parlor in Chisinau" class={styles.horns} />
         <img src={leovinkTitle} alt="Leaovink Tattoo. Tattoo parlor in Chisinau" class={styles.title} />
@@ -45,8 +45,8 @@ import "./Main.scss"
       />
   
       <ScrollIcon client:load className={styles.scroll} />
-    </article>
-  </header>
+    </div>
+  </section>
   <div class={styles.dungeon} id="dungeon" style={{ backgroundImage: `url(${dungeonImg})` }}></div>
   <slot />  
 </main>
