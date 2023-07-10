@@ -92,10 +92,9 @@ export function TableRows({
                             <th>ID</th>
                             <th>Photo</th>
                             <th>Status</th>
-                            <th>Name</th>
-                            <th>Style</th>
-                            <th>Place</th>
-                            <th>Color</th>
+                            {filterKeys.map((key, index) => {
+                                return <th key={key + index}>{key}</th>
+                            })}
                             <th>Edit/Delete</th>
                         </tr>
                     </thead>
