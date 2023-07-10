@@ -142,3 +142,58 @@
     content: "";
     padding: 0;
 }
+
+.singleItemsContainer {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .singleItem {
+        max-width: 300px;
+        border-radius: 6px;
+
+        img {
+            border-radius: 6px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .eye {
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            right: 50%;
+            transform: translate(50%, -50%);
+            transition: all 0.15s ease;
+            width: 40px;
+            height: 40px;
+
+            path {
+                fill: var(--color-base);
+            }
+        }
+
+        &:hover {
+            img {
+                filter: brightness(80%) blur(1px);
+            }
+
+            .eye {
+                opacity: 1;
+
+                &:hover {
+                    path {
+                        fill: var(--color-accent);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .singleItemsContainer {
+        justify-content: start;
+    }
+}
