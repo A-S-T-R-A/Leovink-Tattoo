@@ -1,19 +1,20 @@
 ---
 import { Header } from "widgets/Header"
 import { Footer } from "widgets/Footer/Footer";
-import { ILayoutData, IOtherData, fetchGlobalData, fetchSectionData } from "shared/const/firebaseVariables";
-import "./Layout.scss"
+import { fetchGlobalData } from "shared/const/firebaseVariables";
 import {LogoLink} from "shared/components/LogoLink/LogoLink"
 import type { LanguageType } from "shared/types/types";
 import {getLangFromUrl} from 'shared/lib/i18n/getLangFromUrl'
 import type { IGlobalData } from "shared/types/IGlobalData";
+import "./Layout.scss"
 
 const defaultLanguage:LanguageType = "en"
-
-
 const language: LanguageType =  getLangFromUrl(Astro.url)
-const globalData = await fetchGlobalData() as IGlobalData
-const {layoutData, addressData, socialsData} = globalData
+
+let globalData = null
+try{
+    globalData = await fetchGlobalData() as IGlobalData
+}catch(e){}
 
 const { image } = Astro.props;
 ---
@@ -36,11 +37,20 @@ const { image } = Astro.props;
     </head>
     <body>
         {image && <div class='layout__dungeon-background' style={{backgroundImage: `url(${image})`}} />}
-        <Header client:load language={language} defaultLanguage={defaultLanguage} data={layoutData.navList[language]} socialsData={socialsData}>
+        <Header 
+            client:load 
+            language={language} 
+            defaultLanguage={defaultLanguage} 
+            data={globalData?.layoutData.navList[language] || null} 
+            socialsData={globalData?.socialsData || []}>
             <LogoLink language={language} defaultLanguage={defaultLanguage}/>
         </Header>
         <slot />
-        <Footer data={layoutData.footerList[language]} addressData={addressData} language={language} socialsData={socialsData}>  
+        <Footer 
+        data={globalData?.layoutData.footerList[language] || null} 
+        addressData={globalData?.addressData || null} 
+        language={language} 
+        socialsData={globalData?.socialsData || []}>  
             <LogoLink language={language} defaultLanguage={defaultLanguage}/>
         </Footer>
     </body>

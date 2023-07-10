@@ -9,14 +9,23 @@ import cave from "widgets/Main/const/dungeon.webp"
 import type { IGlobalData } from "shared/types/IGlobalData";
 
 const language = getLangFromUrl(Astro.url)
-const globalData = await fetchGlobalData() as IGlobalData
-const {sectionNames, buttons,formData ,layoutData, contactsGuide} = globalData
-const { cta } = buttons[language]
+
+let globalData = null
+try{
+    globalData = await fetchGlobalData() as IGlobalData
+}catch(e){}
 ---
 
 <Layout image={cave}>
-    <PageWrapper title={layoutData.navList[language][3].text} main={layoutData.navList[language][0].text}>
-        <FindUs data={contactsGuide[language]}/>
-        <FormSection client:load title={sectionNames[language].form} button={cta} data={formData[language]}/>
+    <PageWrapper 
+        title={globalData?.layoutData.navList[language][3].text || 'Contact'} 
+        main={globalData?.layoutData.navList[language][0].text || 'Main'}>
+        <FindUs 
+            data={globalData?.contactsGuide[language] || null} />
+        <FormSection 
+            client:load 
+            title={globalData?.sectionNames[language].form || 'Book an appointment'} 
+            button={globalData?.buttons[language].cta || 'book an appointment'} 
+            data={globalData?.formData[language] || null}/>
     </PageWrapper>
 </Layout>
