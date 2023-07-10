@@ -1,0 +1,12 @@
+---
+import Layout from "layouts/Layout.astro";
+import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl";
+import cave from "widgets/Main/const/dungeon.webp";
+import {PageNotFound} from "pageComponents/PageNotFound/PageNotFound"
+
+const language = getLangFromUrl(Astro.url)
+---
+
+<Layout image={cave}>
+   <PageNotFound language={language} />
+</Layout>

@@ -1,35 +1,38 @@
 ---
 import { Header } from "widgets/Header"
-import { Footer } from "widgets/Footer/Footer";
-import { fetchGlobalData } from "shared/const/firebaseVariables";
-import {LogoLink} from "shared/components/LogoLink/LogoLink"
-import type { LanguageType } from "shared/types/types";
-import {getLangFromUrl} from 'shared/lib/i18n/getLangFromUrl'
-import type { IGlobalData } from "shared/types/IGlobalData";
+import { Footer } from "widgets/Footer/Footer"
+import { fetchGlobalData } from "shared/const/firebaseVariables"
+import { LogoLink } from "shared/components/LogoLink/LogoLink"
+import type { LanguageType } from "shared/types/types"
+import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl"
+import type { IGlobalData } from "shared/types/IGlobalData"
 import "./Layout.scss"
 
-const defaultLanguage:LanguageType = "en"
-const language: LanguageType =  getLangFromUrl(Astro.url)
+const defaultLanguage: LanguageType = "en"
+const language: LanguageType = getLangFromUrl(Astro.url)
 
 let globalData = null
-try{
-    globalData = await fetchGlobalData() as IGlobalData
-}catch(e){}
+try {
+    globalData = (await fetchGlobalData()) as IGlobalData
+} catch (e) {}
 
-const { image } = Astro.props;
+const { image } = Astro.props
 ---
 
 <!DOCTYPE html>
 <html lang={language}>
     <head>
         <meta charset="UTF-8" />
-        <meta name="description" content="Fondat în 2010, Leovink-Tattoo este cel mai important salon de tatuaje din Chisinau. Experimentează arta de top și un mediu sigur pentru călătoria ta unică în tatuaje." />
+        <meta
+            name="description"
+            content="Fondat în 2010, Leovink-Tattoo este cel mai important salon de tatuaje din Chisinau. Experimentează arta de top și un mediu sigur pentru călătoria ta unică în tatuaje."
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="geo.region" content="MD-CU" />
         <meta name="geo.placename" content="Кишинёв" />
         <meta name="geo.position" content="47.0131;28.841897" />
         <meta name="ICBM" content="47.0131, 28.841897" />
-        <link rel="canonical" href="https://leovink-tattoo.ro">
+        <link rel="canonical" href="https://leovink-tattoo.ro" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,25 +41,80 @@ const { image } = Astro.props;
             rel="stylesheet"
         />
         <meta name="generator" content={Astro.generator} />
-        <title>Leovink-Tattoo. Cel mai bun salon de tatuaje din Chișinău.</title>
+        <title>Leovink-Tattoo Chisinau</title>
+        <script is:inline>
+            const defaultLanguage = "en"
+            let lang = "ro"
+
+            const langFromStorage = localStorage.getItem("language")
+            switch (true) {
+                case !!langFromStorage:
+                    lang = langFromStorage
+                    break
+                case navigator.language.slice(0, 2) === "en":
+                    localStorage.setItem("language", "en")
+                    lang = "en"
+                    break
+                case navigator.language.slice(0, 2) === "ro":
+                    localStorage.setItem("language", "ro")
+                    lang = "ro"
+                    break
+                case navigator.language.slice(0, 2) === "ru":
+                    localStorage.setItem("language", "ru")
+                    lang = "ru"
+                    break
+                default:
+                    localStorage.setItem("language", "ro")
+                    lang = "ro"
+            }
+
+            const url = window.location.href
+
+            function getLangFromUrl(url) {
+                const [, , , lang] = url.split("/") //https://
+                if (lang === "ru") return "ru"
+                if (lang === "ro") return "ro"
+                return "en"
+            }
+
+            const urlLanguage = getLangFromUrl(url)
+
+            if (lang !== urlLanguage) {
+                const to = "/" + url.split("3000").pop()?.split("/").pop()
+                if (to.slice(1) === "ro" || to.slice(1) === "ru" || to.slice(1) === "en") {
+                    window.location.href = lang === defaultLanguage ? "/" : "/" + lang
+                } else {
+                    window.location.href = lang === defaultLanguage ? to : "/" + lang + to
+                }
+            }
+        </script>
     </head>
     <body>
-        {image && <div class='layout__dungeon-background' style={{backgroundImage: `url(${image})`}} />}
-        <Header 
-            client:load 
-            language={language} 
-            defaultLanguage={defaultLanguage} 
-            data={globalData?.layoutData.navList[language] || null} 
-            socialsData={globalData?.socialsData || []}>
-            <LogoLink language={language} defaultLanguage={defaultLanguage}/>
+        {
+            image && (
+                <div
+                    class="layout__dungeon-background"
+                    style={{ backgroundImage: `url(${image})` }}
+                />
+            )
+        }
+        <Header
+            client:load
+            language={language}
+            defaultLanguage={defaultLanguage}
+            data={globalData?.layoutData.navList[language] || null}
+            socialsData={globalData?.socialsData || []}
+        >
+            <LogoLink language={language} defaultLanguage={defaultLanguage} />
         </Header>
         <slot />
-        <Footer 
-        data={globalData?.layoutData.footerList[language] || null} 
-        addressData={globalData?.addressData || null} 
-        language={language} 
-        socialsData={globalData?.socialsData || []}>  
-            <LogoLink language={language} defaultLanguage={defaultLanguage}/>
+        <Footer
+            data={globalData?.layoutData.footerList[language] || null}
+            addressData={globalData?.addressData || null}
+            language={language}
+            socialsData={globalData?.socialsData || []}
+        >
+            <LogoLink language={language} defaultLanguage={defaultLanguage} />
         </Footer>
     </body>
 </html>

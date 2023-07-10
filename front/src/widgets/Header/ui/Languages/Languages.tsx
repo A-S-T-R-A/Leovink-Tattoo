@@ -1,7 +1,7 @@
 import { GreatBritianFlag, MoldovaRepublicFlag, RussiaFlag } from "shared/ui/Icons"
 import styles from "./Languages.module.scss"
 import { classNames } from "shared/lib/classNames/classNames"
-import { useEffect, useRef, useState } from "preact/hooks"
+import { useRef, useState } from "preact/hooks"
 import type { LanguageType } from "shared/types/types"
 
 export function Languages({
@@ -69,13 +69,25 @@ export function Languages({
                 {LanguageFlag}
                 {dropdownOpen && (
                     <div className={styles.dropdown}>
-                        <a href={localizedLink("ro")} className={styles.language}>
+                        <a
+                            href={localizedLink("ro")}
+                            className={styles.language}
+                            onClick={() => localStorage.setItem("language", "ro")}
+                        >
                             <MoldovaRepublicFlag /> RO
                         </a>
-                        <a href={localizedLink("en")} className={styles.language}>
+                        <a
+                            href={localizedLink("en")}
+                            onClick={() => localStorage.setItem("language", "en")}
+                            className={styles.language}
+                        >
                             <GreatBritianFlag /> EN
                         </a>
-                        <a href={localizedLink("ru")} className={styles.language}>
+                        <a
+                            href={localizedLink("ru")}
+                            className={styles.language}
+                            onClick={() => localStorage.setItem("language", "ru")}
+                        >
                             <RussiaFlag /> RU
                         </a>
                     </div>

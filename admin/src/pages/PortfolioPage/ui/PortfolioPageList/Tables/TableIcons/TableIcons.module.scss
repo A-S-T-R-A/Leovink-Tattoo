@@ -1,0 +1,178 @@
+.wrapper {
+    width: 100%;
+    height: calc(100vh - var(--portfolio-header-height) - var(--header-height));
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.table {
+    display: grid;
+    justify-content: start;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 10px;
+    padding: 10px;
+}
+
+.displayedContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: fit-content;
+    color: var(--color-base-accent);
+    background-color: var(--color-white);
+    max-height: fit-content;
+    margin: 10px 5px;
+    box-shadow: 0 0 1px 0 var(--color-base-accent);
+    border-radius: 10px;
+}
+
+.photo {
+    align-self: center;
+    margin-top: 10px;
+    height: 150px;
+    width: fit-content;
+}
+
+.checkboxBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-light-accent);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 35px;
+}
+
+.idCheckbox {
+    display: flex;
+    align-items: center;
+    width: 17px;
+    height: 17px;
+    margin-left: 10px;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.checkbox {
+    opacity: 0;
+}
+
+.idCheckbox::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--color-base-accent);
+    background-color: var(--color-white);
+    border-radius: 3px;
+}
+
+.idCheckbox:checked::before {
+    background-color: var(--color-white);
+}
+
+.idCheckbox::after {
+    content: "\2713";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-base-accent);
+    font-size: 12px;
+    font-weight: bold;
+    opacity: 0;
+}
+
+.idCheckbox:checked::after {
+    opacity: 1;
+}
+
+.idCheckbox:checked .table td {
+    background-color: black;
+}
+
+.selectBtns {
+    margin: 10px 10px 20px 50px;
+}
+
+.selectBtn {
+    border: none;
+    background-color: var(--color-light-accent);
+    width: 120px;
+    height: 40px;
+    border-radius: 10px;
+    color: var(--color-dark-accent);
+    cursor: pointer;
+}
+
+.tattooCharacteristics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 5px;
+    padding: 5px;
+}
+
+.btns {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    border-radius: 10px;
+    padding: 0 5px;
+    background-color: var(--color-light-accent);
+    border-top: 1px solid var(--color-moderate-accent);
+    border-radius: 1px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.statusPublished,
+.statusUnpublished {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    text-align: left;
+    font-size: var(--font-size-blockTable);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 20px;
+    gap: 5px;
+}
+
+.publishedIcon {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: rgb(114, 255, 114);
+}
+
+.unpublishedIcon {
+    margin: auto 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: rgb(255, 111, 111);
+}
+
+@media screen and (max-width: 1370px) {
+    .table {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 30%));
+        width: 100%;
+    }
+}
+
+::-webkit-scrollbar {
+    background-color: transparent;
+    width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 3px;
+    background-color: var(--color-light-brown);
+}

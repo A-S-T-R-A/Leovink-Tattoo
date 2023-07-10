@@ -7,7 +7,6 @@ import type { ITattooImage } from "shared/const/firebaseVariables"
 import { useState, useEffect, useRef } from "preact/hooks"
 import { getMaximumColumnHeight } from "./lib/getMaximumColumnHeight"
 import { getColumnsNumber } from "./lib/getColumnsNumber"
-import { useThrottle } from "shared/lib/useThrottle/useThrottle"
 import { useDebounce } from "shared/lib/useDebounce/useDebounce"
 
 interface IGalleryGrid {
@@ -19,12 +18,16 @@ interface IGalleryGrid {
 
 export function GalleryGrid({ data, onClick, maxHeight = "auto", language }: IGalleryGrid) {
     const [height, setHeight] = useState(50000)
+    const [columns, setColumns] = useState(5)
+    const [isInited, setIsInited] = useState(false)
     const gridContainerRef = useRef<HTMLDivElement | null>(null)
 
     function resetHeight() {
-        const columns = getColumnsNumber(window.innerWidth)
-        const h = getMaximumColumnHeight(gridContainerRef.current, columns)
+        const cols = getColumnsNumber(window.innerWidth)
+        const h = getMaximumColumnHeight(gridContainerRef.current, cols)
+        setColumns(cols)
         setHeight(h)
+        setIsInited(true)
     }
 
     const debouncedResetHeight = useDebounce(resetHeight, 50)
@@ -32,7 +35,7 @@ export function GalleryGrid({ data, onClick, maxHeight = "auto", language }: IGa
     useEffect(() => {
         debouncedResetHeight()
         window.addEventListener("resize", debouncedResetHeight)
-        return window.removeEventListener("resize", debouncedResetHeight)
+        return () => window.removeEventListener("resize", debouncedResetHeight)
     }, [])
 
     return (
@@ -43,8 +46,27 @@ export function GalleryGrid({ data, onClick, maxHeight = "auto", language }: IGa
             style={{ maxHeight }}
         >
             <div
+                className={styles.singleItemsContainer}
+                style={{ display: isInited && data.length < columns ? "flex" : "none" }}
+            >
+                {data.map((item, index) => {
+                    const { img, alt } = item
+                    return (
+                        <div
+                            key={index}
+                            className={styles.singleItem}
+                            onClick={() => onClick?.(index)}
+                        >
+                            <img src={img} alt={alt[language]} />
+                            <EyeIcon className={styles.eye} />
+                        </div>
+                    )
+                })}
+            </div>
+
+            <div
                 className={styles.gridContainer}
-                style={{ height: `${height}px` }}
+                style={{ height: `${height}px`, display: data.length < columns ? "none" : "flex" }}
                 ref={gridContainerRef}
             >
                 {data.map((item, index) => {
