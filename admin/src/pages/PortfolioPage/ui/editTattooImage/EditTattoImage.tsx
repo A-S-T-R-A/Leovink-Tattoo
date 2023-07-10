@@ -30,7 +30,7 @@ export function EditTattooImage({
     const [isLoading, setIsLoading] = useState(false)
 
     const length = data.length
-    console.log(data.map((_, i) => i).sort((a, b) => +a - +b))
+
     function onChangeLanguage(lang: LanguageType) {
         setCurrentLanguage(lang)
     }
