@@ -9,6 +9,8 @@ import { EditTattooImage } from "pages/PortfolioPage/ui/editTattooImage/EditTatt
 import { DeleteTattooImage } from "pages/PortfolioPage/ui/deleteTattooImage/DeleteTattooImage"
 import { IFilter } from "features/portfolioFilters/types/types"
 import { defaultLanguage } from "shared/const/languages"
+import { EditBulkTattooImages } from "pages/PortfolioPage/ui/editBulkTattooImages/EditBulkTattooImages"
+import { DeleteBulkTattooImages } from "pages/PortfolioPage/ui/deleteBulkTattooImages/DeleteBulkTattooImages"
 
 export function TableIcons({
     data,
@@ -49,6 +51,39 @@ export function TableIcons({
 
     return (
         <article className={styles.wrapper}>
+            <div className={styles.tableButtons}>
+                <button onClick={selectAllHandler} className={styles.selectBtn}>
+                    {filteredData.length === selected.length ? "Unselect All" : "Select All"}
+                </button>
+                {selected.length === 1 && (
+                    <>
+                        <EditBulkTattooImages
+                            imagesId={selected}
+                            triggerRefetch={triggerRefetch}
+                            filtersData={filtersData}
+                        />
+                        <DeleteBulkTattooImages
+                            imagesId={selected}
+                            triggerRefetch={triggerRefetch}
+                            unselectAllHandler={unselectAllHandler}
+                        />
+                    </>
+                )}
+                {selected.length > 1 && (
+                    <>
+                        <EditBulkTattooImages
+                            imagesId={selected}
+                            triggerRefetch={triggerRefetch}
+                            filtersData={filtersData}
+                        />
+                        <DeleteBulkTattooImages
+                            imagesId={selected}
+                            triggerRefetch={triggerRefetch}
+                            unselectAllHandler={unselectAllHandler}
+                        />
+                    </>
+                )}
+            </div>
             <div className={styles.container}>
                 <section className={styles.table}>
                     {filteredData.map((item, index) => {
@@ -97,11 +132,13 @@ export function TableIcons({
                                         data={data}
                                         filtersData={filtersData}
                                         unselectAllHandler={unselectAllHandler}
+                                        className={styles.editBtn}
                                     />
                                     <DeleteTattooImage
                                         id={id}
                                         triggerRefetch={triggerRefetch}
                                         unselectAllHandler={unselectAllHandler}
+                                        className={styles.deleteBtn}
                                     />
                                 </div>
                             </div>

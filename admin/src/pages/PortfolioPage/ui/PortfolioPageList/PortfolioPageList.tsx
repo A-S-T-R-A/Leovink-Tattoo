@@ -11,7 +11,7 @@ import { defaultLanguage } from "shared/const/languages"
 import { TableIcons } from "./Tables/TableIcons/TableIcons"
 import { DeleteIcon, EditIcon } from "shared/assets/icons"
 import { v4 as uuidv4 } from "uuid"
-import { TableRows } from "./Tables/TableRows"
+import { TableRows } from "./Tables/TableRows/TableRows"
 
 export function PortfolioPageList({
     data,

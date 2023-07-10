@@ -1,5 +1,6 @@
 .selectBtn {
     color: var(--color-base-accent);
+    margin-left: 12px;
     width: 150px;
     height: 30px;
     background-color: var(--color-light-accent);
@@ -15,7 +16,7 @@
 
 .tableWrapper {
     margin-top: 10px;
-    height: 550px;
+    height: calc(100vh - var(--portfolio-header-height) - var(--header-height) - 35px);
     overflow-y: scroll;
     position: relative;
 }
@@ -26,12 +27,12 @@
     border-radius: 10px;
     width: 100%;
     border-spacing: 0;
+    border-top-left-radius: 10px;
 }
 
 .tableThead {
     position: sticky;
     top: 0;
-    background-color: #f9f9f9;
     z-index: 10;
 
     tr {
@@ -153,10 +154,11 @@
     box-shadow: 0 0 1px 0 var(--color-base-accent);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     width: fit-content;
     border-radius: 10px;
     margin: 0 auto;
+    width: 100px;
 }
 
 tr {
@@ -174,9 +176,14 @@ tr {
     color: var(--color-white);
     font-weight: bold;
     border-radius: 10px;
-    width: 100px;
+    width: 60px;
     height: 30px;
     cursor: pointer;
+}
+
+.editBtn svg {
+    width: 24px;
+    height: 24px;
 }
 
 .editBtn:hover {
@@ -184,28 +191,27 @@ tr {
     transition: 0.1s;
 }
 
-.deleteIcon:hover {
-    stroke: var(--color-base-accent);
+.deleteBtn {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    margin-left: 5px;
 }
 
-.deleteIcon:active {
+.deleteBtn:hover svg {
+    stroke: var(--color-moderate-accent);
+}
+
+.deleteBtn:hover {
+    stroke: var(--color-dark-accent);
+}
+
+.deleteBtn:active {
     stroke: var(--color-dark-accent);
 }
 
 .editBtn:active {
     background-color: var(--color-base-accent);
-}
-
-.editIcon,
-.deleteIcon {
-    margin-right: 10px;
-    width: 20px;
-    cursor: pointer;
-}
-
-.deleteIcon {
-    stroke: var(--color-dark-accent);
-    margin-left: 5px;
 }
 
 .status {
@@ -256,6 +262,14 @@ tr {
 
 .icon:active {
     fill: var(--color-base-accent);
+}
+
+.className {
+    width: 30px;
+}
+
+.className path {
+    width: 30px;
 }
 
 @media screen and (max-width: 1250px) {

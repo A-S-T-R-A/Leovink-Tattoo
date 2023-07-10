@@ -19,6 +19,7 @@
     justify-content: center;
     gap: 10px;
     width: 100%;
+    max-height: 357px;
     height: fit-content;
     color: var(--color-base-accent);
     background-color: var(--color-white);
@@ -98,12 +99,18 @@
 }
 
 .selectBtn {
-    border: none;
+    color: var(--color-base-accent);
+    margin-left: 12px;
+    width: 150px;
+    height: 30px;
     background-color: var(--color-light-accent);
-    width: 120px;
-    height: 40px;
-    border-radius: 10px;
-    color: var(--color-dark-accent);
+    box-shadow: 1px 1px 0 0 var(--color-base-accent);
+    border: none;
+}
+
+.selectBtn:hover {
+    color: white;
+    background-color: var(--color-base-light-accent);
     cursor: pointer;
 }
 
@@ -115,19 +122,29 @@
 }
 
 .btns {
-    width: 100%;
-    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
     border-radius: 10px;
-    padding: 0 5px;
+    padding: 5px;
     background-color: var(--color-light-accent);
     border-top: 1px solid var(--color-moderate-accent);
     border-radius: 1px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+}
+
+.editBtn svg,
+.deleteBtn svg {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.editBtn svg:hover,
+.deleteBtn svg:hover {
+    stroke: var(--color-moderate-accent);
 }
 
 .statusPublished,

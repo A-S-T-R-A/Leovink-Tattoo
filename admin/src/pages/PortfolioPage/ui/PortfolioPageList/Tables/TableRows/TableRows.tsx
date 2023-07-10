@@ -1,11 +1,11 @@
 import { useState } from "react"
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
-import { ITattooImage, ViewType } from "../../../types/types"
+import { ITattooImage, ViewType } from "../../../../types/types"
 import styles from "./TableRows.module.scss"
-import { EditTattooImage } from "../../editTattooImage/EditTattoImage"
-import { DeleteTattooImage } from "../../deleteTattooImage/DeleteTattooImage"
-import { EditBulkTattooImages } from "../../editBulkTattooImages/EditBulkTattooImages"
-import { DeleteBulkTattooImages } from "../../deleteBulkTattooImages/DeleteBulkTattooImages"
+import { EditTattooImage } from "../../../editTattooImage/EditTattoImage"
+import { DeleteTattooImage } from "../../../deleteTattooImage/DeleteTattooImage"
+import { EditBulkTattooImages } from "../../../editBulkTattooImages/EditBulkTattooImages"
+import { DeleteBulkTattooImages } from "../../../deleteBulkTattooImages/DeleteBulkTattooImages"
 import { IFilter } from "features/portfolioFilters/types/types"
 import { defaultLanguage } from "shared/const/languages"
 import { DeleteIcon, EditIcon } from "shared/assets/icons"
@@ -57,15 +57,13 @@ export function TableRows({
                 </button>
                 {selected.length === 1 && (
                     <>
-                        <EditTattooImage
-                            id={selected[0]}
+                        <EditBulkTattooImages
+                            imagesId={selected}
                             triggerRefetch={triggerRefetch}
-                            data={data}
                             filtersData={filtersData}
-                            unselectAllHandler={unselectAllHandler}
                         />
-                        <DeleteTattooImage
-                            id={selected[0]}
+                        <DeleteBulkTattooImages
+                            imagesId={selected}
                             triggerRefetch={triggerRefetch}
                             unselectAllHandler={unselectAllHandler}
                         />
@@ -143,20 +141,21 @@ export function TableRows({
                                     })}
                                     <td className={styles.editDelete}>
                                         <div className={styles.editDeleteInternal}>
-                                            <button className={styles.editBtn}>
-                                                <p>Edit</p>
+                                            <div className={styles.editTattooBlock}>
                                                 <EditTattooImage
                                                     id={item.id}
                                                     triggerRefetch={triggerRefetch}
                                                     data={data}
                                                     filtersData={filtersData}
                                                     unselectAllHandler={unselectAllHandler}
+                                                    className={styles.editBtn}
                                                 />
-                                            </button>
+                                            </div>
                                             <DeleteTattooImage
                                                 id={id}
                                                 triggerRefetch={triggerRefetch}
                                                 unselectAllHandler={unselectAllHandler}
+                                                className={styles.deleteBtn}
                                             />
                                         </div>
                                     </td>
