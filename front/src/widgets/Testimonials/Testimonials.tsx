@@ -13,7 +13,7 @@ export function Testimonials({
     language,
     defaultLanguage,
 }: {
-    data: ITestimonialsData[]
+    data: ITestimonialsData[] | null
     title: string
     showMore: string
     cta: string
@@ -21,9 +21,10 @@ export function Testimonials({
     defaultLanguage: LanguageType
 }) {
     const link = language === defaultLanguage ? "/testimonials" : `/${language}/testimonials`
+    if (!data) return null
     return (
         <Section title={title}>
-            {data.map((item, index, array) => (
+            {data.slice(0, 2).map((item, index, array) => (
                 <Testimonial data={item} cta={cta} isWithBorder={index !== array.length - 1} />
             ))}
             <ShowMoreLink to={link} text={showMore} className={styles.showMore} />

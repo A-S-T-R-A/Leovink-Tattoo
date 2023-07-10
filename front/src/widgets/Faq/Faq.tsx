@@ -12,13 +12,14 @@ export function Faq({
     language,
     defaultLanguage,
 }: {
-    data: IFaqData[]
+    data: IFaqData[] | null
     title: string
     button: string
     language: LanguageType
     defaultLanguage: LanguageType
 }) {
     const link = language === defaultLanguage ? "/faq" : `/${language}/faq`
+    if (!data) return null
     return (
         <Section title={title}>
             <FaqBlock data={data.filter(item => item.title === "index")[0]} isWithoutTitle />
