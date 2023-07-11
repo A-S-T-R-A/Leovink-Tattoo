@@ -1,4 +1,4 @@
-import type { IArtistData } from "../types/types"
+/* import type { IArtistData } from "../types/types"
 import a1 from "./a1.jpg"
 import a2 from "./a2.jpg"
 import a3 from "./a3.jpg"
@@ -37,4 +37,4 @@ export const data: IArtistData[] = [
         img: a4,
         slug: "",
     },
-]
+] */

@@ -15,7 +15,6 @@ export interface IFilter {
 
 export interface IFiltersData {
     filters: IFilter[]
-    reset: { en: string; ro: string; ru: string }
 }
 
 export interface ISocialMedia {
