@@ -93,6 +93,8 @@ export function PortfolioPage({
         }))
     }, [globalFiltersData])
 
+    const all = language === "en" ? "All" : language === "ru" ? "Все" : "Toate"
+
     return (
         <>
             <ModalGallery
@@ -110,7 +112,7 @@ export function PortfolioPage({
                             <Dropdown
                                 key={index}
                                 options={options}
-                                firstOptionText={`All ${name}`}
+                                firstOptionText={`${all} ${name}`}
                                 value={filters?.[name] || ("" as string)}
                                 onChange={value =>
                                     setFilters((prev: any) => ({ ...prev, [name]: value }))
