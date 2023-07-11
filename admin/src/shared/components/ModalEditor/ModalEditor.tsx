@@ -50,8 +50,12 @@ export function ModalEditor(props: IModalEditor) {
             </div>
             {children}
             <div className={styles.btnContainer}>
-                <button onClick={onSaveClick}>save</button>
-                <button onClick={onDiscardClick}>discard</button>
+                <button onClick={onSaveClick} className={styles.btn}>
+                    save
+                </button>
+                <button onClick={onDiscardClick} className={styles.btn}>
+                    discard
+                </button>
             </div>
         </Modal>
     )

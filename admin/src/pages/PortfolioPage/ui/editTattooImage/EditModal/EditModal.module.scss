@@ -116,19 +116,24 @@
     }
 
     .button {
-        color: var(--color-base-accent);
-        margin-left: 12px;
-        width: 150px;
+        max-width: 150px;
+        margin: 0 5px 0 auto;
         height: 30px;
-        background-color: var(--color-light-accent);
-        box-shadow: 1px 1px 0 0 var(--color-base-accent);
-        border: none;
-        margin-top: 15px;
-    }
-
-    .button:hover {
-        color: white;
-        background-color: var(--color-base-light-accent);
+        white-space: pre-wrap;
+        display: flex;
+        align-items: center;
+        padding: 3px 10px;
+        box-sizing: content-box;
+        border: 1px solid var(--color-light-accent);
+        border-radius: 3px;
         cursor: pointer;
+        background-color: var(--color-moderate-accent);
+        color: var(--color-base);
+        font-weight: bold;
+
+        &:hover {
+            transition: 0.1s ease;
+            filter: brightness(80%);
+        }
     }
 }

@@ -18,12 +18,13 @@
     justify-content: center;
     transition: 0.3s all ease;
     cursor: pointer;
+    background-color: rgba(13, 17, 17, 0.707);
 }
 
 .content {
     padding: 20px;
     border-radius: 12px;
-    background: #0d1111ff;
+    background: var(--color-bg-modal);
     transition: 0.3s all ease;
     max-width: 60%;
 }
