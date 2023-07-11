@@ -28,6 +28,6 @@ export const routes: IRoute[] = [
     { Svg: TestimonialsIcon, path: "/reviews", name: "Reviews", private: true },
     { Svg: ArtistsIcon, path: "/artists", name: "Artists", private: true },
     { Svg: FaqIcon, path: "/faq", name: "FAQ", private: true },
-    { Svg: OtherIcon, path: "/other", name: "*Other", allowedRoles: ["dev"], private: true },
+    { Svg: OtherIcon, path: "/other", name: "Other", private: true },
     { Svg: OtherIcon, path: "/test", name: "*Test", allowedRoles: ["dev"], private: true },
 ]

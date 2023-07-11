@@ -71,7 +71,7 @@ function App() {
                     <Route
                         path="/other"
                         element={
-                            <RequireAuth allowedRoles={["dev"]}>
+                            <RequireAuth>
                                 <OtherPage />
                             </RequireAuth>
                         }

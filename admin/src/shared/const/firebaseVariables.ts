@@ -10,6 +10,7 @@ import {
     getDoc,
     getDocs,
     query,
+    setDoc,
     updateDoc,
     where,
 } from "firebase/firestore"
@@ -131,6 +132,29 @@ export async function fetchSectionData(
     const data = raw ? newData : reformattedNewData
     return data
 }
+
+/* export async function copyDatabase() {
+    for (const language in LANGUAGE_DOCUMENT) {
+        for (const section in SECTION_COLLECTION) {
+            const ref = collection(
+                db,
+                "dev_data",
+                LANGUAGE_DOCUMENT[language],
+                SECTION_COLLECTION[section]
+            )
+            const docs = await getDocs(ref)
+            if (docs.empty) continue
+            const data = docs.docs[0].data()
+            const newRef = collection(
+                db,
+                "data",
+                LANGUAGE_DOCUMENT[language],
+                SECTION_COLLECTION[section]
+            )
+            await addDoc(newRef, data)
+        }
+    }
+} */
 
 /* export async function copyPaste() {
     for (const lang of allLanguages) {
