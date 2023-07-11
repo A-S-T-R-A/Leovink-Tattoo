@@ -1,5 +1,4 @@
 import { Alert, Confirm } from "shared/ui/CustomNotifications"
-import { MarkdownTextarea } from "shared/ui/MarkdownTextarea/MarkdownTextarea"
 
 export function DevPage() {
     async function saveClickHandler() {

@@ -11,13 +11,13 @@ export function Sidebar() {
     return (
         <div className={styles.wrapper}>
             <div className={styles.container}>
-                {routes.map(item => {
+                {routes.map((item, index) => {
                     const { Svg } = item
                     if (item.private && user === "none") return null
                     if (item.allowedRoles && !item.allowedRoles?.includes(user)) return null
 
                     return (
-                        <div className={styles.linkBlock}>
+                        <div key={index} className={styles.linkBlock}>
                             <Link
                                 className={classNames(styles.link, {
                                     [styles.currentLink]: pathname === item.path,

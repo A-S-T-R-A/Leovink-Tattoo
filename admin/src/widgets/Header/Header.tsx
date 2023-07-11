@@ -2,6 +2,7 @@ import { AuthComponent } from "features/authByGoogle"
 import styles from "./Header.module.scss"
 import { useLocation } from "react-router-dom"
 import { routes } from "shared/config/routes"
+import { ToFronBtn } from "shared/ui/ToFronBtn/ToFronBtn"
 
 export function Header() {
     const { pathname } = useLocation()
@@ -15,7 +16,8 @@ export function Header() {
                     {SvgComponent && <SvgComponent className={styles.icon} />}
                     <h3 className={styles.section}>{section}</h3>
                 </div>
-                <div className={styles.dropdownContainer}>
+                <div className={styles.btnsContainer}>
+                    <ToFronBtn />
                     <AuthComponent />
                 </div>
             </div>
