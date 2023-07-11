@@ -22,7 +22,9 @@ export function Footer({
     socialsData: ISocialMedia[]
 }) {
     if (!data || !addressData) return null
-    const footerList = reformatAndSortObjectValuesToArray(data)
+    const footerList = Object.entries(data)
+        .sort((a, b) => Number(a[0]) - Number(b[0]))
+        .map(([_, value]) => value)
     const { location, mail, phone } = addressData
     return (
         <footer className={styles.container}>
