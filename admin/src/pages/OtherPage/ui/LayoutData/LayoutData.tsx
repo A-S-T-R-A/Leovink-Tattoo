@@ -190,7 +190,6 @@ export function LayoutData({
                 onDiscardClick={discardClickHandler}
             >
                 <div className={styles.wrapperModal}>
-                    {" "}
                     <div className={styles.modalContainer}>
                         <p>Footer List</p>
                         <Input
