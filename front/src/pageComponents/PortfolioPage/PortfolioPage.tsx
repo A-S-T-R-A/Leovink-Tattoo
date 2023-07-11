@@ -17,6 +17,7 @@ export function PortfolioPage({
     button,
     globalFiltersData,
     fetchedData,
+    filtersButton,
     language,
 }: {
     globalFiltersData: IFiltersData | null
@@ -33,6 +34,7 @@ export function PortfolioPage({
     button: string
     fetchedData: ITattooImage[] | []
     language: LanguageType
+    filtersButton: string
 }) {
     const [isOpen, setIsOpen] = useState(false)
     const [modalData, setModalData] = useState<ITattooImage[]>([])
@@ -118,7 +120,7 @@ export function PortfolioPage({
                     })}
                     {globalFiltersData && (
                         <Button className={styles.btn} onClick={resetFiltersHandler}>
-                            {globalFiltersData?.reset[language]}
+                            {filtersButton}
                             <AntiClockwiseIcon />
                         </Button>
                     )}
