@@ -181,6 +181,7 @@ export function LayoutData({
         <>
             <LoadingModal isLoading={isLoading} />
             <ModalEditor
+                withTranslation
                 isOpen={isOpen}
                 onClose={() => setIsOpen(false)}
                 onChangeLanguage={onChangeLanguage}
