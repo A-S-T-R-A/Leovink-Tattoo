@@ -28,7 +28,7 @@ import {
 
 const IS_DEV = import.meta.env.MODE === "development"
 
-export const PORTFOLIO_PICTURES_DB = IS_DEV ? "dev_portfolio_pictures" : "portfolio_pictures"
+export const PORTFOLIO_PICTURES_DB = "dev_portfolio_pictures"
 const DATA_COLLECTION = IS_DEV ? "dev_data" : "data"
 export const TATTOO_IMAGES_BUCKET = IS_DEV ? "dev_tattoo_images" : "tattoo_images"
 export const DATA_BUCKET = {
@@ -132,6 +132,14 @@ export async function fetchSectionData(
     const data = raw ? newData : reformattedNewData
     return data
 }
+
+/* export async function copyGlobal() {
+    const ref = doc(db, "dev_data", GLOBAL_DATA)
+    const newDoc = await getDoc(ref)
+    const newData = newDoc.data()
+    const newRef = doc(db, "data", GLOBAL_DATA)
+    await setDoc(newRef, newData)
+} */
 
 /* export async function copyDatabase() {
     for (const language in LANGUAGE_DOCUMENT) {
