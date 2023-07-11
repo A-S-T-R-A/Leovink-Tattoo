@@ -3,6 +3,7 @@
     height: calc(100vh - var(--portfolio-header-height) - var(--header-height));
     overflow-y: scroll;
     overflow-x: hidden;
+    position: relative;
 }
 
 .table {
@@ -182,14 +183,4 @@
         grid-template-columns: repeat(auto-fit, minmax(200px, 30%));
         width: 100%;
     }
-}
-
-::-webkit-scrollbar {
-    background-color: transparent;
-    width: 3px;
-}
-
-::-webkit-scrollbar-thumb {
-    width: 3px;
-    background-color: var(--color-light-brown);
 }

@@ -40,7 +40,8 @@
             &:first-child {
                 border-top-left-radius: 10px;
             }
-
+        }
+        th {
             &:last-child {
                 border-top-right-radius: 10px;
             }
@@ -93,12 +94,6 @@
     justify-content: center;
     color: var(--color-base-accent);
 }
-
-/* .table td:first-child {
-    display: flex;
-    padding: 0;
-    gap: 10px;
-} */
 
 .photo,
 .icon {
@@ -276,4 +271,13 @@ tr {
         width: 250px;
         white-space: break-spaces;
     }
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 3px;
+    background-color: darkgray;
 }

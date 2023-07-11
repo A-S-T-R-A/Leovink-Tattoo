@@ -145,6 +145,7 @@ export function TableIcons({
                         )
                     })}
                 </section>
+                <div className={styles.scrollBar} />
             </div>
         </article>
     )

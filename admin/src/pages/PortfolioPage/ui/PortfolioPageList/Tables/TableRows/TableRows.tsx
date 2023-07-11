@@ -98,7 +98,7 @@ export function TableRows({
                             <th>Edit/Delete</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className={styles.tableContent}>
                         {filteredData.map((item, index) => {
                             const { id, img, filters } = item
 
