@@ -62,13 +62,13 @@ export function EditModal(props: IEditModalProps) {
 
     return (
         <Modal isOpen={isOpen || isLoading} onClose={() => null} contentClassName={styles.content}>
+            <div className={styles.cross} onClick={onClose}>
+                <PlusIcon />
+            </div>
             {isLoading ? (
                 "Loading..."
             ) : (
                 <div className={styles.container}>
-                    <div className={styles.cross} onClick={onClose}>
-                        <PlusIcon />
-                    </div>
                     <div className={styles.contentLine}>
                         <p>ID:</p>
                         <Dropdown
