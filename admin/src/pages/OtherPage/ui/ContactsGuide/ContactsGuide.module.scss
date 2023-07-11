@@ -18,19 +18,18 @@
         font-size: 14px;
         width: fit-content;
         min-width: 100px;
-        height: fit-content;
+        min-height: fit-content;
         border-radius: 5px;
         border: 1px solid var(--color-dark-accent);
         background-color: var(--color-dark-accent);
         color: white;
-        padding: 10px 10px;
+        padding: 5px 10px;
         margin-left: auto;
         cursor: pointer;
         transition: all 0.3s ease;
 
         &:hover {
-            background-color: var(--color-light-accent);
-            color: var(--color-dark-accent);
+            filter: brightness(80%);
         }
     }
 }
