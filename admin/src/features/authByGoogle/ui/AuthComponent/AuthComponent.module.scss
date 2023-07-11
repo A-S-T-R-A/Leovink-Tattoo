@@ -6,13 +6,17 @@
 }
 
 .slider {
-    background-color: var(--color-navbar);
+    background-color: var(--color-dark-bg);
     width: 200px;
     height: 60px;
     gap: 10px;
     display: flex;
     align-items: center;
     cursor: pointer;
+}
+
+.name {
+    color: var(--color-base-inverted) !important;
 }
 
 .avatar {
@@ -45,24 +49,21 @@
     padding: 5px 10px;
     margin-top: 10px;
     background-color: var(--color-dark-accent);
-    color: white;
-    fill: white;
+    color: var(--color-base-inverted);
+    fill: var(--color-base-inverted);
     transform: translateY(-150%);
     z-index: -1;
 }
 
 .logOutBtn:hover {
-    background-color: var(--color-light-accent);
-    color: var(--color-dark-accent);
-    fill: var(--color-dark-accent);
-    box-shadow: 0 0 1px 0 var(--color-dark-accent);
+    filter: brightness(80%);
 }
 
 .loginBtn {
     width: 80px;
     height: 40px;
-    color: var(--color-light-accent);
-    background-color: var(--color-base-accent);
+    color: var(--color-base-inverted);
+    background-color: var(--color-moderate-accent);
     transition: 0.2s ease;
     box-shadow: 0 1px 0 0 var(--color-dark-accent);
     border-radius: 5px;
@@ -72,8 +73,7 @@
     margin-right: 20px;
 
     &:hover {
-        background-color: var(--color-light-accent);
-        color: var(--color-base-accent);
+        filter: brightness(80%);
     }
 }
 

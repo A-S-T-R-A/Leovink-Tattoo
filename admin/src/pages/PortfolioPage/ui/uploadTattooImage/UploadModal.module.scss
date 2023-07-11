@@ -38,8 +38,6 @@
 .uploadBtn {
     width: 150px;
     height: 40px;
-    color: var(--color-base-accent);
-    background-color: var(--color-light-accent);
     transition: 0.1s ease;
     box-shadow: 0 1px 0 0 var(--color-dark-accent);
     border-radius: 5px;
@@ -47,19 +45,8 @@
     font-weight: bold;
     border: none;
     cursor: pointer;
-    animation: glow 2s infinite alternate;
-
-    @keyframes glow {
-        0% {
-            box-shadow: 3px 3px 0 0 var(--color-moderate-accent);
-        }
-        50% {
-            box-shadow: 0 3px 4px 0 var(--color-moderate-accent);
-        }
-        100% {
-            box-shadow: 0 0 3px 2px var(--color-moderate-accent);
-        }
-    }
+    background-color: var(--color-moderate-accent);
+    color: var(--color-base);
 }
 
 .uploadBtn:hover {

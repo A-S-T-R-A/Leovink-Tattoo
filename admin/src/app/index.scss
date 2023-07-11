@@ -47,16 +47,6 @@ a:active {
 }
 
 :root {
-    --color-accent: #e2ab4d;
-    --color-base: #020b13;
-    --color-bg: #fff1e9;
-    --color-darkgray: rgb(49, 49, 49);
-    --color-gray: rgb(128, 128, 128);
-    --color-lightgray: rgb(189, 189, 189);
-    --color-bg-modal: rgb(212, 212, 212);
-    --color-modal-overlay: rgba(12 31 49 / 49%);
-    --color-error: #f82929;
-
     --font-size-h1: 36px;
     --font-size-h2: 28px;
     --font-size-h3: 24px;
@@ -71,20 +61,18 @@ a:active {
     --header-height: 60px;
     --portfolio-header-height: 130px;
     --sidebar-width: 300px;
-    /*  --transition: transform 0.2 ease-in; */
     --color-white: #fff;
-    --color-sidebar: #003153;
-    --color-base-accent: #007bd3;
-    --color-moderate-accent: #aedafe;
-    --color-navbar: #002743;
     --color-black: #000;
-    --color-dark-accent: #004373;
-    --color-light-accent: #edf7ff;
-    --color-table-initial: #6e6e6e;
-    --color-table-second: #f7f7f7;
-    --color-status-dropdown: #6a6a6a;
-    --color-table-initial-block: #797979;
-    --color-light-brown: #c5b1a6;
+    --color-base: #000;
+    --color-base-inverted: whitesmoke;
+    --color-bg: rgb(227, 227, 222);
+    --color-light-bg: whitesmoke;
+    --color-dark-bg: #0d1111ff;
+    --color-dark-accent: #b6955d;
+    --color-base-accent: #d8bd8e;
+    --color-moderate-accent: #d3bd97;
+
+    --color-error: #f82929;
     //
     --font-size-blockTable: 14px;
     --font-size-rowTable: 14px;

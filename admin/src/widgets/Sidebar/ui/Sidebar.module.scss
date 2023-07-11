@@ -1,6 +1,6 @@
 .wrapper {
     height: 100%;
-    background-color: var(--color-light-accent);
+    background-color: var(--color-dark-bg);
     width: 300px;
     position: fixed;
     box-shadow: 0 0 1px 0 var(--color-base-accent);
@@ -36,27 +36,22 @@
         box-shadow: 1px 1px 0 0 var(--color-moderate-accent);
         text-decoration: none;
         transition: ease 0.3s;
+        font-weight: 500;
 
         &.currentLink {
             display: flex;
             width: 250px;
             padding: 30px;
-            color: white;
+            color: var(--color-base);
             border-radius: 10px;
             background-color: var(--color-moderate-accent);
             box-shadow: 0 1px 0 0 var(--color-base-accent);
             border-right: 1px solid var(--color-base-accent);
-            transform: translateX(10%);
+            transform: translateX(9%);
         }
     }
     .linkBlock:hover .link {
-        transform: translateX(10%);
         cursor: pointer;
-        color: var(--color-white);
-        background-color: var(--color-moderate-accent);
-        border-right: 1px solid var(--color-base-accent);
-        box-shadow: 0 1px 0 0 var(--color-base-accent);
-        border-radius: 10px;
     }
 
     .svg path {

@@ -19,11 +19,11 @@
         width: 30px;
         height: 30px;
 
-        stroke: var(--color-base);
+        stroke: white;
         transition: all 0.3s ease;
 
         &:hover {
-            stroke: var(--color-accent);
+            filter: brightness(80%);
         }
     }
 }
