@@ -20,6 +20,7 @@ import {
 import { defaultNewData } from "../../const/const"
 import { Alert } from "shared/ui/CustomNotifications"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
+import { ModalVideo } from "shared/components/ModalVideo/ModalVideo"
 
 export function EditParagraph({
     id,
@@ -162,7 +163,7 @@ export function EditParagraph({
                     </div>
                     <div className={styles.videoContainer}>
                         Video:
-                        <video src={previewAssets.video.url || newData.video} />
+                        <ModalVideo video={previewAssets.video.url || newData.video} />
                         <EditVideo onChange={editVideoChangeHandler} />
                     </div>
                     <div>id: {id}</div>
@@ -187,9 +188,7 @@ export function EditParagraph({
                         <Input
                             label="Tattoo Artist"
                             value={newData.artist}
-                            onChange={value =>
-                                setNewData(prev => ({ ...prev, tattoo_artist: value }))
-                            }
+                            onChange={value => setNewData(prev => ({ ...prev, artist: value }))}
                         />
                     </div>
                     <div>
