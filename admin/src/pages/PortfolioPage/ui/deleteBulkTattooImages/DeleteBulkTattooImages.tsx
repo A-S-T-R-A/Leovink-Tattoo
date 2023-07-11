@@ -10,6 +10,7 @@ import { useState } from "react"
 import { useUserRole } from "features/authByGoogle"
 import { Alert, Confirm } from "shared/ui/CustomNotifications"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
+import styles from "./DeleteBulkTattooImages.module.scss"
 
 export function DeleteBulkTattooImages({
     imagesId,
@@ -70,7 +71,9 @@ export function DeleteBulkTattooImages({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <button onClick={clickHandler}>Delete Selected</button>
+            <button onClick={clickHandler} className={styles.btn}>
+                Delete Selected
+            </button>
         </>
     )
 }

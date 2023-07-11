@@ -11,6 +11,7 @@ import { FAQPage } from "pages/FAQPage"
 import { OtherPage } from "pages/OtherPage"
 import { ArtistsPage } from "pages/ArtistsPage"
 import { DevPage } from "pages/DevPage"
+import { HomePage } from "pages/HomePage"
 
 function App() {
     return (
@@ -19,7 +20,7 @@ function App() {
             <Header />
             <div className="page-wrapper">
                 <Routes>
-                    <Route path="/" element={<div>Home</div>} />
+                    <Route path="/" element={<HomePage />} />
                     <Route
                         path="/portfolio"
                         element={

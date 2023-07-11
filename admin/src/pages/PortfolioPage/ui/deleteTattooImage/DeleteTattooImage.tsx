@@ -16,10 +16,12 @@ export function DeleteTattooImage({
     id,
     triggerRefetch,
     unselectAllHandler,
+    className,
 }: {
     id: number
     triggerRefetch: () => void
     unselectAllHandler: () => void
+    className: string
 }) {
     const [isLoading, setIsLoading] = useState(false)
 
@@ -63,7 +65,7 @@ export function DeleteTattooImage({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <div onClick={clickHandler} className={styles.btn}>
+            <div onClick={clickHandler} className={className}>
                 <DeleteIcon />
             </div>
         </>

@@ -69,8 +69,8 @@ export function EditModal(props: IEditModalProps) {
                     <div className={styles.cross} onClick={onClose}>
                         <PlusIcon />
                     </div>
-                    <div>
-                        id:
+                    <div className={styles.contentLine}>
+                        <p>ID:</p>
                         <Dropdown
                             options={dropdownNumbers}
                             value={newData.id?.toString()}
@@ -79,14 +79,14 @@ export function EditModal(props: IEditModalProps) {
                             }
                         />
                     </div>
-                    <div>
-                        img:
+                    <div className={styles.contentLine}>
+                        <p>Image:</p>
                         <ModalImage url={newData.img} className={styles.img} />
                     </div>
                     {dropdownOptions.map((item, index) => {
                         return (
-                            <div key={item.name + index}>
-                                {item.name}:
+                            <div key={item.name + index} className={styles.contentLine}>
+                                <p>{item.name}:</p>
                                 <Dropdown
                                     options={item.options}
                                     value={newData.filters[item.name] as string}
@@ -101,7 +101,7 @@ export function EditModal(props: IEditModalProps) {
                         )
                     })}
                     <div className={styles.description}>
-                        <p>description:</p>
+                        <p>Description:</p>
                         <div>
                             <Textarea
                                 value={newData.alt[currentLanguage]}
@@ -118,9 +118,10 @@ export function EditModal(props: IEditModalProps) {
                             />
                         </div>
                     </div>
-                    <div>
-                        published:
+                    <div className={styles.published}>
+                        <p>Published:</p>
                         <input
+                            className={styles.idCheckbox}
                             type="checkbox"
                             checked={newData.filters.isLive}
                             onChange={e =>
@@ -131,8 +132,14 @@ export function EditModal(props: IEditModalProps) {
                             }
                         />
                     </div>
-                    <button onClick={saveClickHandler}>Save</button>
-                    <button onClick={discardClickHandler}>Discard</button>
+                    <div className={styles.buttons}>
+                        <button className={styles.button} onClick={saveClickHandler}>
+                            Save
+                        </button>
+                        <button className={styles.button} onClick={discardClickHandler}>
+                            Discard
+                        </button>
+                    </div>
                 </div>
             )}
         </Modal>

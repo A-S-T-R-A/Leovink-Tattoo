@@ -1,0 +1,17 @@
+.btn {
+    width: max-content;
+    height: 40px;
+    color: var(--color-base-inverted);
+    background-color: transparent;
+    border: 1px solid var(--color-base-inverted);
+    border-radius: 5px;
+    padding: 0 20px;
+    transition: filter 0.2s ease;
+    cursor: pointer;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+
+    &:hover {
+        filter: brightness(80%);
+    }
+}
