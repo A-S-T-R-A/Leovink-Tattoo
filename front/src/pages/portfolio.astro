@@ -27,6 +27,7 @@ try{
          formTitle={globalData?.sectionNames[language].form || 'Book an appointment'} 
          formData={globalData?.formData[language] || null}
          button={globalData?.buttons[language].cta || 'Book an appointment'}
+         filtersButton={globalData?.buttons[language].resetFilters || 'Reset'}
          globalFiltersData={globalData?.filtersData || null}
          fetchedData={imagesData || []}
          language={language}
