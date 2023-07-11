@@ -105,7 +105,6 @@ export function Edit({
         setIsLoading(false)
         setIsOpen(false)
         setIsLoading(false)
-        refreshNewData()
         triggerRefetch()
     }
 
@@ -121,7 +120,10 @@ export function Edit({
                 onDiscardClick={discardClickHandler}
             >
                 <div className={styles.cont}>
-                    <ModalImage url={newData?.icon || previewImage.url} className={styles.img} />
+                    <ModalImage
+                        url={previewImage.url || newData?.icon || ""}
+                        className={styles.img}
+                    />
                     <EditImage onChange={editImageChangeHandler} />
                     <Input
                         value={newData?.link || ""}
