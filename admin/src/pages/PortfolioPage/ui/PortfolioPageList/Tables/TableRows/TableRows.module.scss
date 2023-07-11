@@ -1,17 +1,18 @@
 .selectBtn {
-    color: var(--color-base-accent);
     margin-left: 12px;
     width: 150px;
     height: 30px;
-    background-color: var(--color-light-accent);
-    box-shadow: 1px 1px 0 0 var(--color-base-accent);
     border: none;
-}
-
-.selectBtn:hover {
-    color: white;
-    background-color: var(--color-base-light-accent);
     cursor: pointer;
+    background-color: var(--color-moderate-accent);
+    border-radius: 3px;
+    color: var(--color-base);
+    font-weight: 500;
+    margin-top: 10px;
+
+    &:hover {
+        filter: brightness(80%);
+    }
 }
 
 .tableWrapper {
@@ -74,7 +75,7 @@
     }
 
     &:nth-child(2n) {
-        background-color: var(--color-light-accent);
+        background-color: var(--color-base-inverted);
     }
 
     &:last-child {
@@ -92,7 +93,8 @@
 
 .table td {
     justify-content: center;
-    color: var(--color-base-accent);
+    color: var(--color-base);
+    font-weight: 500;
 }
 
 .photo,
@@ -181,8 +183,7 @@ tr {
 }
 
 .editBtn:hover {
-    background-color: var(--color-base-light-accent);
-    transition: 0.1s;
+    filter: brightness(80%);
 }
 
 .deleteBtn {
@@ -190,22 +191,13 @@ tr {
     height: 24px;
     cursor: pointer;
     margin-left: 5px;
-}
 
-.deleteBtn:hover svg {
-    stroke: var(--color-moderate-accent);
-}
-
-.deleteBtn:hover {
-    stroke: var(--color-dark-accent);
-}
-
-.deleteBtn:active {
-    stroke: var(--color-dark-accent);
-}
-
-.editBtn:active {
-    background-color: var(--color-base-accent);
+    &:hover {
+        filter: brightness(80%);
+        svg {
+            filter: brightness(80%);
+        }
+    }
 }
 
 .status {
@@ -225,7 +217,7 @@ tr {
     gap: 5px;
     border-radius: 10px;
     font-weight: bold;
-    color: var(--color-base-accent);
+    color: var(--color-base);
 }
 
 .publishedIcon path {

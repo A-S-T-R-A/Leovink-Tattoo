@@ -1,9 +1,10 @@
 .wrapper {
     width: 100%;
-    height: calc(100vh - var(--portfolio-header-height) - var(--header-height));
+    height: calc(100vh - var(--portfolio-header-height) - var(--header-height) - 20px);
     overflow-y: scroll;
     overflow-x: hidden;
     position: relative;
+    margin-top: 20px;
 }
 
 .table {
@@ -100,24 +101,25 @@
 }
 
 .selectBtn {
-    color: var(--color-base-accent);
     margin-left: 12px;
     width: 150px;
     height: 30px;
-    background-color: var(--color-light-accent);
-    box-shadow: 1px 1px 0 0 var(--color-base-accent);
     border: none;
+    cursor: pointer;
+    background-color: var(--color-moderate-accent);
+    border-radius: 3px;
+    color: var(--color-base);
+    font-weight: 500;
 }
 
 .selectBtn:hover {
-    color: white;
-    background-color: var(--color-base-light-accent);
-    cursor: pointer;
+    filter: brightness(80%);
 }
 
 .tattooCharacteristics {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
     gap: 5px;
     padding: 5px;
 }

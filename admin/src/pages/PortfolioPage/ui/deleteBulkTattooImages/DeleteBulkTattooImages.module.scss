@@ -1,15 +1,15 @@
 .btn {
-    color: var(--color-base-accent);
+    margin-left: 12px;
     width: 150px;
     height: 30px;
-    background-color: var(--color-white);
-    box-shadow: 1px 1px 0 0 var(--color-base-accent);
     border: none;
-    border-left: 1px solid var(--color-base-accent);
+    cursor: pointer;
+    background-color: var(--color-moderate-accent);
+    border-radius: 3px;
+    color: var(--color-base);
+    font-weight: 500;
 }
 
 .btn:hover {
-    color: white;
-    background-color: var(--color-base-light-accent);
-    cursor: pointer;
+    filter: brightness(80%);
 }
