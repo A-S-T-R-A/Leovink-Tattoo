@@ -15,10 +15,10 @@
 }
 
 .container {
+    width: 100%;
     display: flex;
-    text-align: center;
+    justify-content: center;
     align-items: center;
-    align-content: center;
 }
 
 .sectionContainer {
@@ -29,6 +29,12 @@
     top: auto;
     bottom: auto;
     cursor: pointer;
+}
+
+.btnsContainer {
+    display: flex;
+    align-items: center;
+    gap: 30px;
 }
 
 .icon path {
