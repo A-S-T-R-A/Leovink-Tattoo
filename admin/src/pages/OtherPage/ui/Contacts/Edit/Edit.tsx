@@ -73,6 +73,7 @@ export function Edit({
         <>
             <LoadingModal isLoading={isLoading} />
             <ModalEditor
+                withTranslation
                 isOpen={isOpen === "location"}
                 onClose={() => setIsOpen(null)}
                 onChangeLanguage={onChangeLanguage}

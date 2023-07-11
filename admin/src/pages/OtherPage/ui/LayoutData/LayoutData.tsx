@@ -181,6 +181,7 @@ export function LayoutData({
         <>
             <LoadingModal isLoading={isLoading} />
             <ModalEditor
+                withTranslation
                 isOpen={isOpen}
                 onClose={() => setIsOpen(false)}
                 onChangeLanguage={onChangeLanguage}
@@ -189,7 +190,6 @@ export function LayoutData({
                 onDiscardClick={discardClickHandler}
             >
                 <div className={styles.wrapperModal}>
-                    {" "}
                     <div className={styles.modalContainer}>
                         <p>Footer List</p>
                         <Input
