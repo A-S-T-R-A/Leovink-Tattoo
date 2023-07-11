@@ -1,6 +1,7 @@
 .container {
     width: 250px;
     background-color: var(--color-bg);
+
     div {
         margin-bottom: 5px;
     }
@@ -27,22 +28,19 @@
 .content {
     position: relative;
     background-color: var(--color-bg);
+    padding-top: 30px;
 
     .cross {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+        width: 25px;
+        height: 25px;
         > svg {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            cursor: pointer;
-            width: 25px;
-            height: 25px;
             stroke: black;
             transform: rotate(45deg);
             z-index: 1000;
-
-            &:hover {
-                stroke: var(--color-accent);
-            }
         }
     }
 
