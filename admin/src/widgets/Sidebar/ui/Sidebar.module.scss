@@ -14,7 +14,7 @@
     text-align: center;
     align-items: center;
     gap: 10px;
-    margin: 10px auto 0 auto;
+    margin: var(--header-height) auto 0 auto;
     color: var(--color-dark-accent);
 
     .linkBlock {

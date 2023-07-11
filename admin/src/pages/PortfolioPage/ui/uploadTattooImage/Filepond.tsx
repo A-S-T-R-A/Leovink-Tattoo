@@ -5,6 +5,7 @@ import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type"
 import FilePondPluginImagePreview from "filepond-plugin-image-preview"
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
 import "filepond/dist/filepond.min.css"
+import styles from "./Filepond.module.scss"
 
 interface IFilepond {
     files: FilePondFile[]

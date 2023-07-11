@@ -17,12 +17,14 @@ export function EditTattooImage({
     filtersData,
     triggerRefetch,
     unselectAllHandler,
+    className,
 }: {
     id: number
     data: ITattooImage[]
     filtersData: IFilter[]
     triggerRefetch: () => void
     unselectAllHandler: () => void
+    className?: string
 }) {
     const [isOpen, setIsOpen] = useState(false)
     const [newData, setNewData] = useState<ITattooImage>(defaultNewData)
@@ -121,7 +123,7 @@ export function EditTattooImage({
                 saveClickHandler={saveClickHandler}
                 discardClickHandler={discardClickHandler}
             />
-            <div onClick={openClickHandler} className={styles.btn}>
+            <div onClick={openClickHandler} className={className}>
                 <EditIcon />
             </div>
         </>

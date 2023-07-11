@@ -156,8 +156,12 @@ export function UploadModal({ triggerRefetch }: { triggerRefetch: () => void }) 
                         <>
                             <Filepond setFiles={setFiles} files={files} />
                             <div className={styles.buttons}>
-                                <Button onClick={saveClickHandler}>Save</Button>
-                                <Button onClick={discardClickHandler}>Discard</Button>
+                                <Button className={styles.button} onClick={saveClickHandler}>
+                                    Save
+                                </Button>
+                                <Button className={styles.button} onClick={discardClickHandler}>
+                                    Discard
+                                </Button>
                             </div>
                         </>
                     )}
