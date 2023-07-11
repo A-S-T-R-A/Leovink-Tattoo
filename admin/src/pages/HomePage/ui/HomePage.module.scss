@@ -29,7 +29,7 @@
 .horns {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(calc(-50% - var(--header-height) / 2));
     z-index: 2;
     filter: brightness(80%);
 }
@@ -42,16 +42,19 @@
     align-items: center;
     position: absolute;
     top: 50%;
+    transform: translateY(calc(-40% - var(--header-height) / 2));
+    gap: 10px;
 
     .first {
         color: #e7e7e0;
-        font-size: 46px;
+        font-size: 54px;
         font-weight: 500;
         text-shadow: 0 0 15px #9d822b;
     }
 
     .second {
         color: #e7e7e0;
+        font-size: 24px;
         text-shadow: 0 0 15px #9d822b;
     }
 }
