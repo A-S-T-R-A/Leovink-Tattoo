@@ -1,0 +1,15 @@
+.btn {
+    margin-left: 12px;
+    width: 150px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--color-moderate-accent);
+    border-radius: 3px;
+    color: var(--color-base);
+    font-weight: 500;
+}
+
+.btn:hover {
+    filter: brightness(80%);
+}

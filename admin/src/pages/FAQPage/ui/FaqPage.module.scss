@@ -60,7 +60,7 @@
     }
 
     .titleContainer {
-        background-color: rgba(255, 255, 255, 0.4);
+        background-color: var(--color-moderate-accent);
         border: 2px solid var(--color-base);
         display: grid;
         grid-template-columns: 50px 1fr 100px;

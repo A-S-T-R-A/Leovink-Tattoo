@@ -156,8 +156,14 @@ export function EditBulkTattooImages({
                                 }
                             />
                         </div>
-                        <button onClick={saveClickHandler}>Save</button>
-                        <button onClick={discardClickHandler}>Discard</button>
+                        <div className={styles.btnContainer}>
+                            <button onClick={saveClickHandler} className={styles.modalBtn}>
+                                Save
+                            </button>
+                            <button onClick={discardClickHandler} className={styles.modalBtn}>
+                                Discard
+                            </button>
+                        </div>
                     </>
                 )}
             </Modal>

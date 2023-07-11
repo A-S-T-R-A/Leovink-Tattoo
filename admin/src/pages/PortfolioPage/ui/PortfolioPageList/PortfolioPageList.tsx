@@ -9,6 +9,9 @@ import { DeleteBulkTattooImages } from "../deleteBulkTattooImages/DeleteBulkTatt
 import { IFilter } from "features/portfolioFilters/types/types"
 import { defaultLanguage } from "shared/const/languages"
 import { TableIcons } from "./Tables/TableIcons/TableIcons"
+import { DeleteIcon, EditIcon } from "shared/assets/icons"
+import { v4 as uuidv4 } from "uuid"
+import { TableRows } from "./Tables/TableRows/TableRows"
 
 export function PortfolioPageList({
     data,
@@ -45,6 +48,7 @@ export function PortfolioPageList({
         setSelected([])
     }
 
+    const uuid = uuidv4()
     const filterKeys = filtersData.map(item => item.title[defaultLanguage])
 
     return view === "icons" ? (
@@ -56,78 +60,12 @@ export function PortfolioPageList({
             filteredData={filteredData}
         />
     ) : (
-        <>
-            <div className={styles.tableButtons}>
-                <button onClick={selectAllHandler}>
-                    {filteredData.length === selected.length ? "Unselect All" : "Select All"}
-                </button>
-                {selected.length === 1 && (
-                    <>
-                        <EditTattooImage
-                            id={selected[0]}
-                            triggerRefetch={triggerRefetch}
-                            data={data}
-                            filtersData={filtersData}
-                            unselectAllHandler={unselectAllHandler}
-                        />
-                        <DeleteTattooImage
-                            id={selected[0]}
-                            triggerRefetch={triggerRefetch}
-                            unselectAllHandler={unselectAllHandler}
-                        />
-                    </>
-                )}
-                {selected.length > 1 && (
-                    <>
-                        <EditBulkTattooImages
-                            imagesId={selected}
-                            triggerRefetch={triggerRefetch}
-                            filtersData={filtersData}
-                        />
-                        <DeleteBulkTattooImages
-                            imagesId={selected}
-                            triggerRefetch={triggerRefetch}
-                            unselectAllHandler={unselectAllHandler}
-                        />
-                    </>
-                )}
-            </div>
-            <div className={styles.table}>
-                {filteredData.map((item, index) => (
-                    <div className={styles.item} key={index}>
-                        <input
-                            type="checkbox"
-                            checked={selected.includes(item.id)}
-                            onChange={() => checkboxChangeHandler(item.id)}
-                        />
-                        <div>id: {item.id}</div>
-                        <ModalImage className={styles.img} url={item.img} />
-
-                        {filterKeys.map((key, index) => {
-                            return (
-                                <div key={key + index}>
-                                    {key}: {item.filters[key] || ""}
-                                </div>
-                            )
-                        })}
-                        <div>{item.filters.isLive ? "Published" : "Unpublished"}</div>
-                        <div className={styles.buttons}>
-                            <EditTattooImage
-                                id={item.id}
-                                triggerRefetch={triggerRefetch}
-                                data={data}
-                                filtersData={filtersData}
-                                unselectAllHandler={unselectAllHandler}
-                            />
-                            <DeleteTattooImage
-                                id={item.id}
-                                triggerRefetch={triggerRefetch}
-                                unselectAllHandler={unselectAllHandler}
-                            />
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </>
+        <TableRows
+            data={data}
+            filteredData={filteredData}
+            view="table"
+            filtersData={filtersData}
+            triggerRefetch={triggerRefetch}
+        />
     )
 }
