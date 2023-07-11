@@ -39,9 +39,9 @@ export function EditVideo({ onChange }: { onChange: (v: Blob) => void }) {
     }
 
     return (
-        <>
+        <div>
             <label htmlFor={id}>Edit</label>
             <input type="file" id={id} className={styles.file} onChange={videoChangeHandler} />
-        </>
+        </div>
     )
 }
