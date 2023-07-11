@@ -113,7 +113,6 @@ export function AddArtistsModal({
             Alert.success("Success")
         } catch (error) {
             Alert.error("Error")
-            console.log(error)
         }
 
         setIsOpen(false)
