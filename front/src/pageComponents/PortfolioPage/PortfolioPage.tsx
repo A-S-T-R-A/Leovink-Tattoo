@@ -39,8 +39,9 @@ export function PortfolioPage({
     const [isOpen, setIsOpen] = useState(false)
     const [modalData, setModalData] = useState<ITattooImage[]>([])
     const f: { [key: string]: string } = {}
-    globalFiltersData &&
-        globalFiltersData.filters.forEach((item: any) => (f[item.title[language]] = ""))
+    if (globalFiltersData) {
+        globalFiltersData.filters.forEach((item: any) => (f[item.title.en] = ""))
+    }
     const [filters, setFilters] = useState<{ [key: string]: string }>(f)
     const [filtersData, setFiltersData] = useState<IFilter[]>(
         () => globalFiltersData?.filters || []
@@ -48,6 +49,8 @@ export function PortfolioPage({
     const keys = filtersData.map(item => item.title.en)
     const data = filter(fetchedData, keys)
     const [filteredData, setFilteredData] = useState<ITattooImage[]>(data)
+
+    console.log(filters)
 
     useEffect(() => {
         const keys = filtersData.map(item => item.title.en)
@@ -73,7 +76,7 @@ export function PortfolioPage({
     function resetFiltersHandler() {
         if (!filtersData) return
         const initialFilters: { [key: string]: string } = {}
-        filtersData.forEach(item => (initialFilters[item.title[language]] = ""))
+        filtersData.forEach(item => (initialFilters[item.title.en] = ""))
         setFilters(initialFilters)
     }
 
@@ -85,7 +88,8 @@ export function PortfolioPage({
 
     const dropdownOptions = useMemo(() => {
         return globalFiltersData?.filters.map(item => ({
-            name: item.title[language],
+            name: item.title.en,
+            label: item.title[language],
             options: item.items.map(innerItem => ({
                 label: innerItem.label[language],
                 value: innerItem.key,
@@ -106,13 +110,13 @@ export function PortfolioPage({
             <Section>
                 <div className={styles.filters}>
                     {dropdownOptions?.map((item, index) => {
-                        const { name, options } = item
+                        const { label, name, options } = item
 
                         return (
                             <Dropdown
                                 key={index}
                                 options={options}
-                                firstOptionText={`${all} ${name}`}
+                                firstOptionText={`${all} ${label}`}
                                 value={filters?.[name] || ("" as string)}
                                 onChange={value =>
                                     setFilters((prev: any) => ({ ...prev, [name]: value }))
