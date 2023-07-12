@@ -10,8 +10,8 @@ import { Button } from "shared/ui/Button/Button"
 import { ArrowDownIcon } from "shared/ui/Icons"
 import { FormStatus } from "./FormStatus/FormStatus"
 import AnimatedLoadingIcon from "./AnimatedLoadingIcon/AnimatedLoadingIcon"
-import { BiErrorCircle } from "react-icons/bi"
-import { AiOutlineCheckCircle } from "react-icons/ai"
+/* import { BiErrorCircle } from "react-icons/bi"
+import { AiOutlineCheckCircle } from "react-icons/ai" */
 
 export function Form({
     isVertical,
@@ -114,7 +114,7 @@ export function Form({
                 return (
                     <FormStatus
                         /* @ts-ignore */
-                        icon={<BiErrorCircle className={styles.failIcon} />}
+                        icon={<div>1</div>} /* <BiErrorCircle className={styles.failIcon} /> */
                         text={data.error}
                     />
                 )
@@ -122,7 +122,9 @@ export function Form({
                 return (
                     <FormStatus
                         /* @ts-ignore */
-                        icon={<AiOutlineCheckCircle className={styles.successIcon} />}
+                        icon={
+                            <div>2</div>
+                        } /* <AiOutlineCheckCircle className={styles.successIcon} /> */
                         text={data.success}
                     />
                 )
