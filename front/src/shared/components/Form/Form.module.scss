@@ -92,12 +92,14 @@
 
 .successIcon {
     color: var(--color-accent);
-    font-size: 60px;
+    width: 60px;
+    height: 60px;
     margin-bottom: 10px;
 }
 
 .failIcon {
-    color: var(--color-error);
-    font-size: 60px;
+    fill: var(--color-error);
+    width: 60px;
+    height: 60px;
     margin-bottom: 10px;
 }
