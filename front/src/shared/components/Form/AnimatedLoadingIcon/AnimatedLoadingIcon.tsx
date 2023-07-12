@@ -1,9 +1,8 @@
 import styles from "./AnimatedLoadingIcon.module.css"
-import { AiOutlineLoading3Quarters } from "react-icons/ai"
+import { LoadingQuarters } from "./LoadingQarters"
 
 function AnimatedLoadingIcon({ className }: { className?: string }) {
-    /* @ts-ignore */
-    return <AiOutlineLoading3Quarters className={`${styles.icon} ${className}`} />
+    return <LoadingQuarters className={`${styles.icon} ${className}`} />
 }
 
 export default AnimatedLoadingIcon

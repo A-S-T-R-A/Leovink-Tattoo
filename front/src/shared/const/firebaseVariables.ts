@@ -4,10 +4,8 @@ import { addDoc, collection, doc, getDoc, getDocs } from "firebase/firestore"
 
 const IS_DEV = import.meta.env.IS_DEV
 
-const PORTFOLIO_PICTURES_DB = IS_DEV ? "dev_portfolio_pictures" : "portfolio_pictures"
+const PORTFOLIO_PICTURES_DB = "dev_portfolio_pictures"
 const DATA_COLLECTION = IS_DEV ? "dev_data" : "data"
-
-//const DATA_BUCKET = "data"
 
 const LANGUAGE_DOCUMENT = {
     en: "english",

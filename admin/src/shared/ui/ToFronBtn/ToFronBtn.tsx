@@ -4,8 +4,8 @@ import styles from "./ToFrontBtn.module.scss"
 
 export function ToFronBtn({ className }: { className?: string }) {
     async function clickHandler() {
-        const isConfirmed = await Confirm("You will open main website")
-        if (isConfirmed) window.open("http://localhost:3000", "_blank")
+        const isConfirmed = await Confirm("You will be redirected to leovink-tattoo.com")
+        if (isConfirmed) window.open("https://leovink-tattoo.com/", "_blank")
         return null
     }
 

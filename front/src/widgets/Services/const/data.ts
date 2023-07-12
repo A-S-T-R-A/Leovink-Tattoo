@@ -1,4 +1,4 @@
-import { images } from "../../../shared/const/images"
+/* import { images } from "../../../shared/const/images"
 
 export const servicesData = [
     {
@@ -27,3 +27,4 @@ export const servicesData = [
         imgs: [images.ta19, images.ta20, images.ta21],
     },
 ]
+ */
