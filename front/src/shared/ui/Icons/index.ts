@@ -15,8 +15,11 @@ import { EyeIcon } from "./EyeIcon"
 import { PauseIcon } from "./PauseIcon"
 import { PlayIcon } from "./PlayIcon"
 import { AntiClockwiseIcon } from "./AntiClockwiseIcon"
+import { ErrorCircle } from "./ErrorCircle"
+import { CheckCircle } from "./CheckCircle"
 
 export {
+    CheckCircle,
     AntiClockwiseIcon,
     BigLine,
     GreatBritianFlag,
@@ -34,4 +37,5 @@ export {
     EyeIcon,
     PauseIcon,
     PlayIcon,
+    ErrorCircle,
 }
