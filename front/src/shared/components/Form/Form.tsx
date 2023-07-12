@@ -7,11 +7,9 @@ import emailjs from "@emailjs/browser"
 import { NAME_REG_EX, PHONE_REG_EX } from "./const/regex"
 import { initialFormData } from "./const/const"
 import { Button } from "shared/ui/Button/Button"
-import { ArrowDownIcon } from "shared/ui/Icons"
+import { ArrowDownIcon, CheckCircle, ErrorCircle } from "shared/ui/Icons"
 import { FormStatus } from "./FormStatus/FormStatus"
 import AnimatedLoadingIcon from "./AnimatedLoadingIcon/AnimatedLoadingIcon"
-import { BiErrorCircle } from "react-icons/bi"
-import { AiOutlineCheckCircle } from "react-icons/ai"
 
 export function Form({
     isVertical,
@@ -113,16 +111,14 @@ export function Form({
             case isError:
                 return (
                     <FormStatus
-                        /* @ts-ignore */
-                        icon={<BiErrorCircle className={styles.failIcon} />}
+                        icon={<ErrorCircle className={styles.failIcon} />}
                         text={data.error}
                     />
                 )
             case isSuccess:
                 return (
                     <FormStatus
-                        /* @ts-ignore */
-                        icon={<AiOutlineCheckCircle className={styles.successIcon} />}
+                        icon={<CheckCircle className={styles.successIcon} />}
                         text={data.success}
                     />
                 )
