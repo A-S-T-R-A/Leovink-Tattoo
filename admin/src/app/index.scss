@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    background: var(--color-bg);
+    color: var(--color-base);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar {
+    width: 4px;
+}
+
+body::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #555;
+}
+
+img {
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    margin: 0;
+    font: inherit;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+:root {
+    --font-size-h1: 36px;
+    --font-size-h2: 28px;
+    --font-size-h3: 24px;
+    --font-size-h4: 20px;
+    --font-size-h5: 18px;
+    --font-size-base: 16px;
+    --font-size-small: 14px;
+    --font-size-extra-small: 12px;
+
+    --index: calc(1vw + 1vh);
+
+    --header-height: 60px;
+    --portfolio-header-height: 130px;
+    --sidebar-width: 300px;
+    --color-white: #fff;
+    --color-black: #000;
+    --color-base: #000;
+    --color-base-inverted: whitesmoke;
+    --color-bg: rgb(227, 227, 222);
+    --color-bg-modal: rgb(185, 183, 183);
+    --color-light-bg: whitesmoke;
+    --color-dark-bg: #0d1111ff;
+    --color-dark-accent: #b6955d;
+    --color-base-accent: #d8bd8e;
+    --color-moderate-accent: #d3bd97;
+
+    --color-error: #f82929;
+    //
+    --font-size-blockTable: 14px;
+    --font-size-rowTable: 14px;
+}
+
+.app {
+    display: flex;
+}
+
+.page-wrapper {
+    margin-left: var(--sidebar-width);
+    margin-top: var(--header-height);
+    padding: 10px 30px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100vh - var(--header-height));
+    width: 100%;
+
+    &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: #555;
+    }
+}

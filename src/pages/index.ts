@@ -1,6 +1,0 @@
-export { ArtistPage } from "./ArtistPage/ArtistPage"
-export { ContactPage } from "./ContactPage/ContactPage"
-export { FAQPage } from "./FAQPage/FAQPage"
-export { HomePage } from "./HomePage/HomePage"
-export { PortfolioPage } from "./PortfolioPage/PortfolioPage"
-export { TestimonialsPage } from "./TestimonialsPage/TestimonialsPage"

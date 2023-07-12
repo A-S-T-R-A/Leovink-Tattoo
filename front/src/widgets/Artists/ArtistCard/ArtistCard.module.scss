@@ -1,0 +1,53 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.img {
+    margin-bottom: 10px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.name {
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.specialization {
+    margin-bottom: 10px;
+}
+
+.description {
+    min-height: 95px;
+    margin-bottom: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.view {
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    gap: 10px;
+    color: var(--color-accent) !important;
+    transform-origin: left;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    svg {
+        width: 16px;
+        path {
+            stroke: var(--color-accent);
+        }
+    }
+}

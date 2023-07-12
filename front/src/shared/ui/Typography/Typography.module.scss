@@ -1,0 +1,69 @@
+.typography {
+    &.xxxxl {
+        font-size: var(--font-size-h1);
+    }
+
+    &.xxxl {
+        font-size: var(--font-size-h2);
+    }
+
+    &.xxl {
+        font-size: var(--font-size-h3);
+    }
+
+    &.xl {
+        font-size: var(--font-size-h4);
+    }
+
+    &.l {
+        font-size: var(--font-size-h5);
+    }
+
+    &.m {
+        font-size: var(--font-size-base);
+    }
+
+    &.s {
+        font-size: var(--font-size-small);
+    }
+
+    &.xs {
+        font-size: var(--font-size-extra-small);
+    }
+
+    &.color_base {
+        color: var(--color-base);
+    }
+
+    &.color_darkgray {
+        color: var(--color-darkgray);
+    }
+
+    &.color_lightgray {
+        color: var(--color-lightgray);
+    }
+
+    &.color_accent {
+        color: var(--color-accent);
+    }
+
+    &.color_error {
+        color: var(--color-error);
+    }
+
+    &.four {
+        font-weight: 400;
+    }
+
+    &.five {
+        font-weight: 500;
+    }
+
+    &.six {
+        font-weight: 600;
+    }
+
+    &.seven {
+        font-weight: 700;
+    }
+}

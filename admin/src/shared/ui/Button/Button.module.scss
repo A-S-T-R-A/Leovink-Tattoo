@@ -1,0 +1,15 @@
+.btn {
+    border: none;
+    background-color: transparent;
+    color: var(--color-table-initial);
+    font-weight: 700;
+    width: fit-content;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+
+    &:hover {
+        transition: 0.1s ease;
+        filter: brightness(90%);
+    }
+}

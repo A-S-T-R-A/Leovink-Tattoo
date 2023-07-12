@@ -1,0 +1,148 @@
+.icon {
+    transition: all 250ms cubic-bezier(0.5, 0, 0.5, 1);
+    z-index: 112;
+    position: fixed;
+    right: 0;
+    width: fit-content;
+    height: 60px;
+
+    .container {
+        padding: 0.5em;
+        cursor: pointer;
+        position: absolute;
+        border: 0;
+        top: 50%;
+        right: 18px;
+        transform: translateY(-50%);
+        border-radius: 50%;
+        z-index: 1111;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+    }
+
+    @media (min-width: 961px) {
+        .container {
+            display: none;
+        }
+    }
+
+    .burgerOpen {
+        .hamburger {
+            transform: rotate(0.625turn);
+
+            &::before {
+                transform: rotate(90deg) translateX(-6px);
+            }
+
+            &::after {
+                opacity: 0;
+            }
+        }
+    }
+
+    .hamburger {
+        display: block;
+        position: relative;
+        z-index: 111;
+    }
+
+    .hamburger,
+    .hamburger::before,
+    .hamburger::after {
+        background: var(--color-base);
+        width: 1.5em;
+        height: 3px;
+        border-radius: 1em;
+        transition: transform 250ms ease-in-out;
+    }
+
+    .hamburger::before,
+    .hamburger::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+
+    .hamburger::before {
+        top: 6px;
+    }
+
+    .hamburger::after {
+        bottom: 6px;
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    transition: all 250ms cubic-bezier(0.5, 0, 0.5, 1);
+    z-index: 109;
+
+    &.navOpen {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+.wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: transparent;
+    z-index: 2;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 250ms cubic-bezier(0.5, 0, 0.5, 1);
+    z-index: 110;
+
+    &.navOpen {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+.container {
+    padding: 50px 30px 30px;
+    display: grid;
+    justify-content: center;
+    grid-template-rows: 1fr min-content min-content;
+    row-gap: 10px;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+}
+
+.btn {
+    max-width: 200px;
+}
+
+.languages {
+    position: fixed;
+    top: 18px;
+    right: 80px;
+    z-index: 15;
+}
+
+@media (min-width: 961px) {
+    .icon {
+        display: none;
+    }
+
+    .languages {
+        display: none;
+    }
+}

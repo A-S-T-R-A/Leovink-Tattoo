@@ -1,0 +1,63 @@
+.header {
+    display: flex;
+    justify-content: center;
+
+    .uploadBtn {
+        margin: 0 auto 0 5px;
+    }
+
+    .viewToggle {
+        margin-left: 50px;
+        width: 120px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        background-color: var(--color-light-accent);
+
+        .viewToggle:first-child {
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+        .viewToggle:last-child {
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .iconBlock {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            width: 40px;
+            height: 40px;
+            background-color: transparent;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        .iconBlock:hover .icon {
+            filter: brightness(80%);
+        }
+
+        .icon {
+            width: 20px;
+            cursor: pointer;
+            fill: var(--color-base);
+        }
+
+        .icon:active {
+            fill: var(--color-base-accent);
+        }
+
+        .selectedView {
+            background-color: var(--color-moderate-accent);
+            fill: var(--color-base);
+            border-radius: 3px;
+            box-shadow: 0 0 1px 0 (--color-moderate-accent);
+            border: 1px solid var(--color-moderate-accent);
+        }
+    }
+}

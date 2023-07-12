@@ -1,0 +1,93 @@
+.filterTableContainer {
+    display: flex;
+    flex-direction: column;
+    border-bottom: none;
+    width: 100%;
+    border-radius: 5px;
+
+    .titleContainer {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-height: 50px;
+        gap: 10px;
+        border: 3px solid black;
+        border-radius: 5px 5px 0 5px;
+        padding: 0 15px;
+        cursor: pointer;
+        background-color: var(--color-dark-accent);
+        color: white;
+
+        .arrow {
+            color: var(--color-moderate-accent);
+            font-size: 24px;
+        }
+    }
+
+    .filtersContainer {
+        border-top: none;
+        border-radius: 5px;
+        padding-left: 27px;
+
+        .filterContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            border: 2px solid black;
+            margin-top: -2px;
+            border-radius: 0 0 5px 5px;
+            border-top: none;
+
+            .filterTitleContainer {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                width: 100%;
+                min-height: 40px;
+                padding: 0 15px 0 45px;
+                border-bottom: 2px solid gray;
+                border-bottom-left-radius: 5px;
+            }
+
+            .filterContentContainer {
+                display: flex;
+                align-items: center;
+                width: 95%;
+                min-height: 40px;
+                gap: 10px;
+                margin-top: -2px;
+                padding: 0 15px 0 150px;
+                border: 1px solid darkgray;
+                border-top: none;
+                border-right: none;
+                border-radius: 0 0 5px 5px;
+
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+        }
+
+        .title {
+            text-transform: capitalize;
+        }
+    }
+}
+
+.editArtist {
+    font-size: 14px;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 5px;
+    border: 1px solid var(--color-dark-accent);
+    background-color: var(--color-dark-accent);
+    color: white;
+    padding: 5px 10px;
+    margin-left: auto;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        filter: brightness(80%);
+    }
+}

@@ -1,0 +1,105 @@
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.formContent {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    width: 100%;
+    justify-content: center;
+    align-items: end;
+
+    .input {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+.vertical {
+    max-width: 450px;
+
+    .formContent {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        gap: 40px;
+    }
+}
+
+@media (min-width: 960px) {
+    .vertical {
+        width: fit-content;
+    }
+}
+
+@media (min-width: 489px) {
+    .form {
+        .formContent {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .btn {
+            grid-column: span 2;
+        }
+    }
+}
+
+@media (min-width: 869px) {
+    .form {
+        .formContent {
+            grid-template-columns: minmax(200px, 400px) minmax(200px, 400px) max-content;
+        }
+
+        .btn {
+            grid-column: 3;
+        }
+    }
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    .icon {
+        width: 14px;
+
+        path {
+            stroke: var(--color-accent);
+        }
+    }
+}
+
+.loadingIcon {
+    color: var(--color-base);
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+
+.successIcon {
+    color: var(--color-accent);
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.failIcon {
+    fill: var(--color-error);
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+}

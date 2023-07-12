@@ -1,0 +1,183 @@
+.mainWrapper {
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    &::after {
+        content: "";
+        position: absolute;
+        z-index: 10;
+        width: 100%;
+        height: calc(var(--index) * 10);
+        background-image: url(./const/ground.webp);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        bottom: calc(var(--index) * -4.5);
+    }
+}
+
+.mainContainer {
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.layer {
+    height: 140vh;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    filter: blur(20px);
+}
+
+.layerBase {
+    transform: translate3d(0, calc(var(--scrollTop) / 1.6), 0);
+    z-index: 0;
+}
+
+.layerMiddle {
+    transform: translate3d(0, calc(var(--scrollTop) / 2.5), 0);
+    z-index: 2;
+}
+
+.layerFront {
+    transform: translate3d(0, calc(var(--scrollTop) / 5.7), 0);
+    z-index: 10;
+}
+
+.textContainer {
+    transform: translate3d(0, calc(var(--scrollTop) / 2), 0);
+    transition: var(--transition);
+    will-change: transform;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+    z-index: 3;
+    padding-bottom: 20px;
+}
+
+.title {
+    width: 550px;
+    margin-bottom: 20px;
+}
+
+.caption {
+    width: 100%;
+    min-width: 320px;
+    font-size: 26px;
+    white-space: nowrap;
+    font-weight: 500;
+    color: #dbc0a2;
+    letter-spacing: 1px;
+}
+
+.est {
+    width: 260px;
+    position: relative;
+    color: #dbc0a2;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+
+    &::after,
+    &::before {
+        position: absolute;
+        top: 50%;
+        content: "";
+        min-width: 28%;
+        border: 1px solid #dbc0a2;
+    }
+
+    &::after {
+        left: 0;
+    }
+
+    &::before {
+        right: 0;
+    }
+}
+
+@media (min-width: 481px) {
+    .caption {
+        font-size: 28px;
+    }
+    .est {
+        font-size: 20px;
+        width: 280px;
+    }
+}
+
+@media (min-width: 768px) {
+    .caption {
+        font-size: 30px;
+    }
+    .est {
+        font-size: 22px;
+        width: 300px;
+    }
+}
+
+@media (min-width: 961px) {
+    .caption {
+        font-size: 32px;
+    }
+    .est {
+        width: 320px;
+    }
+}
+
+.horns {
+    position: absolute;
+    top: -170px;
+    z-index: -1;
+    width: 100%;
+    max-width: 360px;
+    min-height: 100%;
+    background-repeat: no-repeat;
+    background-position: top center;
+    transform: translate3d(0, calc(var(--scrollTop) / 6), 0);
+    transition: var(--transition);
+    will-change: transform;
+}
+
+.scroll {
+    z-index: 10;
+    position: absolute;
+    bottom: 50px;
+    cursor: pointer;
+}
+
+.dungeon {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+    margin-bottom: -100vh;
+}
+
+@media (min-width: 1000px) {
+    .mainContainer {
+        height: 100vh;
+    }
+
+    .layer,
+    .textContainer,
+    .horns {
+        transition: var(--transition-desktop);
+    }
+}

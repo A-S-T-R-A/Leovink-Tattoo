@@ -1,0 +1,36 @@
+---
+import Layout from "layouts/Layout.astro";
+import { PortfolioPage } from "pageComponents/PortfolioPage/PortfolioPage";
+import { fetchGlobalData, fetchImagesData, ITattooImage } from "shared/const/firebaseVariables";
+import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl";
+import type { IGlobalData } from "shared/types/IGlobalData";
+import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
+import cave from "widgets/Main/const/dungeon.webp"
+
+const language = getLangFromUrl(Astro.url)
+
+let imagesData = null
+let globalData = null
+try{
+    imagesData = await fetchImagesData() as ITattooImage[]
+    globalData = await fetchGlobalData() as IGlobalData
+}catch(e){}
+---
+
+<Layout image={cave}>
+    <PageWrapper 
+            title={globalData?.layoutData.navList[language][1].text || 'Portfolio'} 
+            main={globalData?.layoutData.navList[language][0].text || 'Main'}
+            >
+        <PortfolioPage 
+         client:load
+         formTitle={globalData?.sectionNames[language].form || 'Book an appointment'} 
+         formData={globalData?.formData[language] || null}
+         button={globalData?.buttons[language].cta || 'Book an appointment'}
+         filtersButton={globalData?.buttons[language].resetFilters || 'Reset'}
+         globalFiltersData={globalData?.filtersData || null}
+         fetchedData={imagesData || []}
+         language={language}
+         />
+    </PageWrapper>
+</Layout>

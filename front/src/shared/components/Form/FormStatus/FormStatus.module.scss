@@ -1,0 +1,14 @@
+.container {
+    width: 100%;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.contentContainer {
+    text-align: center;
+    font-size: var(--font-size-h4);
+}

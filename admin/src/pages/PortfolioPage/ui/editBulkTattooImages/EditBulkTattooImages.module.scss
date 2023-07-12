@@ -1,0 +1,74 @@
+.container {
+    div {
+        margin-bottom: 20px;
+    }
+
+    button {
+        margin-right: 20px;
+    }
+}
+
+.btn {
+    margin-left: 12px;
+    width: 150px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--color-moderate-accent);
+    border-radius: 3px;
+    color: var(--color-base);
+    font-weight: 500;
+}
+
+.btn:hover {
+    filter: brightness(80%);
+}
+
+.content {
+    position: relative;
+
+    .cross {
+        > svg {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            width: 25px;
+            height: 25px;
+            stroke: black;
+            transform: rotate(45deg);
+            z-index: 1000;
+
+            &:hover {
+                stroke: var(--color-accent);
+            }
+        }
+    }
+}
+
+.btnContainer {
+    display: flex;
+    width: 100%;
+
+    .modalBtn {
+        max-width: 150px;
+        margin: 0 5px 0 auto;
+        height: 30px;
+        white-space: pre-wrap;
+        display: flex;
+        align-items: center;
+        padding: 3px 10px;
+        box-sizing: content-box;
+        border: 1px solid var(--color-light-accent);
+        border-radius: 3px;
+        cursor: pointer;
+        background-color: var(--color-moderate-accent);
+        color: var(--color-base);
+        font-weight: bold;
+
+        &:hover {
+            transition: 0.1s ease;
+            filter: brightness(80%);
+        }
+    }
+}

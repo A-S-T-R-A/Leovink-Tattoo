@@ -1,0 +1,63 @@
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100vw;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.img {
+    cursor: pointer;
+}
+
+.cross {
+    > svg {
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+
+        stroke: var(--color-base);
+        transition: all 0.3s ease;
+
+        &:hover {
+            filter: brightness(80%);
+        }
+    }
+}
+
+.cross {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 40px;
+
+    z-index: 1000;
+
+    > svg {
+        width: 40px;
+        height: 40px;
+        transform: rotate(45deg);
+    }
+}
+
+.prev {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 40px;
+    z-index: 900;
+
+    > svg {
+        transform: rotate(90deg);
+    }
+}
+
+.img {
+    max-height: 100%;
+    object-fit: contain !important;
+}

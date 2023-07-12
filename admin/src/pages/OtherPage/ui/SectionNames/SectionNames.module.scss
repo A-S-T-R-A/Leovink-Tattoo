@@ -1,0 +1,54 @@
+.sectionNamesContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-self: center;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-bottom: 50px;
+
+    .sectionNamesTitle {
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 20px;
+        border-bottom: 2px solid black;
+        min-height: 40px;
+        background-color: var(--color-dark-accent);
+        color: white;
+    }
+
+    .content {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-height: 40px;
+        border-bottom: 1px solid black;
+        border-top: none;
+        padding-left: 50px;
+
+        &:last-child {
+            border-radius: 0 0 5px 5px;
+        }
+    }
+
+    .editBtn {
+        font-size: 14px;
+        width: fit-content;
+        min-width: 100px;
+        min-height: fit-content;
+        border-radius: 5px;
+        border: 1px solid var(--color-dark-accent);
+        background-color: var(--color-dark-accent);
+        color: white;
+        margin: auto 0 10px;
+        padding: 5px 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            filter: brightness(80%);
+        }
+    }
+}

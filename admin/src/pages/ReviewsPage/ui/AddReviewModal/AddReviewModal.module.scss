@@ -1,0 +1,37 @@
+.imgContainer,
+.videoContainer {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    gap: 20px;
+    width: 100px;
+    cursor: pointer;
+
+    .video {
+        max-width: 50px;
+    }
+}
+
+.container {
+    width: 300px;
+
+    .textarea {
+        min-height: fit-content;
+
+        textarea {
+            min-height: 200px;
+        }
+    }
+
+    label {
+        margin: 5px 0;
+    }
+
+    input {
+        background-color: white;
+    }
+
+    & > :nth-child(6) {
+        margin-bottom: 5px;
+    }
+}

@@ -1,0 +1,31 @@
+---
+import Layout from "layouts/Layout.astro";
+import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
+import { FormSection } from "widgets/FormSection/FormSection";
+import { FindUs } from "widgets/FindUs/FindUs";
+import {  fetchGlobalData  } from "shared/const/firebaseVariables";
+import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl";
+import cave from "widgets/Main/const/dungeon.webp"
+import type { IGlobalData } from "shared/types/IGlobalData";
+
+const language = getLangFromUrl(Astro.url)
+
+let globalData = null
+try{
+    globalData = await fetchGlobalData() as IGlobalData
+}catch(e){}
+---
+
+<Layout image={cave}>
+    <PageWrapper 
+        title={globalData?.layoutData.navList[language][3].text || 'Contact'} 
+        main={globalData?.layoutData.navList[language][0].text || 'Main'}>
+        <FindUs 
+            data={globalData?.contactsGuide[language] || null} />
+        <FormSection 
+            client:load 
+            title={globalData?.sectionNames[language].form || 'Book an appointment'} 
+            button={globalData?.buttons[language].cta || 'book an appointment'} 
+            data={globalData?.formData[language] || null}/>
+    </PageWrapper>
+</Layout>

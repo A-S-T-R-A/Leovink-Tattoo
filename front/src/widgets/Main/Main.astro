@@ -1,0 +1,137 @@
+---
+import styles from "./Main.module.scss"
+import leovinkTitle from "./const/leovinkLogo.webp"
+import leovinkHorns from "./const/leovinkHorns.png"
+import layerBaseImg from "./const/base-bg.webp"
+import layerBaseImgLowRes from "./const/base-bg-low-res.webp"
+import layerMiddleImg from "./const/layer-middle.webp"
+import layerMiddleImgLowRes from "./const/layer-middle-low-res.webp"
+import layerFrontImg from "./const/layer-front.webp"
+import layerFrontImgLowRes from "./const/layer-front-low-res.webp"
+import dungeonImg from "./const/dungeon2.webp"
+import { ScrollIcon } from "shared/ui/ScrollIcon/ScrollIcon"
+import "./Main.scss"
+---
+
+<main>
+  <section id="wrapperMainSection" class={styles.mainWrapper}>
+    <div id="main-container" class={styles.mainContainer}>
+      <div class={styles.textContainer}>
+        <img src={leovinkHorns} alt="Tattoo parlor in Chisinau" class={styles.horns} />
+        <img src={leovinkTitle} alt="Leovink Tattoo. Tattoo parlor in Chisinau" class={styles.title} />
+        <p class={styles.caption}>TATTOO & PIERCING</p>
+        <p class={styles.est}>EST. 2010</p>
+      </div>
+  
+      <div
+        id="baseImg"
+        class={`${styles.layerBase} ${styles.layer}`}
+        style={{ backgroundImage: `url(${layerBaseImgLowRes})` }}
+        data-src = {layerBaseImg}
+      />
+      
+      <div
+        id="middleImg"
+        class={`${styles.layerMiddle} ${styles.layer}`}
+        style={{ backgroundImage: `url(${layerMiddleImgLowRes})` }}
+        data-src = {layerMiddleImg}
+      />
+      
+      <div
+        id="frontImg"
+        class={`${styles.layerFront} ${styles.layer}`}
+        style={{ backgroundImage: `url(${layerFrontImgLowRes})` }}
+        data-src = {layerFrontImg}
+      />
+  
+      <ScrollIcon client:load className={styles.scroll} />
+    </div>
+  </section>
+  <div class={styles.dungeon} id="dungeon" style={{ backgroundImage: `url(${dungeonImg})` }}></div>
+  <slot />  
+</main>
+
+<script is:inline>
+function onScrollMobile() {
+  throttleMobile(() => {
+    document.documentElement.style.setProperty("--scrollTop", `${window.scrollY}px`)
+  })()
+}
+
+function onScrollDesktop() {
+  throttleDesktop(() => {
+    document.documentElement.style.setProperty("--scrollTop", `${window.scrollY}px`)
+  })()
+}
+
+function throttleDesktop(fn, delay = 50) {
+  let timeoutId;
+  return function (...args) {
+    if (timeoutId) {
+      return;
+    }
+    timeoutId = setTimeout(() => {
+      fn(...args);
+      timeoutId = null;
+    }, delay);
+  }
+}
+
+function throttleMobile(func, delay = 50) {
+  let timeoutId;
+  let lastExecutedTime = 0;
+
+  return function (...args) {
+    const currentTime = new Date().getTime();
+
+    if (currentTime - lastExecutedTime < delay) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        lastExecutedTime = currentTime;
+        func(...args);
+      }, delay);
+    } else {
+      lastExecutedTime = currentTime;
+      func(...args);
+    }
+  };
+}
+
+function applyDataSrc(id) {
+  const base = document.getElementById(id)
+  const imgEl = new Image()
+  imgEl.src = base.getAttribute("data-src")
+
+  if (imgEl.complete) {
+    base.style.backgroundImage = `url(${imgEl.src})`
+  } else {
+    imgEl.onload = () => {
+      base.style.opacity = 0.1
+      base.style.backgroundImage = `url(${imgEl.src})`
+      base.style.opacity = 1
+      base.classList.add("loaded")
+    }
+  }
+}
+
+applyDataSrc("baseImg")
+applyDataSrc("middleImg")
+applyDataSrc("frontImg")
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      if (window.innerWidth < 961) {
+        window.addEventListener("scroll", onScrollMobile, { passive: true })
+      } else {
+        window.addEventListener("scroll", onScrollDesktop, { passive: true })
+      }
+    } else {
+      window.removeEventListener("scroll", onScrollMobile)
+      window.removeEventListener("scroll", onScrollDesktop)
+    }
+  })
+}, { rootMargin: "150px 0px 0px 0px" })
+
+observer.observe(document.getElementById("wrapperMainSection"))
+</script>

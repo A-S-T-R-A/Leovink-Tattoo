@@ -1,0 +1,45 @@
+.socialsContainer {
+    display: flex;
+    flex-direction: column;
+
+    .socialsTitle {
+        text-align: center;
+        padding: 10px 0;
+        font-size: 20px;
+        border: 2px solid black;
+        border-radius: 5px 5px 0 5px;
+        min-height: 50px;
+        background-color: var(--color-dark-accent);
+        color: white;
+    }
+
+    .socialContainer {
+        min-height: 50px;
+        display: grid;
+        grid-template-columns: 200px 1fr 100px;
+        align-items: center;
+        border: 2px solid black;
+        border-top: none;
+        margin-top: -2px;
+        margin-left: 27px;
+        border-radius: 0 0 0 5px;
+        padding: 0 15px 0 50px;
+
+        &:last-child {
+            border-radius: 0 0 5px 5px;
+        }
+
+        .icon {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            .img {
+                width: 50px;
+            }
+        }
+
+        .link {
+            padding-left: 35%;
+        }
+    }
+}

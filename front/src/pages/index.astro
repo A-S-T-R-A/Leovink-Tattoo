@@ -1,0 +1,120 @@
+---
+import Layout from "layouts/Layout.astro";
+import { Portfolio } from "widgets/Portfolio/Portfolio";
+import { Steps } from "widgets/Steps/Steps";
+import { Services } from "widgets/Services/Services";
+import { Artists } from "widgets/Artists/Artists";
+import { Testimonials } from "widgets/Testimonials/Testimonials";
+import { Faq } from "widgets/Faq/Faq";
+import { FormSection } from "widgets/FormSection/FormSection";
+import { fetchSectionData, IStepData, fetchImagesData, IServicesData, IArtistsData, IFaqData, ITestimonialsData,  fetchGlobalData, ITattooImage } from "shared/const/firebaseVariables";
+import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl";
+import Main from "widgets/Main/Main.astro";
+import type { IGlobalData } from "shared/types/IGlobalData";
+import type {  LanguageType } from "shared/types/types";
+
+const defaultLanguage:LanguageType = 'en'
+
+const language = getLangFromUrl(Astro.url)
+
+let stepsData = null
+let imagesData = null
+let servicesData = null
+let artistsData = null
+let faqData = null
+let testimonialsData = null
+let globalData = null
+try{
+    stepsData = await fetchSectionData(language, "steps") as IStepData[];
+    imagesData = await fetchImagesData() as ITattooImage[];
+     servicesData = await fetchSectionData(language, "services") as IServicesData[];
+     artistsData = await fetchSectionData(language, "artists") as IArtistsData[];
+     faqData = await fetchSectionData(language, "faq") as IFaqData[];
+     testimonialsData = await fetchSectionData(language, "testimonials") as ITestimonialsData[];
+     globalData = await fetchGlobalData() as IGlobalData
+}catch(e){}
+---
+
+<Layout>
+    <Main >
+        <Portfolio 
+            client:idle 
+            title={globalData?.sectionNames[language].portfolio || "Portfolio"} 
+            button={globalData?.buttons[language].showMore || "show more"} 
+            fetchedData={imagesData || []} 
+            language={language} 
+            defaultLanguage={defaultLanguage}/>
+        <Steps 
+            client:load 
+            data={stepsData} 
+            title={globalData?.sectionNames[language].steps || "How it Works"} 
+            button={globalData?.buttons[language].cta || "book an appointment"} />
+        <Services 
+            client:idle 
+            data={servicesData} 
+            title={globalData?.sectionNames[language].services || "Services"} 
+            button={globalData?.buttons[language].cta || "book an appointment"} />
+        <Artists 
+            client:idle 
+            data={artistsData} 
+            title={globalData?.sectionNames[language].artists || "Artists"} 
+            button={globalData?.buttons[language].viewGallery || "view gallery"} 
+            language={language} 
+            defaultLanguage={defaultLanguage}/>
+        <Testimonials 
+            data={testimonialsData} 
+            title={globalData?.sectionNames[language].testimonials || "Testimonials"} 
+            showMore={globalData?.buttons[language].showMore || "show more"}
+            cta={globalData?.buttons[language].cta || "book an appointment"} 
+            language={language} 
+            defaultLanguage={defaultLanguage}/>
+        <Faq 
+            client:idle 
+            data={faqData} 
+            title={globalData?.sectionNames[language].faq || "FAQ"}  
+            button={globalData?.buttons[language].showMore || "show more"}
+            language={language} 
+            defaultLanguage={defaultLanguage}/>
+        <FormSection   
+            client:load 
+            data={globalData?.formData[language] || null} 
+            title={globalData?.sectionNames[language].form || "Book an appointment"} 
+            button={globalData?.buttons[language].cta || "book an appointment"}/>
+    </Main>
+</Layout>
+
+<script type='application/ld+json' is:inline>
+{
+    "@context": "http://www.schema.org",
+        "@type": "TattooParlor",
+            "name": "Leovink-Tattoo Studio",
+                "url": "https://leovink-tattoo.com",
+                    "logo": "https://www.leovink-tattoo.com/_astro/leovinkLogo.daf659c7.webp",
+                        "image": "https://www.leovink-tattoo.com/_astro/leovinkLogo.daf659c7.webp",
+                            "description": "Founded in 2010, Leovink Tattoo is the most important tattoo parlor in Chisinau. Experience top artistry and a safe environment for your unique tattoo journey.",
+                                "address": {
+        "@type": "PostalAddress",
+            "streetAddress": "Izmail str. 40/2",
+                "addressLocality": "Chisinau",
+                    "addressRegion": "Chisinau",
+                        "postalCode": "2038",
+                            "addressCountry": " Republic of Moldova"
+    },
+
+    "review": {
+        "@type": "Review",
+            "reviewRating": {
+            "@type": "Rating",
+                "ratingValue": "5",
+                    "bestRating": "5"
+        }
+    },
+
+    "openingHours": "Mo, Tu, We, Th, Fr, Sa 08:00-19:00",
+        "contactPoint": {
+        "@type": "ContactPoint",
+            "telephone": "+37369935908",
+                "contactType": " Phone:"
+    }
+}
+</script>

@@ -1,0 +1,42 @@
+---
+import { IArtistsData,  ITattooImage, fetchGlobalData, fetchImagesData, fetchSectionData } from "shared/const/firebaseVariables";
+import Layout from "layouts/Layout.astro";
+import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper";
+import { ArtistPage } from "pageComponents/ArtistPage/ArtistPage";
+import { getLangFromUrl } from "shared/lib/i18n/getLangFromUrl";
+import cave from "widgets/Main/const/dungeon.webp"
+import type { IGlobalData } from "shared/types/IGlobalData";
+
+const language = getLangFromUrl(Astro.url)
+const {artistSlug} = Astro.params
+let artist: IArtistsData | undefined = undefined
+try{
+    const pages = await fetchSectionData(language, "artists") as IArtistsData[];
+    artist = pages.find((page) => page.slug === artistSlug);
+}catch(e){}
+
+if (!artist) return Astro.redirect("/404");
+
+
+let imagesData = null
+let globalData = null
+try{
+    imagesData = await fetchImagesData() as ITattooImage[]
+    globalData = await fetchGlobalData() as IGlobalData
+}catch(e){}
+---
+
+<Layout image={cave}>
+    <PageWrapper 
+        title={globalData?.sectionNames[language].artists || 'Artist'}
+        main={globalData?.layoutData.navList[language][0].text || 'Main'}>
+        <ArtistPage 
+        client:load 
+        formTitle={globalData?.sectionNames[language].form || 'Book an appointment'} 
+        cta={globalData?.buttons[language].cta || 'book an appointment'} 
+        formData={globalData?.formData[language] || null} 
+        data={artist} 
+        imagesData={imagesData?.filter(item=>artist ? item.filters.artists === artist.key : false) || []} 
+        language={language}/>
+    </PageWrapper>
+</Layout>

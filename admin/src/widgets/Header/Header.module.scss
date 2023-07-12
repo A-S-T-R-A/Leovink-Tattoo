@@ -1,0 +1,51 @@
+.wrapper {
+    top: 0;
+    position: fixed;
+    width: 100%;
+    display: grid;
+    align-items: center;
+    text-align: center;
+    justify-content: end;
+    padding: 0 10px;
+    background-color: var(--color-dark-bg);
+    border: 0 0 5px 0 var(--color-dark-accent);
+    height: 60px;
+    color: var(--color-moderate-accent);
+    z-index: 100;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sectionContainer {
+    position: absolute;
+    display: flex;
+    left: calc(var(--sidebar-width) + 20px);
+    align-items: center;
+    top: auto;
+    bottom: auto;
+    cursor: pointer;
+}
+
+.btnsContainer {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.icon path {
+    fill: var(--color-moderate-accent);
+    margin: auto 0;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+.section {
+    line-height: 1;
+}
