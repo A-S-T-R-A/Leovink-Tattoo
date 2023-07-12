@@ -16,9 +16,10 @@
     "dependencies": {
         "@astrojs/netlify": "^2.3.0",
         "@astrojs/preact": "^2.2.1",
+        "@astrojs/vercel": "^3.7.0",
         "@emailjs/browser": "^3.11.0",
         "@preact/compat": "^17.1.2",
-        "astro": "^2.6.6",
+        "astro": "^2.8.1",
         "cross-env": "^7.0.3",
         "emailjs": "^4.0.2",
         "firebase": "^9.22.2",
