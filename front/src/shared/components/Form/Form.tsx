@@ -114,7 +114,7 @@ export function Form({
                 return (
                     <FormStatus
                         /* @ts-ignore */
-                        icon={<div>1</div>} /* <BiErrorCircle className={styles.failIcon} /> */
+                        icon={<BiErrorCircle className={styles.failIcon} />}
                         text={data.error}
                     />
                 )
@@ -122,9 +122,7 @@ export function Form({
                 return (
                     <FormStatus
                         /* @ts-ignore */
-                        icon={
-                            <div>2</div>
-                        } /* <AiOutlineCheckCircle className={styles.successIcon} /> */
+                        icon={<AiOutlineCheckCircle className={styles.successIcon} />}
                         text={data.success}
                     />
                 )
