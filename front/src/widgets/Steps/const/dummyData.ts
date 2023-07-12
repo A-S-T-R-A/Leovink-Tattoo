@@ -1,4 +1,4 @@
-import { care, consult, drawing, prepare, treatment, update } from "shared/assets/images/index"
+/* import { care, consult, drawing, prepare, treatment, update } from "shared/assets/images/index"
 
 export const stepsData = [
     {
@@ -28,7 +28,7 @@ export const stepsData = [
         description:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt totam, obcaecati praesentium veniam.",
     },
-    /*  {
+   {
         id: 4,
         step: "04",
         stepContainer: "fourthStep",
@@ -48,5 +48,6 @@ export const stepsData = [
         stepContainer: "sixthStep",
         title: "Tattoo Update",
         img: update,
-    }, */
+    }, 
 ]
+ */
