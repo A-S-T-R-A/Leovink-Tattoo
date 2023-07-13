@@ -41,6 +41,10 @@
             stroke: black;
             transform: rotate(45deg);
             z-index: 1000;
+
+            &:hover {
+                filter: brightness(80%);
+            }
         }
     }
 

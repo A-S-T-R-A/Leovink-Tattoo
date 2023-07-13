@@ -33,13 +33,13 @@
     gap: 10px;
 
     .cross {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+        width: 25px;
+        height: 25px;
         > svg {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            cursor: pointer;
-            width: 25px;
-            height: 25px;
             stroke: black;
             transform: rotate(45deg);
             z-index: 1000;
