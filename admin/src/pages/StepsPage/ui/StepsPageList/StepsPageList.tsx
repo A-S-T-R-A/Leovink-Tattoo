@@ -13,8 +13,10 @@ export function StepsPageList({
     triggerRefetch: () => void
 }) {
     return (
-        <>
-            <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
+        <div className={styles.wrapper}>
+            <div className={styles.header}>
+                <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
+            </div>
             <div className={styles.table}>
                 {data?.[defaultLanguage]?.map((item, index) => (
                     <div className={styles.item} key={index}>
@@ -28,6 +30,6 @@ export function StepsPageList({
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     )
 }

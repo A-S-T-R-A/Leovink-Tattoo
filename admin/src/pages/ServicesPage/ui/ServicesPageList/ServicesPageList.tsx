@@ -39,9 +39,11 @@ export function ServicesPageList() {
         )
     } else {
         return (
-            <>
-                <AddServiceModal data={data} triggerRefetch={triggerRefetch} />
-                <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
+            <div className={styles.wrapper}>
+                <div className={styles.header}>
+                    <AddServiceModal data={data} triggerRefetch={triggerRefetch} />
+                    <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
+                </div>
                 <div className={styles.table}>
                     {data?.[defaultLanguage].map((item, index) => (
                         <div className={styles.item} key={index}>
@@ -70,7 +72,7 @@ export function ServicesPageList() {
                         </div>
                     ))}
                 </div>
-            </>
+            </div>
         )
     }
 }
