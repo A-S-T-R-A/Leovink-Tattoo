@@ -94,6 +94,7 @@ export interface IServicesData {
 export interface IArtistsData {
     name: string
     description: string
+    fullDescription: string
     specialization: string
     img: string
     slug: string
