@@ -3,6 +3,7 @@ import { PlusIcon } from "shared/ui/Icons"
 import { Modal } from "shared/ui/Modal"
 
 import styles from "./ModalImage.module.scss"
+import { Image } from "shared/ui/Image/Image"
 
 export function ModalImage({
     url,
@@ -26,9 +27,9 @@ export function ModalImage({
                 <div className={styles.cross} onClick={onClose}>
                     <PlusIcon />
                 </div>
-                <img src={url} alt={`${alt}. Service.`} className={styles.img} />
+                <Image src={url} alt={`${alt}. Service.`} className={styles.img} />
             </Modal>
-            <img
+            <Image
                 src={url}
                 alt={`${alt} img.`}
                 className={className}

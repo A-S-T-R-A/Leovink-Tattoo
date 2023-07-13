@@ -55,7 +55,6 @@ export function EditItem({
         const images = await fetchAllImages()
         const newImages = images.map(item => {
             if (item.filters[parentTitle] === filterKey) {
-                console.log(item.filters)
                 const newItem = JSON.parse(JSON.stringify(item))
                 newItem.filters[parentTitle] = currentKey
                 return newItem

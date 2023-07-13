@@ -94,7 +94,6 @@ export function EditParagraph({
                     await updateSectionData(lang, "steps", objectData)
                 }
             } else {
-                console.log(dataToUpload)
                 documentData[id] = dataToUpload
                 const objectData = reformatArrayToObject(documentData)
                 await updateSectionData(currentLanguage, "steps", objectData)

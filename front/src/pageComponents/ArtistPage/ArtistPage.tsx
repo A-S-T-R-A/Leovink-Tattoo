@@ -7,6 +7,7 @@ import styles from "./ArtistPage.module.scss"
 import { GalleryGrid } from "shared/components/GalleryGrid/GalleryGrid"
 import type { IArtistsData, ITattooImage } from "shared/const/firebaseVariables"
 import type { LanguageType } from "shared/types/types"
+import { Image } from "shared/ui/Image/Image"
 
 export function ArtistPage({
     formData,
@@ -47,7 +48,7 @@ export function ArtistPage({
             <Section containerClassName={styles.container}>
                 <div className={styles.card}>
                     <div className={styles.left}>
-                        <img src={img} alt="" />
+                        <Image src={img} alt={`${name} tattoo ${specialization}`} />
                     </div>
                     <div className={styles.right}>
                         <Typography tag="h2" size="xxxl" className={styles.name}>

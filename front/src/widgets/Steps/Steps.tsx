@@ -6,6 +6,7 @@ import type { IStepData } from "shared/const/firebaseVariables"
 import { useState } from "preact/hooks"
 import { ChevronDownIcon } from "shared/ui/Icons"
 import { classNames } from "shared/lib/classNames/classNames"
+import { Image } from "shared/ui/Image/Image"
 
 export function Steps({
     data,
@@ -29,7 +30,7 @@ export function Steps({
                             className={styles.stepContainer}
                             style={{ flex: index === selected ? "3" : "2" }}
                         >
-                            <img src={img} alt="step" className={styles.img} />
+                            <Image src={img} alt={title} className={styles.img} />
                             <Typography className={styles.index} tag="p" size="xxxl" color="base">
                                 {"0" + (index + 1)}
                             </Typography>

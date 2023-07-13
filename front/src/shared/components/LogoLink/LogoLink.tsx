@@ -1,6 +1,7 @@
 import type { LanguageType } from "shared/types/types"
 import { logo } from "shared/assets/images"
 import styles from "./LogoLink.module.scss"
+import { Image } from "shared/ui/Image/Image"
 
 export function LogoLink({
     language,
@@ -16,7 +17,7 @@ export function LogoLink({
 
     return (
         <a href={getLogoLink(language)} className={styles.logoContainer}>
-            <img
+            <Image
                 src={logo}
                 className={styles.logo}
                 alt="Logo al salonului de tatuaje din Chișinău"
