@@ -25,7 +25,7 @@ export function SocialIcons({ onClick, className, data }: ISocialIconsProps) {
                         target="_blank"
                         rel="noreferrer"
                     >
-                        <Image src={item.icon} alt={alt} />
+                        <Image src={item.icon} alt={alt} className={styles.icons} />
                     </a>
                 )
             })}
