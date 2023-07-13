@@ -200,7 +200,9 @@ export function AddArtistsModal({
                     </div>
                 </div>
             </ModalEditor>
-            <button onClick={() => setIsOpen(true)}>Add New</button>
+            <button onClick={() => setIsOpen(true)} className={styles.btn}>
+                Add New
+            </button>
         </>
     )
 }

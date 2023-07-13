@@ -270,7 +270,9 @@ export function EditParagraph({
                     </div>
                 </div>
             </ModalEditor>
-            <button onClick={() => setIsOpen(true)}>Edit</button>
+            <button onClick={() => setIsOpen(true)} className={styles.btn}>
+                Edit
+            </button>
         </>
     )
 }

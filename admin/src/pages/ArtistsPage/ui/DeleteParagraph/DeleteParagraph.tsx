@@ -11,6 +11,7 @@ import {
 import { allLanguages, defaultLanguage } from "shared/const/languages"
 import { Alert, Confirm } from "shared/ui/CustomNotifications"
 import { IFiltersData } from "features/portfolioFilters"
+import styles from "./DeleteParagraph.module.scss"
 
 export function DeleteParagraph({
     name,
@@ -64,7 +65,9 @@ export function DeleteParagraph({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <button onClick={deleteClickHandler}>Delete</button>
+            <button onClick={deleteClickHandler} className={styles.btn}>
+                Delete
+            </button>
         </>
     )
 }

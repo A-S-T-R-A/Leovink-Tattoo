@@ -89,7 +89,9 @@ export function EditFaqTitle({
                     <Input label="Title" value={newTitle} onChange={value => setNewTitle(value)} />
                 </div>
             </ModalEditor>
-            <button onClick={() => setIsOpen(true)}>Edit</button>
+            <button onClick={() => setIsOpen(true)} className={styles.btn}>
+                Edit
+            </button>
         </>
     )
 }

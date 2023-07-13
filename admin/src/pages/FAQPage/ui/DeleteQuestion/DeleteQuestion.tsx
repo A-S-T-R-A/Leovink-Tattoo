@@ -4,6 +4,7 @@ import { useState } from "react"
 import { reformatArrayToObject, updateSectionData } from "shared/const/firebaseVariables"
 import { Alert, Confirm } from "shared/ui/CustomNotifications"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
+import styles from "./DeleteQuestion.module.scss"
 
 export function DeleteQuestion({
     id,
@@ -46,7 +47,9 @@ export function DeleteQuestion({
     return (
         <>
             <LoadingModal isLoading={isLoading} />
-            <button onClick={deleteClickHandler}>Delete</button>
+            <button onClick={deleteClickHandler} className={styles.btn}>
+                Delete
+            </button>
         </>
     )
 }

@@ -9,3 +9,21 @@
         margin-bottom: 10px;
     }
 }
+
+.btn {
+    margin: 5px 0;
+    padding: 5px 10px;
+    transition: 0.1s ease;
+    box-shadow: 0 1px 0 0 var(--color-dark-accent);
+    border-radius: 5px;
+    margin-left: 7px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    background-color: var(--color-moderate-accent);
+    color: var(--color-base);
+
+    &:hover {
+        filter: brightness(80%);
+    }
+}

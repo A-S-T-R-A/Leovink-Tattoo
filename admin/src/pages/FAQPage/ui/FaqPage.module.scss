@@ -1,3 +1,13 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
 .table {
     overflow-y: visible;
 
@@ -31,7 +41,7 @@
         .questionContainer {
             border-bottom: 1px solid black;
             display: grid;
-            grid-template-columns: 50px 1fr 1fr 100px;
+            grid-template-columns: 50px 1fr 1fr min-content;
             gap: 10px;
             align-items: center;
             padding: 5px;
@@ -63,10 +73,11 @@
         background-color: var(--color-moderate-accent);
         border: 2px solid var(--color-base);
         display: grid;
-        grid-template-columns: 50px 1fr 100px;
+        grid-template-columns: 50px 1fr min-content;
         gap: 10px;
         align-items: center;
         padding: 5px;
+        font-weight: 700;
 
         .buttons {
             display: flex;
