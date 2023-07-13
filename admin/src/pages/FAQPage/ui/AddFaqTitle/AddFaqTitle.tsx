@@ -88,7 +88,9 @@ export function AddFaqTitle({
                     />
                 </div>
             </ModalEditor>
-            <button onClick={() => setIsOpen(true)}>Add new title</button>
+            <button onClick={() => setIsOpen(true)} className={styles.btn}>
+                Add new title
+            </button>
         </>
     )
 }

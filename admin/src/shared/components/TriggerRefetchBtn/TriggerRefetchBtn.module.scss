@@ -2,7 +2,6 @@
     padding: 0 10px;
     height: 40px;
     transition: 0.1s ease;
-    box-shadow: 0 1px 0 0 var(--color-moderate-accent);
     border-radius: 5px;
     font-weight: bold;
     border: none;
@@ -11,6 +10,6 @@
     color: var(--color-base);
 
     &:hover {
-        filter: brightness(90%);
+        filter: brightness(80%);
     }
 }
