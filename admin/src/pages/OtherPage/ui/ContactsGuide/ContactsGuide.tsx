@@ -76,12 +76,18 @@ export function ContactsGuide({
                 onSaveClick={saveClickHandler}
                 onDiscardClick={discardClickHandler}
             >
-                <MarkdownTextarea
-                    onSaveData={value =>
-                        setNewAllData(prev => ({ ...prev, [currentLanguage]: value }))
-                    }
-                    initialData={newAllData[currentLanguage]}
-                />
+                <div className={styles.modalContainer}>
+                    <MarkdownTextarea
+                        rows={15}
+                        onDiscardClick={() =>
+                            setNewAllData(prev => ({ ...prev, [currentLanguage]: "" }))
+                        }
+                        onSaveData={value =>
+                            setNewAllData(prev => ({ ...prev, [currentLanguage]: value }))
+                        }
+                        initialData={newAllData[currentLanguage]}
+                    />
+                </div>
             </ModalEditor>
             <div className={styles.guideContainer}>
                 <div className={styles.guide}>

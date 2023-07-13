@@ -1,6 +1,7 @@
 export interface IArtistData {
     name: string
     description: string
+    fullDescription: string
     specialization: string
     img: string
     slug: string

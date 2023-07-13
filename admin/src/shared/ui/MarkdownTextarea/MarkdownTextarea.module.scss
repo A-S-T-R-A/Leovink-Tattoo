@@ -9,7 +9,8 @@
     margin-bottom: 10px;
 
     > div {
-        width: 30px;
+        width: max-content;
+        padding: 0 5px;
         height: 30px;
         display: flex;
         align-items: center;
@@ -32,4 +33,14 @@
     padding: 10px;
     max-width: 100%;
     min-width: 100%;
+}
+
+.btnContainer {
+    display: flex;
+    gap: 10px;
+
+    button {
+        cursor: pointer;
+        padding: 0 5px;
+    }
 }

@@ -27,6 +27,7 @@ import { Alert } from "shared/ui/CustomNotifications"
 import { LoadingModal } from "shared/components/LoadingModal/LoadingModal"
 import { IFiltersData } from "features/portfolioFilters"
 import { ITattooImage } from "pages/PortfolioPage/types/types"
+import { MarkdownTextarea } from "shared/ui/MarkdownTextarea/MarkdownTextarea"
 
 export function EditParagraph({
     id,
@@ -215,6 +216,8 @@ export function EditParagraph({
         triggerRefetch?.()
     }
 
+    console.log(newData)
+
     return (
         <>
             <LoadingModal isLoading={isLoading} />
@@ -233,8 +236,8 @@ export function EditParagraph({
                         <ModalImage url={previewImage.url || newData.img} className={styles.img} />
                         <EditImage onChange={editImageChangeHandler} />
                     </div>
-                    <div>id: {id}</div>
-                    <div>key: {newData.key}</div>
+                    {/* <div>id: {id}</div>
+                    <div>key: {newData.key}</div> */}
                     <div>
                         <Input
                             label="Name"
@@ -258,6 +261,19 @@ export function EditParagraph({
                             value={newData.description}
                             onChange={value =>
                                 setNewData(prev => ({ ...prev, description: value }))
+                            }
+                        />
+                    </div>
+                    <div>
+                        <p className={styles.fullDescriptionTitle}>Full Description</p>
+                        <MarkdownTextarea
+                            initialData={newData.fullDescription}
+                            rows={6}
+                            onDiscardClick={() =>
+                                setNewData(prev => ({ ...prev, fullDescription: "" }))
+                            }
+                            onSaveData={val =>
+                                setNewData(prev => ({ ...prev, fullDescription: val }))
                             }
                         />
                     </div>
