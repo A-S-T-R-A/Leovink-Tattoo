@@ -69,6 +69,10 @@
     justify-content: center;
 }
 
+.photoColumn {
+    max-width: 75px;
+}
+
 .displayedContent {
     &:nth-child(n) {
         background-color: var(--color-white);
