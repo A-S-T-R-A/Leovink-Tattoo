@@ -6,7 +6,9 @@ export function ImagesList({ data, onDelete }: { data: string[]; onDelete: (v: s
         return (
             <div className={styles.container}>
                 <ModalImage key={index} url={item || ""} className={styles.img} />
-                <button onClick={() => onDelete(item)}>del</button>
+                <button className={styles.btn} onClick={() => onDelete(item)}>
+                    del
+                </button>
             </div>
         )
     })
