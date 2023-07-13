@@ -58,7 +58,7 @@ export function ArtistsPage() {
                     <div className={styles.item} key={index}>
                         <div>id: {index}</div>
                         <div className={styles.imgContainer}>
-                            <ModalImage className={styles.img} url={item.img} />
+                            Photo: <ModalImage className={styles.img} url={item.img} />
                         </div>
                         <div>Name: {item.name}</div>
                         <div>Specialization: {item.specialization}</div>

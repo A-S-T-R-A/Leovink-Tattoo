@@ -21,7 +21,9 @@ export function StepsPageList({
                 {data?.[defaultLanguage]?.map((item, index) => (
                     <div className={styles.item} key={index}>
                         <div>id: {index}</div>
-                        <ModalImage className={styles.img} url={item.img} />
+                        <div className={styles.imgContainer}>
+                            Img: <ModalImage className={styles.img} url={item.img} />
+                        </div>
                         <div>title: {item.title}</div>
                         <div>description: {item.description}</div>
                         <div className={styles.buttons}>
