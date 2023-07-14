@@ -50,7 +50,7 @@ export function ArtistPage({
             <Section containerClassName={styles.container}>
                 <div className={styles.card}>
                     <div className={styles.left}>
-                        <Image src={dummyImg || img} alt={`${name} tattoo ${specialization}`} />
+                        <Image src={img} alt={`${name} tattoo ${specialization}`} />
                     </div>
                     <div className={styles.right}>
                         <Typography tag="h2" size="xxxl" className={styles.name}>
