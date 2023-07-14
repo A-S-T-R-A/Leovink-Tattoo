@@ -40,9 +40,11 @@ export function ReviewsPage() {
         )
     } else {
         return (
-            <>
-                <AddReviewModal data={data} triggerRefetch={triggerRefetch} />
-                <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
+            <div className={styles.wrapper}>
+                <div className={styles.header}>
+                    <AddReviewModal data={data} triggerRefetch={triggerRefetch} />
+                    <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
+                </div>
                 <div className={styles.table}>
                     {data?.[defaultLanguage].map((item, index) => (
                         <div className={styles.item} key={index}>
@@ -54,10 +56,8 @@ export function ReviewsPage() {
                                 <ModalVideo video={item.video} />
                             </div>
                             <div>title: {item.title}</div>
-                            <div className={styles.description}>
-                                Description: {item.description}
-                            </div>
-                            <div>Tattoo Artist: {item.artist}</div>
+                            <div className={styles.description}>Descr: {item.description}</div>
+                            <div>Artist: {item.artist}</div>
                             <div>Duration: {item.duration}</div>
                             <div className={styles.buttons}>
                                 <EditParagraph
@@ -74,7 +74,7 @@ export function ReviewsPage() {
                         </div>
                     ))}
                 </div>
-            </>
+            </div>
         )
     }
 }

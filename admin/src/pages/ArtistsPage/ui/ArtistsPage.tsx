@@ -44,19 +44,21 @@ export function ArtistsPage() {
         )
 
     return (
-        <>
-            <AddArtistsModal
-                data={data}
-                filtersData={filtersData}
-                triggerRefetch={triggerRefetch}
-            />
-            <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
+        <div className={styles.wrapper}>
+            <div className={styles.header}>
+                <AddArtistsModal
+                    data={data}
+                    filtersData={filtersData}
+                    triggerRefetch={triggerRefetch}
+                />
+                <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
+            </div>
             <div className={styles.table}>
                 {data?.[defaultLanguage].map((item, index) => (
                     <div className={styles.item} key={index}>
                         <div>id: {index}</div>
                         <div className={styles.imgContainer}>
-                            <ModalImage className={styles.img} url={item.img} />
+                            Photo: <ModalImage className={styles.img} url={item.img} />
                         </div>
                         <div>Name: {item.name}</div>
                         <div>Specialization: {item.specialization}</div>
@@ -79,6 +81,6 @@ export function ArtistsPage() {
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     )
 }

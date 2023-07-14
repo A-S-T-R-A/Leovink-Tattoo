@@ -42,9 +42,11 @@ export function FAQPage() {
         )
     } else {
         return (
-            <>
-                <AddFaqTitle data={data} triggerRefetch={triggerRefetch} />
-                <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
+            <div className={styles.wrapper}>
+                <div className={styles.header}>
+                    <AddFaqTitle data={data} triggerRefetch={triggerRefetch} />
+                    <TriggerRefetchBtn triggerRefetch={triggerRefetch} />
+                </div>
                 <div className={styles.table}>
                     {data?.[defaultLanguage]?.map((titleItem, titleIndex) => {
                         return (
@@ -106,7 +108,7 @@ export function FAQPage() {
                         )
                     })}
                 </div>
-            </>
+            </div>
         )
     }
 }

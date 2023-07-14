@@ -133,7 +133,6 @@ export function Form({
                                 error={formErrors.name}
                                 name="name"
                                 onChange={name => {
-                                    console.log("fired on Change")
                                     setFormData(prev => ({ ...prev, name }))
                                     setFormErrors(prev => ({ ...prev, name: "" }))
                                 }}

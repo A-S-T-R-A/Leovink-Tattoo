@@ -4,6 +4,7 @@ import { AppLink } from "shared/ui/AppLink/AppLink"
 import { ArrowDownIcon } from "shared/ui/Icons"
 import type { IArtistsData } from "shared/const/firebaseVariables"
 import type { LanguageType } from "shared/types/types"
+import { Image } from "shared/ui/Image/Image"
 
 export function ArtistCard({
     data,
@@ -26,7 +27,11 @@ export function ArtistCard({
 
     return (
         <div className={styles.container}>
-            <img src={img} alt={`Fotografie cu artistul tatuator ${name}`} className={styles.img} />
+            <Image
+                src={img}
+                alt={`Fotografie cu artistul tatuator ${name}`}
+                className={styles.img}
+            />
             <Typography tag="h3" size="xxl" className={styles.name}>
                 {name}
             </Typography>

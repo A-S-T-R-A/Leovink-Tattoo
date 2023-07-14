@@ -2,6 +2,7 @@ import type { ISocialMedia } from "shared/types/IGlobalData"
 import styles from "./SocialIcons.module.scss"
 import { classNames } from "shared/lib/classNames/classNames"
 import { reformatAndSortObjectValuesToArray } from "shared/const/firebaseVariables"
+import { Image } from "shared/ui/Image/Image"
 
 interface ISocialIconsProps {
     onClick?: () => void
@@ -24,7 +25,7 @@ export function SocialIcons({ onClick, className, data }: ISocialIconsProps) {
                         target="_blank"
                         rel="noreferrer"
                     >
-                        <img src={item.icon} alt={alt} />
+                        <Image src={item.icon} alt={alt} className={styles.icons} />
                     </a>
                 )
             })}

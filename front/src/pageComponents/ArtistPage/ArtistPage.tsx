@@ -7,6 +7,9 @@ import styles from "./ArtistPage.module.scss"
 import { GalleryGrid } from "shared/components/GalleryGrid/GalleryGrid"
 import type { IArtistsData, ITattooImage } from "shared/const/firebaseVariables"
 import type { LanguageType } from "shared/types/types"
+import { Image } from "shared/ui/Image/Image"
+import { DecodeMarkdown } from "widgets/FindUs/lib/DecodeMarkdown"
+import dummyImg from "./const/a1.jpg"
 
 export function ArtistPage({
     formData,
@@ -31,7 +34,7 @@ export function ArtistPage({
     imagesData: ITattooImage[]
     language: LanguageType
 }) {
-    const { name, img, specialization, description } = data
+    const { name, img, specialization, fullDescription } = data
     const galleryData = imagesData
     const [modalData, setModalData] = useState(galleryData)
     const [isOpen, setIsOpen] = useState(false)
@@ -47,7 +50,7 @@ export function ArtistPage({
             <Section containerClassName={styles.container}>
                 <div className={styles.card}>
                     <div className={styles.left}>
-                        <img src={img} alt="" />
+                        <Image src={dummyImg || img} alt={`${name} tattoo ${specialization}`} />
                     </div>
                     <div className={styles.right}>
                         <Typography tag="h2" size="xxxl" className={styles.name}>
@@ -56,13 +59,27 @@ export function ArtistPage({
                         <Typography tag="p" color="lightgray" className={styles.specialization}>
                             {specialization}
                         </Typography>
-                        <Typography tag="p" color="lightgray">
-                            {description}
-                        </Typography>
+                        {fullDescription && <DecodeMarkdown data={fullDescription} />}
                     </div>
                 </div>
-                {formData && <Form isVertical data={formData} title={formTitle} cta={cta} />}
+                {formData && (
+                    <Form
+                        isVertical
+                        data={formData}
+                        title={formTitle}
+                        cta={cta}
+                        className={styles.verticalForm}
+                    />
+                )}
             </Section>
+            {formData && (
+                <Form
+                    data={formData}
+                    title={formTitle}
+                    cta={cta}
+                    className={styles.horizontalForm}
+                />
+            )}
             <Section title="Gallery">
                 <GalleryGrid data={galleryData} onClick={clickHandler} language={language} />
                 <ModalGallery

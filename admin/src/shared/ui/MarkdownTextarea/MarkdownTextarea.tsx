@@ -7,10 +7,16 @@ import { Alert } from "../CustomNotifications"
 
 export function MarkdownTextarea({
     onSaveData,
+    onDiscardClick,
     initialData = "",
+    title,
+    rows = 3,
 }: {
     onSaveData: (val: string) => void
+    onDiscardClick: () => void
     initialData?: string
+    title?: string
+    rows?: number
 }) {
     const [data, setData] = useState("")
     const [displayedData, setDisplayedData] = useState("")
@@ -21,7 +27,7 @@ export function MarkdownTextarea({
 
     useEffect(() => {
         setData(initialData)
-    }, [])
+    }, [initialData])
 
     useEffect(() => {
         if (isShowMarkdown) {
@@ -85,13 +91,14 @@ export function MarkdownTextarea({
 
     return (
         <div className={styles.container}>
+            {!!title && <p>{title}</p>}
             <div className={styles.header}>
-                <div onClick={brClickHandler}>br</div>
+                <div onClick={brClickHandler}>break</div>
                 <div
                     onClick={bClickHandler}
                     className={classNames("", { [styles.active]: isBActive })}
                 >
-                    B
+                    Bold
                 </div>
                 <input
                     type="checkbox"
@@ -101,6 +108,7 @@ export function MarkdownTextarea({
                 <label>show markdown</label>
             </div>
             <textarea
+                rows={rows}
                 ref={textareaRef}
                 value={displayedData}
                 onChange={e => {
@@ -110,17 +118,27 @@ export function MarkdownTextarea({
                 onClick={cursorPositionHandler}
                 className={styles.textarea}
             ></textarea>
-            <button
-                onClick={() => {
-                    if (isBActive) {
-                        Alert.error(`You have to close the "B" tag`)
-                        return
-                    }
-                    onSaveData(data)
-                }}
-            >
-                Save changes
-            </button>
+            <div className={styles.btnContainer}>
+                <button
+                    onClick={() => {
+                        if (isBActive) {
+                            Alert.error(`You have to close the "B" tag`)
+                            return
+                        }
+                        onSaveData(data)
+                    }}
+                >
+                    Save changes
+                </button>
+                <button
+                    onClick={() => {
+                        setData("")
+                        onDiscardClick()
+                    }}
+                >
+                    Clear
+                </button>
+            </div>
         </div>
     )
 }

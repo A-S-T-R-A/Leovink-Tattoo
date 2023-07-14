@@ -13,6 +13,7 @@ import type { LanguageType } from "../../shared/types/types"
 import { ChevronDownIcon, PlusIcon } from "../../shared/ui/Icons"
 import { Typography } from "shared/ui/Typography/Typography"
 import type { ITattooImage } from "shared/const/firebaseVariables"
+import { Image } from "shared/ui/Image/Image"
 
 interface IModalGallery {
     isOpen: boolean
@@ -47,7 +48,7 @@ export function ModalGallery({ data, isOpen, onClose, language }: IModalGallery)
                     return (
                         <SwiperSlide key={index} className={styles.slide}>
                             <figure className={styles.slideContainer}>
-                                <img src={img} className={styles.img} alt={alt[language]} />
+                                <Image src={img} className={styles.img} alt={alt[language]} />
                                 <figcaption className={styles.descriptionContainer}>
                                     <Typography tag="p" className={styles.description}>
                                         {alt[language]}

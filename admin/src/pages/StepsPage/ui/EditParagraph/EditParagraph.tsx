@@ -94,7 +94,6 @@ export function EditParagraph({
                     await updateSectionData(lang, "steps", objectData)
                 }
             } else {
-                console.log(dataToUpload)
                 documentData[id] = dataToUpload
                 const objectData = reformatArrayToObject(documentData)
                 await updateSectionData(currentLanguage, "steps", objectData)
@@ -153,7 +152,9 @@ export function EditParagraph({
                     />
                 </div>
             </ModalEditor>
-            <button onClick={() => setIsOpen(true)}>Edit</button>
+            <button onClick={() => setIsOpen(true)} className={styles.btn}>
+                Edit
+            </button>
         </>
     )
 }

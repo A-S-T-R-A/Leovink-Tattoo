@@ -1,6 +1,5 @@
 import { ViewType } from "pages/PortfolioPage/types/types"
 import { useState } from "react"
-import { DeleteIcon, EditIcon } from "shared/assets/icons"
 import { ModalImage } from "shared/components/ModalImage/ModalImage"
 import { ITattooImage } from "pages/PortfolioPage/types/types"
 import styles from "./TableIcons.module.scss"
@@ -18,18 +17,20 @@ export function TableIcons({
     view,
     filtersData,
     triggerRefetch,
+    selected,
+    setSelected,
 }: {
     data: ITattooImage[]
     filteredData: ITattooImage[]
     view: ViewType
     filtersData: IFilter[]
     triggerRefetch: () => void
+    selected: number[]
+    setSelected: React.Dispatch<React.SetStateAction<number[]>>
 }) {
-    const [selected, setSelected] = useState<number[]>([])
-
     function checkboxChangeHandler(id: number) {
         if (selected.includes(id)) {
-            setSelected(prev => prev.filter(item => item !== id))
+            setSelected((prev: number[]) => prev.filter(item => item !== id))
         } else {
             setSelected(prev => [...prev, id])
         }

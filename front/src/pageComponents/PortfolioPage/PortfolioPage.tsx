@@ -50,8 +50,6 @@ export function PortfolioPage({
     const data = filter(fetchedData, keys)
     const [filteredData, setFilteredData] = useState<ITattooImage[]>(data)
 
-    console.log(filters)
-
     useEffect(() => {
         const keys = filtersData.map(item => item.title.en)
         const data = filter(fetchedData, keys)

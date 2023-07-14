@@ -8,6 +8,7 @@ import { useState, useEffect, useRef } from "preact/hooks"
 import { getMaximumColumnHeight } from "./lib/getMaximumColumnHeight"
 import { getColumnsNumber } from "./lib/getColumnsNumber"
 import { useDebounce } from "shared/lib/useDebounce/useDebounce"
+import { Image } from "shared/ui/Image/Image"
 
 interface IGalleryGrid {
     data: ITattooImage[]
@@ -57,7 +58,8 @@ export function GalleryGrid({ data, onClick, maxHeight = "auto", language }: IGa
                             className={styles.singleItem}
                             onClick={() => onClick?.(index)}
                         >
-                            <img src={img} alt={alt[language]} />
+                            <Image src={img} alt={alt[language]} />
+
                             <EyeIcon className={styles.eye} />
                         </div>
                     )
@@ -77,7 +79,7 @@ export function GalleryGrid({ data, onClick, maxHeight = "auto", language }: IGa
                             className={styles.item}
                             onClick={() => onClick?.(index)}
                         >
-                            <img src={img} alt={alt[language]} />
+                            <Image src={img} alt={alt[language]} />
                             <EyeIcon className={styles.eye} />
                         </figure>
                     )

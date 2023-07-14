@@ -45,7 +45,6 @@ export function AddNewItem({
         setIsLoading(true)
 
         const newFiltersData = JSON.parse(JSON.stringify(data.filtersData)) as IFiltersData
-        console.log(parentId)
 
         try {
             const filterItemToUpload: IFilterItem = {

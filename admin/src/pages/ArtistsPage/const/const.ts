@@ -1,6 +1,7 @@
 export const defaultNewEditData = {
     name: "",
     description: "",
+    fullDescription: "",
     specialization: "",
     img: "",
     slug: "",
